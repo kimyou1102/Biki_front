@@ -29,6 +29,9 @@
     },
     // 플러그인을 통해 설치한 것 외에 규칙 설정
     "rules": {
+        "import/prefer-default-export": "off",
+        "react/require-default-props": "off",
+        "react/jsx-props-no-spreading": "off",
         "prettier/prettier": [
             "error", {
                 "endOfLine": "auto"
