@@ -10,6 +10,56 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'PretendardRegular'
     }
 
+    a {
+      text-decoration: none;
+    }
+
+    .dots_custom {
+      width: 100%;
+      position: absolute;
+      bottom: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .dots_custom li {
+      list-style: none;
+      cursor: pointer;
+      display: inline-block;
+      margin: 0 4px;
+      padding: 0;
+    }
+    
+    .dots_custom li button {
+      border: none;
+      background: #d9d9d9;
+      color: transparent;
+      cursor: pointer;
+      display: block;
+      height: 14px;
+      width: 14px;
+      border-radius: 100%;
+      padding: 0;
+    }
+    
+    .dots_custom li.slick-active button {
+      background-color: #74b743;
+    }
+    
+    .slick-next {
+      right: 0px;
+      bottom: 0px;
+      top: auto;
+    }
+    
+    .slick-prev::before,
+    .slick-next::before {
+      opacity: 0;
+      display: none;
+    }
+      
+
     @font-face {
         font-family: 'PretendardBold';
         src: local('PretendardBold'), url(${PretendardBold}) format('woff2');
