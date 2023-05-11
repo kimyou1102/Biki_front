@@ -6,7 +6,7 @@ interface HeaderProps {
 }
 
 const StyledHeader = styled.header`
-  padding: 25px 0 20px 0;
+  padding: 20px 0 16px 0;
   border-bottom: 1px solid #f4f4f4;
   display: flex;
   justify-content: space-between;

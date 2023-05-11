@@ -7,7 +7,7 @@ import logo from '../../../assets/images/Biky_Logo.png';
 const StyledNav = styled.nav`
   display: flex;
   align-items: center;
-  padding: 40px 0px 38px 0px;
+  padding: 32px 0px 30px 0px;
 `;
 
 export function Nav() {

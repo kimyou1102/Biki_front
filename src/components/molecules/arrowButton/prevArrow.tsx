@@ -12,10 +12,10 @@ export function PrevArrow({ onClick }: ArrowProps) {
       onClick={onClick}
       display="flex"
       position="absolute"
-      bottom="23px"
+      bottom="19px"
       left="50%"
       zIndex={10}
-      transform="translateX(calc(-50% - 59px))"
+      transform="translateX(calc(-50% - 47px))"
     >
       <Img src={leftSlide} alt="왼쪽슬라이드" width={18} height={18} />
     </Button>

@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     .dots_custom {
       width: 100%;
       position: absolute;
-      bottom: 23px;
+      bottom: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
       list-style: none;
       cursor: pointer;
       display: inline-block;
-      margin: 0 4px;
+      margin: 0 3px;
       padding: 0;
     }
     
@@ -37,8 +37,8 @@ const GlobalStyle = createGlobalStyle`
       color: transparent;
       cursor: pointer;
       display: block;
-      height: 14px;
-      width: 14px;
+      height: 11px;
+      width: 11px;
       border-radius: 100%;
       padding: 0;
     }

@@ -9,9 +9,9 @@ interface NavigationProps {
 
 const StyledUl = styled.ul`
   display: flex;
-  width: 676px;
+  width: 541px;
   justify-content: space-between;
-  margin-left: 142px;
+  margin-left: 114px;
 `;
 
 export function Navigation() {

@@ -7,7 +7,7 @@ interface NoticeHeaderProps {
 
 export function NoticeHeader({ title }: NoticeHeaderProps) {
   return (
-    <FlexContainer justify="space-between" align="baseline" margin="0px 0px 8px 0px">
+    <FlexContainer justify="space-between" align="baseline" margin="0px 0px 6px 0px">
       <H3 size={2.5} weight="bold" font="PretendardMedium" lineHeight={3}>
         {title}
       </H3>

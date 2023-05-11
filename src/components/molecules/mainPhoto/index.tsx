@@ -6,7 +6,7 @@ import { MainProps } from 'src/models/main';
 
 const Styled = styled.div`
   width: 100%;
-  height: 840px;
+  height: 672px;
   position: relative;
 `;
 

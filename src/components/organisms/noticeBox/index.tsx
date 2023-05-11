@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { NoticeType, noticeState } from '../../../recoil/notice/notice';
 
 const StyledUl = styled.ul`
-  padding: 8px 24px;
+  padding: 6px 19px;
 `;
 
 export function NoticeBox() {
