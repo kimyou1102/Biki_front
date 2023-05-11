@@ -8,3 +8,6 @@ export * from './textList';
 export * from './mainPhotoText';
 export * from './mainPhoto';
 export * from './arrowButton';
+export * from './pagination';
+export * from './archiveTitle';
+export * from './searchBar';
