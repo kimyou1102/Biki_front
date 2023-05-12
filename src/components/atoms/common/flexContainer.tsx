@@ -39,9 +39,6 @@ export const FlexContainer = styled.div<Props>`
   &.slide::-webkit-scrollbar {
     display: none;
   }
-  &.archive:nth-child(3n + 0) {
-    margin-right: 0px;
-  }
   &.full {
     width: 100%;
   }

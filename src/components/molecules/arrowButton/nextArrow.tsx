@@ -1,5 +1,5 @@
 import React from 'react';
-import { Img, Button } from '@atoms';
+import { Img, AbsoluteButton } from '@atoms';
 import rightSlide from '../../../assets/images/rightSlide.png';
 
 interface ArrowProps {
@@ -8,7 +8,8 @@ interface ArrowProps {
 
 export function NextArrow({ onClick }: ArrowProps) {
   return (
-    <Button
+    <AbsoluteButton
+      className={['bottom', 'left'].join(' ')}
       onClick={onClick}
       display="flex"
       position="absolute"
@@ -18,6 +19,6 @@ export function NextArrow({ onClick }: ArrowProps) {
       transform="translateX(calc(-50% + 47px))"
     >
       <Img src={rightSlide} alt="오른쪽슬라이드" width={18} height={18} />
-    </Button>
+    </AbsoluteButton>
   );
 }
