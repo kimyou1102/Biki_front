@@ -1,2 +1,2 @@
 export * from './movieDescription';
-export * from './youtubeDescription';
+export * from './contentDescription';

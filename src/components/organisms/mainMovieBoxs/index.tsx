@@ -21,7 +21,7 @@ const SlideContainer = forwardRef((props: TestType, ref: any) => {
   );
 });
 
-export function MovieBoxs({ data }: Props) {
+export function MainMovieBoxs({ data }: Props) {
   const setScroll = useSetRecoilState<HTMLDivElement | undefined>(mainMovieScrollState);
   const scrollRef = useRef<HTMLDivElement>();
 
@@ -35,6 +35,7 @@ export function MovieBoxs({ data }: Props) {
         <MovieBox
           key={movie.id}
           id={movie.id}
+          type="main"
           title={movie.title}
           director={movie.director}
           country={movie.country}

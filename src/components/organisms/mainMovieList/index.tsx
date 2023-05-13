@@ -1,6 +1,6 @@
 import React from 'react';
 import { SlideHeader } from '@molecules';
-import { MovieBoxs } from '@organisms/movieBoxs';
+import { MainMovieBoxs } from '@organisms/mainMovieBoxs';
 import { MovieInfo } from 'src/models/movie';
 import { useRecoilValue } from 'recoil';
 import { mainMovieScrollState } from '../../../recoil/notice/notice';
@@ -87,7 +87,7 @@ export function MainMovieList() {
   return (
     <div>
       <SlideHeader text="BIKI 상영작" onLeftClick={onLeftClick} onRightClick={onRightClick} />
-      <MovieBoxs data={test} />
+      <MainMovieBoxs data={test} />
     </div>
   );
 }
