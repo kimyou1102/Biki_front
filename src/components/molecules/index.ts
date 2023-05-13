@@ -11,3 +11,4 @@ export * from './arrowButton';
 export * from './pagination';
 export * from './archiveTitle';
 export * from './searchBar';
+export * from './searchFilter';

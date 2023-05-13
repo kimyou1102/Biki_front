@@ -2,7 +2,7 @@ import React from 'react';
 import { atom } from 'recoil';
 import { MovieInfo } from 'src/models/movie';
 
-const test: MovieInfo[] = [
+export const testMovie: MovieInfo[] = [
   {
     id: 1,
     title: '내 이름은 말룸 테스트',
@@ -250,5 +250,5 @@ const test: MovieInfo[] = [
 
 export const movieState = atom<MovieInfo[]>({
   key: 'movies',
-  default: test,
+  default: testMovie,
 });
