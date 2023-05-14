@@ -11,10 +11,12 @@ interface Props {
 
 export function MainMovieBoxs({ data }: Props) {
   const setScroll = useSetRecoilState<HTMLDivElement | undefined>(mainMovieScrollState);
-  const scrollRef = useRef<HTMLDivElement>();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setScroll(scrollRef.current);
+    if (scrollRef && scrollRef.current) {
+      setScroll(scrollRef.current);
+    }
   }, [setScroll]);
 
   return (
