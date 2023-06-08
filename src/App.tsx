@@ -28,6 +28,7 @@ import {
   JudgesPage,
 } from '@pages';
 import { HeaderLayout } from '@layout';
+import { ScheduleInfoPage } from '@pages/movieSchedule';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/news/newsletter/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/festival" element={<FestivalSymbolPage />} />
           <Route path="/judges" element={<JudgesPage />} />
+          <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
         </Route>
       </Routes>
     </div>

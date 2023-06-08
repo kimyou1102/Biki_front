@@ -20,3 +20,6 @@ export * from './SymbolChatacter';
 export * from './JudgeItem';
 export * from './ScheduleTable';
 export * from './RelatedMovies';
+export * from './schedule';
+export * from './movieScheduleTitle';
+export * from './labelHint';
