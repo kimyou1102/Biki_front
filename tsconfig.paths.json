@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+            "@assets": ["src/components/assets/index.ts"],
+            "@assets/*": ["src/components/assets/*"],
+            "@atoms": ["src/components/atoms/index.ts"],
+			"@atoms/*": ["src/components/atoms/*"],
+			"@layout": ["src/components/layouts/index.ts"],
+			"@layout/*": ["src/components/layouts/*"],
+			"@molecules": ["src/components/molecules/index.ts"],
+			"@molecules/*": ["src/components/molecules/*"],
+			"@organisms": ["src/components/organisms/index.ts"],
+			"@organisms/*": ["src/components/organisms/*"],
+			"@templates": ["src/components/templates/index.ts"],
+			"@templates/*": ["src/components/templates/*"],
+			"@pages": ["src/components/pages/index.ts"],
+			"@pages/*": ["src/components/pages/*"],
+			"@components/*": ["src/components/*"]
+        }
+	}
+}
