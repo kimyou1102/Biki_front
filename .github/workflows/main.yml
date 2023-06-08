@@ -47,6 +47,6 @@ jobs:
           # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
           channel-id: 'dev'
           # For posting a simple plain text message
-          slack-message: "*:alert: [BIKY] 사용자 Web(DEV) Deploy :alert:*\n :white_check_mark: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          slack-message: "*:alert: [BIKY] 사용자 Web(DEV) Deploy :alert:*\n :white_check_mark: ${{ job.status }}\n${{ github.event.head_commit.message }}"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
