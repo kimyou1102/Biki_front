@@ -54,6 +54,7 @@ export function ArchiveModal() {
 
   const onCloseClick = () => {
     setMovieModal(false);
+    document.querySelector('body')?.classList.remove('none');
   };
 
   const test = [

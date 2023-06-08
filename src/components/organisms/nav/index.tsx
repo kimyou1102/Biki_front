@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Img, A } from '@atoms';
 import { Navigation } from '@molecules';
-import logo from '../../../assets/images/Biky_Logo.png';
+import logo from '../../../assets/images/Biky_Logo_season.png';
 
 const StyledNav = styled.nav`
   display: flex;
@@ -11,8 +11,8 @@ const StyledNav = styled.nav`
   border-bottom: 1px solid #dbdbdb;
 
   img {
-    width: calc(153px * 0.8);
-    height: calc(48px * 0.8);
+    width: calc(152px * 0.8);
+    height: calc(74px * 0.8);
   }
 
   .wrap {

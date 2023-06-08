@@ -5,7 +5,7 @@ import { ButtonsProps } from 'src/models/headerButton';
 
 export function Header() {
   const lefttData: ButtonsProps[] = [
-    { id: 1, name: 'Badge', url: '/' },
+    { id: 1, name: 'Guest', url: '/' },
     { id: 2, name: 'Volunteer', url: '/' },
     { id: 3, name: 'Badge', url: '/' },
   ];
