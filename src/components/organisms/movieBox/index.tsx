@@ -2,6 +2,7 @@ import React from 'react';
 import { MovieDescription } from '@molecules';
 import { FlexContainer, Img, ContentBoxImgWrap } from '@atoms';
 import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 import { movieModalState, movieModalDataState, movieModalPositionState } from '../../../recoil/movies';
 import { MovieBoxInfo, MovieData } from '../../../models/movie';
 
@@ -16,12 +17,16 @@ export function MovieBox({ type, data }: Props) {
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
   const [top, setTop] = useRecoilState(movieModalPositionState);
 
+  const navigate = useNavigate();
+
   const onClick = () => {
     if (type === 'archive') {
       setMovieModal(true);
       setMovieModalData(data);
       setTop(window.scrollY);
       document.querySelector('body')?.classList.add('none');
+    } else {
+      navigate('/archive/distributions');
     }
   };
   return (

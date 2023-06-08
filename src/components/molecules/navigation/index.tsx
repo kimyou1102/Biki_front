@@ -32,18 +32,7 @@ const ButtonWrap = styled.div`
 const Container = styled.div`
   position: relative;
 
-  #BIKI:hover {
-    color: var(--main-color);
-  }
-
-  #BIKI:hover #BIKI_content {
-    position: absolute;
-    top: 20px;
-    z-index: 100;
-    display: block;
-  }
-
-  #biki:hover,
+  #biky:hover,
   #education:hover,
   #program:hover,
   #event:hover,
@@ -88,8 +77,8 @@ export function Navigation() {
   const menus: NavigationProps[] = [
     {
       id: 1,
-      name: 'BIKI',
-      idValue: 'biki',
+      name: 'BIKY',
+      idValue: 'biky',
       url: '/#',
       arr: ['제18회 BIKY', '페스티벌 심벌', '시상내역', '비키를 만드는 사람들', '스폰서 모집안내'],
       link: ['/news/notice', '/', '/', '/', '/'],
@@ -182,7 +171,8 @@ export function Navigation() {
             </Li>
             <ButtonWrap id={`${menu.idValue}_content`}>
               {menu.arr.map((item, i) => (
-                <StyledButton>
+                // eslint-disable-next-line react/no-array-index-key
+                <StyledButton key={i}>
                   <A url={menu.link[i]}>{item}</A>
                 </StyledButton>
               ))}
