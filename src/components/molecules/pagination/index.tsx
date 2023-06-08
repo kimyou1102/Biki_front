@@ -12,7 +12,7 @@ interface Props {
 
 export function Pagination({ total, limit, page, setPage }: Props) {
   const numPage = Math.ceil(total / limit);
-  const arr = Array.from({ length: numPage }, (v, i) => i + 1);
+  const arr = Array.from({ length: numPage }, (v, i) => i);
 
   const onPrevClick = () => {
     if (page !== 1) {
@@ -36,7 +36,7 @@ export function Pagination({ total, limit, page, setPage }: Props) {
           key={e}
           width={24}
           height={24}
-          bgColor={e === page ? '#74B543' : 'transparent'}
+          bgColor={e === page ? 'var(--main-color)' : 'transparent'}
           color={e === page ? 'white' : 'black'}
           border="none"
           radius="50%"
@@ -44,7 +44,7 @@ export function Pagination({ total, limit, page, setPage }: Props) {
           className={e === arr[arr.length - 1] ? 'right-none' : ''}
           onClick={() => setPage(e)}
         >
-          {e}
+          {e + 1}
         </Button>
       ))}
       <Button onClick={onNextClick} width={24} height={24} margin="0px 0px 0px 45px">

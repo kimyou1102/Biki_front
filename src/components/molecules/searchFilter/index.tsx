@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Img, Button } from '@atoms';
 import { SearchBar } from '@molecules/searchBar';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { filmInputState, sketchInputState } from '../../../recoil/archive/atome';
-import { movieState, testMovie } from '../../../recoil/movies';
+import { movieState, testMovie, movieInitialState } from '../../../recoil/movies';
 import { testSketchs, sketchState } from '../../../recoil/sketch/atom';
 import { SketchProps } from '../../../models/sketch';
-import { MovieInfo } from '../../../models/movie';
+import { MovieInfo, MovieData } from '../../../models/movie';
 
 import filter from '../../../assets/images/Filter.png';
 
@@ -15,9 +15,9 @@ interface Props {
 }
 
 export function SearchFilter({ type }: Props) {
-  const initialMovieData = testMovie; // api에서 받아오는 걸로
-  const initialSketchData = testSketchs; // api에서 받아오는 걸로
-  const [movies, setMovies] = useRecoilState<MovieInfo[]>(movieState);
+  const initialMovieData = useRecoilValue<MovieData[]>(movieInitialState);
+  const initialSketchData = testSketchs;
+  const [movies, setMovies] = useRecoilState<MovieData[]>(movieState);
   const [sketchs, setSketchs] = useRecoilState<SketchProps[]>(sketchState);
   const [filmValue, setFilmValue] = useRecoilState<string>(filmInputState);
   const [sketchValue, setSketchValue] = useRecoilState<string>(sketchInputState);
@@ -36,7 +36,7 @@ export function SearchFilter({ type }: Props) {
 
   const onSearch = () => {
     if (type === 'film') {
-      const newArr = movies.filter((e) => e.title.includes(filmValue));
+      const newArr = movies.filter((e) => e.titleKo.includes(filmValue));
       setMovies(newArr);
     } else {
       const newArr = sketchs.filter((e) => e.title.includes(sketchValue));

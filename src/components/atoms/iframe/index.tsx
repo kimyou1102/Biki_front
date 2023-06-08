@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  url?: string;
+  url: string;
 }
 
 export function Iframe({ url }: Props) {

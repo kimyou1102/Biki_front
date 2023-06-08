@@ -9,6 +9,8 @@ interface Props {
   radius?: number;
   bgColor?: string;
   border?: string;
+  margin?: string;
+  padding?: string;
 }
 
 export const BorderContainer = styled.div<Props>`
@@ -16,8 +18,11 @@ export const BorderContainer = styled.div<Props>`
   justify-content: ${(props) => (props.justify ? props.justify : 'flex-start')};
   align-items: ${(props) => (props.align ? props.align : 'flex-start')};
   width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : '100%')};
-  height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : '320px')};
+  min-height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : '320px')};
   border-radius: ${(props) => (props.radius ? `${props.radius}px` : '0px')};
   background-color: ${(props) => (props.bgColor ? props.bgColor : 'transparent')};
   border: ${(props) => (props.border ? `1px solid ${props.border}` : 'none')};
+  margin: ${(props) => (props.margin ? props.margin : '0px')};
+  padding: ${(props) => (props.padding ? props.padding : '0px')};
+  box-sizing: border-box;
 `;

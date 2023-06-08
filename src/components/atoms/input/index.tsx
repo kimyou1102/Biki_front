@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import search from '../../../assets/images/Search.png';
 
 interface InputProps {
+  type?: string;
   width?: number | string;
   height?: number | string;
   padding?: string;
@@ -13,6 +14,7 @@ interface InputProps {
   value: string;
   border?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  ref?: React.RefObject<HTMLInputElement>;
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -29,6 +31,7 @@ const StyledInput = styled.input<InputProps>`
 `;
 
 export function Input({
+  type = 'text',
   width,
   height,
   padding,
@@ -39,7 +42,8 @@ export function Input({
   border,
   value,
   onChange,
+  ref,
 }: InputProps) {
   const CommonProps = { width, height, padding, position, radius, size, value, border };
-  return <StyledInput type="text" {...CommonProps} placeholder={placeholder} onChange={onChange} />;
+  return <StyledInput ref={ref} type={type} {...CommonProps} placeholder={placeholder} onChange={onChange} />;
 }

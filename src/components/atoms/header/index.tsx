@@ -6,12 +6,21 @@ interface HeaderProps {
 }
 
 const StyledHeader = styled.header`
-  padding: 20px 0 16px 0;
   border-bottom: 1px solid #f4f4f4;
-  display: flex;
-  justify-content: space-between;
+
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0 16px 0;
+    max-width: calc(1280px * 0.8);
+    margin: auto;
+  }
 `;
 
 export function HeaderDefault({ children }: HeaderProps) {
-  return <StyledHeader>{children}</StyledHeader>;
+  return (
+    <StyledHeader>
+      <div className="wrap">{children}</div>
+    </StyledHeader>
+  );
 }

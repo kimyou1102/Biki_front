@@ -1,10 +1,10 @@
 import React from 'react';
 import { FlexContainer, Grid } from '@atoms';
 import { Pagination } from '@molecules';
-import { ContentBox } from '@organisms/contentBox';
+import { ContentBox } from '@molecules/contentBox';
 import { SketchProps } from 'src/models/sketch';
-import { useRecoilValue } from 'recoil';
-import { sketchPhotos } from '../../../recoil/archive/atome';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { modalDataState, modalState } from '../../../recoil/archive/atome';
 
 interface Props {
   page: number;
@@ -13,13 +13,14 @@ interface Props {
 }
 
 export function SketchList({ page, setPage, photos }: Props) {
-  const modalPhotos = useRecoilValue<string[]>(sketchPhotos);
+  const setModal = useSetRecoilState(modalState);
+
   const limit = 15;
-  const offset = (page - 1) * limit;
+  const offset = page * limit;
 
   return (
     <>
-      <FlexContainer width={1280} margin="0 auto" wrap="wrap">
+      <FlexContainer width={1280} margin="0 auto" wrap="wrap" className="cursor">
         <Grid templateColumns="1fr 1fr 1fr" gap="21px 16px">
           {photos.slice(offset, offset + limit).map((photo) => (
             <ContentBox

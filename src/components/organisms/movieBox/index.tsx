@@ -1,25 +1,47 @@
 import React from 'react';
 import { MovieDescription } from '@molecules';
-import { FlexContainer, Img } from '@atoms';
-import { MovieBoxInfo } from '../../../models/movie';
+import { FlexContainer, Img, ContentBoxImgWrap } from '@atoms';
+import { useRecoilState } from 'recoil';
+import { movieModalState, movieModalDataState, movieModalPositionState } from '../../../recoil/movies';
+import { MovieBoxInfo, MovieData } from '../../../models/movie';
 
-export function MovieBox({ type, title, director, country, year, runningTime, url }: MovieBoxInfo) {
+interface Props {
+  type: 'main' | 'archive';
+  data: MovieData;
+}
+
+// export function MovieBox({ type, title, director, country, year, runningTime, url }: MovieBoxInfo) {
+export function MovieBox({ type, data }: Props) {
+  const [movieModal, setMovieModal] = useRecoilState(movieModalState);
+  const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
+  const [top, setTop] = useRecoilState(movieModalPositionState);
+
+  const onClick = () => {
+    if (type === 'archive') {
+      setMovieModal(true);
+      setMovieModalData(data);
+      setTop(window.scrollY);
+      document.querySelector('body')?.classList.add('none');
+    }
+  };
   return (
     <FlexContainer
       width={413}
       direction="column"
       margin={type === 'main' ? '0px 17px 0px 0px' : '0px'}
-      className={type}
+      className={[type, 'cursor'].join(' ')}
+      radius="16px"
+      onClick={onClick}
     >
-      <div style={{ width: '330px', height: '220px' }}>
-        <Img alt="이미지" src={url} width="100%" />
-      </div>
+      <ContentBoxImgWrap>
+        <Img alt="이미지" src={data.stillImage.first} />
+      </ContentBoxImgWrap>
       <MovieDescription
-        title={title}
-        director={director}
-        country={country}
-        year={year}
-        runningTime={runningTime}
+        title={data.titleKo}
+        director={data.credit.directorNameKo}
+        country={data.country}
+        year={data.eventYear}
+        runningTime={data.runningTime}
         type={type}
       />
     </FlexContainer>

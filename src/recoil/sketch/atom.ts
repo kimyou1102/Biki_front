@@ -17,6 +17,7 @@ export const testSketchs: SketchProps[] = [
       'http://www.biky.or.kr/uploads/editor/20220805150110_11copy.jpg',
       'http://www.biky.or.kr/uploads/editor/20220805150143_12copy.jpg',
       'http://www.biky.or.kr/uploads/editor/20220805150210_13copy.jpg',
+      'https://item.kakaocdn.net/do/493188dee481260d5c89790036be0e66effd194bae87d73dd00522794070855d',
     ],
   },
   {

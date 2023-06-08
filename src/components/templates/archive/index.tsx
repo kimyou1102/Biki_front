@@ -12,19 +12,15 @@ interface Props {
 
 export function ArchiveTemplate({ children, title, type }: Props) {
   return (
-    <>
-      <Header />
-      <Nav />
-      <Section>
-        <ArchiveTitle />
-        <FlexContainer className="full" margin="0px 0px 26px 0px" justify="space-between" align="center">
-          <H3 size={2} weight="bold">
-            {title}
-          </H3>
-          <SearchFilter type={type} />
-        </FlexContainer>
-        {children}
-      </Section>
-    </>
+    <Section>
+      <ArchiveTitle />
+      <FlexContainer className="full" margin="0px 0px 26px 0px" justify="space-between" align="center">
+        <H3 size={2} weight="bold">
+          {title}
+        </H3>
+        <SearchFilter type={type} />
+      </FlexContainer>
+      {children}
+    </Section>
   );
 }

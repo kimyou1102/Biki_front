@@ -1,6 +1,6 @@
 import React from 'react';
 import { atom } from 'recoil';
-import { MovieInfo } from 'src/models/movie';
+import { MovieInfo, MovieData } from 'src/models/movie';
 
 export const testMovie: MovieInfo[] = [
   {
@@ -248,7 +248,91 @@ export const testMovie: MovieInfo[] = [
   },
 ];
 
-export const movieState = atom<MovieInfo[]>({
+const defaultData: MovieData = {
+  id: 0,
+  eventYear: 0,
+  section: {
+    id: 0,
+    eventYear: 0,
+    nameKo: '',
+    nameEn: '',
+    descriptionKo: '',
+    descriptionEn: '',
+  },
+  titleKo: '',
+  titleEn: '',
+  productionYear: 0,
+  country: '',
+  rating: '',
+  runningTime: 0,
+  color: '',
+  film: '',
+  subTitle: '',
+  youtube: '',
+  synopsisKo: '',
+  synopsisEn: '',
+  programmerNoteKo: '',
+  programmerNoteEn: '',
+  relatedMovies: [],
+  categories: [],
+  tags: [],
+  screening: {
+    id: 0,
+    status: '',
+    vimeo: '',
+  },
+  distribution: {
+    id: 0,
+    status: '',
+    url: '',
+  },
+  credit: {
+    id: 0,
+    directorNameKo: '',
+    directorNameEn: '',
+    profileImage: '',
+    directorInfoKo: '',
+    directorInfoEn: '',
+    castingKo: '',
+    castingEn: '',
+  },
+  contact: {
+    id: 0,
+    making: '',
+    distribution: '',
+  },
+  stillImage: {
+    id: 1,
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  },
+  status: '',
+  mainPostStatus: '',
+};
+
+export const movieState = atom<MovieData[]>({
   key: 'movies',
-  default: testMovie,
+  default: [defaultData],
+});
+
+export const movieInitialState = atom<MovieData[]>({
+  key: 'movieInitialState',
+  default: [defaultData],
+});
+
+export const movieModalState = atom<boolean>({
+  key: 'movieModalState',
+  default: false,
+});
+
+export const movieModalDataState = atom<any>({
+  key: 'movieModalDataState',
+  default: defaultData,
+});
+
+export const movieModalPositionState = atom<number>({
+  key: 'movieModalPositionState',
+  default: 0,
 });

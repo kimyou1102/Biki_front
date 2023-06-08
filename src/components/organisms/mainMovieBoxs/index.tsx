@@ -3,10 +3,10 @@ import { MovieBox } from '@organisms/movieBox';
 import { SlideContainer } from '@atoms';
 import { useSetRecoilState } from 'recoil';
 import { mainMovieScrollState } from '../../../recoil/notice/notice';
-import { MovieInfo } from '../../../models/movie';
+import { MovieInfo, MovieData } from '../../../models/movie';
 
 interface Props {
-  data: MovieInfo[];
+  data: MovieData[];
 }
 
 export function MainMovieBoxs({ data }: Props) {
@@ -22,17 +22,18 @@ export function MainMovieBoxs({ data }: Props) {
   return (
     <SlideContainer ref={scrollRef}>
       {data.map((movie) => (
-        <MovieBox
-          key={movie.id}
-          id={movie.id}
-          type="main"
-          title={movie.title}
-          director={movie.director}
-          country={movie.country}
-          year={movie.year}
-          runningTime={movie.runningTime}
-          url={movie.url}
-        />
+        <MovieBox key={movie.id} type="main" data={movie} />
+        // <MovieBox
+        //   key={movie.id}
+        //   id={movie.id}
+        //   type="main"
+        //   title={movie.title}
+        //   director={movie.director}
+        //   country={movie.country}
+        //   year={movie.year}
+        //   runningTime={movie.runningTime}
+        //   url={movie.url}
+        // />
       ))}
     </SlideContainer>
   );

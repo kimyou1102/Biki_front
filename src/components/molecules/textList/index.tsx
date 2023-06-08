@@ -1,5 +1,5 @@
 import React from 'react';
-import { Span, Li } from '@atoms';
+import { Span, Li, FlexContainer } from '@atoms';
 
 interface Props {
   date: string;
@@ -8,15 +8,17 @@ interface Props {
 }
 
 export function TextList({ date, title, isCheck }: Props) {
-  const changeColor = '#74B743';
+  const changeColor = 'var(--main-color)';
   return (
-    <Li outline="#DBDBDB" padding="16px 0">
-      <Span weight="bold" size={0.75} color={isCheck ? changeColor : 'black'} margin="0 19px 0 0">
-        {date}
-      </Span>
-      <Span weight="bold" color={isCheck ? changeColor : 'black'}>
-        {title.length > 42 ? `${title.slice(0, 42)}...` : title}
-      </Span>
+    <Li outline="#DBDBDB" padding="16px 0 8px 0">
+      <FlexContainer direction="column">
+        <Span weight="bold" color={isCheck ? changeColor : 'black'}>
+          {title.length > 45 ? `${title.slice(0, 45)}...` : title}
+        </Span>
+        <Span weight="bold" size={0.5} color="#999999" margin="4px 0 0 0">
+          {date}
+        </Span>
+      </FlexContainer>
     </Li>
   );
 }

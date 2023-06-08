@@ -4,7 +4,8 @@ import { NoticeBox } from '@organisms/noticeBox';
 import { NoticeHeader } from '@molecules';
 
 const StyledArticel = styled.article`
-  width: 504px;
+  width: calc(1280px * 0.8);
+  margin: 5rem auto 7rem;
 `;
 
 export function NoticeArticel() {

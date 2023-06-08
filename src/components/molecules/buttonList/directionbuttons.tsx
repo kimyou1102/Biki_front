@@ -13,7 +13,7 @@ export function DirectionButtons({ onLeftClick, onRightClick }: Props) {
     <FlexContainer>
       <Button
         onClick={onLeftClick}
-        bgColor="#74B743"
+        bgColor="var(--main-color)"
         width={32}
         height={32}
         radius="50%"
@@ -22,11 +22,11 @@ export function DirectionButtons({ onLeftClick, onRightClick }: Props) {
         justify="center"
         align="center"
       >
-        <Img alt="왼쪽방향" src={leftArrow} width={12} />
+        <Img alt="왼쪽방향" src={leftArrow} width={12} height={12} />
       </Button>
       <Button
         onClick={onRightClick}
-        bgColor="#74B743"
+        bgColor="var(--main-color)"
         width={32}
         height={32}
         radius="50%"
@@ -34,7 +34,7 @@ export function DirectionButtons({ onLeftClick, onRightClick }: Props) {
         justify="center"
         align="center"
       >
-        <Img alt="오른쪽방향" src={rightArrow} width={12} />
+        <Img alt="오른쪽방향" src={rightArrow} width={12} height={12} />
       </Button>
     </FlexContainer>
   );

@@ -12,7 +12,7 @@ interface H3Props {
 }
 
 const StyledH3 = styled.h3<H3Props>`
-  font-size: ${(props) => (props.size ? `${props.size}rem` : '1rem')};
+  font-size: ${(props) => (props.size ? `${props.size * 0.8}rem` : '1rem')};
   font-weight: ${(props) => (props.weight ? props.weight : 'normal')};
   color: ${(props) => props.color};
   font-family: ${(props) => (props.font ? `${props.font}` : 'PretendardRegular')};

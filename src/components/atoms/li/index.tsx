@@ -9,6 +9,7 @@ interface LiProps {
   weight?: string | number;
   padding?: string;
   onClick?: (e: any) => void;
+  id?: string;
 }
 
 const StyledLi = styled.li<LiProps>`
@@ -17,11 +18,11 @@ const StyledLi = styled.li<LiProps>`
   cursor: pointer;
   font-weight: ${(props) => (props.weight ? props.weight : 'normal')};
   outline: none;
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding: ${(props) => (props.padding ? props.padding : '0px')};
 `;
 
-export function Li({ children, color = 'black', outline = 'none', bgColor, weight, padding, onClick }: LiProps) {
+export function Li({ children, color = 'black', outline = 'none', bgColor, weight, padding, onClick, id }: LiProps) {
   const CommonProps = {
     color,
     outline,
@@ -29,6 +30,11 @@ export function Li({ children, color = 'black', outline = 'none', bgColor, weigh
     weight,
     onClick,
     padding,
+    id,
   };
-  return <StyledLi {...CommonProps}>{children}</StyledLi>;
+  return (
+    <StyledLi {...CommonProps} id={id}>
+      {children}
+    </StyledLi>
+  );
 }

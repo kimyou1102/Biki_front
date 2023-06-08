@@ -1,16 +1,17 @@
 import React from 'react';
-import { FlexContainer, Span, StyledStrong } from '@atoms';
+import { FlexContainer, Span, StyledStrong, ContentDescriptionWrap } from '@atoms';
 import { ContentDescriptionInfo } from 'src/models/content';
 
 export function ContentDescription({ title, date, count, type }: ContentDescriptionInfo) {
   return (
-    <FlexContainer
-      bgColor={type === 'main' ? '#6DB03C' : '#EEEEEE'}
-      width={type === 'main' ? 630 : 413}
-      height={type === 'main' ? 96 : 85}
-      padding={type === 'main' ? '13px' : '19px'}
-      direction="column"
-    >
+    // <FlexContainer
+    //   bgColor={type === 'main' ? 'var(--main-color)' : '#EEEEEE'}
+    //   width={type === 'main' ? 630 : 413}
+    //   height={type === 'main' ? 96 : 85}
+    //   padding={type === 'main' ? '13px' : '19px'}
+    //   direction="column"
+    // >
+    <ContentDescriptionWrap type={type} className={type === 'main' ? 'big' : 'small'}>
       <StyledStrong size={type === 'main' ? 1.25 : 1} color={type === 'main' ? 'white' : 'black'}>
         {title}
       </StyledStrong>
@@ -22,6 +23,7 @@ export function ContentDescription({ title, date, count, type }: ContentDescript
           조회수 : {count}
         </Span>
       </FlexContainer>
-    </FlexContainer>
+    </ContentDescriptionWrap>
+    // </FlexContainer>
   );
 }
