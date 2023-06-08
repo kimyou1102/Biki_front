@@ -6,3 +6,4 @@ export * from './newsDetail';
 export * from './MainPage';
 export * from './FestivalSymbolPage';
 export * from './JudgesPage';
+export * from './movieSchedule';
