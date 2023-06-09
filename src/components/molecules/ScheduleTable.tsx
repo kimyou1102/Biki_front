@@ -54,6 +54,7 @@ export function ScheduleTable({ data }: Props) {
                 <Th>{data.addInfo.join(' ')}</Th>
                 <Th>
                   <Button
+                    size={1}
                     width={120}
                     bgColor="var(--main-color)"
                     color="white"
@@ -74,7 +75,8 @@ export function ScheduleTable({ data }: Props) {
               <Th>정보없음</Th>
               <Th>
                 <Button
-                  width={120}
+                  width={130}
+                  size={1}
                   bgColor="var(--main-color)"
                   color="white"
                   weight="bold"
