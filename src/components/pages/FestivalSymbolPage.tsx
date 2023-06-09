@@ -104,7 +104,7 @@ export function FestivalSymbolPage() {
           <FlexContainer justify="center" margin="calc(22px * 0.8) 0 0 0">
             <a href={logo} download>
               <Button
-                bgColor="#74B743"
+                bgcolor="#74B743"
                 color="white"
                 radius="8px"
                 width={280}
@@ -116,7 +116,7 @@ export function FestivalSymbolPage() {
             </a>
 
             <Button
-              bgColor="#74B743"
+              bgcolor="#74B743"
               color="white"
               radius="8px"
               width={280}
@@ -140,7 +140,7 @@ export function FestivalSymbolPage() {
           </div>
           <FlexContainer justify="center">
             <Button
-              bgColor="#74B743"
+              bgcolor="#74B743"
               color="white"
               radius="8px"
               width={500}

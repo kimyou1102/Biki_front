@@ -13,19 +13,19 @@ export interface ButtonProps {
   radius?: string;
   color?: string;
   border?: string;
-  bgColor?: string;
+  bgcolor?: string;
   weight?: string | number;
   font?: string;
   display?: string;
   justify?: string;
   align?: string;
-  zIndex?: number;
+  zindex?: number;
   onClick?: (e: any) => void;
 }
 
 const StyledButton = styled.button<ButtonProps>`
   border: ${(props) => (props.border === 'none' ? 'none' : `1px solid ${props.border}`)};
-  background: ${(props: ButtonProps) => (props.bgColor ? props.bgColor : 'transparent')};
+  background: ${(props: ButtonProps) => (props.bgcolor ? props.bgcolor : 'transparent')};
   width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')};
   height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : 'auto')};
   margin: ${(props) => (props.margin ? props.margin : '0px')};
@@ -38,7 +38,7 @@ const StyledButton = styled.button<ButtonProps>`
   display: ${(props) => (props.display ? props.display : 'inline-block')};
   justify-content: ${(props) => (props.justify ? props.justify : 'flex-start')};
   align-items: ${(props) => (props.align ? props.align : 'flex-start')};
-  z-index: ${(props) => (props.zIndex ? props.zIndex : 0)};
+  z-index: ${(props) => (props.zindex ? props.zindex : 0)};
   &.right-none {
     margin-right: 0px;
   }
@@ -56,12 +56,12 @@ export function Button({
   radius,
   color,
   border = 'none',
-  bgColor,
+  bgcolor,
   weight,
   display,
   justify,
   align,
-  zIndex,
+  zindex,
   onClick,
 }: ButtonProps) {
   const CommonProps = {
@@ -74,12 +74,12 @@ export function Button({
     padding,
     radius,
     border,
-    bgColor,
+    bgcolor,
     weight,
     display,
     justify,
     align,
-    zIndex,
+    zindex,
     onClick,
   };
   return (

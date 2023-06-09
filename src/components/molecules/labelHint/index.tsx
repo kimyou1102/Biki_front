@@ -3,11 +3,11 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 interface LeftLabelProps {
-  bgColor: string;
+  bgcolor: string;
 }
 
 interface LabelHintProps {
-  bgColor: string;
+  bgcolor: string;
   leftText: string;
   rightText: string;
 }
@@ -21,7 +21,7 @@ const LeftLabelDiv = styled.div<LeftLabelProps>`
   align-items: center;
   font-family: 'PretendardBold';
   font-size: 0.9rem;
-  background-color: ${(props) => (props.bgColor ? props.bgColor : '#FFFFFF')};
+  background-color: ${(props) => (props.bgcolor ? props.bgcolor : '#FFFFFF')};
   color: white;
 `;
 
@@ -37,10 +37,10 @@ const RightLabelDiv = styled.div`
   font-size: 0.9rem;
 `;
 
-export function LabelHint({ bgColor, leftText, rightText }: LabelHintProps) {
+export function LabelHint({ bgcolor, leftText, rightText }: LabelHintProps) {
   return (
     <Div display="flex" margin="0 0 1rem 0" style={{ width: '100%' }}>
-      <LeftLabelDiv bgColor={bgColor}>{leftText}</LeftLabelDiv>
+      <LeftLabelDiv bgcolor={bgcolor}>{leftText}</LeftLabelDiv>
       <RightLabelDiv>{rightText}</RightLabelDiv>
     </Div>
   );

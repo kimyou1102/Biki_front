@@ -177,7 +177,7 @@ export function ArchiveModal() {
       </Wrap>
       <FlexContainer justify="right">
         <Button
-          bgColor="var(--main-color)"
+          bgcolor="var(--main-color)"
           width={440}
           padding="calc(18px * 0.8) calc(100px * 0.8)"
           radius="10px"

@@ -235,23 +235,23 @@ export function ScheduleInfoPage() {
         </Typography>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="BF" rightText="배리어프리 영화" bgColor="#FF810D" />
-          <LabelHint leftText="GV" rightText="관객과의 대화" bgColor="#8A2BE2" />
+          <LabelHint leftText="BF" rightText="배리어프리 영화" bgcolor="#FF810D" />
+          <LabelHint leftText="GV" rightText="관객과의 대화" bgcolor="#8A2BE2" />
         </Box>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="Reads" rightText="영화읽기" bgColor="#006400" />
-          <LabelHint leftText="Greeting" rightText="무대인사  " bgColor="#FF1191" />
+          <LabelHint leftText="Reads" rightText="영화읽기" bgcolor="#006400" />
+          <LabelHint leftText="Greeting" rightText="무대인사  " bgcolor="#FF1191" />
         </Box>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="W.S" rightText="워크숍  " bgColor="#B7CC37" />
-          <LabelHint leftText="Live" rightText="라이브더빙  " bgColor="#283FBC" />
+          <LabelHint leftText="W.S" rightText="워크숍  " bgcolor="#B7CC37" />
+          <LabelHint leftText="Live" rightText="라이브더빙  " bgcolor="#283FBC" />
         </Box>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="Opening" rightText="개막작  " bgColor="#191919" />
-          <LabelHint leftText="Talk" rightText="시네마 토크  " bgColor="#E5C32B" />
+          <LabelHint leftText="Opening" rightText="개막작  " bgcolor="#191919" />
+          <LabelHint leftText="Talk" rightText="시네마 토크  " bgcolor="#E5C32B" />
         </Box>
       </Section>
     </ThemeProvider>

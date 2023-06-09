@@ -7,7 +7,7 @@ interface PropsType {
 
 export const SlideContainer = forwardRef((props: PropsType, ref: ForwardedRef<HTMLDivElement>) => {
   return (
-    <FlexContainer ref={ref} overflowX="auto" direction="row" className="slide">
+    <FlexContainer ref={ref} overflowx="auto" direction="row" className="slide">
       {props.children}
     </FlexContainer>
   );

@@ -10,6 +10,8 @@ interface ImgProps {
   position?: string;
   objectfit?: string;
   radius?: string;
+  onClick?: () => void;
+  className?: string;
 }
 
 const StyledImg = styled.img<ImgProps>`
@@ -19,9 +21,13 @@ const StyledImg = styled.img<ImgProps>`
   position: ${(props) => (props.position ? props.position : 'relative')};
   object-fit: ${(props) => (props.objectfit ? props.objectfit : 'fill')};
   border-radius: ${(props) => (props.radius ? props.radius : '0px')};
+
+  &.cursor {
+    cursor: pointer;
+  }
 `;
 
-export function Img({ alt, src, width, height, margin, position, objectfit, radius }: ImgProps) {
+export function Img({ alt, src, width, height, margin, position, objectfit, radius, onClick, className }: ImgProps) {
   const CommonProps = {
     width,
     height,
@@ -29,6 +35,7 @@ export function Img({ alt, src, width, height, margin, position, objectfit, radi
     position,
     objectfit,
     radius,
+    onClick,
   };
-  return <StyledImg alt={alt} src={src} {...CommonProps} />;
+  return <StyledImg className={className} alt={alt} src={src} {...CommonProps} />;
 }

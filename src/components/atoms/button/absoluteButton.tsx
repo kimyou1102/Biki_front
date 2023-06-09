@@ -13,7 +13,7 @@ interface Props extends ButtonProps {
 
 const StyledButton = styled.button<Props>`
   border: ${(props) => (props.border === 'none' ? 'none' : `1px solid ${props.border}`)};
-  background: ${(props: ButtonProps) => (props.bgColor ? props.bgColor : 'transparent')};
+  background: ${(props: ButtonProps) => (props.bgcolor ? props.bgcolor : 'transparent')};
   width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')};
   height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : 'auto')};
   margin: ${(props) => (props.margin ? props.margin : '0px')};
@@ -27,7 +27,7 @@ const StyledButton = styled.button<Props>`
   justify-content: ${(props) => (props.justify ? props.justify : 'flex-start')};
   align-items: ${(props) => (props.align ? props.align : 'flex-start')};
   position: ${(props) => (props.position ? props.position : 'relative')};
-  z-index: ${(props) => (props.zIndex ? props.zIndex : 0)};
+  z-index: ${(props) => (props.zindex ? props.zindex : 0)};
   transform: ${(props) => (props.transform ? props.transform : 'none')};
   &.right-none {
     margin-right: 0px;
@@ -61,12 +61,12 @@ export function AbsoluteButton({
   radius,
   color,
   border = 'none',
-  bgColor,
+  bgcolor,
   weight,
   display,
   justify,
   align,
-  zIndex,
+  zindex,
   position,
   top,
   bottom,
@@ -84,12 +84,12 @@ export function AbsoluteButton({
     margin,
     radius,
     border,
-    bgColor,
+    bgcolor,
     weight,
     display,
     justify,
     align,
-    zIndex,
+    zindex,
     position,
     top,
     bottom,

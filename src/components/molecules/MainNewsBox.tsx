@@ -14,7 +14,7 @@ export function MainNewsBox({ data, newsName }: Props) {
   return (
     <BorderContainer
       radius={10}
-      bgColor="white"
+      bgcolor="white"
       border="#74B743"
       width={630}
       height={newsName === '언론보도' ? 482 : 396}
