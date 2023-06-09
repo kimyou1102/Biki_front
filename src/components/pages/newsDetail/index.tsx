@@ -4,7 +4,7 @@ import { NewsSection } from '@organisms';
 import { Footer } from '@layout/Footer';
 import { useLocation } from 'react-router-dom';
 import { getPostByIdApi } from '../../../apis/post/get-post-by-id-api';
-import { PostType } from '../../../apis/post/model';
+import { PostType } from '../../../models/post';
 
 interface Props {
   type: string;

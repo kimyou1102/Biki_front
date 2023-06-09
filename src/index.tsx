@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RecoilRoot } from 'recoil';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ArchiveMoviePage, ArchiveSketchPage, NewsNotice, Newsletter, NewsDetail } from '@pages';
 import { HeaderLayout } from '@layout';
+import { ArchiveMoviePage, ArchiveSketchPage, NewsNotice, Newsletter, NewsDetail } from '@pages';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './styles/globalStyle';
-import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

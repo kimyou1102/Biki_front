@@ -103,9 +103,6 @@ const GlobalStyle = createGlobalStyle`
       display: none;
     }
 
-    #archive .slick-slide > div {
-      margin-right: calc(16px * 0.8);
-    }
     /* #paging .slick-slide {
       width: calc(200px * 0.8) !important;
     } */

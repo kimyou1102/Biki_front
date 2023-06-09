@@ -5,7 +5,7 @@ import { Footer } from '@layout/Footer';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { noticeListState, noticeListInitialState } from '../../../recoil/notice/notice';
 import { getPostApi } from '../../../apis/post/get-post-api';
-import { PostType } from '../../../apis/post/model';
+import { PostType } from '../../../models/post';
 
 export function NewsNotice() {
   // const [notices, setNotices] = useState<any>([]);

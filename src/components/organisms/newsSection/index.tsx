@@ -4,7 +4,7 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { Viewer } from '@toast-ui/react-editor';
 import { useNavigate } from 'react-router-dom';
 import { Button, FlexContainer, Text, Span } from '@atoms';
-import { PostType } from '../../../apis/post/model';
+import { PostType } from '../../../models/post';
 
 // interface Props {
 //   title: string;

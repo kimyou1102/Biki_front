@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { PostType } from 'src/apis/post/model';
+import { PostType } from '@src/models/post';
 
 export const noticeInputState = atom<string>({
   key: 'noticeInput',

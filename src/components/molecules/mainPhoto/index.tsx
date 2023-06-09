@@ -13,7 +13,7 @@ const Styled = styled.div<{ src: string }>`
 export function MainPhoto({ src, sub, title, date }: MainProps) {
   return (
     <Styled src={src!}>
-      <Img position="absolute" width="100%" height={700} alt="메인" src={src} objectFit="cover" />
+      <Img position="absolute" width="100%" height={700} alt="메인" src={src} objectfit="cover" />
       <MainPhotoText sub={sub} title={title} date={date} />
     </Styled>
   );

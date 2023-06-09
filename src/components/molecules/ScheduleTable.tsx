@@ -2,16 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from '@atoms';
 
+type ScheduleType = {
+  id: number;
+  screeningDate: string;
+  startTime: string;
+  theater: string;
+};
+
 type DataType = {
-  date: string;
-  time: string;
-  cinema: string;
-  addInfo: string;
-  ticketLink: string;
+  schedule: ScheduleType[];
+  addInfo: string[];
 };
 
 interface Props {
-  data: DataType[];
+  data: DataType;
 }
 
 const Tr = styled.tr``;
@@ -40,13 +44,34 @@ export function ScheduleTable({ data }: Props) {
           </Tr>
         </thead>
         <tbody>
-          {data.map((e, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Tr key={i}>
-              <Th>{e.date}</Th>
-              <Th>{e.time}</Th>
-              <Th>{e.cinema}</Th>
-              <Th>{e.addInfo}</Th>
+          {data?.schedule.length > 0 ? (
+            data.schedule.map((e, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Tr key={i}>
+                <Th>{e.screeningDate}</Th>
+                <Th>{e.startTime}</Th>
+                <Th>{e.theater}</Th>
+                <Th>{data.addInfo.join(' ')}</Th>
+                <Th>
+                  <Button
+                    width={120}
+                    bgColor="var(--main-color)"
+                    color="white"
+                    weight="bold"
+                    padding="calc(6px * 0.8) calc(36px * 0.8)"
+                    radius="8px"
+                  >
+                    예매
+                  </Button>
+                </Th>
+              </Tr>
+            ))
+          ) : (
+            <Tr>
+              <Th>정보없음</Th>
+              <Th>정보없음</Th>
+              <Th>정보없음</Th>
+              <Th>정보없음</Th>
               <Th>
                 <Button
                   width={120}
@@ -56,11 +81,11 @@ export function ScheduleTable({ data }: Props) {
                   padding="calc(6px * 0.8) calc(36px * 0.8)"
                   radius="8px"
                 >
-                  예매
+                  정보없음
                 </Button>
               </Th>
             </Tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

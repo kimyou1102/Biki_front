@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TableRow, SearchBar, Pagination } from '@molecules';
 import { Th, Tr, THead } from '@atoms';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { PostType } from 'src/apis/post/model';
+import { PostType } from '@src/models/post';
 import { noticeListState, noticeListInitialState } from '../../../recoil/notice/notice';
 
 type DataType = {

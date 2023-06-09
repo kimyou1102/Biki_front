@@ -168,6 +168,7 @@ export function SketchModal({ state }: Props) {
   const pagingSettings = {
     dots: false,
     arrows: false,
+    infinite: true,
     centerMode: true,
     slidesToShow: 5,
     swipeToSlide: true,
