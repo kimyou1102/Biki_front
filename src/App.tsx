@@ -46,7 +46,7 @@ function App() {
           <Route path="/festival" element={<FestivalSymbolPage />} />
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
-          <Route path="/program/opening-film" element={<OpeningFilmPage />} />
+          <Route path="/movie/opening-film" element={<OpeningFilmPage />} />
         </Route>
       </Routes>
     </div>

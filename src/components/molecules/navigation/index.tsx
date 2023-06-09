@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Li, A } from '@atoms';
+import { Li, FlexContainer, Img, DropMenuWrap, ButtonsWrap, MenudButton } from '@atoms';
+import { useNavigate } from 'react-router-dom';
+import character from '../../../assets/images/nav_menu_character.png';
 
 interface NavigationProps {
   id: number;
@@ -11,69 +13,25 @@ interface NavigationProps {
   idValue: string;
 }
 
-const StyledUl = styled.ul`
+interface Props {
+  left: number;
+}
+
+const MenuWrap = styled.ul`
   display: flex;
-  width: calc(870px * 0.8);
-  justify-content: space-between;
-  margin-left: 114px;
+  width: calc(916px * 0.8);
 `;
 
-const ButtonWrap = styled.div`
-  width: 100%;
-  background-color: gray;
-  height: calc(368px * 0.8);
-  display: none;
-  /* display: block; */
-  /* &:hover {
-    display: block;
-  } */
-`;
+// const NavItemWrap = styled.div`
+//   display: flex;
+//   align-items: center;
+//   height: calc(118px * 0.8);
+//   padding: 0 calc(23px * 0.8);
+// `;
 
-const Container = styled.div`
-  position: relative;
-
-  #biky:hover,
-  #education:hover,
-  #program:hover,
-  #event:hover,
-  #forum:hover,
-  #news:hover,
-  #archive:hover,
-  #contact:hover {
-    color: var(--main-color);
-  }
-
-  #biki:hover .content {
-    position: absolute;
-    /* top: 20px; */
-    z-index: 100;
-    display: block;
-  }
-
-  #education:hover {
-    color: var(--main-color);
-  }
-
-  #program:hover {
-    color: var(--main-color);
-  }
-`;
-
-const StyledButton = styled.button`
-  background-color: #d9d9d9;
-  border: none;
-  color: black;
-  /* width: calc(250px * 0.8); */
-  padding: 18px 57px;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: var(--main-color);
-    color: white;
-  }
-`;
-
-export function Navigation() {
+export function Navigation({ left }: Props) {
+  const navigate = useNavigate();
+  const menuRef = useRef<HTMLDivElement>(null);
   const menus: NavigationProps[] = [
     {
       id: 1,
@@ -81,21 +39,21 @@ export function Navigation() {
       idValue: 'biky',
       url: '/#',
       arr: ['제18회 BIKY', '페스티벌 심벌', '시상내역', '비키를 만드는 사람들', '스폰서 모집안내'],
-      link: ['/news/notice', '/', '/', '/', '/'],
+      link: ['/', '/festival', '/', '/', '/'],
     },
     {
       id: 2,
       name: '교육',
       idValue: 'education',
       url: '/#',
-      arr: ['부설연구소', '배급영화 교재, 활동지, 교육영상', '비키랑 학교랑', '교육 프로그램'],
+      arr: ['부설연구소', '배급영화 교재,</br>활동지, 교육영상', '비키랑 학교랑', '교육 프로그램'],
       link: ['/', '/', '/', '/', '/'],
     },
     {
       id: 3,
       name: '2023 프로그램',
       idValue: 'program',
-      url: '/movie/schedule',
+      url: '/#',
       arr: [
         '상영 시간표',
         '상영관 정보',
@@ -111,9 +69,9 @@ export function Navigation() {
         '특별전: 채널 1016',
         '바로,씽!',
         '야외극장 달빛별빛',
-        '완두콩극장: 슈링겔국제어린이청소년영화제',
+        '완두콩극장:</br>슈링겔국제어린이청소년영화제',
       ],
-      link: ['/', '/', '/', '/', '/'],
+      link: ['/movie/schedule', '/', '/', '/movie/opening-film', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/', '/'],
     },
     {
       id: 4,
@@ -121,7 +79,7 @@ export function Navigation() {
       idValue: 'event',
       url: '/#',
       arr: ['상영이벤트', '포스터그림전시회', '어린이청소년영화인의 밤', '비키놀이터'],
-      link: ['/', '/', '/', '/', '/'],
+      link: ['/', '/', '/', '/'],
     },
     {
       id: 5,
@@ -129,15 +87,15 @@ export function Navigation() {
       idValue: 'forum',
       url: '/#',
       arr: ['역대 비키포럼', '인더스트리 네트워크'],
-      link: ['/', '/', '/', '/', '/'],
+      link: ['/', '/'],
     },
     {
       id: 6,
       name: '비키소식',
       idValue: 'news',
-      url: '/news/notice',
+      url: '/#',
       arr: ['공지사항', '뉴스레터', '보도자료'],
-      link: ['/', '/', '/', '/', '/'],
+      link: ['/news/notice', '/news/newsletter', '/'],
     },
     {
       id: 7,
@@ -145,7 +103,7 @@ export function Navigation() {
       idValue: 'archive',
       url: '/archive/distributions',
       arr: ['비키가 걸어온 길', '배급작품', '현장스케치', '영상클립', '상영작검색'],
-      link: ['/', '/', '/', '/', '/'],
+      link: ['/', '/archive/distributions', '/archive/sketch', '/', '/'],
     },
     {
       id: 8,
@@ -153,33 +111,44 @@ export function Navigation() {
       idValue: 'contact',
       url: '/#',
       arr: ['사무국사람들', '사무국위치'],
-      link: ['/#', '/#'],
+      link: ['/', '/'],
     },
   ];
 
-  const [nav, setNav] = useState([]);
+  useEffect(() => {
+    if (menuRef.current) {
+      console.log(menuRef.current.offsetLeft);
+    }
+  }, []);
 
   return (
-    <Container>
-      <StyledUl>
-        {menus.map((menu) => (
-          <div id={menu.idValue} key={menu.id}>
-            <Li weight="bold" id={menu.idValue}>
-              <A url={menu.url} id={menu.idValue}>
-                {menu.name}
-              </A>
-            </Li>
-            <ButtonWrap id={`${menu.idValue}_content`}>
-              {menu.arr.map((item, i) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <StyledButton key={i}>
-                  <A url={menu.link[i]}>{item}</A>
-                </StyledButton>
-              ))}
-            </ButtonWrap>
-          </div>
-        ))}
-      </StyledUl>
-    </Container>
+    <MenuWrap>
+      {menus.map((menu) => (
+        <Li key={menu.id} weight="bold" id={menu.idValue}>
+          {/* <NavItemWrap style={{ height: 'calc(118px * 0.8)' }}>{menu.name}</NavItemWrap> */}
+          <FlexContainer align="center" height={118} padding="0 calc(23px * 0.8)">
+            {menu.name}
+          </FlexContainer>
+          <DropMenuWrap id="menu_wrap">
+            <FlexContainer align="center" justify="center" width={left / 0.8}>
+              <Img alt="캐릭터" src={character} width={282} height={223} margin="0 0 0 calc(127px * 0.8))" />
+            </FlexContainer>
+            <ButtonsWrap>
+              {menu.arr.map((item, i) => {
+                const [text1, text2] = item.split('</br>');
+                return (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <MenudButton key={i} onClick={() => navigate(menu.link[i])}>
+                    {text1}
+                    <br />
+                    {text2}
+                  </MenudButton>
+                );
+              })}
+            </ButtonsWrap>
+          </DropMenuWrap>
+        </Li>
+      ))}
+    </MenuWrap>
   );
 }
