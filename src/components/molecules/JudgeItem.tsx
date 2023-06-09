@@ -21,7 +21,7 @@ export function JudgeItem({ src, name, career, awards }: Props) {
           width={197}
           height={197}
           radius="50%"
-          objectFit="cover"
+          objectfit="cover"
           margin="0 calc(20px * 0.8) 0 0"
         />
         <FlexContainer direction="column">

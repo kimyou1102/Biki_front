@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ArchiveTemplate } from '@templates';
-import { ArchiveMovieSection, ArchiveModal, ArchiveMovieList } from '@organisms';
-import { Footer } from '@layout/Footer';
+import { ArchiveModal, ArchiveMovieList } from '@organisms';
 import { ModalWrap } from '@atoms';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
@@ -12,9 +11,9 @@ import {
   movieInitialState,
 } from '../../../recoil/movies';
 import { MovieBoxInfo, MovieData } from '../../../models/movie';
-import { getMovieApi } from '../../../apis/movie/get-movie-api';
+import { getSectionByWordApi } from '../../../apis/section/get-section-by-word-api';
 
-export function ArchiveMoviePage() {
+export function OpeningFilmPage() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
   const [top, setTop] = useRecoilState(movieModalPositionState);
@@ -24,22 +23,21 @@ export function ArchiveMoviePage() {
 
   const [page, setPage] = useState(0);
 
-  const movieApi = useCallback(async () => {
-    await getMovieApi()
+  const sectionApi = useCallback(async () => {
+    await getSectionByWordApi('개막작')
       .then((res) => {
         console.log(res);
         setMovies(res);
         setInitialMovieData(res);
       })
       .catch((err) => console.log(err));
-  }, [setInitialMovieData, setMovies]);
+  }, [setMovies, setInitialMovieData]);
 
   useEffect(() => {
-    movieApi();
-  }, [movieApi]);
+    sectionApi();
+  }, [sectionApi]);
 
   const onOutsideModalClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // console.log(e.target);
     const target = e.target as HTMLElement;
     if (!target.closest('#modal')) {
       setMovieModal(false);
@@ -49,7 +47,7 @@ export function ArchiveMoviePage() {
 
   return (
     <>
-      <ArchiveTemplate title="배급작품" type="film">
+      <ArchiveTemplate title="개막작" type="film" pageTitle="2023 프로그램" sub="제18회 BIKY의 상영작을 소개합니다">
         {movies.length === 0 ? (
           <h1>등록된 게시물이 없습니다.</h1>
         ) : (

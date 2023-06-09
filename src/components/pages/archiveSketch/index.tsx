@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ModalWrap } from '@atoms';
 import { ArchiveTemplate } from '@templates';
-import { SketcSection, SketchModal } from '@organisms';
+import { SketcSection, SketchModal, SketchList } from '@organisms';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modalState, modalPositionState, modalDataState } from '../../../recoil/archive/atome';
+import { sketchState } from '../../../recoil/sketch/atom';
+import { SketchProps } from '../../../models/sketch';
 
 const Modal = styled.div<{ state: boolean }>`
   width: calc(1180px * 0.7);
@@ -16,6 +18,8 @@ const Modal = styled.div<{ state: boolean }>`
 export function ArchiveSketchPage() {
   const [modal, setModal] = useRecoilState<boolean>(modalState);
   // const [modalDatas, setModalDatas] = useRecoilValue(modalDataState);
+  const [photos, setPhotos] = useRecoilState<SketchProps[]>(sketchState);
+  const [page, setPage] = useState(0);
 
   const [top, setTop] = useRecoilState<number>(modalPositionState);
 
@@ -31,7 +35,13 @@ export function ArchiveSketchPage() {
   return (
     <>
       <ArchiveTemplate title="현장스케치" type="sketch">
-        <SketcSection />
+        {photos.length === 0 ? (
+          <h1>등록된 게시물이 없습니다.</h1>
+        ) : (
+          <div>
+            <SketchList page={page} setPage={setPage} photos={photos} />
+          </div>
+        )}
       </ArchiveTemplate>
       <ModalWrap
         top={top}

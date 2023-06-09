@@ -163,8 +163,8 @@ export function Navigation() {
     <Container>
       <StyledUl>
         {menus.map((menu) => (
-          <div id={menu.idValue}>
-            <Li key={menu.id} weight="bold" id={menu.idValue}>
+          <div id={menu.idValue} key={menu.id}>
+            <Li weight="bold" id={menu.idValue}>
               <A url={menu.url} id={menu.idValue}>
                 {menu.name}
               </A>

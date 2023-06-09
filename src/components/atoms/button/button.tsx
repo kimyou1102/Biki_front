@@ -34,7 +34,7 @@ const StyledButton = styled.button<ButtonProps>`
   color: ${(props: ButtonProps) => props.color};
   cursor: pointer;
   font-weight: ${(props) => (props.weight ? props.weight : 'normal')};
-  font-size: ${(props) => (props.size ? `${props.size}rem` : '1rem')};
+  font-size: ${(props) => (props.size ? `${props.size * 0.8}rem` : '1rem')};
   display: ${(props) => (props.display ? props.display : 'inline-block')};
   justify-content: ${(props) => (props.justify ? props.justify : 'flex-start')};
   align-items: ${(props) => (props.align ? props.align : 'flex-start')};

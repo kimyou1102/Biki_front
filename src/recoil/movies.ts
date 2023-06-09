@@ -1,6 +1,6 @@
 import React from 'react';
 import { atom } from 'recoil';
-import { MovieInfo, MovieData } from 'src/models/movie';
+import { MovieInfo, MovieData, UserMovieData } from 'src/models/movie';
 
 export const testMovie: MovieInfo[] = [
   {
@@ -312,6 +312,85 @@ const defaultData: MovieData = {
   mainPostStatus: '',
 };
 
+const userMovieDefault: UserMovieData = {
+  id: 0,
+  eventYear: 0,
+  section: {
+    id: 0,
+    eventYear: 0,
+    nameKo: '',
+    nameEn: '',
+    descriptionKo: '',
+    descriptionEn: '',
+  },
+  titleKo: '',
+  titleEn: '',
+  productionYear: 0,
+  country: '',
+  rating: '',
+  runningTime: '',
+  color: '',
+  film: '',
+  subTitle: '',
+  youtube: '',
+  synopsisKo: '',
+  synopsisEn: '',
+  relatedMovies: [
+    {
+      id: 0,
+      titleKo: '',
+      eventYear: 0,
+      titleEn: '',
+      directorName: '',
+      runningTime: 0,
+      stillImage: '',
+    },
+  ],
+  tags: [],
+  programmerNoteKo: '',
+  programmerNoteEn: '',
+  screening: {
+    id: 0,
+    status: '',
+    vimeo: '',
+  },
+  distribution: {
+    id: 0,
+    status: '',
+    url: '',
+  },
+  credit: {
+    id: 0,
+    directorNameKo: '',
+    directorNameEn: '',
+    profileImage: '',
+    directorInfoKo: '',
+    directorInfoEn: '',
+    castingKo: '',
+    castingEn: '',
+  },
+  contact: {
+    id: 0,
+    making: '',
+    distribution: '',
+  },
+  stillImage: {
+    id: 0,
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  },
+  schedule: [
+    {
+      id: 0,
+      screeningDate: '',
+      startTime: '',
+      theater: '',
+    },
+  ],
+};
+
 export const movieState = atom<MovieData[]>({
   key: 'movies',
   default: [defaultData],
@@ -327,12 +406,17 @@ export const movieModalState = atom<boolean>({
   default: false,
 });
 
-export const movieModalDataState = atom<any>({
+export const movieModalDataState = atom<UserMovieData>({
   key: 'movieModalDataState',
-  default: defaultData,
+  default: userMovieDefault,
 });
 
 export const movieModalPositionState = atom<number>({
   key: 'movieModalPositionState',
   default: 0,
+});
+
+export const movieModalIdState = atom<number>({
+  key: 'movieModalIdState',
+  default: Infinity,
 });
