@@ -95,7 +95,7 @@ export function Navigation() {
       id: 3,
       name: '2023 프로그램',
       idValue: 'program',
-      url: '/#',
+      url: '/movie/schedule',
       arr: [
         '상영 시간표',
         '상영관 정보',
