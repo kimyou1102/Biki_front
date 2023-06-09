@@ -16,6 +16,7 @@ const Container = styled.div`
   overflow-y: auto;
   height: 100vh;
   padding: calc(100px * 0.8) calc(120px * 0.8);
+  box-sizing: border-box;
 `;
 
 const Wrap = styled.div`
@@ -137,7 +138,14 @@ export function ArchiveModal() {
           Director
         </Text>
         <FlexContainer>
-          <Img src={movie.credit.profileImage} alt="감독사진" width={300} height={300} radius="10px" />
+          <Img
+            src={movie.credit.profileImage}
+            alt="감독사진"
+            width={300}
+            height={300}
+            radius="10px"
+            objectfit="cover"
+          />
           <div style={{ width: 'calc(480px * 0.8)', marginLeft: 'calc(24px * 0.8)' }}>
             <Text weight="bold" size={1.5} margin="0 0 calc(20px * 0.8) 0">
               {movie.credit.directorNameKo}
@@ -167,15 +175,17 @@ export function ArchiveModal() {
           ))}
         </div>
       </Wrap>
-      <Button
-        bgColor="var(--main-color)"
-        width={440}
-        padding="calc(18px * 0.8) calc(100px * 0.8)"
-        radius="10px"
-        color="white"
-      >
-        온라인 상영관 바로가기
-      </Button>
+      <FlexContainer justify="right">
+        <Button
+          bgColor="var(--main-color)"
+          width={440}
+          padding="calc(18px * 0.8) calc(100px * 0.8)"
+          radius="10px"
+          color="white"
+        >
+          온라인 상영관 바로가기
+        </Button>
+      </FlexContainer>
     </Container>
   );
 }
