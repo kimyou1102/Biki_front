@@ -11,7 +11,7 @@ export function Header() {
   ];
 
   const rightData: ButtonsProps[] = [
-    { id: 1, name: '로그인', url: '/' },
+    { id: 1, name: '로그인', url: '/login' },
     { id: 2, name: '회원가입', url: '/' },
     { id: 3, name: 'English', url: '/' },
   ];

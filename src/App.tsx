@@ -38,6 +38,7 @@ import {
   ReadyActionMovies15Page,
   ReadyActionMovies18Page,
   ReadyActionMoviesPage,
+  LoginPage,
 } from '@pages';
 import { HeaderLayout } from '@layout';
 import { ScheduleInfoPage } from '@pages/movieSchedule';
@@ -69,6 +70,7 @@ function App() {
           <Route path="/movie/ready-action15-movies" element={<ReadyActionMovies15Page />} />
           <Route path="/movie/ready-action18-movies" element={<ReadyActionMovies18Page />} />
           <Route path="/movie/ready-action-movies" element={<ReadyActionMoviesPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Route>
       </Routes>
     </div>

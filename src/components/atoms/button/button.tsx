@@ -26,7 +26,10 @@ export interface ButtonProps {
 const StyledButton = styled.button<ButtonProps>`
   border: ${(props) => (props.border === 'none' ? 'none' : `1px solid ${props.border}`)};
   background: ${(props: ButtonProps) => (props.bgcolor ? props.bgcolor : 'transparent')};
-  width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')};
+  /* width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')}; */
+  width: ${(props) =>
+    // eslint-disable-next-line no-nested-ternary
+    props.width ? (typeof props.width === 'string' ? props.width : `calc(${props.width}px * 0.8)`) : 'auto'};
   height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : 'auto')};
   margin: ${(props) => (props.margin ? props.margin : '0px')};
   padding: ${(props) => (props.padding ? props.padding : '0px')};
@@ -41,6 +44,10 @@ const StyledButton = styled.button<ButtonProps>`
   z-index: ${(props) => (props.zindex ? props.zindex : 0)};
   &.right-none {
     margin-right: 0px;
+  }
+
+  &.full {
+    width: 100%;
   }
 `;
 
