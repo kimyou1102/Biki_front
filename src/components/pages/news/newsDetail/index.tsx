@@ -3,8 +3,8 @@ import { NewsTemplates } from '@templates';
 import { NewsSection } from '@organisms';
 import { Footer } from '@layout/Footer';
 import { useLocation } from 'react-router-dom';
-import { getPostByIdApi } from '../../../apis/post/get-post-by-id-api';
-import { PostType } from '../../../models/post';
+import { getPostByIdApi } from '../../../../apis/post/get-post-by-id-api';
+import { PostType } from '../../../../models/post';
 
 interface Props {
   type: string;
@@ -47,6 +47,8 @@ export function NewsDetail({ type }: Props) {
     titleName = '공지사항';
   } else if (type === 'newsletter') {
     titleName = '뉴스레터';
+  } else {
+    titleName = '보도자료';
   }
   return (
     <>
