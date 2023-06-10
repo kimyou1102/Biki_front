@@ -16,10 +16,12 @@ export function ArchiveMovieList({ page, setPage, movies }: Props) {
   const limit = 12;
   const offset = page * limit;
 
+  console.log(offset, offset + limit);
+
   return (
     <>
       <FlexContainer width={1280} margin="0 auto" wrap="wrap">
-        <Grid templateColumns="1fr 1fr 1fr" gap="21px 16px">
+        <Grid templatecolumns="1fr 1fr 1fr" gap="21px 16px">
           {movies.slice(offset, offset + limit).map((movie) => (
             <MovieBox key={movie.id} type="archive" data={movie} />
             // <MovieBox

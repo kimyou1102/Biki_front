@@ -26,7 +26,18 @@ import {
   MainPage,
   FestivalSymbolPage,
   JudgesPage,
-  OpeningFilmPage,
+  OpeningMoviesPage,
+  FindMeMoviesPage,
+  TogetherMoviesPage,
+  WithinDifferencesMoviesPage,
+  BeyondBoundariesMoviesPage,
+  SpecialExhibitionMoviesPage,
+  RightNowMoviesPage,
+  OutdoorScreenMovies,
+  ReadyActionMovies12Page,
+  ReadyActionMovies15Page,
+  ReadyActionMovies18Page,
+  ReadyActionMoviesPage,
 } from '@pages';
 import { HeaderLayout } from '@layout';
 import { ScheduleInfoPage } from '@pages/movieSchedule';
@@ -46,7 +57,18 @@ function App() {
           <Route path="/festival" element={<FestivalSymbolPage />} />
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
-          <Route path="/movie/opening-film" element={<OpeningFilmPage />} />
+          <Route path="/movie/opening-movies" element={<OpeningMoviesPage />} />
+          <Route path="/movie/find-me-movies" element={<FindMeMoviesPage />} />
+          <Route path="/movie/together-movies" element={<TogetherMoviesPage />} />
+          <Route path="/movie/within-differences-movies" element={<WithinDifferencesMoviesPage />} />
+          <Route path="/movie/beyond-boundaries-movies" element={<BeyondBoundariesMoviesPage />} />
+          <Route path="/movie/special-exhibition-movies" element={<SpecialExhibitionMoviesPage />} />
+          <Route path="/movie/rightnow-movies" element={<RightNowMoviesPage />} />
+          <Route path="/movie/outdoor-screen-movies" element={<OutdoorScreenMovies />} />
+          <Route path="/movie/ready-action12-movies" element={<ReadyActionMovies12Page />} />
+          <Route path="/movie/ready-action15-movies" element={<ReadyActionMovies15Page />} />
+          <Route path="/movie/ready-action18-movies" element={<ReadyActionMovies18Page />} />
+          <Route path="/movie/ready-action-movies" element={<ReadyActionMoviesPage />} />
         </Route>
       </Routes>
     </div>

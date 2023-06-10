@@ -21,7 +21,7 @@ export function SketchList({ page, setPage, photos }: Props) {
   return (
     <>
       <FlexContainer width={1280} margin="0 auto" wrap="wrap" className="cursor">
-        <Grid templateColumns="1fr 1fr 1fr" gap="21px 16px">
+        <Grid templatecolumns="1fr 1fr 1fr" gap="21px 16px">
           {photos.slice(offset, offset + limit).map((photo) => (
             <ContentBox
               key={photo.id}
