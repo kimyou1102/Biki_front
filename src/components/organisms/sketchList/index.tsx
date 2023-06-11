@@ -2,17 +2,18 @@ import React from 'react';
 import { FlexContainer, Grid } from '@atoms';
 import { Pagination } from '@molecules';
 import { ContentBox } from '@molecules/contentBox';
-import { SketchProps, SketchType } from 'src/models/sketch';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { SketchProps, SketchType } from '../../../models/sketch';
+import { ClipType } from '../../../models/clip';
 import { modalDataState, modalState } from '../../../recoil/archive/atome';
 
 interface Props {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  photos: SketchType[];
+  datas: SketchType[] | ClipType[];
 }
 
-export function SketchList({ page, setPage, photos }: Props) {
+export function SketchList({ page, setPage, datas }: Props) {
   const setModal = useSetRecoilState(modalState);
 
   const limit = 15;
@@ -22,23 +23,24 @@ export function SketchList({ page, setPage, photos }: Props) {
     <>
       <FlexContainer width={1280} margin="0 auto" wrap="wrap">
         <Grid templatecolumns="1fr 1fr 1fr" gap="21px 16px">
-          {photos.slice(offset, offset + limit).map((photo) => {
-            const date = new Date(photo.createdDate);
+          {datas.slice(offset, offset + limit).map((data) => {
+            const date = new Date(data.createdDate);
             return (
               <ContentBox
-                key={photo.id}
-                id={photo.id}
-                title={photo.titleKo}
+                key={data.id}
+                id={data.id}
+                title={data.titleKo}
                 date={`${date.getFullYear()} / ${date.getMonth() + 1} / ${date.getDate()}`}
-                count={photo.view}
+                count={data.view}
                 type="archive"
-                url={photo.images}
+                subType="clip"
+                url={data.images ? data.images! : data.url!}
               />
             );
           })}
         </Grid>
       </FlexContainer>
-      <Pagination total={photos.length} limit={limit} page={page} setPage={setPage} />
+      <Pagination total={datas.length} limit={limit} page={page} setPage={setPage} />
     </>
   );
 }

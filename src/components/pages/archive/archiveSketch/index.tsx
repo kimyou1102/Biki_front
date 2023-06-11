@@ -4,10 +4,10 @@ import { ModalWrap } from '@atoms';
 import { ArchiveTemplate } from '@templates';
 import { SketcSection, SketchModal, SketchList } from '@organisms';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { modalState, modalPositionState, modalDataState } from '../../../recoil/archive/atome';
-import { sketchState } from '../../../recoil/sketch/atom';
-import { SketchProps, SketchType } from '../../../models/sketch';
-import { getSketchApi } from '../../../apis/sketch/get-sketch-api';
+import { modalState, modalPositionState, modalDataState } from '../../../../recoil/archive/atome';
+import { sketchState } from '../../../../recoil/sketch/atom';
+import { SketchProps, SketchType } from '../../../../models/sketch';
+import { getSketchApi } from '../../../../apis/sketch/get-sketch-api';
 
 const Modal = styled.div<{ state: boolean }>`
   width: calc(1180px * 0.7);
@@ -54,7 +54,7 @@ export function ArchiveSketchPage() {
           <h1>등록된 게시물이 없습니다.</h1>
         ) : (
           <div>
-            <SketchList page={page} setPage={setPage} photos={photos} />
+            <SketchList page={page} setPage={setPage} datas={photos} />
           </div>
         )}
       </ArchiveTemplate>

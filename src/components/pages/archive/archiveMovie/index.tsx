@@ -10,9 +10,9 @@ import {
   movieModalPositionState,
   movieState,
   movieInitialState,
-} from '../../../recoil/movies';
-import { MovieBoxInfo, MovieData } from '../../../models/movie';
-import { getMovieApi } from '../../../apis/movie/get-movie-api';
+} from '../../../../recoil/movies';
+import { MovieBoxInfo, MovieData } from '../../../../models/movie';
+import { getMovieApi } from '../../../../apis/movie/get-movie-api';
 
 export function ArchiveMoviePage() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);

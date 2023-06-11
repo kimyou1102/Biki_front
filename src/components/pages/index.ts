@@ -1,5 +1,4 @@
-export * from './archiveMovie';
-export * from './archiveSketch';
+export * from './archive';
 export * from './news';
 export * from './MainPage';
 export * from './FestivalSymbolPage';

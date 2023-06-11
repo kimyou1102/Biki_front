@@ -14,6 +14,7 @@ export type SketchType = {
   view: number;
   createdDate: string;
   images: string[];
+  url?: string;
 };
 
 export interface Photo {

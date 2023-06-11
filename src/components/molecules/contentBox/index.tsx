@@ -14,7 +14,7 @@ const Wrap = styled.div<{ width: number; height: number }>`
   overflow: hidden;
 `;
 
-export function ContentBox({ type, title, date, count, url }: ContentBoxInfo) {
+export function ContentBox({ type, title, date, count, url, subType }: ContentBoxInfo) {
   const [modalDatas, setModalDatas] = useRecoilState(modalDataState);
   const [top, setTop] = useRecoilState<number>(modalPositionState);
   const setModal = useSetRecoilState<boolean>(modalState);
@@ -44,11 +44,15 @@ export function ContentBox({ type, title, date, count, url }: ContentBoxInfo) {
     >
       {type === 'main' ? (
         <Wrap width={630} height={352.5}>
-          <Iframe url={!Array.isArray(url) ? url : url[0]} />
+          <Iframe type="main" url={!Array.isArray(url) ? url : url[0]} />
         </Wrap>
       ) : (
         <Wrap width={413} height={275}>
-          <Img alt="현장스케치" src={url[0]} width={413} height={275} />
+          {subType === 'clip' ? (
+            <Iframe url={!Array.isArray(url) ? url : url[0]} />
+          ) : (
+            <Img alt="현장스케치" src={url[0]} width={413} height={275} />
+          )}
         </Wrap>
       )}
       <ContentDescription title={title} date={date} count={count} type={type} />
