@@ -36,7 +36,7 @@ export function ContentBox({ type, title, date, count, url }: ContentBoxInfo) {
   return (
     <FlexContainer
       onClick={onClick}
-      className={type}
+      className={[type, 'cursor'].join(' ')}
       width={type === 'main' ? 630 : 413}
       direction="column"
       margin={type === 'main' ? '0px 17px 0px 0px' : '0px'}

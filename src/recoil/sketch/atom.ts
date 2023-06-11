@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { SketchProps } from 'src/models/sketch';
+import { SketchProps, SketchType } from 'src/models/sketch';
 
 export const testSketchs: SketchProps[] = [
   {
@@ -73,7 +73,7 @@ export const testSketchs: SketchProps[] = [
   },
 ];
 
-export const sketchState = atom<SketchProps[]>({
+export const sketchState = atom<SketchType[]>({
   key: 'sketch',
-  default: testSketchs,
+  default: [],
 });

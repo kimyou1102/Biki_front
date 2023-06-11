@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { filmInputState, sketchInputState } from '../../../recoil/archive/atome';
 import { movieState, testMovie, movieInitialState } from '../../../recoil/movies';
 import { testSketchs, sketchState } from '../../../recoil/sketch/atom';
-import { SketchProps } from '../../../models/sketch';
+import { SketchProps, SketchType } from '../../../models/sketch';
 import { MovieInfo, MovieData } from '../../../models/movie';
 
 import filter from '../../../assets/images/Filter.png';
@@ -16,9 +16,9 @@ interface Props {
 
 export function SearchFilter({ type }: Props) {
   const initialMovieData = useRecoilValue<MovieData[]>(movieInitialState);
-  const initialSketchData = testSketchs;
+  // const initialSketchData = useRecoilValue<SketchType[]>(sketchState);
   const [movies, setMovies] = useRecoilState<MovieData[]>(movieState);
-  const [sketchs, setSketchs] = useRecoilState<SketchProps[]>(sketchState);
+  const [sketchs, setSketchs] = useRecoilState<SketchType[]>(sketchState);
   const [filmValue, setFilmValue] = useRecoilState<string>(filmInputState);
   const [sketchValue, setSketchValue] = useRecoilState<string>(sketchInputState);
 
@@ -28,20 +28,20 @@ export function SearchFilter({ type }: Props) {
     }
   }, [filmValue, initialMovieData, setMovies]);
 
-  useEffect(() => {
-    if (sketchValue === '') {
-      setSketchs(initialSketchData);
-    }
-  }, [sketchValue, initialSketchData, setSketchs]);
+  // useEffect(() => {
+  //   if (sketchValue === '') {
+  //     setSketchs(initialSketchData);
+  //   }
+  // }, [sketchValue, initialSketchData, setSketchs]);
 
   const onSearch = () => {
-    if (type === 'film') {
-      const newArr = movies.filter((e) => e.titleKo.includes(filmValue));
-      setMovies(newArr);
-    } else {
-      const newArr = sketchs.filter((e) => e.title.includes(sketchValue));
-      setSketchs(newArr);
-    }
+    // if (type === 'film') {
+    //   const newArr = movies.filter((e) => e.titleKo.includes(filmValue));
+    //   setMovies(newArr);
+    // } else {
+    //   const newArr = sketchs.filter((e) => e.title.includes(sketchValue));
+    //   setSketchs(newArr);
+    // }
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
