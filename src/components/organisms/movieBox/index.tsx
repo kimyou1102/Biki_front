@@ -10,6 +10,7 @@ import {
   movieModalIdState,
 } from '../../../recoil/movies';
 import { MovieBoxInfo, MovieData } from '../../../models/movie';
+import emptyImg from '../../../assets/images/empty.png';
 
 interface Props {
   type: 'main' | 'archive';
@@ -46,7 +47,7 @@ export function MovieBox({ type, data }: Props) {
       onClick={onClick}
     >
       <ContentBoxImgWrap>
-        <Img alt="이미지" src={data.stillImage.first} />
+        <Img alt="이미지" src={data.stillImage.first === '' ? emptyImg : data.stillImage.first} />
       </ContentBoxImgWrap>
       <MovieDescription
         title={data.titleKo}

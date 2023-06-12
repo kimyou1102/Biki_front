@@ -9,6 +9,7 @@ import { ArchiveModalSlide } from './ArchiveModalSlide';
 import { movieModalState, movieModalDataState, movieModalIdState } from '../../recoil/movies';
 import { MovieBoxInfo, MovieData, UserMovieData } from '../../models/movie';
 import close from '../../assets/images/close.png';
+import emptyImg from '../../assets/images/empty.png';
 
 const Container = styled.div`
   width: calc(1600px * 0.8);
@@ -150,7 +151,7 @@ export function ArchiveModal() {
         </Text>
         <FlexContainer>
           <Img
-            src={movie.credit.profileImage}
+            src={movie.credit.profileImage === '' ? emptyImg : movie.credit.profileImage}
             alt="감독사진"
             width={300}
             height={300}

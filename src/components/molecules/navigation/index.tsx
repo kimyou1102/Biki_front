@@ -111,7 +111,7 @@ export function Navigation({ left }: Props) {
       idValue: 'news',
       url: '/#',
       arr: ['공지사항', '뉴스레터', '보도자료'],
-      link: ['/news/notice', '/news/newsletter', '/'],
+      link: ['/news/notice', '/news/newsletter', '/news/pressrelease'],
     },
     {
       id: 7,
