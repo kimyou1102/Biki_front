@@ -10,7 +10,6 @@ export * from './contentBoxs';
 export * from './archiveMovieList';
 export * from './archiveMovieSection';
 export * from './sketchList';
-export * from './sketchSection';
 export * from './newsListSection';
 export * from './newsSection';
 export * from './MainYoutebeList';

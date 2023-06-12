@@ -10,7 +10,6 @@ import {
   MovieBox,
   ArchiveMovieList,
   ArchiveMovieSection,
-  SketcSection,
   NewsSection,
 } from '@organisms';
 import { Header } from '@molecules';

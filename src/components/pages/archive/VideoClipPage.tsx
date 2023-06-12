@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { ModalWrap } from '@atoms';
 import { ArchiveTemplate } from '@templates';
-import { SketcSection, SketchModal, SketchList } from '@organisms';
+import { SketchModal, SketchList } from '@organisms';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modalState, modalPositionState, modalDataState } from '../../../recoil/archive/atome';
 import { sketchState } from '../../../recoil/sketch/atom';
