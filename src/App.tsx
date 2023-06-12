@@ -40,6 +40,7 @@ import {
   ReadyActionMoviesPage,
   LoginPage,
   VideoClipPage,
+  PressReleasePage,
 } from '@pages';
 import { HeaderLayout } from '@layout';
 import { ScheduleInfoPage } from '@pages/movieSchedule';
@@ -56,6 +57,7 @@ function App() {
           <Route path="/news/notice/:id" element={<NewsDetail type="notice" />} />
           <Route path="/news/notice" element={<NewsNotice />} />
           <Route path="/news/newsletter" element={<Newsletter />} />
+          <Route path="/news/pressrelease" element={<PressReleasePage />} />
           <Route path="/news/newsletter/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/festival" element={<FestivalSymbolPage />} />
           <Route path="/judges" element={<JudgesPage />} />
