@@ -164,4 +164,5 @@ export type UserMovieData = {
       theater: string;
     },
   ];
+  categoryImages: string[];
 };

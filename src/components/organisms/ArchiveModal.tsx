@@ -70,7 +70,8 @@ export function ArchiveModal() {
     document.querySelector('body')?.classList.remove('none');
   };
 
-  console.log({ ...movie.schedule, addInfo: movie.tags });
+  // console.log({ ...movie.schedule, addInfo: movie.tags });
+  console.log(movie);
 
   return (
     <Container id="modal">
@@ -100,6 +101,16 @@ export function ArchiveModal() {
           프로그래머 노트
         </Text>
         <Span>{movie.programmerNoteKo}</Span>
+      </Wrap>
+      <Wrap>
+        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+          카테고리
+        </Text>
+        <FlexContainer>
+          {movie.categoryImages.map((item) => (
+            <Img alt="카테고리이미지" src={item} width={122} height={122} margin="0 calc(20px * 0.8) 0 0" />
+          ))}
+        </FlexContainer>
       </Wrap>
 
       <Wrap>
