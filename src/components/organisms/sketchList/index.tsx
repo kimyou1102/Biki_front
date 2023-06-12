@@ -2,17 +2,18 @@ import React from 'react';
 import { FlexContainer, Grid } from '@atoms';
 import { Pagination } from '@molecules';
 import { ContentBox } from '@molecules/contentBox';
-import { SketchProps } from 'src/models/sketch';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { SketchProps, SketchType } from '../../../models/sketch';
+import { ClipType } from '../../../models/clip';
 import { modalDataState, modalState } from '../../../recoil/archive/atome';
 
 interface Props {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  photos: SketchProps[];
+  datas: SketchType[] | ClipType[];
 }
 
-export function SketchList({ page, setPage, photos }: Props) {
+export function SketchList({ page, setPage, datas }: Props) {
   const setModal = useSetRecoilState(modalState);
 
   const limit = 15;
@@ -20,22 +21,26 @@ export function SketchList({ page, setPage, photos }: Props) {
 
   return (
     <>
-      <FlexContainer width={1280} margin="0 auto" wrap="wrap" className="cursor">
-        <Grid templateColumns="1fr 1fr 1fr" gap="21px 16px">
-          {photos.slice(offset, offset + limit).map((photo) => (
-            <ContentBox
-              key={photo.id}
-              id={photo.id}
-              title={photo.title}
-              date={photo.date}
-              count={photo.count}
-              type="archive"
-              url={photo.urls}
-            />
-          ))}
+      <FlexContainer width={1280} margin="0 auto" wrap="wrap">
+        <Grid templatecolumns="1fr 1fr 1fr" gap="21px 16px">
+          {datas.slice(offset, offset + limit).map((data) => {
+            const date = new Date(data.createdDate);
+            return (
+              <ContentBox
+                key={data.id}
+                id={data.id}
+                title={data.titleKo}
+                date={`${date.getFullYear()} / ${date.getMonth() + 1} / ${date.getDate()}`}
+                count={data.view}
+                type="archive"
+                subType="clip"
+                url={data.images ? data.images! : data.url!}
+              />
+            );
+          })}
         </Grid>
       </FlexContainer>
-      <Pagination total={photos.length} limit={limit} page={page} setPage={setPage} />
+      <Pagination total={datas.length} limit={limit} page={page} setPage={setPage} />
     </>
   );
 }

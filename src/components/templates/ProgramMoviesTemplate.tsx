@@ -9,11 +9,16 @@ import {
   movieModalPositionState,
   movieState,
   movieInitialState,
-} from '../../../recoil/movies';
-import { MovieBoxInfo, MovieData } from '../../../models/movie';
-import { getSectionByWordApi } from '../../../apis/section/get-section-by-word-api';
+} from '../../recoil/movies';
+import { MovieData } from '../../models/movie';
+import { getMovieBySectionApi } from '../../apis/movie/get-movie-by-section-api';
 
-export function OpeningFilmPage() {
+interface Props {
+  title: string;
+  url: string;
+}
+
+export function ProgramMoviesTemplate({ title, url }: Props) {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
   const [top, setTop] = useRecoilState(movieModalPositionState);
@@ -24,14 +29,16 @@ export function OpeningFilmPage() {
   const [page, setPage] = useState(0);
 
   const sectionApi = useCallback(async () => {
-    await getSectionByWordApi('개막작')
+    await getMovieBySectionApi(url)
       .then((res) => {
-        console.log(res);
-        setMovies(res);
-        setInitialMovieData(res);
+        console.log(res.list);
+        setMovies(res.list);
+        setInitialMovieData(res.list);
       })
       .catch((err) => console.log(err));
-  }, [setMovies, setInitialMovieData]);
+  }, [setMovies, setInitialMovieData, url]);
+
+  console.log('movies : ', movies);
 
   useEffect(() => {
     sectionApi();
@@ -47,7 +54,7 @@ export function OpeningFilmPage() {
 
   return (
     <>
-      <ArchiveTemplate title="개막작" type="film" pageTitle="2023 프로그램" sub="제18회 BIKY의 상영작을 소개합니다">
+      <ArchiveTemplate title={title} type="film" pageTitle="2023 프로그램" sub="제18회 BIKY의 상영작을 소개합니다">
         {movies.length === 0 ? (
           <h1>등록된 게시물이 없습니다.</h1>
         ) : (

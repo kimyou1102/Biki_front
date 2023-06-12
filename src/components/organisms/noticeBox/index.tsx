@@ -18,7 +18,7 @@ export function NoticeBox() {
   const test = notices;
 
   return (
-    <BorderContainer radius={10} bgColor="#eeeeee">
+    <BorderContainer radius={10} bgcolor="#eeeeee">
       <MainNewsUl type="notice">
         {test.map(({ id, date, title, isCheck }) => (
           <TextList key={id} date={date} title={title} isCheck={isCheck} />

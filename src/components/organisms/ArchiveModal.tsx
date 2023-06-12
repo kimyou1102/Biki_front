@@ -9,6 +9,7 @@ import { ArchiveModalSlide } from './ArchiveModalSlide';
 import { movieModalState, movieModalDataState, movieModalIdState } from '../../recoil/movies';
 import { MovieBoxInfo, MovieData, UserMovieData } from '../../models/movie';
 import close from '../../assets/images/close.png';
+import emptyImg from '../../assets/images/empty.png';
 
 const Container = styled.div`
   width: calc(1600px * 0.8);
@@ -70,7 +71,8 @@ export function ArchiveModal() {
     document.querySelector('body')?.classList.remove('none');
   };
 
-  console.log({ ...movie.schedule, addInfo: movie.tags });
+  // console.log({ ...movie.schedule, addInfo: movie.tags });
+  console.log(movie);
 
   return (
     <Container id="modal">
@@ -100,6 +102,16 @@ export function ArchiveModal() {
           프로그래머 노트
         </Text>
         <Span>{movie.programmerNoteKo}</Span>
+      </Wrap>
+      <Wrap>
+        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+          카테고리
+        </Text>
+        <FlexContainer>
+          {movie.categoryImages.map((item) => (
+            <Img alt="카테고리이미지" src={item} width={122} height={122} margin="0 calc(20px * 0.8) 0 0" />
+          ))}
+        </FlexContainer>
       </Wrap>
 
       <Wrap>
@@ -139,7 +151,7 @@ export function ArchiveModal() {
         </Text>
         <FlexContainer>
           <Img
-            src={movie.credit.profileImage}
+            src={movie.credit.profileImage === '' ? emptyImg : movie.credit.profileImage}
             alt="감독사진"
             width={300}
             height={300}
@@ -177,7 +189,7 @@ export function ArchiveModal() {
       </Wrap>
       <FlexContainer justify="right">
         <Button
-          bgColor="var(--main-color)"
+          bgcolor="var(--main-color)"
           width={440}
           padding="calc(18px * 0.8) calc(100px * 0.8)"
           radius="10px"

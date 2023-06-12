@@ -15,7 +15,7 @@ export function MainNewsBoxList() {
       <FlexContainer direction="column" justify="space-between" margin="0 0 0 calc(20px * 0.8)">
         <MainNewsBox data={test2} newsName="BIKY레터" />
         <Button
-          bgColor="#2153D4"
+          bgcolor="#2153D4"
           weight="bold"
           width={630}
           size={1.5}

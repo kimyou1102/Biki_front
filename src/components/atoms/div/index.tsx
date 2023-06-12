@@ -7,8 +7,8 @@ interface Props {
   display?: string;
   margin?: string;
   padding?: string;
-  bgColor?: string;
-  overflowX?: string;
+  bgcolor?: string;
+  overflowx?: string;
 }
 
 export const Div = styled.div<Props>`
@@ -17,7 +17,7 @@ export const Div = styled.div<Props>`
   width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')};
   height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : 'auto')};
   padding: ${(props) => (props.padding ? props.padding : '0px')};
-  background-color: ${(props) => (props.bgColor ? props.bgColor : 'transparent')};
+  background-color: ${(props) => (props.bgcolor ? props.bgcolor : 'transparent')};
   box-sizing: border-box;
-  overflow-x: ${(props) => (props.overflowX ? props.overflowX : 'visible')};
+  overflow-x: ${(props) => (props.overflowx ? props.overflowx : 'visible')};
 `;

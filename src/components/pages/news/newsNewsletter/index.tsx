@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
-import { getPostApi } from '../../../apis/post/get-post-api';
+import { getPostApi } from '../../../../apis/post/get-post-api';
 
 export function Newsletter() {
   const [news, setNews] = useState<any>([]);

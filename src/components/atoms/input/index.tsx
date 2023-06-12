@@ -18,7 +18,10 @@ interface InputProps {
 }
 
 const StyledInput = styled.input<InputProps>`
-  width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')};
+  /* width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')}; */
+  width: ${(props) =>
+    // eslint-disable-next-line no-nested-ternary
+    props.width ? (typeof props.width === 'string' ? props.width : `calc(${props.width}px * 0.8)`) : 'auto'};
   height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : 'auto')};
   border-radius: ${(props) => (props.radius ? props.radius : '0px')};
   border: ${(props) => (props.border === 'none' ? 'none' : `1px solid ${props.border}`)};

@@ -15,4 +15,5 @@ export interface ContentDescriptionInfo extends ContentType {
 
 export interface ContentBoxInfo extends ContentProps {
   type: 'main' | 'archive';
+  subType?: string;
 }

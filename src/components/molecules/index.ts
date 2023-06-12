@@ -23,3 +23,4 @@ export * from './RelatedMovies';
 export * from './schedule';
 export * from './movieScheduleTitle';
 export * from './labelHint';
+export * from './SingupTitleBox';

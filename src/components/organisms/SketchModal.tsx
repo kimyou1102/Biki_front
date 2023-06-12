@@ -127,8 +127,9 @@ export function SketchModal({ state }: Props) {
   const [modalDatas, setModalDatas] = useRecoilState(modalDataState);
   //   console.log('modalDatas : ', modalDatas);
   const imgs = modalDatas.urls.map((e, i) => ({ id: i, src: e }));
-  console.log(imgs);
+  console.log(imgs.length);
 
+  console.log('state :', state);
   //   const [mainSlick, setMainSlick] = useState<any>(1);
   //   const [pagingSlick, setPagingSlick] = useState<any>(1);
 
@@ -168,8 +169,8 @@ export function SketchModal({ state }: Props) {
   const pagingSettings = {
     dots: false,
     arrows: false,
-    infinite: true,
-    centerMode: true,
+    infinite: !(imgs.length < 5),
+    centerMode: false,
     slidesToShow: 5,
     swipeToSlide: true,
     focusOnSelect: true,

@@ -56,7 +56,7 @@ export function ScheduleTable({ data }: Props) {
                   <Button
                     size={1}
                     width={120}
-                    bgColor="var(--main-color)"
+                    bgcolor="var(--main-color)"
                     color="white"
                     weight="bold"
                     padding="calc(6px * 0.8) calc(36px * 0.8)"
@@ -77,7 +77,7 @@ export function ScheduleTable({ data }: Props) {
                 <Button
                   width={130}
                   size={1}
-                  bgColor="var(--main-color)"
+                  bgcolor="var(--main-color)"
                   color="white"
                   weight="bold"
                   padding="calc(6px * 0.8) calc(36px * 0.8)"

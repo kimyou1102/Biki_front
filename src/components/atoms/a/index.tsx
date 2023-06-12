@@ -7,6 +7,7 @@ interface Props {
   color?: string;
   url?: string;
   id?: string;
+  className?: string;
 }
 
 const StyledLink = styled(Link)<Props>`
@@ -24,11 +25,15 @@ const StyledLink = styled(Link)<Props>`
   &:visited {
     color: ${(props) => (props.color ? props.color : 'black')};
   }
+
+  &.cursor {
+    cursor: pointer;
+  }
 `;
 
-export function A({ url, color, children, id }: Props) {
+export function A({ url, color, children, id, className }: Props) {
   return (
-    <StyledLink to={url || '/'} color={color} id={id}>
+    <StyledLink to={url || '/'} color={color} id={id} className={className}>
       {children}
     </StyledLink>
   );

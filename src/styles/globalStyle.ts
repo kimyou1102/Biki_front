@@ -102,13 +102,9 @@ const GlobalStyle = createGlobalStyle`
       opacity: 0;
       display: none;
     }
-
-    /* #paging .slick-slide {
-      width: calc(200px * 0.8) !important;
-    } */
       
     #paging .slick-slide > div {
-      margin-right: calc(16px * 0.8);
+      margin: 0 calc(8px * 0.8);
     }
 
     @font-face {

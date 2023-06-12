@@ -6,3 +6,4 @@ export * from './contentDescriptionWrap';
 export * from './mainListSection';
 export * from './modalWrap';
 export * from './MainNewsUl';
+export * from './SignupBox';

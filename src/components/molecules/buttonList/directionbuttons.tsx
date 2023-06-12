@@ -13,7 +13,7 @@ export function DirectionButtons({ onLeftClick, onRightClick }: Props) {
     <FlexContainer>
       <Button
         onClick={onLeftClick}
-        bgColor="var(--main-color)"
+        bgcolor="var(--main-color)"
         width={32}
         height={32}
         radius="50%"
@@ -26,7 +26,7 @@ export function DirectionButtons({ onLeftClick, onRightClick }: Props) {
       </Button>
       <Button
         onClick={onRightClick}
-        bgColor="var(--main-color)"
+        bgcolor="var(--main-color)"
         width={32}
         height={32}
         radius="50%"

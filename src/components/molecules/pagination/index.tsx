@@ -36,7 +36,7 @@ export function Pagination({ total, limit, page, setPage }: Props) {
           key={e}
           width={24}
           height={24}
-          bgColor={e === page ? 'var(--main-color)' : 'transparent'}
+          bgcolor={e === page ? 'var(--main-color)' : 'transparent'}
           color={e === page ? 'white' : 'black'}
           border="none"
           radius="50%"

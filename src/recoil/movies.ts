@@ -389,6 +389,7 @@ const userMovieDefault: UserMovieData = {
       theater: '',
     },
   ],
+  categoryImages: [],
 };
 
 export const movieState = atom<MovieData[]>({

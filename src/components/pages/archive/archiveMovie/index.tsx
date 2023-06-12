@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ArchiveTemplate } from '@templates';
-import { ArchiveModal, ArchiveMovieList } from '@organisms';
+import { ArchiveMovieSection, ArchiveModal, ArchiveMovieList } from '@organisms';
+import { Footer } from '@layout/Footer';
 import { ModalWrap } from '@atoms';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
@@ -9,11 +10,11 @@ import {
   movieModalPositionState,
   movieState,
   movieInitialState,
-} from '../../../recoil/movies';
-import { MovieBoxInfo, MovieData } from '../../../models/movie';
-import { getSectionByWordApi } from '../../../apis/section/get-section-by-word-api';
+} from '../../../../recoil/movies';
+import { MovieBoxInfo, MovieData } from '../../../../models/movie';
+import { getMovieApi } from '../../../../apis/movie/get-movie-api';
 
-export function FindMeFilmPage() {
+export function ArchiveMoviePage() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
   const [top, setTop] = useRecoilState(movieModalPositionState);
@@ -23,21 +24,22 @@ export function FindMeFilmPage() {
 
   const [page, setPage] = useState(0);
 
-  const sectionApi = useCallback(async () => {
-    await getSectionByWordApi('나를 찾아서')
+  const movieApi = useCallback(async () => {
+    await getMovieApi()
       .then((res) => {
         console.log(res);
         setMovies(res);
         setInitialMovieData(res);
       })
       .catch((err) => console.log(err));
-  }, [setMovies, setInitialMovieData]);
+  }, [setInitialMovieData, setMovies]);
 
   useEffect(() => {
-    sectionApi();
-  }, [sectionApi]);
+    movieApi();
+  }, [movieApi]);
 
   const onOutsideModalClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // console.log(e.target);
     const target = e.target as HTMLElement;
     if (!target.closest('#modal')) {
       setMovieModal(false);
@@ -47,7 +49,7 @@ export function FindMeFilmPage() {
 
   return (
     <>
-      <ArchiveTemplate title="개막작" type="film" pageTitle="2023 프로그램" sub="제18회 BIKY의 상영작을 소개합니다">
+      <ArchiveTemplate title="배급작품" type="film">
         {movies.length === 0 ? (
           <h1>등록된 게시물이 없습니다.</h1>
         ) : (

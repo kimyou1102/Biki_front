@@ -11,7 +11,7 @@ const StyledArticel = styled.article`
 export function NoticeArticel() {
   return (
     <StyledArticel>
-      <NoticeHeader title="공지사항" />
+      <NoticeHeader title="공지사항" url="news/notice" />
       <NoticeBox />
     </StyledArticel>
   );
