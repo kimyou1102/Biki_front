@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
+import { Footer } from '@layout/Footer';
 import { getPostApi } from '../../../../apis/post/get-post-api';
 
 export function Newsletter() {
@@ -36,8 +37,11 @@ export function Newsletter() {
     { id: 7, num: 10, title: '뉴스레터, 일곱 어쩌구 글', count: 324, date: '2023-11-12' },
   ];
   return (
-    <NewsTemplates title="뉴스레터">
-      <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
-    </NewsTemplates>
+    <>
+      <NewsTemplates title="뉴스레터">
+        <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
+      </NewsTemplates>
+      <Footer />
+    </>
   );
 }

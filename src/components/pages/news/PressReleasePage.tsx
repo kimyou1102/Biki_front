@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
+import { Footer } from '@layout/Footer';
 import { getPostApi } from '../../../apis/post/get-post-api';
 
 export function PressReleasePage() {
@@ -27,8 +28,11 @@ export function PressReleasePage() {
   }, [postApi]);
 
   return (
-    <NewsTemplates title="보도자료">
-      <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
-    </NewsTemplates>
+    <>
+      <NewsTemplates title="보도자료">
+        <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
+      </NewsTemplates>
+      <Footer />
+    </>
   );
 }
