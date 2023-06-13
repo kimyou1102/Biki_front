@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { SlideHeader } from '@molecules';
 import { useRecoilValue } from 'recoil';
 import { mainYoutubeScrollState } from '../../recoil/scroll/scroll';
 import { ContentBoxs } from './contentBoxs';
+import { getClipApi } from '../../apis/videoClip/get-clip-api';
+import { ClipType } from '../../models/clip';
 
 export function MainYoutebeList() {
   const scroll = useRecoilValue<HTMLDivElement | undefined>(mainYoutubeScrollState);
+
+  const [youtubes, setYoutubes] = useState<ClipType[]>([]);
+
+  const clipApi = useCallback(async () => {
+    await getClipApi()
+      .then((res) => {
+        setYoutubes(res);
+      })
+      .catch((err) => console.log(err));
+  }, [setYoutubes]);
+
+  useEffect(() => {
+    clipApi();
+  }, [clipApi]);
 
   const onLeftClick = () => {
     if (scroll) {
@@ -21,7 +37,7 @@ export function MainYoutebeList() {
   return (
     <>
       <SlideHeader text="영상" onLeftClick={onLeftClick} onRightClick={onRightClick} />
-      <ContentBoxs />
+      <ContentBoxs data={youtubes} />
     </>
   );
 }

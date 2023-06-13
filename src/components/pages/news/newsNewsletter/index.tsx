@@ -23,19 +23,12 @@ export function Newsletter() {
       .catch((err) => console.log(err));
   }, [page]);
 
+  console.log('뉴스레터 : ', news);
+
   useEffect(() => {
     postApi();
   }, [postApi]);
 
-  const testData2 = [
-    { id: 1, num: 16, title: '뉴스레터, 제일 최신 어쩌구 글', count: 324, date: '2023-12-12' },
-    { id: 2, num: 15, title: '뉴스레터, 둘 어쩌구 글', count: 324, date: '2023-12-10' },
-    { id: 3, num: 14, title: '뉴스레터, 셋 어쩌구 글', count: 324, date: '2023-12-04' },
-    { id: 4, num: 13, title: '뉴스레터, 넷 어쩌구 글', count: 324, date: '2023-12-01' },
-    { id: 5, num: 12, title: '뉴스레터, 다섯 어쩌구 글', count: 324, date: '2023-11-12' },
-    { id: 6, num: 11, title: '뉴스레터, 여섯 머시기 어쩌구 글', count: 324, date: '2023-11-12' },
-    { id: 7, num: 10, title: '뉴스레터, 일곱 어쩌구 글', count: 324, date: '2023-11-12' },
-  ];
   return (
     <>
       <NewsTemplates title="뉴스레터">

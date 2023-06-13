@@ -14,9 +14,10 @@ export function PressReleasePage() {
   const limit = 3;
 
   const postApi = useCallback(async () => {
-    await getPostApi('보도자료', page, limit)
+    await getPostApi('언론보도', page, limit)
       // await getPostApi('공지사항', page, limit)
       .then((res) => {
+        console.log('언론보도 :', res.data.content);
         setTotal(res.data.totalElements);
         setNews(res.data.content);
       })

@@ -8,6 +8,7 @@ export type PostType = {
   status: number;
   highlightStatus: number;
   files: any[];
-  count?: number;
-  createdDated?: number;
+  view?: number;
+  createdDated?: string;
+  createdDate?: string;
 };

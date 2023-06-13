@@ -5,18 +5,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { PostType } from '@src/models/post';
 import { noticeListState, noticeListInitialState } from '../../../recoil/notice/notice';
 
-type DataType = {
-  id: number;
-  board: string;
-  category: string;
-  titleKo: string;
-  titleEn: string;
-  body: string;
-  status: number;
-  highlightStatus: number;
-  files: any[];
-};
-
 interface Props {
   data: PostType[];
   page: number;
@@ -27,12 +15,9 @@ interface Props {
 
 export function NewsListSection({ data, page, setPage, limit, total }: Props) {
   const [newsData, setNewsData] = useState<PostType[]>(data);
-  const [notices, setNotices] = useRecoilState<PostType[]>(noticeListState);
   const [noticeListInitial, setNoticeListInitial] = useRecoilState<PostType[]>(noticeListInitialState); // api에서 받아오는 걸로
 
   const [value, setValue] = useState<string>('');
-
-  console.log(notices);
 
   const offset = (page - 1) * limit;
 
@@ -40,22 +25,19 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
     setValue(e.target.value);
   };
 
-  useEffect(() => {
-    if (value === '') {
-      // setNewsData(data);
-      setNotices(noticeListInitial);
-    }
-  }, [data, noticeListInitial, setNotices, value]);
+  // useEffect(() => {
+  //   if (value === '') {
+  //     // setNewsData(data);
+  //     setNotices(noticeListInitial);
+  //   }
+  // }, [data, noticeListInitial, setNotices, value]);
 
-  // 아마 api?
   const onSearch = () => {
     // const newData = notices.filter((e) => e.titleKo.includes(value));
     // console.log(newData);
     // setNotices(newData);
   };
 
-  const count = 3;
-  const createdDated = '2023-06-01';
   return (
     <>
       <SearchBar
@@ -79,21 +61,25 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
           </Tr>
         </THead>
 
-        {notices.length === 0 ? (
+        {data.length === 0 ? (
           <div>등록된 글이 없습니다.</div>
         ) : (
           <tbody>
-            {/* {newsData.map((newsInfo) => ( */}
-            {notices.map((newsInfo) => (
-              <TableRow
-                key={newsInfo.id}
-                id={newsInfo.id}
-                num={newsInfo.id}
-                title={newsInfo.titleKo}
-                count={count}
-                date={createdDated}
-              />
-            ))}
+            {data.map((newsInfo) => {
+              const date = new Date(newsInfo.createdDate!);
+              const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+
+              return (
+                <TableRow
+                  key={newsInfo.id}
+                  id={newsInfo.id}
+                  num={newsInfo.id}
+                  title={newsInfo.titleKo}
+                  count={newsInfo.view!}
+                  date={dateStr}
+                />
+              );
+            })}
           </tbody>
         )}
       </table>

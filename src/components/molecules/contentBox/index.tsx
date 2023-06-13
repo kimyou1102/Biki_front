@@ -19,8 +19,6 @@ export function ContentBox({ type, title, date, count, url, subType }: ContentBo
   const [top, setTop] = useRecoilState<number>(modalPositionState);
   const setModal = useSetRecoilState<boolean>(modalState);
 
-  // console.log(type);
-
   const onClick = () => {
     if (type === 'archive' && Array.isArray(url)) {
       document.querySelector('body')?.classList.add('none');
@@ -44,12 +42,25 @@ export function ContentBox({ type, title, date, count, url, subType }: ContentBo
     >
       {type === 'main' ? (
         <Wrap width={630} height={352.5}>
-          <Iframe type="main" url={!Array.isArray(url) ? url : url[0]} />
+          <Iframe
+            type="main"
+            url={
+              !Array.isArray(url)
+                ? url.replace('https://www.youtube.com/watch?v=', '')
+                : url[0].replace('https://www.youtube.com/watch?v=', '')
+            }
+          />
         </Wrap>
       ) : (
         <Wrap width={413} height={275}>
           {subType === 'clip' ? (
-            <Iframe url={!Array.isArray(url) ? url : url[0]} />
+            <Iframe
+              url={
+                !Array.isArray(url)
+                  ? url.replace('https://www.youtube.com/watch?v=', '')
+                  : url[0].replace('https://www.youtube.com/watch?v=', '')
+              }
+            />
           ) : (
             <Img alt="현장스케치" src={url[0]} width={413} height={275} />
           )}
