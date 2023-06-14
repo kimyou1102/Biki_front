@@ -1,52 +1,69 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '@atoms';
+import { Button, Img } from '@atoms';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import left from '../../assets/images/leftSlide.png';
+import right from '../../assets/images/rightSlide.png';
 
-const test = Array.from({ length: 6 }, (v, i) => i + 1);
+const test = Array.from({ length: 8 }, (v, i) => i + 1);
 
-const Slider = styled.div`
-  /* overflow: hidden;
-  position: relative;
-  width: 1440px; // 이미지 보여지는 뷰 부분
-  height: 200px; */
-
-  /* .image-box {
-    width: 5280px; // 원본+클론의 총 합
-    height: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    animation: bannermove 5s linear infinite;
-  }
-  @keyframes bannermove {
-    0% {
-      transform: translate(0, 0);
-    }
-    100% {
-      transform: translate(-50%, 0);
-    }
-  } */
+const Container = styled.div`
+  width: calc(1520px * 0.8);
+  margin: 0 auto;
 `;
 
-export function FooterBannerList() {
-  return (
-    <Slider>
-      <div className="image-box">
-        <ul>
-          {test.map((e) => (
-            <li key={e}>
-              <Button>후원사배너{e}</Button>
-            </li>
-          ))}
-        </ul>
+const Banner = styled.li`
+  display: inline-block;
+`;
 
-        {/* <ul>
-          {test.map((e) => (
-            <div key={e} className="clone">
-              <Button>후원사배너{e}</Button>
-            </div>
-          ))}
-        </ul> */}
-      </div>
-    </Slider>
+interface ArrowProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function PrevArrow({ onClick }: ArrowProps) {
+  return (
+    <Button onClick={onClick} className="left">
+      <Img src={left} alt="왼쪽화살표" width={38} height={67} />
+    </Button>
+  );
+}
+
+function NextArrow({ onClick }: ArrowProps) {
+  return (
+    <Button onClick={onClick} className="right">
+      <Img src={right} alt="오른쪽화살표" width={38} height={67} />
+    </Button>
+  );
+}
+
+export function FooterBannerList() {
+  const settings = {
+    loop: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 7,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
+    // eslint-disable-next-line react/no-unstable-nested-components
+  };
+
+  return (
+    <Container id="banner">
+      <Slider {...settings}>
+        {test.map((e) => (
+          <ul key={e}>
+            <Banner>
+              <Button width={200} bgcolor="tomato">
+                후원사배너{e}
+              </Button>
+            </Banner>
+          </ul>
+        ))}
+      </Slider>
+    </Container>
   );
 }

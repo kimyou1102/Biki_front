@@ -19,3 +19,4 @@ export * from './FooterBannerList';
 export * from './MainNewsBoxList';
 export * from './ArchiveModal';
 export * from './ArchiveModalSlide';
+export * from './MainEventBoxs';
