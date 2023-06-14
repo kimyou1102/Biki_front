@@ -4,58 +4,14 @@ import { SlideContainer } from '@atoms';
 import { useSetRecoilState } from 'recoil';
 import { ContentProps } from 'src/models/content';
 import { mainYoutubeScrollState } from '../../../recoil/scroll/scroll';
+import { ClipType } from '../../../models/clip';
 
 interface Props {
-  data: ContentProps[];
+  data: ClipType[];
 }
 
-const test = [
-  {
-    title: '[2022 BIKY : 4] 자원활동가 비키비 헌정영상',
-    date: ' 2022 / 07 / 24 14:18:18',
-    count: 413,
-    id: 1,
-    url: 'dowxLQpuMlE',
-  },
-  {
-    title: '[2022 BIKY : 4] 자원활동가 비키비 헌정영상',
-    date: ' 2022 / 07 / 24 14:18:18',
-    count: 413,
-    id: 2,
-    url: 'dowxLQpuMlE',
-  },
-  {
-    title: '[2022 BIKY : 4] 자원활동가 비키비 헌정영상',
-    date: ' 2022 / 07 / 24 14:18:18',
-    count: 413,
-    id: 3,
-    url: 'dowxLQpuMlE',
-  },
-  {
-    title: '[2022 BIKY : 4] 자원활동가 비키비 헌정영상',
-    date: ' 2022 / 07 / 24 14:18:18',
-    count: 413,
-    id: 4,
-    url: 'dowxLQpuMlE',
-  },
-  {
-    title: '[2022 BIKY : 4] 자원활동가 비키비 헌정영상',
-    date: ' 2022 / 07 / 24 14:18:18',
-    count: 413,
-    id: 5,
-    url: 'dowxLQpuMlE',
-  },
-  {
-    title: '[2022 BIKY : 4] 자원활동가 비키비 헌정영상',
-    date: ' 2022 / 07 / 24 14:18:18',
-    count: 413,
-    id: 6,
-    url: 'dowxLQpuMlE',
-  },
-];
-
-// export function ContentBoxs({ data }: Props) {
-export function ContentBoxs() {
+export function ContentBoxs({ data }: Props) {
+  // export function ContentBoxs() {
   const setScroll = useSetRecoilState<HTMLDivElement | undefined>(mainYoutubeScrollState);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -67,13 +23,13 @@ export function ContentBoxs() {
 
   return (
     <SlideContainer ref={scrollRef}>
-      {test.map((youtube) => (
+      {data.map((youtube) => (
         <ContentBox
           key={youtube.id}
           id={youtube.id}
-          title={youtube.title}
-          date={youtube.date}
-          count={youtube.count}
+          title={youtube.titleKo}
+          date={youtube.createdDate}
+          count={youtube.view}
           url={youtube.url}
           type="main"
         />

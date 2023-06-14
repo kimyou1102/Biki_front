@@ -10,7 +10,8 @@ import { modalDataState, modalState } from '../../../recoil/archive/atome';
 interface Props {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  datas: SketchType[] | ClipType[];
+  // datas: SketchType[] | ClipType[];
+  datas: SketchType[] | ClipType[] | [];
 }
 
 export function SketchList({ page, setPage, datas }: Props) {
@@ -25,6 +26,9 @@ export function SketchList({ page, setPage, datas }: Props) {
         <Grid templatecolumns="1fr 1fr 1fr" gap="21px 16px">
           {datas.slice(offset, offset + limit).map((data) => {
             const date = new Date(data.createdDate);
+            console.log(data);
+            console.log(data.url);
+            console.log(data.images);
             return (
               <ContentBox
                 key={data.id}

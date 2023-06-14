@@ -3,11 +3,19 @@ import styled from 'styled-components';
 import { Img, FlexContainer, Li } from '@atoms';
 import { FooterBannerList } from '@organisms';
 import bikiLogo from '../../assets/images/biki_white_logo.png';
+import footer from '../../assets/images/footer.png';
 
 const Container = styled.div`
-  background-color: var(--main-color);
-  padding: calc(68.8px) calc(94.4px);
   margin-top: 100px;
+`;
+
+const FooterWrap = styled.div`
+  position: relative;
+  background-color: var(--main-color);
+  backdrop-filter: blur(2px);
+  background-image: url(${footer});
+  background-blend-mode: overlay;
+  padding: calc(68.8px) calc(94.4px);
 
   ul {
     display: grid;
@@ -22,9 +30,9 @@ const Text = styled.span`
 `;
 export function Footer() {
   return (
-    <>
+    <Container>
       {/* <FooterBannerList /> */}
-      <Container>
+      <FooterWrap>
         <FlexContainer align="ceter">
           <Img alt="하단로고" src={bikiLogo} width={350} height={110} />
           <ul>
@@ -39,7 +47,7 @@ export function Footer() {
             </Li>
           </ul>
         </FlexContainer>
-      </Container>
-    </>
+      </FooterWrap>
+    </Container>
   );
 }

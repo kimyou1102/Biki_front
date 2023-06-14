@@ -4,6 +4,11 @@ import { TextList } from '@molecules';
 import { BorderContainer, MainNewsUl } from '@atoms';
 import { useRecoilValue } from 'recoil';
 import { NoticeType, noticeState } from '../../../recoil/notice/notice';
+import { PostType } from '../../../models/post';
+
+interface Props {
+  data: PostType[];
+}
 
 const StyledUl = styled.ul`
   padding: calc(26px * 0.8) calc(48px * 0.8);
@@ -12,17 +17,15 @@ const StyledUl = styled.ul`
   column-gap: 10px;
 `;
 
-export function NoticeBox() {
-  const notices = useRecoilValue<NoticeType[]>(noticeState);
-  // const test = notices.slice(notices.length - 7, notices.length);
-  const test = notices;
-
+export function NoticeBox({ data }: Props) {
   return (
     <BorderContainer radius={10} bgcolor="#eeeeee">
       <MainNewsUl type="notice">
-        {test.map(({ id, date, title, isCheck }) => (
-          <TextList key={id} date={date} title={title} isCheck={isCheck} />
-        ))}
+        {data.map((post) => {
+          const date = new Date(post.createdDate!);
+          const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+          return <TextList key={post.id} date={dateStr} title={post.titleKo} isCheck={post.highlightStatus === 1} />;
+        })}
       </MainNewsUl>
     </BorderContainer>
   );

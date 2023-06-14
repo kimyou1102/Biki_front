@@ -68,8 +68,9 @@ const defaultData = {
   status: 0,
   highlightStatus: 0,
   files: [],
-  count: 0,
-  createdDated: 0,
+  view: 0,
+  createdDated: '',
+  createdDate: '',
 };
 
 export const noticeListState = atom<PostType[]>({
