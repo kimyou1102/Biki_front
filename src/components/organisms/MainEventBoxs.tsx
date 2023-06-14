@@ -5,7 +5,11 @@ import { SlideContainer } from '@atoms';
 import { useSetRecoilState } from 'recoil';
 // import { ContentProps } from 'src/models/content';
 import { mainEventScrollState } from '../../recoil/scroll/scroll';
-import empty from '../../assets/images/empty.png';
+import main_event1 from '../../assets/images/main_event1.jpg';
+import main_event2 from '../../assets/images/main_event2.jpg';
+import main_event3 from '../../assets/images/main_event3.jpg';
+import main_event4 from '../../assets/images/main_event4.jpg';
+import main_event5 from '../../assets/images/main_event5.jpg';
 
 // export function ContentBoxs({ data }: Props) {
 export function MainEventBoxs() {
@@ -18,12 +22,19 @@ export function MainEventBoxs() {
     }
   }, [setScroll]);
 
+  const datas = [
+    { id: 1, url: main_event1, title: '영화 읽기' },
+    { id: 2, url: main_event2, title: '베리어프리' },
+    { id: 3, url: main_event3, title: '라이브 더빙' },
+    { id: 4, url: main_event4, title: '관객과의 대화' },
+    { id: 5, url: main_event5, title: '공감토크: 문' },
+  ];
+
   return (
     <SlideContainer ref={scrollRef}>
-      <MainEventBox url={empty} width={847} title="나도 성우다!" />
-      <MainEventBox url={empty} width={847} title="나도 성우다!" />
-      <MainEventBox url={empty} width={847} title="나도 성우다!" />
-      <MainEventBox url={empty} title="어린이청소년</br>영화인의 밤" />
+      {datas.map((data) => (
+        <MainEventBox key={data.id} url={data.url} title={data.title} />
+      ))}
     </SlideContainer>
   );
 }

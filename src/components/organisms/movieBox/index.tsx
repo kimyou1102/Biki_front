@@ -10,7 +10,8 @@ import {
   movieModalIdState,
 } from '../../../recoil/movies';
 import { MovieBoxInfo, MovieData } from '../../../models/movie';
-import emptyImg from '../../../assets/images/empty.png';
+// import emptyImg from '../../../assets/images/empty.png';
+import emptyImg from '../../../assets/images/empty_medium.png';
 
 interface Props {
   type: 'main' | 'archive';
