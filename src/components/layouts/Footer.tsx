@@ -10,7 +10,6 @@ const Container = styled.div`
 `;
 
 const FooterWrap = styled.div`
-  position: relative;
   background-color: var(--main-color);
   backdrop-filter: blur(2px);
   background-image: url(${footer});
@@ -21,6 +20,7 @@ const FooterWrap = styled.div`
     display: grid;
     grid-gap: 8px;
     margin-left: calc(82px * 0.8);
+    text-align: left;
   }
 `;
 
@@ -33,7 +33,7 @@ export function Footer() {
     <Container>
       {/* <FooterBannerList /> */}
       <FooterWrap>
-        <FlexContainer align="ceter">
+        <FlexContainer align="center">
           <Img alt="하단로고" src={bikiLogo} width={350} height={110} />
           <ul>
             <Li color="white">
