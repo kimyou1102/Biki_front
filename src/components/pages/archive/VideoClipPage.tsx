@@ -13,15 +13,17 @@ import { getSketchApi } from '../../../apis/sketch/get-sketch-api';
 import { getClipApi } from '../../../apis/videoClip/get-clip-api';
 
 export function VideoClipPage() {
-  const [photos, setPhotos] = useRecoilState<ClipType[]>(clipState);
+  const [photos, setPhotos] = useRecoilState(clipState);
   const [page, setPage] = useState(0);
+
+  console.log(photos);
+  console.log(photos.length);
 
   const clipApi = useCallback(async () => {
     await getClipApi()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setPhotos(res);
-        // setInitialMovieData(res);
       })
       .catch((err) => console.log(err));
   }, [setPhotos]);

@@ -14,9 +14,6 @@ interface Props {
 }
 
 export function NewsListSection({ data, page, setPage, limit, total }: Props) {
-  const [newsData, setNewsData] = useState<PostType[]>(data);
-  const [noticeListInitial, setNoticeListInitial] = useRecoilState<PostType[]>(noticeListInitialState); // api에서 받아오는 걸로
-
   const [value, setValue] = useState<string>('');
 
   const offset = (page - 1) * limit;
@@ -24,6 +21,8 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+
+  console.log('뉴스섹션 : ', data.length);
 
   // useEffect(() => {
   //   if (value === '') {
@@ -83,7 +82,7 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
           </tbody>
         )}
       </table>
-      {newsData.length !== 0 ? <Pagination total={total} limit={limit} page={page} setPage={setPage} /> : null}
+      {data.length !== 0 ? <Pagination total={total} limit={limit} page={page} setPage={setPage} /> : null}
     </>
   );
 }
