@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Img } from '@atoms';
 import Slider from 'react-slick';
@@ -6,6 +6,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import left from '../../assets/images/banner_left.png';
 import right from '../../assets/images/banner_right.png';
+import { getSponsorApi } from '../../apis/sponsor/get-sponsor-api';
+import { SponsorType } from '../../models/sponsor';
 
 interface ArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -60,11 +62,32 @@ function NextArrow({ onClick }: ArrowProps) {
 }
 
 export function FooterBannerList() {
-  const test = Array.from({ length: 8 }, (v, i) => i + 1);
+  const [sponsors, setSponsors] = useState<SponsorType[]>([
+    {
+      id: 0,
+      image: '',
+      url: '',
+    },
+  ]);
+
+  const sponsorApi = useCallback(async () => {
+    await getSponsorApi()
+      .then((res) => {
+        console.log(res);
+        setSponsors(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    sponsorApi();
+  }, [sponsorApi]);
+
+  // const test = Array.from({ length: 6 }, (v, i) => i + 1);
 
   const settings = {
     loop: true,
-    infinite: true,
+    infinite: sponsors.length > 7,
     speed: 500,
     slidesToShow: 7,
     slidesToScroll: 1,
@@ -77,7 +100,16 @@ export function FooterBannerList() {
   return (
     <Container id="banner">
       <Slider {...settings}>
-        {test.map((e) => (
+        {sponsors.map((e) => (
+          <ul key={e.id}>
+            <li>
+              <Button width={200} height={40} onClick={() => window.open(e.url)}>
+                <Img alt="후원사" src={e.image} width={200} height={40} />
+              </Button>
+            </li>
+          </ul>
+        ))}
+        {/* {test.map((e) => (
           <ul key={e}>
             <li>
               <Button width={200} height={40} bgcolor="tomato">
@@ -85,7 +117,7 @@ export function FooterBannerList() {
               </Button>
             </li>
           </ul>
-        ))}
+        ))} */}
       </Slider>
     </Container>
   );

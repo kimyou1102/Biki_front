@@ -31,7 +31,7 @@ const Text = styled.span`
 export function Footer() {
   return (
     <Container>
-      {/* <FooterBannerList /> */}
+      <FooterBannerList />
       <FooterWrap>
         <FlexContainer align="center">
           <Img alt="하단로고" src={bikiLogo} width={350} height={110} />
