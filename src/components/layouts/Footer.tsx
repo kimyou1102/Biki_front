@@ -3,9 +3,14 @@ import styled from 'styled-components';
 import { Img, FlexContainer, Li } from '@atoms';
 import { FooterBannerList } from '@organisms';
 import bikiLogo from '../../assets/images/biki_white_logo.png';
+import footer from '../../assets/images/footer.png';
 
 const Container = styled.div`
+  position: relative;
   background-color: var(--main-color);
+  backdrop-filter: blur(2px);
+  background-image: url(${footer});
+  background-blend-mode: overlay;
   padding: calc(68.8px) calc(94.4px);
   margin-top: 100px;
 
