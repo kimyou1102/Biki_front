@@ -96,7 +96,7 @@ export function Navigation({ left }: Props) {
       ],
       link: [
         '/movie/schedule',
-        '/#',
+        '/movie/상영관-정보',
         '/#',
         '/movie/opening-movies',
         '/movie/ready-action12-movies',

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MainListSection, Img } from '@atoms';
+import { ShortcutButtonList } from '@molecules';
 import { MainSlide, NoticeArticel, MainMovieList, MainEventList, MainYoutebeList, MainNewsBoxList } from '@organisms';
 import { Footer } from '@layout/Footer';
 import character1 from '../../assets/images/main_character1.png';
@@ -43,6 +44,7 @@ export function MainPage() {
   return (
     <>
       <MainSlide />
+      <ShortcutButtonList />
       <Wrap>
         <NoticeArticel />
         <ImgWrap className="character1">

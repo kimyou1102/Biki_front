@@ -54,7 +54,7 @@ export function ArchiveSketchPage() {
           <h1>등록된 게시물이 없습니다.</h1>
         ) : (
           <div>
-            <SketchList page={page} setPage={setPage} datas={photos} />
+            <SketchList page={page} setPage={setPage} datas={photos} type="sketch" />
           </div>
         )}
       </ArchiveTemplate>

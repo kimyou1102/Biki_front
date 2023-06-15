@@ -12,9 +12,10 @@ interface Props {
   setPage: React.Dispatch<React.SetStateAction<number>>;
   // datas: SketchType[] | ClipType[];
   datas: SketchType[] | ClipType[] | [];
+  type?: string;
 }
 
-export function SketchList({ page, setPage, datas }: Props) {
+export function SketchList({ page, setPage, datas, type }: Props) {
   const setModal = useSetRecoilState(modalState);
 
   const limit = 15;
@@ -37,7 +38,7 @@ export function SketchList({ page, setPage, datas }: Props) {
                 date={`${date.getFullYear()} / ${date.getMonth() + 1} / ${date.getDate()}`}
                 count={data.view}
                 type="archive"
-                subType="clip"
+                subType={type || 'clip'}
                 url={data.images ? data.images! : data.url!}
               />
             );

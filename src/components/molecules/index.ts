@@ -25,3 +25,5 @@ export * from './movieScheduleTitle';
 export * from './labelHint';
 export * from './SingupTitleBox';
 export * from './MainEventBox';
+export * from './ShortcutsButton';
+export * from './ShortcutButtonList';

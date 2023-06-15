@@ -10,3 +10,4 @@ export * from './ReadyActionMoviesPage';
 export * from './ReadyActionMovies12Page';
 export * from './ReadyActionMovies15Page';
 export * from './ReadyActionMovies18Page';
+export * from './TheaterInformationPage';

@@ -57,6 +57,7 @@ import {
   LoginPage,
   VideoClipPage,
   PressReleasePage,
+  TheaterInformationPage,
 } from '@pages';
 import { HeaderLayout } from '@layout';
 import { ScheduleInfoPage } from '@pages/movieSchedule';
@@ -97,6 +98,7 @@ function App() {
           <Route path="/news/pressrelease/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
+          <Route path="/movie/상영관-정보" element={<TheaterInformationPage />} />
           <Route path="/movie/opening-movies" element={<OpeningMoviesPage />} />
           <Route path="/movie/find-me-movies" element={<FindMeMoviesPage />} />
           <Route path="/movie/together-movies" element={<TogetherMoviesPage />} />
