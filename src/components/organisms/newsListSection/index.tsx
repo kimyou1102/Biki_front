@@ -22,7 +22,7 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
     setValue(e.target.value);
   };
 
-  console.log('뉴스섹션 : ', data.length);
+  // console.log('뉴스섹션 : ', data.length);
 
   // useEffect(() => {
   //   if (value === '') {

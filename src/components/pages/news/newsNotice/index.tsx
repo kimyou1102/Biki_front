@@ -14,14 +14,14 @@ export function NewsNotice() {
 
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
-  const limit = 3;
+  const limit = 15;
 
   console.log(page, limit);
   const postApi = useCallback(async () => {
     await getPostApi('공지사항', page, limit)
       .then((res) => {
-        console.log(res.data.content);
-        console.log(res.data);
+        // console.log(res.data.content);
+        // console.log(res.data);
         setTotal(res.data.totalElements);
         setNotices(res.data.content);
         setNoticeListInitial(res.data.content);
@@ -48,7 +48,7 @@ export function NewsNotice() {
       <NewsTemplates title="공지사항">
         <NewsListSection data={notices} page={page} setPage={setPage} limit={limit} total={total} />
       </NewsTemplates>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -25,11 +25,14 @@ export function FixTemplate({ param }: Props) {
   console.log(data);
 
   return (
-    <>
-      <Section>
-        <div className="ck-content" dangerouslySetInnerHTML={{ __html: data! }} />
-      </Section>
-      <Footer />
-    </>
+    <Section>
+      <div className="ck-content" dangerouslySetInnerHTML={{ __html: data! }} />
+    </Section>
+    // <>
+    //   <Section>
+    //     <div className="ck-content" dangerouslySetInnerHTML={{ __html: data! }} />
+    //   </Section>
+    //   <Footer />
+    // </>
   );
 }

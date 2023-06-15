@@ -146,7 +146,7 @@ export type UserMovieData = {
   };
   contact: {
     id: number;
-    making: string;
+    email: string;
     distribution: string;
   };
   stillImage: {

@@ -16,19 +16,16 @@ interface Props {
 
 export function ArchiveTemplate({ children, title, type, pageTitle, sub }: Props) {
   return (
-    <>
-      <Section>
-        <ArchiveTitle pageTitle={pageTitle} sub={sub} />
-        <FlexContainer className="full" margin="0px 0px 26px 0px" justify="space-between" align="center">
-          <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
-            {title}
-          </H3>
-          <SearchFilter type={type} />
-        </FlexContainer>
-        {children}
-        {/* <ArchiveMovieSection data={data} page={page} setPage={setPage} /> */}
-      </Section>
-      <Footer />
-    </>
+    <Section>
+      <ArchiveTitle pageTitle={pageTitle} sub={sub} />
+      <FlexContainer className="full" margin="0px 0px 26px 0px" justify="space-between" align="center">
+        <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
+          {title}
+        </H3>
+        <SearchFilter type={type} />
+      </FlexContainer>
+      {children}
+      {/* <ArchiveMovieSection data={data} page={page} setPage={setPage} /> */}
+    </Section>
   );
 }

@@ -58,32 +58,11 @@ export function NewsSection({ url, data }: Props) {
   const [element, setElement] = useState<any>('');
   // let url = '';
   // const count = 3;
-  const createdDated = '2023-06-01';
+  // const createDate = new Date(data.createdDate!);
+  // const deleteDate = `${createDate.getFullYear()}_${createDate.getMonth() + 1}_${createDate.getDate()}`;
 
-  // const downloadFile = (fileUrl: any) => {
-  //   // fileUrl = '파일에 대한 url';
-
-  //   fetch(fileUrl, { method: 'GET' })
-  //     .then((res) => {
-  //       return res.blob();
-  //     })
-  //     .then((blob) => {
-  //       const blobUrl = window.URL.createObjectURL(blob);
-  //       const a = document.createElement('a');
-  //       a.href = fileUrl;
-  //       a.download = '파일명';
-  //       document.body.appendChild(a);
-  //       a.click();
-  //       setTimeout((_: any) => {
-  //         window.URL.revokeObjectURL(blobUrl);
-  //       }, 60000);
-  //       a.remove();
-  //       // setOpen(false);
-  //     })
-  //     .catch((err) => {
-  //       console.error('err: ', err);
-  //     });
-  // };
+  const date = new Date(data.createdDate!);
+  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 
   const downloadFile = async (file: any, filename: any) => {
     const download = document.createElement('a');
@@ -96,7 +75,8 @@ export function NewsSection({ url, data }: Props) {
         const blobUrl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = blobUrl;
-        a.download = file.replace('https://biky-files.s3.ap-northeast-2.amazonaws.com/post/2023/06/15/', '');
+        console.log(filename.substring(11));
+        a.download = filename.substring(11);
         document.body.appendChild(a);
         a.click();
         setTimeout((_: any) => {
@@ -109,16 +89,14 @@ export function NewsSection({ url, data }: Props) {
       });
   };
 
-  console.log(data);
-  console.log(data.body);
+  // console.log(data);
+  // console.log(data.body);
+  console.log(data.files);
 
   useEffect(() => {
     setElement(data.body);
     console.log(data.body);
   }, [data.body]);
-
-  const date = new Date(data.createdDate!);
-  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 
   return (
     <div>
@@ -143,14 +121,19 @@ export function NewsSection({ url, data }: Props) {
       {/* <div style={{ marginTop: 'calc(82px * 0.8)' }}>{element && <Viewer initialValue={element} />}</div> */}
       <div style={{ marginTop: 'calc(82px * 0.8)' }}>
         <div className="ck-content" dangerouslySetInnerHTML={{ __html: element }} />
-        <AttacBox
-          onClick={() =>
-            downloadFile('https://biky-files.s3.ap-northeast-2.amazonaws.com/post/2023/06/15/8.jpg', '이름')
-          }
-        >
-          <Icon src={attach_file_icon} alt="첨부파일아이콘" />
-          <span>첨부파일 항목을 넣어주세요~</span>
-        </AttacBox>
+        {data.files.length > 0
+          ? data.files.map((e) => (
+              <AttacBox
+                onClick={() =>
+                  // downloadFile('https://biky-files.s3.ap-northeast-2.amazonaws.com/post/2023/06/15/8.jpg', '이름')
+                  downloadFile(e.file, e.file.replace('https://biky-files.s3.ap-northeast-2.amazonaws.com/post/', ''))
+                }
+              >
+                <Icon src={attach_file_icon} alt="첨부파일아이콘" />
+                <span>첨부파일 항목을 넣어주세요~</span>
+              </AttacBox>
+            ))
+          : null}
       </div>
     </div>
   );

@@ -7,8 +7,13 @@ export type PostType = {
   body: string;
   status: number;
   highlightStatus: number;
-  files: any[];
+  files: Files[];
   view?: number;
   createdDated?: string;
   createdDate?: string;
+};
+
+type Files = {
+  count: number;
+  file: string;
 };

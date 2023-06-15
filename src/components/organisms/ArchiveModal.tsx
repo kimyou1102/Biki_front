@@ -22,6 +22,11 @@ const Container = styled.div`
 
 const Wrap = styled.div`
   margin-bottom: calc(48px * 0.8);
+  &.contact {
+    display: flex;
+    flex-direction: column;
+    gap: calc(16px * 0.8);
+  }
 `;
 
 const TextWrap = styled.div`
@@ -123,10 +128,13 @@ export function ArchiveModal() {
           <Span weight="bold">{movie.section.nameKo}</Span>
           <Span>배우</Span>
           <Span weight="bold">{movie.credit.castingKo}</Span>
+          <Span>제작</Span>
+          <Span weight="bold">
+            감독: {movie.credit.directorNameEn}, 각본: {movie.credit.directorNameEn}, 프로듀서:{' '}
+            {movie.credit.directorNameEn}
+          </Span>
           <Span>자막</Span>
           <Span weight="bold">{movie.subTitle}</Span>
-          <Span>관련태그</Span>
-          <Span weight="bold">#동물 #동물친구들 #신나는모험 #지구지킴이 #Animal friends</Span>
         </TextWrap>
       </Wrap>
 
@@ -134,15 +142,11 @@ export function ArchiveModal() {
         <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
           Contact
         </Text>
-        <TextWrap>
-          <Span>제작</Span>
-          <Span weight="bold">
-            감독: {movie.credit.directorNameEn}, 각본: {movie.credit.directorNameEn}, 프로듀서:{' '}
-            {movie.credit.directorNameEn}
-          </Span>
-          <Span>배급</Span>
-          <Span weight="bold">{movie.subTitle}</Span>
-        </TextWrap>
+        <Wrap className="contact">
+          {/* <Span>배급</Span> */}
+          <Span weight="bold">{movie.contact.distribution}</Span>
+          <Span weight="bold">{movie.contact.email}</Span>
+        </Wrap>
       </Wrap>
 
       <Wrap>

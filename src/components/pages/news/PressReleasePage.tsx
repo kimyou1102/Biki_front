@@ -29,11 +29,8 @@ export function PressReleasePage() {
   }, [postApi]);
 
   return (
-    <>
-      <NewsTemplates title="보도자료">
-        <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
-      </NewsTemplates>
-      <Footer />
-    </>
+    <NewsTemplates title="보도자료">
+      <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
+    </NewsTemplates>
   );
 }

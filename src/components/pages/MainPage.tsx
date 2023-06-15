@@ -75,7 +75,7 @@ export function MainPage() {
         <ImgWrap className="character3">
           <Img width={162} height={87} alt="배경캐릭터" src={character3} />
         </ImgWrap>
-        <Footer />
+        {/* <Footer /> */}
       </Wrap>
     </>
   );
