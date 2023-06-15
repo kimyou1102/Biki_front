@@ -30,11 +30,8 @@ export function Newsletter() {
   }, [postApi]);
 
   return (
-    <>
-      <NewsTemplates title="뉴스레터">
-        <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
-      </NewsTemplates>
-      <Footer />
-    </>
+    <NewsTemplates title="뉴스레터">
+      <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
+    </NewsTemplates>
   );
 }

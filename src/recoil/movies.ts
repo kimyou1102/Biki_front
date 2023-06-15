@@ -371,7 +371,7 @@ const userMovieDefault: UserMovieData = {
   },
   contact: {
     id: 0,
-    making: '',
+    email: '',
     distribution: '',
   },
   stillImage: {

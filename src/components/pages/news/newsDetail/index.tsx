@@ -56,7 +56,7 @@ export function NewsDetail({ type }: Props) {
         {/* <NewsSection title={title} count={count} date={date} url={type} data={data} /> */}
         <NewsSection url={type} data={data} />
       </NewsTemplates>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -6,7 +6,7 @@ import bikiLogo from '../../assets/images/biki_white_logo.png';
 import footer from '../../assets/images/footer.png';
 
 const Container = styled.div`
-  margin-top: 100px;
+  /* margin-top: 100px; */
 `;
 
 const FooterWrap = styled.div`

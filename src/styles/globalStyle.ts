@@ -125,6 +125,43 @@ const GlobalStyle = createGlobalStyle`
       pointer-events: none;
     }
 
+    #banner .swiper-wrapper {
+      transition-timing-function: linear;
+    }
+
+    .pagination {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 5rem;
+      font-size: 1rem;
+      gap: 8px;
+    }
+
+    .pagination .page-num {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height:24px;
+      color:black;
+      border: none;
+      border-radius:50%;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* .pagination .page-num: hover {
+      background-color: var(--main-color);
+      color:white;
+    } */
+
+    .pagination .active {
+      background-color: var(--main-color);
+      color:white;
+    }
+
     @font-face {
         font-family: 'PretendardBold';
         src: local('PretendardBold'), url(${PretendardBold}) format('woff2');

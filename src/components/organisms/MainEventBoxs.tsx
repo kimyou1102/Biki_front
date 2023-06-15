@@ -24,8 +24,8 @@ export function MainEventBoxs() {
 
   const datas = [
     { id: 1, url: main_event1, title: '영화 읽기' },
-    { id: 2, url: main_event2, title: '베리어프리' },
-    { id: 3, url: main_event3, title: '라이브 더빙' },
+    { id: 2, url: main_event2, title: '배리어프리' },
+    { id: 3, url: main_event3, title: '라이브더빙' },
     { id: 4, url: main_event4, title: '관객과의 대화' },
     { id: 5, url: main_event5, title: '공감토크: 문' },
   ];

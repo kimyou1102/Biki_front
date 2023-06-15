@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { Li, FlexContainer, Img, DropMenuWrap, ButtonsWrap, MenudButton } from '@atoms';
 import { useFetcher, useNavigate } from 'react-router-dom';
 import character from '../../../assets/images/nav_menu_character.png';
+import { getSectionApi } from '../../../apis/section/get-section-api';
 
 interface NavigationProps {
   id: number;
@@ -33,6 +34,21 @@ export function Navigation({ left }: Props) {
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(true);
+  const [section, setSection] = useState([]);
+
+  const sectionApi = useCallback(async () => {
+    await getSectionApi()
+      .then((res) => {
+        console.log(res);
+        setSection(res.map((x: any) => x.nameKo));
+        // setInitialMovieData(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    sectionApi();
+  }, [sectionApi]);
 
   useEffect(() => {
     let timer: any;
@@ -77,39 +93,41 @@ export function Navigation({ left }: Props) {
       name: '2023 프로그램',
       idValue: 'program',
       url: '/#',
-      arr: [
-        '상영 시간표',
-        '상영관 정보',
-        '티켓 안내',
-        '개막작',
-        '레디~액션! 12',
-        '레디~액션! 15',
-        '레디~액션! 18',
-        '나를 찾아서',
-        '너와 더불어',
-        '다름 안에서',
-        '경계를 넘어서',
-        '특별전: 채널 1016',
-        '바로,씽!',
-        '야외극장 달빛별빛',
-        '완두콩극장:</br>슈링겔국제어린이청소년영화제',
-      ],
+      arr: ['상영 시간표', '상영관 정보', '티켓 안내', ...section],
+      // arr: [
+      //   '상영 시간표',
+      //   '상영관 정보',
+      //   '티켓 안내',
+      //   '개막작',
+      //   '레디~액션! 12',
+      //   '레디~액션! 15',
+      //   '레디~액션! 18',
+      //   '나를 찾아서',
+      //   '너와 더불어',
+      //   '다름 안에서',
+      //   '경계를 넘어서' ,
+      //   '특별전: 채널 1016',
+      //   '바로,씽!',
+      //   '야외극장 달빛별빛',
+      //   '완두콩극장:</br>슈링겔국제어린이청소년영화제',
+      // ],
       link: [
         '/movie/schedule',
         '/movie/상영관-정보',
         '/#',
-        '/movie/opening-movies',
-        '/movie/ready-action12-movies',
-        '/movie/ready-action15-movies',
-        '/movie/ready-action18-movies',
         '/movie/find-me-movies',
         '/movie/together-movies',
         '/movie/within-differences-movies',
         '/movie/beyond-boundaries-movies',
+        '/movie/ready-action12-movies',
+        '/movie/ready-action15-movies',
+        '/movie/ready-action18-movies',
+        '/movie/outdoor-screen-movies',
+        '/movie/opening-movies',
         '/movie/special-exhibition-movies',
         '/movie/rightnow-movies',
-        '/movie/outdoor-screen-movies',
         '/movie/ready-action-movies',
+        '/#',
       ],
     },
     {
