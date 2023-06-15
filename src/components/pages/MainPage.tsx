@@ -33,9 +33,7 @@ const ImgWrap = styled.div`
   }
 
   &.character3 {
-    top: 0px;
-    transform: translate(0px, -110%);
-
+    top: 15px;
     right: calc(375px * 0.8);
   }
 `;
