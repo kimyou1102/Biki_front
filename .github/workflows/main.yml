@@ -36,7 +36,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ap-northeast-2
         run: |
-          aws s3 sync ./build s3://dev.biky
+          aws s3 sync ./build s3://www.biky.or.kr
 
       - name: Post to a Slack channel
         id: slack
