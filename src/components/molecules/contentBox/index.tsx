@@ -19,7 +19,7 @@ export function ContentBox({ type, title, date, count, url, subType }: ContentBo
   const [top, setTop] = useRecoilState<number>(modalPositionState);
   const setModal = useSetRecoilState<boolean>(modalState);
 
-  console.log(url);
+  console.log('url :', url);
   const onClick = () => {
     if (type === 'archive' && Array.isArray(url)) {
       document.querySelector('body')?.classList.add('none');

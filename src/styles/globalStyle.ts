@@ -10,6 +10,16 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'PretendardRegular'
     }
 
+    .ck-content h1 {
+      font-family: 'PretendardBold'
+    }
+    .ck-content h2 {
+      font-family: 'PretendardBold'
+    }
+    .ck-content h3 {
+      font-family: 'PretendardBold'
+    }
+
     html {
       --main-color : #288CB4;
       --main-slide-text-color : #FFF625;
@@ -111,6 +121,10 @@ const GlobalStyle = createGlobalStyle`
       margin: 0 calc(8px * 0.8);
     }
 
+    .hover_none {
+      pointer-events: none;
+    }
+
     @font-face {
         font-family: 'PretendardBold';
         src: local('PretendardBold'), url(${PretendardBold}) format('woff2');
@@ -123,6 +137,11 @@ const GlobalStyle = createGlobalStyle`
     }
     @font-face {
         font-family: 'PretendardRegular';
+        src: local('PretendardRegular'), url(${PretendardRegular}) format('woff2');
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Pretendard';
         src: local('PretendardRegular'), url(${PretendardRegular}) format('woff2');
         font-style: normal;
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Li, FlexContainer, Img, DropMenuWrap, ButtonsWrap, MenudButton } from '@atoms';
-import { useNavigate } from 'react-router-dom';
+import { useFetcher, useNavigate } from 'react-router-dom';
 import character from '../../../assets/images/nav_menu_character.png';
 
 interface NavigationProps {
@@ -32,6 +32,18 @@ const MenuWrap = styled.ul`
 export function Navigation({ left }: Props) {
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState(true);
+
+  useEffect(() => {
+    let timer: any;
+
+    if (!hover) {
+      timer = setTimeout(() => setHover(true), 300);
+    }
+
+    return () => clearTimeout(timer);
+  }, [hover]);
+
   const menus: NavigationProps[] = [
     {
       id: 1,
@@ -39,7 +51,13 @@ export function Navigation({ left }: Props) {
       idValue: 'biky',
       url: '/#',
       arr: ['제18회 BIKY', '페스티벌 심벌', '시상내역', '비키를 만드는 사람들', '스폰서 모집안내'],
-      link: ['/', '/festival', '/', '/', '/'],
+      link: [
+        '/articles/18-부산국제어린이청소년영화제-BIKY-',
+        '/articles/페스티벌-심벌',
+        '/articles/시상내역',
+        '/articles/비키를-만드는-사람들',
+        '/articles/스폰서-모집안내',
+      ],
     },
     {
       id: 2,
@@ -47,7 +65,12 @@ export function Navigation({ left }: Props) {
       idValue: 'education',
       url: '/#',
       arr: ['부설연구소', '배급영화 교재,</br>활동지, 교육영상', '비키랑 학교랑', '교육 프로그램'],
-      link: ['/', '/', '/', '/', '/'],
+      link: [
+        '/articles/부설연구소',
+        '/articles/배급영화-교재-활동지-교육영상',
+        '/articles/비키랑-학교랑',
+        '/articles/교육-프로그램',
+      ],
     },
     {
       id: 3,
@@ -73,7 +96,7 @@ export function Navigation({ left }: Props) {
       ],
       link: [
         '/movie/schedule',
-        '/#',
+        '/movie/상영관-정보',
         '/#',
         '/movie/opening-movies',
         '/movie/ready-action12-movies',
@@ -95,7 +118,12 @@ export function Navigation({ left }: Props) {
       idValue: 'event',
       url: '/#',
       arr: ['상영이벤트', '포스터그림전시회', '어린이청소년영화인의 밤', '비키놀이터'],
-      link: ['/', '/', '/', '/'],
+      link: [
+        '/articles/상영-이벤트',
+        '/articles/포스터-그림-전시회',
+        '/articles/어린이청소년영화인의-밤',
+        '/articles/비키놀이터',
+      ],
     },
     {
       id: 5,
@@ -103,7 +131,7 @@ export function Navigation({ left }: Props) {
       idValue: 'forum',
       url: '/#',
       arr: ['역대 비키포럼', '인더스트리 네트워크'],
-      link: ['/', '/'],
+      link: ['/articles/역대-비키포럼', '/articles/인더스트리-네트워크'],
     },
     {
       id: 6,
@@ -126,8 +154,8 @@ export function Navigation({ left }: Props) {
       name: 'Contact',
       idValue: 'contact',
       url: '/#',
-      arr: ['사무국사람들', '사무국위치'],
-      link: ['/', '/'],
+      arr: ['사무국사람들', '사무국위치', '인더스트리 네트워크'],
+      link: ['/articles/사무국사람들', '/articles/사무국위치', '/articles/contact/인더스트리-네트워크'],
     },
   ];
 
@@ -138,7 +166,7 @@ export function Navigation({ left }: Props) {
   }, []);
 
   return (
-    <MenuWrap>
+    <MenuWrap id="navigation" className={!hover ? 'hover_none' : ''}>
       {menus.map((menu) => (
         <Li key={menu.id} weight="bold" id={menu.idValue}>
           {/* <NavItemWrap style={{ height: 'calc(118px * 0.8)' }}>{menu.name}</NavItemWrap> */}
@@ -153,8 +181,15 @@ export function Navigation({ left }: Props) {
               {menu.arr.map((item, i) => {
                 const [text1, text2] = item.split('</br>');
                 return (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <MenudButton key={i} onClick={() => navigate(menu.link[i])}>
+                  <MenudButton
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={i}
+                    onClick={() => {
+                      setHover(false);
+                      navigate(menu.link[i]);
+                      // setHover(true);
+                    }}
+                  >
                     {text1}
                     <br />
                     {text2}

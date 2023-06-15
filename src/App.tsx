@@ -17,13 +17,30 @@ import { Section, Div, Input, H3, Th, Tr, THead, A } from '@atoms';
 import { useSetRecoilState } from 'recoil';
 import { NewsTemplates } from '@templates';
 import {
+  BikyPage,
+  FestivalSymbolPage,
+  AwardsPage,
+  CreatorsPage,
+  SponsorPage,
+  ResearchPage,
+  EducationScreeningPage,
+  SchoolPage,
+  ProgramPage,
+  EventLivePage,
+  EventPosterPage,
+  EventNightPage,
+  EventPlaygroundPage,
+  ForumHistoryPage,
+  ForumIndustryPage,
+  ContactOfficePage,
+  ContactPositionPage,
+  ContactIndustryPage,
   ArchiveMoviePage,
   ArchiveSketchPage,
   NewsNotice,
   Newsletter,
   NewsDetail,
   MainPage,
-  FestivalSymbolPage,
   JudgesPage,
   OpeningMoviesPage,
   FindMeMoviesPage,
@@ -40,6 +57,7 @@ import {
   LoginPage,
   VideoClipPage,
   PressReleasePage,
+  TheaterInformationPage,
 } from '@pages';
 import { HeaderLayout } from '@layout';
 import { ScheduleInfoPage } from '@pages/movieSchedule';
@@ -50,17 +68,37 @@ function App() {
       <Routes>
         <Route path="/" element={<HeaderLayout />}>
           <Route path="/" element={<MainPage />} />
+          <Route path="/articles/18-부산국제어린이청소년영화제-BIKY-" element={<BikyPage />} />
+          <Route path="/articles/페스티벌-심벌" element={<FestivalSymbolPage />} />
+          <Route path="/articles/시상내역" element={<AwardsPage />} />
+          <Route path="/articles/비키를-만드는-사람들" element={<CreatorsPage />} />
+          <Route path="/articles/스폰서-모집안내" element={<SponsorPage />} />
+          <Route path="/articles/부설연구소" element={<ResearchPage />} />
+          <Route path="/articles/배급영화-교재-활동지-교육영상" element={<EducationScreeningPage />} />
+          <Route path="/articles/비키랑-학교랑" element={<SchoolPage />} />
+          <Route path="/articles/교육-프로그램" element={<ProgramPage />} />
+          <Route path="/articles/상영-이벤트" element={<EventLivePage />} />
+          <Route path="/articles/포스터-그림-전시회" element={<EventPosterPage />} />
+          <Route path="/articles/어린이청소년영화인의-밤" element={<EventNightPage />} />
+          <Route path="/articles/비키놀이터" element={<EventPlaygroundPage />} />
+          <Route path="/articles/역대-비키포럼" element={<ForumHistoryPage />} />
+          <Route path="/articles/인더스트리-네트워크" element={<ForumIndustryPage />} />
+          <Route path="/articles/사무국사람들" element={<ContactOfficePage />} />
+          <Route path="/articles/사무국위치" element={<ContactPositionPage />} />
+          <Route path="/articles/contact/인더스트리-네트워크" element={<ContactIndustryPage />} />
+
           <Route path="/archive/distributions" element={<ArchiveMoviePage />} />
           <Route path="/archive/sketch" element={<ArchiveSketchPage />} />
           <Route path="/archive/videoclip" element={<VideoClipPage />} />
-          <Route path="/news/notice/:id" element={<NewsDetail type="notice" />} />
           <Route path="/news/notice" element={<NewsNotice />} />
+          <Route path="/news/notice/:id" element={<NewsDetail type="notice" />} />
           <Route path="/news/newsletter" element={<Newsletter />} />
-          <Route path="/news/pressrelease" element={<PressReleasePage />} />
           <Route path="/news/newsletter/:id" element={<NewsDetail type="newsletter" />} />
-          <Route path="/festival" element={<FestivalSymbolPage />} />
+          <Route path="/news/pressrelease" element={<PressReleasePage />} />
+          <Route path="/news/pressrelease/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
+          <Route path="/movie/상영관-정보" element={<TheaterInformationPage />} />
           <Route path="/movie/opening-movies" element={<OpeningMoviesPage />} />
           <Route path="/movie/find-me-movies" element={<FindMeMoviesPage />} />
           <Route path="/movie/together-movies" element={<TogetherMoviesPage />} />

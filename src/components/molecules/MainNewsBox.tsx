@@ -36,7 +36,13 @@ export function MainNewsBox({ data, newsName }: Props) {
           const date = new Date(post.createdDate!);
           const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
           return (
-            <MainNewsBoxText key={post.id} date={dateStr} title={post.titleKo} />
+            <MainNewsBoxText
+              key={post.id}
+              id={post.id}
+              date={dateStr}
+              title={post.titleKo}
+              url={newsName === '언론보도' ? 'news/pressrelease' : 'news/newsletter'}
+            />
             // <MainNewsBoxText key={post.id} date={dateStr} title={post.titleKo} isCheck={post.highlightStatus === 1} />
           );
         })}

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { FlexContainer, Span, Img } from '@atoms';
 
 interface Props {
@@ -19,7 +20,7 @@ const ShadowBox = styled.div<{ src: string; width?: number }>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.45);
   border-radius: 16px;
 `;
 
@@ -28,6 +29,7 @@ const Container = styled.div<{ width?: number }>`
   height: calc(413px * 0.8);
   margin-right: calc(24px * 0.8);
   position: relative;
+  border-radius: 16px;
 `;
 
 const TextWrap = styled.div`
@@ -43,10 +45,12 @@ const Text = styled.span`
 `;
 
 export function MainEventBox({ url, width, title }: Props) {
+  const navigate = useNavigate();
+
   const [text1, text2] = title.split('</br>');
   console.log(text1, text2);
   return (
-    <Container width={width || 413}>
+    <Container width={width || 413} onClick={() => navigate('/articles/상영-이벤트')}>
       <ShadowBox src={url} width={width || 413} />
       <TextWrap>
         <Text>{text1}</Text>
