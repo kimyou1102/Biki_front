@@ -11,7 +11,7 @@ export function Newsletter() {
 
   // const initialLimit = 12;
   // const [limit, setLimit] = useState(12);
-  const limit = 3;
+  const limit = 15;
 
   const postApi = useCallback(async () => {
     await getPostApi('뉴스레터', page, limit)

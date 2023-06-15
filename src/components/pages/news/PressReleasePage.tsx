@@ -11,7 +11,7 @@ export function PressReleasePage() {
 
   // const initialLimit = 12;
   // const [limit, setLimit] = useState(12);
-  const limit = 3;
+  const limit = 15;
 
   const postApi = useCallback(async () => {
     await getPostApi('언론보도', page, limit)
