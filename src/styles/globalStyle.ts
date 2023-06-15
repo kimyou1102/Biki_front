@@ -121,6 +121,10 @@ const GlobalStyle = createGlobalStyle`
       margin: 0 calc(8px * 0.8);
     }
 
+    .hover_none {
+      pointer-events: none;
+    }
+
     @font-face {
         font-family: 'PretendardBold';
         src: local('PretendardBold'), url(${PretendardBold}) format('woff2');

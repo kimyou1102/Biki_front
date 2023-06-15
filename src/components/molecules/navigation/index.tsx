@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Li, FlexContainer, Img, DropMenuWrap, ButtonsWrap, MenudButton } from '@atoms';
-import { useNavigate } from 'react-router-dom';
+import { useFetcher, useNavigate } from 'react-router-dom';
 import character from '../../../assets/images/nav_menu_character.png';
 
 interface NavigationProps {
@@ -32,6 +32,18 @@ const MenuWrap = styled.ul`
 export function Navigation({ left }: Props) {
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState(true);
+
+  useEffect(() => {
+    let timer: any;
+
+    if (!hover) {
+      timer = setTimeout(() => setHover(true), 300);
+    }
+
+    return () => clearTimeout(timer);
+  }, [hover]);
+
   const menus: NavigationProps[] = [
     {
       id: 1,
@@ -154,7 +166,7 @@ export function Navigation({ left }: Props) {
   }, []);
 
   return (
-    <MenuWrap>
+    <MenuWrap id="navigation" className={!hover ? 'hover_none' : ''}>
       {menus.map((menu) => (
         <Li key={menu.id} weight="bold" id={menu.idValue}>
           {/* <NavItemWrap style={{ height: 'calc(118px * 0.8)' }}>{menu.name}</NavItemWrap> */}
@@ -169,8 +181,15 @@ export function Navigation({ left }: Props) {
               {menu.arr.map((item, i) => {
                 const [text1, text2] = item.split('</br>');
                 return (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <MenudButton key={i} onClick={() => navigate(menu.link[i])}>
+                  <MenudButton
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={i}
+                    onClick={() => {
+                      setHover(false);
+                      navigate(menu.link[i]);
+                      // setHover(true);
+                    }}
+                  >
                     {text1}
                     <br />
                     {text2}
