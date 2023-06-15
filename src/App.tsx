@@ -89,11 +89,12 @@ function App() {
           <Route path="/archive/distributions" element={<ArchiveMoviePage />} />
           <Route path="/archive/sketch" element={<ArchiveSketchPage />} />
           <Route path="/archive/videoclip" element={<VideoClipPage />} />
-          <Route path="/news/notice/:id" element={<NewsDetail type="notice" />} />
           <Route path="/news/notice" element={<NewsNotice />} />
+          <Route path="/news/notice/:id" element={<NewsDetail type="notice" />} />
           <Route path="/news/newsletter" element={<Newsletter />} />
-          <Route path="/news/pressrelease" element={<PressReleasePage />} />
           <Route path="/news/newsletter/:id" element={<NewsDetail type="newsletter" />} />
+          <Route path="/news/pressrelease" element={<PressReleasePage />} />
+          <Route path="/news/pressrelease/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
           <Route path="/movie/opening-movies" element={<OpeningMoviesPage />} />

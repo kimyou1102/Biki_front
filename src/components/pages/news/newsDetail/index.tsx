@@ -9,7 +9,6 @@ import { PostType } from '../../../../models/post';
 interface Props {
   type: string;
 }
-
 export function NewsDetail({ type }: Props) {
   const [data, setData] = useState<PostType>({
     id: 0,
