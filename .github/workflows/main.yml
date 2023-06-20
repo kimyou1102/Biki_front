@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> .env
           echo "REACT_APP_API=${{ secrets.REACT_APP_API}}" >> .env
-          echo "REACT_APP_AWS_COGNITO_USER_POOL_ID=${{ secrets.GENERATE_SOURCEMAP }}" >> .env
+          echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env
           cat .env
 
       - name: Install dependencies
