@@ -37,6 +37,7 @@ const AttacBox = styled.button`
   justify-content: left;
   align-items: center;
   padding-left: 37px;
+  margin-bottom: 10px;
 
   span {
     color: #767676;
@@ -63,6 +64,13 @@ export function NewsSection({ url, data }: Props) {
 
   const date = new Date(data.createdDate!);
   const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+
+  function getFileName(targetUrl: string) {
+    const fileName = targetUrl.substring(targetUrl.lastIndexOf('/') + 1);
+    const resultFileName = decodeURIComponent(fileName);
+
+    return resultFileName;
+  }
 
   const downloadFile = async (file: any, filename: any) => {
     const download = document.createElement('a');
@@ -130,7 +138,7 @@ export function NewsSection({ url, data }: Props) {
                 }
               >
                 <Icon src={attach_file_icon} alt="첨부파일아이콘" />
-                <span>첨부파일 항목을 넣어주세요~</span>
+                <span>{getFileName(e.file)}</span>
               </AttacBox>
             ))
           : null}
