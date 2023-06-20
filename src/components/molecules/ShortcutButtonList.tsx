@@ -11,8 +11,9 @@ import subscribe from '../../assets/images/subscribe.png';
 const Container = styled.ul`
   width: 80px;
   position: fixed;
-  top: 30px;
+  top: 50%;
   right: 20px;
+  transform: translateY(-50%);
   display: grid;
   gap: calc(16px * 0.8);
   z-index: 100;

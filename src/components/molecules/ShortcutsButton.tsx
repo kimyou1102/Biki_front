@@ -12,8 +12,8 @@ const StyledButton = styled.button`
   align-items: center;
   border: none;
   border-radius: 50%;
-  width: calc(100px * 0.8);
-  height: calc(100px * 0.8);
+  width: calc(80px * 0.8);
+  height: calc(80px * 0.8);
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.45);
   cursor: pointer;
@@ -22,7 +22,7 @@ const StyledButton = styled.button`
 export function ShortcutsButton({ src }: Props) {
   return (
     <StyledButton onClick={() => {}}>
-      <Img src={src} alt="바로가기" width={50} height={50} />
+      <Img src={src} alt="바로가기" width={40} height={40} />
     </StyledButton>
   );
 }
