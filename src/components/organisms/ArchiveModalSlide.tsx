@@ -101,8 +101,6 @@ export function ArchiveModalSlide({ data }: Props) {
     if (slick) {
       slick.slickGoTo(0);
     }
-
-    console.log('값 변함');
   }, [data, slick]);
 
   const settings = {

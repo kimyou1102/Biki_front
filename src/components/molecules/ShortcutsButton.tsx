@@ -4,6 +4,7 @@ import { Img } from '@atoms';
 
 interface Props {
   src: string;
+  onClickEvent?: () => void;
 }
 
 const StyledButton = styled.button`
@@ -19,9 +20,9 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-export function ShortcutsButton({ src }: Props) {
+export function ShortcutsButton({ src, onClickEvent }: Props) {
   return (
-    <StyledButton onClick={() => {}}>
+    <StyledButton onClick={onClickEvent}>
       <Img src={src} alt="바로가기" width={40} height={40} />
     </StyledButton>
   );

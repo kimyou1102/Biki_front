@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RecoilRoot } from 'recoil';
+import ScrollToTop from '@molecules/ScrollToTop';
 import { HeaderLayout } from '@layout';
 import { ArchiveMoviePage, ArchiveSketchPage, NewsNotice, Newsletter, NewsDetail } from '@pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -14,6 +15,7 @@ root.render(
   <RecoilRoot>
     <BrowserRouter>
       <GlobalStyle />
+      <ScrollToTop />
       <App />
     </BrowserRouter>
   </RecoilRoot>,

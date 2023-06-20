@@ -61,6 +61,7 @@ import {
 } from '@pages';
 import { HeaderLayout } from '@layout';
 import { ScheduleInfoPage } from '@pages/movieSchedule';
+import { MoviePage } from '@pages/2023program/MoviePage';
 
 function App() {
   return (
@@ -97,9 +98,10 @@ function App() {
           <Route path="/news/pressrelease" element={<PressReleasePage />} />
           <Route path="/news/pressrelease/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/judges" element={<JudgesPage />} />
+          <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
           <Route path="/movie/상영관-정보" element={<TheaterInformationPage />} />
-          <Route path="/movie/opening-movies" element={<OpeningMoviesPage />} />
+          {/* <Route path="/movie/opening-movies" element={<OpeningMoviesPage />} />
           <Route path="/movie/find-me-movies" element={<FindMeMoviesPage />} />
           <Route path="/movie/together-movies" element={<TogetherMoviesPage />} />
           <Route path="/movie/within-differences-movies" element={<WithinDifferencesMoviesPage />} />
@@ -110,7 +112,7 @@ function App() {
           <Route path="/movie/ready-action12-movies" element={<ReadyActionMovies12Page />} />
           <Route path="/movie/ready-action15-movies" element={<ReadyActionMovies15Page />} />
           <Route path="/movie/ready-action18-movies" element={<ReadyActionMovies18Page />} />
-          <Route path="/movie/ready-action-movies" element={<ReadyActionMoviesPage />} />
+          <Route path="/movie/ready-action-movies" element={<ReadyActionMoviesPage />} /> */}
           <Route path="/login" element={<LoginPage />} />
         </Route>
       </Routes>

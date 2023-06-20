@@ -48,7 +48,7 @@ export function MainEventBox({ url, width, title }: Props) {
   const navigate = useNavigate();
 
   const [text1, text2] = title.split('</br>');
-  console.log(text1, text2);
+
   return (
     <Container width={width || 413} onClick={() => navigate('/articles/상영-이벤트')}>
       <ShadowBox src={url} width={width || 413} />

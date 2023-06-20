@@ -12,9 +12,9 @@ interface Props {
 export function SymbolChatacter({ name, src, text1, text2, text3 }: Props) {
   //   const [text1, text2, text3] = description.split('<br/>');
   const [text1Text, nameText] = text1.split('name:');
-  console.log(nameText);
+
   const [text1First, text1Second] = text1Text.split('<br/>');
-  console.log(text1First, text1Second);
+
   const [text2First, text2Second] = text2.split('<br/>');
   const [text3First, text3Second] = text3.split('<br/>');
 

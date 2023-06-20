@@ -35,12 +35,20 @@ export function Navigation({ left }: Props) {
   const menuRef = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(true);
   const [section, setSection] = useState([]);
+  const [sectionUrl, setSectionUrl] = useState([]);
 
   const sectionApi = useCallback(async () => {
     await getSectionApi()
       .then((res) => {
-        console.log(res);
+        // 'nameKo' 속성을 기준으로 배열 정렬
+        res.sort((a: any, b: any) => {
+          if (a.nameKo < b.nameKo) return -1;
+          if (a.nameKo > b.nameKo) return 1;
+          return 0;
+        });
+
         setSection(res.map((x: any) => x.nameKo));
+        setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
         // setInitialMovieData(res);
       })
       .catch((err) => console.log(err));
@@ -115,19 +123,20 @@ export function Navigation({ left }: Props) {
         '/movie/schedule',
         '/movie/상영관-정보',
         '/#',
-        '/movie/find-me-movies',
-        '/movie/together-movies',
-        '/movie/within-differences-movies',
-        '/movie/beyond-boundaries-movies',
-        '/movie/ready-action12-movies',
-        '/movie/ready-action15-movies',
-        '/movie/ready-action18-movies',
-        '/movie/outdoor-screen-movies',
-        '/movie/opening-movies',
-        '/movie/special-exhibition-movies',
-        '/movie/rightnow-movies',
-        '/movie/ready-action-movies',
-        '/#',
+        ...sectionUrl,
+        // '/movie/find-me-movies',
+        // '/movie/together-movies',
+        // '/movie/within-differences-movies',
+        // '/movie/beyond-boundaries-movies',
+        // '/movie/ready-action12-movies',
+        // '/movie/ready-action15-movies',
+        // '/movie/ready-action18-movies',
+        // '/movie/outdoor-screen-movies',
+        // '/movie/opening-movies',
+        // '/movie/special-exhibition-movies',
+        // '/movie/rightnow-movies',
+        // '/movie/ready-action-movies',
+        // '/#',
       ],
     },
     {
@@ -172,8 +181,8 @@ export function Navigation({ left }: Props) {
       name: 'Contact',
       idValue: 'contact',
       url: '/#',
-      arr: ['사무국사람들', '사무국위치', '인더스트리 네트워크'],
-      link: ['/articles/사무국사람들', '/articles/사무국위치', '/articles/contact/인더스트리-네트워크'],
+      arr: ['사무국사람들', '사무국위치'],
+      link: ['/articles/사무국사람들', '/articles/사무국위치'],
     },
   ];
 

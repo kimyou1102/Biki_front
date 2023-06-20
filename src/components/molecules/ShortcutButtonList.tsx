@@ -20,11 +20,21 @@ const Container = styled.ul`
 `;
 
 export function ShortcutButtonList() {
+  const snsLink = {
+    instagram: 'https://www.instagram.com/biky_filmfest/',
+    facebook: 'https://www.facebook.com/biky.festival/',
+    youtube: 'https://www.youtube.com/@bikipr',
+  };
+
+  function handleButtonClick(link: string) {
+    window.open(link);
+  }
+
   return (
     <Container>
-      <ShortcutsButton src={instagram} />
-      <ShortcutsButton src={facebook} />
-      <ShortcutsButton src={youtube} />
+      <ShortcutsButton src={instagram} onClickEvent={() => handleButtonClick(snsLink.instagram)} />
+      <ShortcutsButton src={facebook} onClickEvent={() => handleButtonClick(snsLink.facebook)} />
+      <ShortcutsButton src={youtube} onClickEvent={() => handleButtonClick(snsLink.youtube)} />
       <ShortcutsButton src={blog} />
       <ShortcutsButton src={newsletter} />
       <ShortcutsButton src={subscribe} />

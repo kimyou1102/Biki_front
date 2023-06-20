@@ -5,9 +5,9 @@ import { ButtonsProps } from 'src/models/headerButton';
 
 export function Header() {
   const lefttData: ButtonsProps[] = [
-    { id: 1, name: 'Guest', url: '/' },
-    { id: 2, name: 'Volunteer', url: '/' },
-    { id: 3, name: 'Badge', url: '/' },
+    { id: 1, name: 'Guest', url: 'http://guest.biky.s3-website.ap-northeast-2.amazonaws.com' },
+    { id: 2, name: 'Volunteer', url: 'http://volunteer.biky.s3-website.ap-northeast-2.amazonaws.com' },
+    { id: 3, name: 'Badge', url: 'http://biky-badge-create.s3-website.ap-northeast-2.amazonaws.com/' },
   ];
 
   const rightData: ButtonsProps[] = [

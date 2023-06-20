@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TextList } from '@molecules';
-import { BorderContainer, MainNewsUl } from '@atoms';
+import { A, BorderContainer, MainNewsUl } from '@atoms';
 import { useRecoilValue } from 'recoil';
 import { NoticeType, noticeState } from '../../../recoil/notice/notice';
 import { PostType } from '../../../models/post';
@@ -24,7 +24,11 @@ export function NoticeBox({ data }: Props) {
         {data.map((post) => {
           const date = new Date(post.createdDate!);
           const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-          return <TextList key={post.id} date={dateStr} title={post.titleKo} isCheck={post.highlightStatus === 1} />;
+          return (
+            <A url={`/news/notice/${post.id}`}>
+              <TextList key={post.id} date={dateStr} title={post.titleKo} isCheck={post.highlightStatus === 1} />
+            </A>
+          );
         })}
       </MainNewsUl>
     </BorderContainer>
