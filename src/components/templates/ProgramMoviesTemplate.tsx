@@ -11,14 +11,14 @@ import {
   movieInitialState,
 } from '../../recoil/movies';
 import { MovieData } from '../../models/movie';
-import { getMovieBySectionApi } from '../../apis/movie/get-movie-by-section-api';
+import { getSectionByIdApi } from '../../apis/section/get-section-by-id-api';
 
 interface Props {
   title: string;
-  url: string;
+  id: number;
 }
 
-export function ProgramMoviesTemplate({ title, url }: Props) {
+export function ProgramMoviesTemplate({ title, id }: Props) {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
   const [top, setTop] = useRecoilState(movieModalPositionState);
@@ -29,16 +29,14 @@ export function ProgramMoviesTemplate({ title, url }: Props) {
   const [page, setPage] = useState(0);
 
   const sectionApi = useCallback(async () => {
-    await getMovieBySectionApi(url)
+    await getSectionByIdApi(id)
       .then((res) => {
         console.log(res.list);
         setMovies(res.list);
         setInitialMovieData(res.list);
       })
       .catch((err) => console.log(err));
-  }, [setMovies, setInitialMovieData, url]);
-
-  console.log('movies : ', movies);
+  }, [setMovies, setInitialMovieData, id]);
 
   useEffect(() => {
     sectionApi();

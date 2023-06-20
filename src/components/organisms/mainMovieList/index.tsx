@@ -104,7 +104,7 @@ export function MainMovieList() {
   };
   return (
     <div>
-      <SlideHeader text="BIKI 상영작" onLeftClick={onLeftClick} onRightClick={onRightClick} />
+      <SlideHeader text="BIKY 상영작" onLeftClick={onLeftClick} onRightClick={onRightClick} />
       <MainMovieBoxs data={initialMovieData} />
     </div>
   );
