@@ -3,6 +3,7 @@ import { NewsTemplates } from '@templates';
 import { NewsSection } from '@organisms';
 import { Footer } from '@layout/Footer';
 import { useLocation, useParams } from 'react-router-dom';
+import { addPostViewApi } from '@src/apis/post/add-post-view-api';
 import { getPostByIdApi } from '../../../../apis/post/get-post-by-id-api';
 import { PostType } from '../../../../models/post';
 
@@ -35,6 +36,9 @@ export function NewsDetail({ type }: Props) {
         // setNotices(res.data);
       })
       .catch((err) => console.log(err));
+
+    // 조회수 추가
+    await addPostViewApi(parseInt(id!, 10));
   }, [id]);
 
   useEffect(() => {
