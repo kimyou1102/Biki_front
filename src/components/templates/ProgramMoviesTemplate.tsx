@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ArchiveTemplate } from '@templates';
 import { ArchiveModal, ArchiveMovieList } from '@organisms';
 import { ModalWrap } from '@atoms';
+import { Box, CircularProgress } from '@mui/material';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   movieModalState,
@@ -25,6 +26,7 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
 
   const [movies, setMovies] = useRecoilState<MovieData[]>(movieState);
   const setInitialMovieData = useSetRecoilState<MovieData[]>(movieInitialState); // api에서 받아오는 걸로
+  const [isLoading, setIsLoading] = useState(true);
 
   const [page, setPage] = useState(0);
 
@@ -34,11 +36,13 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
         console.log(res.list);
         setMovies(res.list);
         setInitialMovieData(res.list);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [setMovies, setInitialMovieData, id]);
 
   useEffect(() => {
+    setIsLoading(true);
     sectionApi();
   }, [sectionApi]);
 
@@ -59,8 +63,10 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
         pageTitle="2023 프로그램"
         sub="제18회 BIKY의 상영작을 소개합니다"
       >
-        {movies.length === 0 ? (
-          <h1>등록된 게시물이 없습니다.</h1>
+        {isLoading ? (
+          <Box width="100%" height="50vh" display="flex" justifyContent="center" alignItems="center">
+            <CircularProgress color="success" />
+          </Box>
         ) : (
           <ArchiveMovieList page={page} setPage={setPage} movies={movies} />
         )}

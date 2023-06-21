@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
+import { Box, CircularProgress } from '@mui/material';
 import { Footer } from '@layout/Footer';
 import { getPostByTitleApi } from '@src/apis/post/get-post-by-title';
 import { getPostApi } from '../../../apis/post/get-post-api';
@@ -10,6 +11,7 @@ export function PressReleasePage() {
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   // const initialLimit = 12;
   // const [limit, setLimit] = useState(12);
@@ -23,6 +25,7 @@ export function PressReleasePage() {
         .then((res) => {
           setTotal(res.data.totalElements);
           setNews(res.data.content);
+          setIsLoading(false);
         })
         .catch((err) => console.log(err));
     } else {
@@ -32,6 +35,7 @@ export function PressReleasePage() {
         .then((res) => {
           setTotal(res.data.totalElements);
           setNews(res.data.content);
+          setIsLoading(false);
         })
         .catch((err) => console.log(err));
     }
@@ -54,16 +58,22 @@ export function PressReleasePage() {
 
   return (
     <NewsTemplates title="보도자료">
-      <NewsListSection
-        data={news}
-        page={page}
-        setPage={setPage}
-        inputValue={searchKeyword}
-        setInputValue={setSearchKeyword}
-        onSearch={handleSearchButtonClick}
-        limit={limit}
-        total={total}
-      />
+      {isLoading ? (
+        <Box width="100%" height="50vh" display="flex" justifyContent="center" alignItems="center">
+          <CircularProgress color="success" />
+        </Box>
+      ) : (
+        <NewsListSection
+          data={news}
+          page={page}
+          setPage={setPage}
+          inputValue={searchKeyword}
+          setInputValue={setSearchKeyword}
+          onSearch={handleSearchButtonClick}
+          limit={limit}
+          total={total}
+        />
+      )}
     </NewsTemplates>
   );
 }
