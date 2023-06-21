@@ -12,9 +12,10 @@ interface Props {
   type: string;
   pageTitle?: string;
   sub?: string;
+  id?: number;
 }
 
-export function ArchiveTemplate({ children, title, type, pageTitle, sub }: Props) {
+export function ArchiveTemplate({ children, title, type, id, pageTitle, sub }: Props) {
   return (
     <Section>
       <ArchiveTitle pageTitle={pageTitle} sub={sub} />
@@ -22,7 +23,7 @@ export function ArchiveTemplate({ children, title, type, pageTitle, sub }: Props
         <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
           {title}
         </H3>
-        <SearchFilter type={type} />
+        <SearchFilter type={type} id={id} />
       </FlexContainer>
       {children}
       {/* <ArchiveMovieSection data={data} page={page} setPage={setPage} /> */}

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Img, Button } from '@atoms';
 import { SearchBar } from '@molecules/searchBar';
+import { getMovieBySectionIdAndTitleApi } from '@src/apis/movie/get-movie-by-id-and-title-api';
+import { getMovieByTitleApi } from '@src/apis/movie/get-movie-by-title-api';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { filmInputState, sketchInputState } from '../../../recoil/archive/atome';
 import { movieState, testMovie, movieInitialState } from '../../../recoil/movies';
@@ -12,9 +14,10 @@ import filter from '../../../assets/images/Filter.png';
 
 interface Props {
   type: string;
+  id?: number;
 }
 
-export function SearchFilter({ type }: Props) {
+export function SearchFilter({ type, id }: Props) {
   const initialMovieData = useRecoilValue<MovieData[]>(movieInitialState);
   // const initialSketchData = useRecoilValue<SketchType[]>(sketchState);
   const [movies, setMovies] = useRecoilState<MovieData[]>(movieState);
@@ -34,15 +37,19 @@ export function SearchFilter({ type }: Props) {
   //   }
   // }, [sketchValue, initialSketchData, setSketchs]);
 
-  const onSearch = () => {
-    // if (type === 'film') {
-    //   const newArr = movies.filter((e) => e.titleKo.includes(filmValue));
-    //   setMovies(newArr);
-    // } else {
-    //   const newArr = sketchs.filter((e) => e.title.includes(sketchValue));
-    //   setSketchs(newArr);
-    // }
+  const onFilmSearch = () => {
+    if (id) {
+      getMovieBySectionIdAndTitleApi(id!, filmValue).then((res) => {
+        setMovies(res.list);
+      });
+    } else {
+      getMovieByTitleApi(filmValue).then((res) => {
+        setMovies(res.list);
+      });
+    }
   };
+
+  const onSketchSearch = () => {};
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (type === 'film') {
@@ -61,12 +68,12 @@ export function SearchFilter({ type }: Props) {
       <SearchBar
         value={type === 'film' ? filmValue : sketchValue}
         onChange={onChange}
-        onSearch={onSearch}
+        onSearch={type === 'film' ? onFilmSearch : onSketchSearch}
         color="#555555"
         radius={10}
         width={349}
         height={48}
-        placeholder={type === 'film' ? '영화 제목, 태그 검색' : '제목 검색'}
+        placeholder={type === 'film' ? '영화 제목 검색' : '제목 검색'}
       />
       <Button
         type="button"

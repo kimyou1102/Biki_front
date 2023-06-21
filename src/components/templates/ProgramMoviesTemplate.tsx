@@ -52,7 +52,13 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
 
   return (
     <>
-      <ArchiveTemplate title={title} type="film" pageTitle="2023 프로그램" sub="제18회 BIKY의 상영작을 소개합니다">
+      <ArchiveTemplate
+        title={title}
+        id={id}
+        type="film"
+        pageTitle="2023 프로그램"
+        sub="제18회 BIKY의 상영작을 소개합니다"
+      >
         {movies.length === 0 ? (
           <h1>등록된 게시물이 없습니다.</h1>
         ) : (

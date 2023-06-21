@@ -2,27 +2,51 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
 import { Footer } from '@layout/Footer';
+import { getPostByTitleApi } from '@src/apis/post/get-post-by-title';
 import { getPostApi } from '../../../apis/post/get-post-api';
 
 export function PressReleasePage() {
   const [news, setNews] = useState<any>([]);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   // const initialLimit = 12;
   // const [limit, setLimit] = useState(12);
   const limit = 15;
 
   const postApi = useCallback(async () => {
-    await getPostApi('언론보도', page, limit)
+    // 키워드가 있을 때
+    if (searchKeyword !== '') {
+      await getPostByTitleApi('언론보도', searchKeyword, page, limit)
+        // await getPostApi('공지사항', page, limit)
+        .then((res) => {
+          setTotal(res.data.totalElements);
+          setNews(res.data.content);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // 키워드가 없을 때
+      await getPostApi('언론보도', page, limit)
+        // await getPostApi('공지사항', page, limit)
+        .then((res) => {
+          setTotal(res.data.totalElements);
+          setNews(res.data.content);
+        })
+        .catch((err) => console.log(err));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  async function handleSearchButtonClick() {
+    await getPostByTitleApi('언론보도', searchKeyword, page, limit)
       // await getPostApi('공지사항', page, limit)
       .then((res) => {
-        console.log('언론보도 :', res.data.content);
         setTotal(res.data.totalElements);
         setNews(res.data.content);
       })
       .catch((err) => console.log(err));
-  }, [page]);
+  }
 
   useEffect(() => {
     postApi();
@@ -30,7 +54,16 @@ export function PressReleasePage() {
 
   return (
     <NewsTemplates title="보도자료">
-      <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
+      <NewsListSection
+        data={news}
+        page={page}
+        setPage={setPage}
+        inputValue={searchKeyword}
+        setInputValue={setSearchKeyword}
+        onSearch={handleSearchButtonClick}
+        limit={limit}
+        total={total}
+      />
     </NewsTemplates>
   );
 }
