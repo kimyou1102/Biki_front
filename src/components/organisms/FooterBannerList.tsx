@@ -90,7 +90,7 @@ export function FooterBannerList() {
       <Swiper
         // slidesPerView="auto"
         spaceBetween={16}
-        centeredSlides
+        // centeredSlides
         loop
         init={false}
         freeMode

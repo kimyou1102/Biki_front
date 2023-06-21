@@ -62,6 +62,7 @@ import {
 import { HeaderLayout } from '@layout';
 import { ScheduleInfoPage } from '@pages/movieSchedule';
 import { MoviePage } from '@pages/2023program/MoviePage';
+import { TicketInformationPage } from '@pages/2023program/TicketInformationPage';
 
 function App() {
   return (
@@ -101,6 +102,7 @@ function App() {
           <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />
           <Route path="/movie/상영관-정보" element={<TheaterInformationPage />} />
+          <Route path="/movie/ticket" element={<TicketInformationPage />} />
           {/* <Route path="/movie/opening-movies" element={<OpeningMoviesPage />} />
           <Route path="/movie/find-me-movies" element={<FindMeMoviesPage />} />
           <Route path="/movie/together-movies" element={<TogetherMoviesPage />} />
