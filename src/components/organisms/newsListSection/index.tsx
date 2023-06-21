@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
+import { useRecoilValue } from 'recoil';
 import { TableRow, SearchBar, Pagination } from '@molecules';
 import { Th, Tr, THead } from '@atoms';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 import { PostType } from '@src/models/post';
-import { noticeListState, noticeListInitialState } from '../../../recoil/notice/notice';
+import { languageState } from '../../../recoil/language/atom';
 
 interface Props {
   data: PostType[];
@@ -15,8 +17,9 @@ interface Props {
 
 export function NewsListSection({ data, page, setPage, limit, total }: Props) {
   const [value, setValue] = useState<string>('');
-
   const offset = (page - 1) * limit;
+  const language = useRecoilValue(languageState);
+  const { t } = useTranslation();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -48,20 +51,20 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
         radius={5}
         width={599}
         height={40}
-        placeholder="제목 검색"
+        placeholder={t(`news.search`)}
       />
       <table style={{ width: '100%', borderSpacing: 0 }}>
         <THead>
           <Tr>
-            <Th className="left">번호</Th>
-            <Th className="title">제목</Th>
-            <Th>조회수</Th>
-            <Th className="right">등록일</Th>
+            <Th className="left">{t(`news.number`)}</Th>
+            <Th className="title">{t(`news.title`)}</Th>
+            <Th>{t(`views`)}</Th>
+            <Th className="right">{t(`registrationDate`)}</Th>
           </Tr>
         </THead>
 
         {data.length === 0 ? (
-          <div>등록된 글이 없습니다.</div>
+          <div>{t(`news.empty`)}</div>
         ) : (
           <tbody>
             {data.map((newsInfo) => {
@@ -73,7 +76,7 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
                   key={newsInfo.id}
                   id={newsInfo.id}
                   num={newsInfo.id}
-                  title={newsInfo.titleKo}
+                  title={language === 'English' ? newsInfo.titleKo : newsInfo.titleEn}
                   count={newsInfo.view!}
                   date={dateStr}
                 />

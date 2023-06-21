@@ -1,11 +1,14 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { BorderContainer, FlexContainer, MainNewsUl, Text, More, A } from '@atoms';
 import { TextList, MainNewsBoxText } from '@molecules';
 import { useRecoilValue } from 'recoil';
 import { NoticeType, noticeState } from '../../recoil/notice/notice';
 import { PostType } from '../../models/post';
 import { getPostApi } from '../../apis/post/get-post-api';
+import { languageState } from '../../recoil/language/atom';
 
 interface Props {
   data: PostType[];
@@ -13,6 +16,9 @@ interface Props {
 }
 
 export function MainNewsBox({ data, newsName }: Props) {
+  const language = useRecoilValue(languageState);
+  const { t } = useTranslation();
+
   return (
     <BorderContainer
       radius={10}
@@ -27,7 +33,7 @@ export function MainNewsBox({ data, newsName }: Props) {
           {newsName}
         </Text>
         <More>
-          <A url={newsName === '언론보도' ? 'news/pressrelease' : 'news/newsletter'}>더보기</A>
+          <A url={newsName === '언론보도' ? 'news/pressrelease' : 'news/newsletter'}>{t(`main.more`)}</A>
         </More>
       </FlexContainer>
 
@@ -40,7 +46,7 @@ export function MainNewsBox({ data, newsName }: Props) {
               key={post.id}
               id={post.id}
               date={dateStr}
-              title={post.titleKo}
+              title={language === 'English' ? post.titleKo : post.titleEn}
               url={newsName === '언론보도' ? 'news/pressrelease' : 'news/newsletter'}
             />
             // <MainNewsBoxText key={post.id} date={dateStr} title={post.titleKo} isCheck={post.highlightStatus === 1} />

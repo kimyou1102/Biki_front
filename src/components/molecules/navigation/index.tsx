@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { Li, FlexContainer, Img, DropMenuWrap, ButtonsWrap, MenudButton } from '@atoms';
 import { useFetcher, useNavigate } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import character from '../../../assets/images/nav_menu_character.png';
 import { getSectionApi } from '../../../apis/section/get-section-api';
+import { languageState } from '../../../recoil/language/atom';
+import { koUrlState, enUrlState } from '../../../recoil/archive/program/atom';
 
 interface NavigationProps {
   id: number;
@@ -23,29 +28,40 @@ const MenuWrap = styled.ul`
   width: calc(916px * 0.8);
 `;
 
-// const NavItemWrap = styled.div`
-//   display: flex;
-//   align-items: center;
-//   height: calc(118px * 0.8);
-//   padding: 0 calc(23px * 0.8);
-// `;
-
 export function Navigation({ left }: Props) {
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(true);
   const [section, setSection] = useState([]);
   const [sectionUrl, setSectionUrl] = useState([]);
+  const [koUrl, setKoUrl] = useRecoilState(koUrlState);
+  const [enUrl, setEnUrl] = useRecoilState(enUrlState);
+  const { t } = useTranslation();
+  const language = useRecoilValue(languageState);
 
   const sectionApi = useCallback(async () => {
     await getSectionApi()
       .then((res) => {
-        setSection(res.map((x: any) => x.nameKo));
-        setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
-        // setInitialMovieData(res);
+        // 'nameKo' 속성을 기준으로 배열 정렬
+        const resKo = res.sort((a: any, b: any) => {
+          if (a.nameKo < b.nameKo) return -1;
+          if (a.nameKo > b.nameKo) return 1;
+          return 0;
+        });
+
+        setKoUrl(resKo.map((x: any) => x.nameKo.trim()));
+        setEnUrl(resKo.map((x: any) => x.nameEn.trim()));
+        if (language === 'English') {
+          setSection(resKo.map((x: any) => x.nameKo));
+          setSectionUrl(resKo.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
+        } else {
+          setSection(res.map((x: any) => x.nameEn));
+          setSectionUrl(resKo.map((x: any) => `/movie/${x.id}?title=${x.nameEn}`));
+        }
       })
       .catch((err) => console.log(err));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language]);
 
   useEffect(() => {
     sectionApi();
@@ -61,13 +77,14 @@ export function Navigation({ left }: Props) {
     return () => clearTimeout(timer);
   }, [hover]);
 
+  const headers: any = t(`header`, { returnObjects: true });
   const menus: NavigationProps[] = [
     {
       id: 1,
-      name: 'BIKY',
+      name: headers[0].title,
       idValue: 'biky',
       url: '/#',
-      arr: ['제18회 BIKY', '페스티벌 심벌', '시상내역', '비키를 만드는 사람들', '스폰서 모집안내'],
+      arr: [headers[0].items[0], headers[0].items[1], headers[0].items[2], headers[0].items[3], headers[0].items[4]],
       link: [
         '/articles/18-부산국제어린이청소년영화제-BIKY-',
         '/articles/페스티벌-심벌',
@@ -78,10 +95,10 @@ export function Navigation({ left }: Props) {
     },
     {
       id: 2,
-      name: '교육',
+      name: headers[1].title,
       idValue: 'education',
       url: '/#',
-      arr: ['부설연구소', '배급영화 교재,</br>활동지, 교육영상', '비키랑 학교랑', '교육 프로그램'],
+      arr: [headers[1].items[0], headers[0].items[1], headers[0].items[2], headers[0].items[3]],
       link: [
         '/articles/부설연구소',
         '/articles/배급영화-교재-활동지-교육영상',
@@ -91,10 +108,10 @@ export function Navigation({ left }: Props) {
     },
     {
       id: 3,
-      name: '2023 프로그램',
+      name: headers[2].title,
       idValue: 'program',
       url: '/#',
-      arr: ['상영 시간표', '상영관 정보', '티켓 안내', ...section],
+      arr: [headers[2].items[0], headers[2].items[1], headers[2].items[2], ...section],
       // arr: [
       //   '상영 시간표',
       //   '상영관 정보',
@@ -134,10 +151,10 @@ export function Navigation({ left }: Props) {
     },
     {
       id: 4,
-      name: '이벤트',
+      name: headers[3].title,
       idValue: 'event',
       url: '/#',
-      arr: ['상영이벤트', '포스터그림전시회', '어린이청소년영화인의 밤', '비키놀이터'],
+      arr: [headers[3].items[0], headers[3].items[1], headers[3].items[2], headers[3].items[3]],
       link: [
         '/articles/상영-이벤트',
         '/articles/포스터-그림-전시회',
@@ -147,34 +164,34 @@ export function Navigation({ left }: Props) {
     },
     {
       id: 5,
-      name: '비키포럼',
+      name: headers[6].title,
       idValue: 'forum',
       url: '/#',
-      arr: ['역대 비키포럼', '인더스트리 네트워크'],
+      arr: [headers[6].items[0], headers[6].items[1]],
       link: ['/articles/역대-비키포럼', '/articles/인더스트리-네트워크'],
     },
     {
       id: 6,
-      name: '비키소식',
+      name: headers[7].title,
       idValue: 'news',
       url: '/#',
-      arr: ['공지사항', '뉴스레터', '보도자료'],
+      arr: [headers[7].items[0], headers[7].items[1], headers[7].items[2]],
       link: ['/news/notice', '/news/newsletter', '/news/pressrelease'],
     },
     {
       id: 7,
-      name: '아카이브',
+      name: headers[4].title,
       idValue: 'archive',
       url: '/archive/distributions',
-      arr: ['비키가 걸어온 길', '배급작품', '현장스케치', '영상클립'],
+      arr: [headers[4].items[0], headers[4].items[1], headers[4].items[2], headers[4].items[3]],
       link: ['/', '/archive/distributions', '/archive/sketch', '/archive/videoclip'],
     },
     {
       id: 8,
-      name: 'Contact',
+      name: headers[5].title,
       idValue: 'contact',
       url: '/#',
-      arr: ['사무국사람들', '사무국위치'],
+      arr: [headers[5].items[0], headers[5].items[1]],
       link: ['/articles/사무국사람들', '/articles/사무국위치'],
     },
   ];

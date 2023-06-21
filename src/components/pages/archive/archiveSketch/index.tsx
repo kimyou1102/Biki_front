@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { ModalWrap } from '@atoms';
 import { ArchiveTemplate } from '@templates';
 import { SketchModal, SketchList } from '@organisms';
@@ -21,8 +23,8 @@ export function ArchiveSketchPage() {
   // const [modalDatas, setModalDatas] = useRecoilValue(modalDataState);
   const [photos, setPhotos] = useRecoilState<SketchType[]>(sketchState);
   const [page, setPage] = useState(0);
-
   const [top, setTop] = useRecoilState<number>(modalPositionState);
+  const { t } = useTranslation();
 
   const sketchApi = useCallback(async () => {
     await getSketchApi()
@@ -49,9 +51,9 @@ export function ArchiveSketchPage() {
 
   return (
     <>
-      <ArchiveTemplate title="현장스케치" type="sketch">
+      <ArchiveTemplate title={t(`archive.sketch`)} type="sketch">
         {photos.length === 0 ? (
-          <h1>등록된 게시물이 없습니다.</h1>
+          <h1>{t(`archive.empty`)}</h1>
         ) : (
           <div>
             <SketchList page={page} setPage={setPage} datas={photos} type="sketch" />

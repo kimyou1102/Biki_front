@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { ContentBox } from '@molecules/contentBox';
 import { SlideContainer } from '@atoms';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { ContentProps } from 'src/models/content';
 import { mainYoutubeScrollState } from '../../../recoil/scroll/scroll';
 import { ClipType } from '../../../models/clip';
+import { languageState } from '../../../recoil/language/atom';
 
 interface Props {
   data: ClipType[];
@@ -14,6 +15,7 @@ export function ContentBoxs({ data }: Props) {
   // export function ContentBoxs() {
   const setScroll = useSetRecoilState<HTMLDivElement | undefined>(mainYoutubeScrollState);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const language = useRecoilValue(languageState);
 
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
@@ -23,17 +25,22 @@ export function ContentBoxs({ data }: Props) {
 
   return (
     <SlideContainer ref={scrollRef}>
-      {data.map((youtube) => (
-        <ContentBox
-          key={youtube.id}
-          id={youtube.id}
-          title={youtube.titleKo}
-          date={youtube.createdDate}
-          count={youtube.view}
-          url={youtube.url}
-          type="main"
-        />
-      ))}
+      {data.map((youtube) => {
+        const date = new Date(youtube.createdDate!);
+        const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+
+        return (
+          <ContentBox
+            key={youtube.id}
+            id={youtube.id}
+            title={language === 'English' ? youtube.titleKo : youtube.titleEn}
+            date={dateStr}
+            count={youtube.view}
+            url={youtube.url}
+            type="main"
+          />
+        );
+      })}
     </SlideContainer>
   );
 }

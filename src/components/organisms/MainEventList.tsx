@@ -1,4 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { SlideHeader, MainEventBox } from '@molecules';
 import { useRecoilValue } from 'recoil';
 import { mainEventScrollState } from '../../recoil/scroll/scroll';
@@ -7,6 +9,7 @@ import { MainEventBoxs } from './MainEventBoxs';
 
 export function MainEventList() {
   const scroll = useRecoilValue<HTMLDivElement | undefined>(mainEventScrollState);
+  const { t } = useTranslation();
 
   // const boardApi = useCallback(async () => {
   //   await getBoardByParamApi('event_night')
@@ -34,7 +37,7 @@ export function MainEventList() {
   };
   return (
     <>
-      <SlideHeader text="이벤트" onLeftClick={onLeftClick} onRightClick={onRightClick} />
+      <SlideHeader text={t(`main.event`)} onLeftClick={onLeftClick} onRightClick={onRightClick} />
       <MainEventBoxs />
     </>
   );

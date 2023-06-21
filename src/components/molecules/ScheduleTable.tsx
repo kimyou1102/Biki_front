@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { Button } from '@atoms';
 
 type ScheduleType = {
@@ -31,16 +33,18 @@ const Th = styled.th`
 `;
 
 export function ScheduleTable({ data }: Props) {
+  const { t } = useTranslation();
+
   return (
     <div>
       <table style={{ width: 'calc(1360px * 0.8)' }}>
         <thead>
           <Tr>
-            <Th className="header">상영날짜</Th>
-            <Th className="header">상영시간</Th>
-            <Th className="header">상영극장</Th>
-            <Th className="header">부가정보</Th>
-            <Th className="header">티켓예매</Th>
+            <Th className="header">{t(`movie.schedule.date`)}</Th>
+            <Th className="header">{t(`movie.schedule.time`)}</Th>
+            <Th className="header">{t(`movie.schedule.theater`)}</Th>
+            <Th className="header">{t(`movie.schedule.addtional`)}</Th>
+            <Th className="header">{t(`movie.schedule.ticket`)}</Th>
           </Tr>
         </thead>
         <tbody>
@@ -62,17 +66,17 @@ export function ScheduleTable({ data }: Props) {
                     padding="calc(6px * 0.8) calc(36px * 0.8)"
                     radius="8px"
                   >
-                    예매
+                    {t(`movie.schedule.reservation`)}
                   </Button>
                 </Th>
               </Tr>
             ))
           ) : (
             <Tr>
-              <Th>정보없음</Th>
-              <Th>정보없음</Th>
-              <Th>정보없음</Th>
-              <Th>정보없음</Th>
+              <Th>{t(`movie.schedule.empty`)}</Th>
+              <Th>{t(`movie.schedule.empty`)}</Th>
+              <Th>{t(`movie.schedule.empty`)}</Th>
+              <Th>{t(`movie.schedule.empty`)}</Th>
               <Th>
                 <Button
                   width={130}
@@ -83,7 +87,7 @@ export function ScheduleTable({ data }: Props) {
                   padding="calc(6px * 0.8) calc(36px * 0.8)"
                   radius="8px"
                 >
-                  정보없음
+                  {t(`movie.schedule.empty`)}
                 </Button>
               </Th>
             </Tr>

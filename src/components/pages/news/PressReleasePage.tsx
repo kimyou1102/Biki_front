@@ -1,4 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
 import { Footer } from '@layout/Footer';
@@ -8,7 +10,7 @@ export function PressReleasePage() {
   const [news, setNews] = useState<any>([]);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
-
+  const { t } = useTranslation();
   // const initialLimit = 12;
   // const [limit, setLimit] = useState(12);
   const limit = 15;
@@ -29,7 +31,7 @@ export function PressReleasePage() {
   }, [postApi]);
 
   return (
-    <NewsTemplates title="보도자료">
+    <NewsTemplates title={t(`news.press`)}>
       <NewsListSection data={news} page={page} setPage={setPage} limit={limit} total={total} />
     </NewsTemplates>
   );
