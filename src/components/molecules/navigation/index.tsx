@@ -166,8 +166,8 @@ export function Navigation({ left }: Props) {
       name: '아카이브',
       idValue: 'archive',
       url: '/archive/distributions',
-      arr: ['비키가 걸어온 길', '배급작품', '현장스케치', '영상클립', '상영작검색'],
-      link: ['/', '/archive/distributions', '/archive/sketch', '/archive/videoclip', '/'],
+      arr: ['비키가 걸어온 길', '배급작품', '현장스케치', '영상클립'],
+      link: ['/', '/archive/distributions', '/archive/sketch', '/archive/videoclip'],
     },
     {
       id: 8,
