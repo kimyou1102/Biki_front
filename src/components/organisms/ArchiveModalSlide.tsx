@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,6 +10,7 @@ import { Img, Button, Text, Span, FlexContainer } from '@atoms';
 import { MovieBoxInfo, MovieData, UserMovieData } from '../../models/movie';
 import left from '../../assets/images/modalLeft.png';
 import right from '../../assets/images/modalRight.png';
+import { languageState } from '../../recoil/language/atom';
 
 interface Props {
   // data: MovieData;
@@ -76,7 +80,8 @@ function NextArrow({ onClick }: ArrowProps) {
 
 export function ArchiveModalSlide({ data }: Props) {
   const [slick, setSlick] = useState<any>();
-
+  const { t } = useTranslation();
+  const language = useRecoilValue(languageState);
   const imgs = [];
 
   const obj = {
@@ -126,45 +131,48 @@ export function ArchiveModalSlide({ data }: Props) {
     <div id="archive" style={{ position: 'relative' }}>
       <TextWrap>
         <Text color="white" weight="bold" size={2.5} margin="0 0 calc(10px * 0.8) 0">
-          {data.titleKo}
+          {language === 'English' ? data.titleKo : data.titleEn}
           <Span color="white" weight="bold" size={1.25} margin="0 0 0 calc(16px * 0.8)">
-            {data.titleEn}
+            {language === 'English' ? data.titleEn : data.titleKo}
           </Span>
         </Text>
         <FlexContainer>
           <Text color="white" margin="0 calc(32px * 0.8) 0 0">
-            감독 :
+            {t(`movie.director`)} :
             <Span color="white" size={1.25} weight="bold" margin="0 0 0 calc(8px * 0.8)">
-              {data.credit.directorNameKo} / {data.credit.directorNameEn}
+              {language === 'English'
+                ? `${data.credit.directorNameKo} / ${data.credit.directorNameEn}`
+                : `${data.credit.directorNameEn} / ${data.credit.directorNameKo}`}
             </Span>
           </Text>
           <Text color="white" margin="0 calc(32px * 0.8) 0 0">
-            국가 :
+            {t(`movie.nationality`)} :
             <Span color="white" size={1.25} weight="bold" margin="0 0 0 calc(8px * 0.8)">
               {data.country}
             </Span>
           </Text>
           <Text color="white" margin="0 calc(32px * 0.8) 0 0">
-            제작년도 :
+            {t(`movie.productionYear`)} :
             <Span color="white" size={1.25} weight="bold" margin="0 0 0 calc(8px * 0.8)">
               {data.productionYear}
             </Span>
           </Text>
           {/* 🚧출품년도 이거 맞는지 확인 */}
           <Text color="white" margin="0 calc(32px * 0.8) 0 0">
-            출품년도 :
+            {t(`movie.exhibtionYear`)} :
             <Span color="white" size={1.25} weight="bold" margin="0 0 0 calc(8px * 0.8)">
               {data.eventYear}
             </Span>
           </Text>
           <Text color="white" margin="0 calc(32px * 0.8) 0 0">
-            상영시간 :
+            {t(`movie.runningTime`)} :
             <Span color="white" size={1.25} weight="bold" margin="0 0 0 calc(8px * 0.8)">
-              {data.runningTime}분
+              {data.runningTime}
+              {t(`movie.minute`)}
             </Span>
           </Text>
           <Text color="white" margin="0 calc(32px * 0.8) 0 0">
-            관람등급 :
+            {t(`movie.rating`)} :
             <Span color="white" size={1.25} weight="bold" margin="0 0 0 calc(8px * 0.8)">
               {data.rating}
             </Span>

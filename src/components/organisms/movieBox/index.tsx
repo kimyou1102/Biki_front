@@ -1,7 +1,7 @@
 import React from 'react';
 import { MovieDescription } from '@molecules';
 import { FlexContainer, Img, ContentBoxImgWrap } from '@atoms';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import {
   movieModalState,
@@ -12,6 +12,7 @@ import {
 import { MovieBoxInfo, MovieData } from '../../../models/movie';
 // import emptyImg from '../../../assets/images/empty.png';
 import emptyImg from '../../../assets/images/empty_medium.png';
+import { languageState } from '../../../recoil/language/atom';
 
 interface Props {
   type: 'main' | 'archive';
@@ -24,6 +25,7 @@ export function MovieBox({ type, data }: Props) {
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
   const [top, setTop] = useRecoilState(movieModalPositionState);
   const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
+  const language = useRecoilValue(languageState);
 
   const navigate = useNavigate();
 
@@ -51,8 +53,8 @@ export function MovieBox({ type, data }: Props) {
         <Img alt="이미지" src={data.stillImage.first === '' ? emptyImg : data.stillImage.first} />
       </ContentBoxImgWrap>
       <MovieDescription
-        title={data.titleKo}
-        director={data.credit.directorNameKo}
+        title={language === 'English' ? data.titleKo : data.titleEn}
+        director={language === 'English' ? data.credit.directorNameKo : data.credit.directorNameEn}
         country={data.country}
         year={data.eventYear}
         runningTime={data.runningTime}

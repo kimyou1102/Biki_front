@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { ArchiveTemplate } from '@templates';
 import { ArchiveModal, ArchiveMovieList } from '@organisms';
 import { ModalWrap } from '@atoms';
@@ -27,6 +29,7 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
   const setInitialMovieData = useSetRecoilState<MovieData[]>(movieInitialState); // api에서 받아오는 걸로
 
   const [page, setPage] = useState(0);
+  const { t } = useTranslation();
 
   const sectionApi = useCallback(async () => {
     await getSectionByIdApi(id)
@@ -52,9 +55,9 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
 
   return (
     <>
-      <ArchiveTemplate title={title} type="film" pageTitle="2023 프로그램" sub="제18회 BIKY의 상영작을 소개합니다">
+      <ArchiveTemplate title={title} type="film" pageTitle={t(`screening.title`)} sub={t(`screening.introduce`)}>
         {movies.length === 0 ? (
-          <h1>등록된 게시물이 없습니다.</h1>
+          <h1>{t(`archive.empty`)}</h1>
         ) : (
           <ArchiveMovieList page={page} setPage={setPage} movies={movies} />
         )}

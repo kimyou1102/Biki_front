@@ -12,10 +12,12 @@ export function FixTemplate({ param }: Props) {
   const [data, setData] = useState();
 
   const boardApi = useCallback(async () => {
-    await getBoardByParamApi(param).then((res) => {
-      console.log(res.data);
-      setData(res.data.body);
-    });
+    await getBoardByParamApi(param)
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data.body);
+      })
+      .catch((err) => console.log(err));
   }, [param]);
 
   useEffect(() => {

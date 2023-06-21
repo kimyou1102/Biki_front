@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { Img, FlexContainer, Li } from '@atoms';
 import { FooterBannerList } from '@organisms';
 import bikiLogo from '../../assets/images/biki_white_logo.png';
@@ -29,6 +31,8 @@ const Text = styled.span`
   text-underline-position: under;
 `;
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <FooterBannerList />
@@ -36,14 +40,14 @@ export function Footer() {
         <FlexContainer align="center">
           <Img alt="하단로고" src={bikiLogo} width={350} height={110} />
           <ul>
+            <Li color="white">{t(`footer.address`)}</Li>
+            <Li color="white">{t(`footer.phone`)} : 051. 743. 7652</Li>
+            <Li color="white">{t(`footer.fax`)} : 051. 711. 7412</Li>
+            <Li color="white">{t(`footer.email`)} : info@biky.or.kr</Li>
             <Li color="white">
-              (48058) 부산광역시 해운대구 수영강변대로 120 영화의전당 비프힐 2층 (사)부산국제어린이청소년영화제 사무국
-            </Li>
-            <Li color="white">전화번호 : 051. 743. 7652</Li>
-            <Li color="white">팩스 : 051. 711. 7412</Li>
-            <Li color="white">이메일 : info@biky.or.kr</Li>
-            <Li color="white">
-              <Text>이용약관 | 개인정보보호방침 | 이메일무단수집거부</Text>
+              <Text>
+                {t(`footer.term`)} | {t(`footer.privacy`)} | {t(`footer.emailCollection`)}
+              </Text>
             </Li>
           </ul>
         </FlexContainer>

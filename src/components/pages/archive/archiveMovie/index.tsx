@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { ArchiveTemplate } from '@templates';
 import { ArchiveMovieSection, ArchiveModal, ArchiveMovieList } from '@organisms';
 import { Footer } from '@layout/Footer';
@@ -23,11 +25,12 @@ export function ArchiveMoviePage() {
   const setInitialMovieData = useSetRecoilState<MovieData[]>(movieInitialState); // api에서 받아오는 걸로
 
   const [page, setPage] = useState(0);
+  const { t } = useTranslation();
 
   const movieApi = useCallback(async () => {
     await getMovieApi()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setMovies(res);
         setInitialMovieData(res);
       })
@@ -49,9 +52,9 @@ export function ArchiveMoviePage() {
 
   return (
     <>
-      <ArchiveTemplate title="배급작품" type="film">
+      <ArchiveTemplate title={t(`movie.distribution`)} type="film">
         {movies.length === 0 ? (
-          <h1>등록된 게시물이 없습니다.</h1>
+          <h1>{t(`archive.empty`)}</h1>
         ) : (
           <ArchiveMovieList page={page} setPage={setPage} movies={movies} />
         )}

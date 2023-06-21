@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { ModalWrap } from '@atoms';
 import { ArchiveTemplate } from '@templates';
 import { SketchModal, SketchList } from '@organisms';
@@ -15,9 +17,7 @@ import { getClipApi } from '../../../apis/videoClip/get-clip-api';
 export function VideoClipPage() {
   const [photos, setPhotos] = useRecoilState(clipState);
   const [page, setPage] = useState(0);
-
-  console.log(photos);
-  console.log(photos.length);
+  const { t } = useTranslation();
 
   const clipApi = useCallback(async () => {
     await getClipApi()
@@ -32,10 +32,11 @@ export function VideoClipPage() {
     clipApi();
   }, [clipApi]);
 
+  const headers: any = t(`header`, { returnObjects: true });
   return (
-    <ArchiveTemplate title="영상클립" type="sketch">
+    <ArchiveTemplate title={headers[4].items[3]} type="sketch">
       {photos.length === 0 ? (
-        <h1>등록된 게시물이 없습니다.</h1>
+        <h1>{t(`archive.empty`)}</h1>
       ) : (
         <div>
           <SketchList page={page} setPage={setPage} datas={photos} />

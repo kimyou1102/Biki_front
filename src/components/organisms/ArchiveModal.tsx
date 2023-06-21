@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Span, Text, Img, H1, FlexContainer, Button } from '@atoms';
 import { ScheduleTable, RelatedMovies } from '@molecules';
 import { getMovieByIdApi } from '../../apis/movie/get-movie-by-id-api';
@@ -10,6 +12,7 @@ import { movieModalState, movieModalDataState, movieModalIdState } from '../../r
 import { MovieBoxInfo, MovieData, UserMovieData } from '../../models/movie';
 import close from '../../assets/images/close.png';
 import emptyImg from '../../assets/images/empty.png';
+import { languageState } from '../../recoil/language/atom';
 
 const Container = styled.div`
   width: calc(1600px * 0.8);
@@ -41,6 +44,8 @@ export function ArchiveModal() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
   const [movieSchedule, setMovieSchedule] = useState<any>();
+  const language = useRecoilValue(languageState);
+  const { t } = useTranslation();
 
   const movieApi = useCallback(async () => {
     await getUserMoviedApi(movieModalId)
@@ -83,7 +88,7 @@ export function ArchiveModal() {
     <Container id="modal">
       <FlexContainer justify="space-between" align="center" margin="0 calc(36px * 0.8) calc(32px * 0.8) 0">
         <Span weight="bold" size={2.5}>
-          배급작품
+          {t(`movie.distribution`)}
         </Span>
         <Button border="none" width={48} height={48} onClick={onCloseClick}>
           <Img src={close} alt="닫기아이콘" width={48} height={48} />
@@ -98,19 +103,19 @@ export function ArchiveModal() {
       </Wrap>
       <Wrap>
         <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          시놉시스
+          {t(`movie.synopsis`)}
         </Text>
-        <Span>{movie.synopsisKo}</Span>
+        <Span>{language === 'English' ? movie.synopsisKo : movie.synopsisEn}</Span>
       </Wrap>
       <Wrap>
         <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          프로그래머 노트
+          {t(`movie.programmerNote`)}
         </Text>
-        <Span>{movie.programmerNoteKo}</Span>
+        <Span>{language === 'English' ? movie.programmerNoteKo : movie.programmerNoteEn}</Span>
       </Wrap>
       <Wrap>
         <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          카테고리
+          {t(`movie.category`)}
         </Text>
         <FlexContainer>
           {movie.categoryImages.map((item) => (
@@ -124,16 +129,16 @@ export function ArchiveModal() {
           Credit
         </Text>
         <TextWrap>
-          <Span>섹션</Span>
-          <Span weight="bold">{movie.section.nameKo}</Span>
-          <Span>배우</Span>
-          <Span weight="bold">{movie.credit.castingKo}</Span>
-          <Span>제작</Span>
+          <Span>{t(`archive.section`)}</Span>
+          <Span weight="bold">{language === 'English' ? movie.section.nameKo : movie.section.nameEn}</Span>
+          <Span>{t(`archive.actor`)}</Span>
+          <Span weight="bold">{language === 'English' ? movie.credit.castingKo : movie.credit.castingEn}</Span>
+          <Span>{t(`archive.production`)}</Span>
           <Span weight="bold">
-            감독: {movie.credit.directorNameEn}, 각본: {movie.credit.directorNameEn}, 프로듀서:{' '}
-            {movie.credit.directorNameEn}
+            {t(`movie.director`)}: {movie.credit.directorNameEn}, {t(`archive.script`)}: {movie.credit.directorNameEn},{' '}
+            {t(`archive.producer`)}: {movie.credit.directorNameEn}
           </Span>
-          <Span>자막</Span>
+          <Span>{t(`archive.subtitle`)}</Span>
           <Span weight="bold">{movie.subTitle}</Span>
         </TextWrap>
       </Wrap>
@@ -164,25 +169,27 @@ export function ArchiveModal() {
           />
           <div style={{ width: 'calc(480px * 0.8)', marginLeft: 'calc(24px * 0.8)' }}>
             <Text weight="bold" size={1.5} margin="0 0 calc(20px * 0.8) 0">
-              {movie.credit.directorNameKo}
+              {language === 'English' ? movie.credit.directorNameKo : movie.credit.directorNameEn}
               <Span weight="bold" color="#767676" margin="0 0 0 calc(8px * 0.8)">
-                {movie.credit.directorNameEn}
+                {language === 'English' ? movie.credit.directorNameEn : movie.credit.directorNameKo}
               </Span>
             </Text>
-            <Span size={1.125}>{movie.credit.directorInfoKo}</Span>
+            <Span size={1.125}>
+              {language === 'English' ? movie.credit.directorInfoKo : movie.credit.directorInfoEn}
+            </Span>
           </div>
         </FlexContainer>
       </Wrap>
 
       <Wrap>
         <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          관련출품작
+          {t(`movie.relatedMovie`)}
         </Text>
         <div style={{ display: 'flex' }}>
           {movie.relatedMovies.map((e) => (
             <RelatedMovies
               key={e.id}
-              title={e.titleKo}
+              title={language === 'English' ? e.titleKo : e.titleEn}
               director={e.directorName}
               year={e.eventYear}
               time={e.runningTime}
@@ -199,7 +206,7 @@ export function ArchiveModal() {
           radius="10px"
           color="white"
         >
-          온라인 상영관 바로가기
+          {t(`movie.goToOnline`)}
         </Button>
       </FlexContainer>
     </Container>
