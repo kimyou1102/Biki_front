@@ -40,13 +40,6 @@ export function Navigation({ left }: Props) {
   const sectionApi = useCallback(async () => {
     await getSectionApi()
       .then((res) => {
-        // 'nameKo' 속성을 기준으로 배열 정렬
-        res.sort((a: any, b: any) => {
-          if (a.nameKo < b.nameKo) return -1;
-          if (a.nameKo > b.nameKo) return 1;
-          return 0;
-        });
-
         setSection(res.map((x: any) => x.nameKo));
         setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
         // setInitialMovieData(res);
@@ -122,7 +115,7 @@ export function Navigation({ left }: Props) {
       link: [
         '/movie/schedule',
         '/movie/상영관-정보',
-        '/#',
+        '/movie/ticket',
         ...sectionUrl,
         // '/movie/find-me-movies',
         // '/movie/together-movies',
