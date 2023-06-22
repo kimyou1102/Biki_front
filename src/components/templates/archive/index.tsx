@@ -23,7 +23,7 @@ export function ArchiveTemplate({ children, title, type, id, pageTitle, sub }: P
         <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
           {title}
         </H3>
-        <SearchFilter type={type} id={id} />
+        {type !== 'online' && <SearchFilter type={type} id={id} />}
       </FlexContainer>
       {children}
       {/* <ArchiveMovieSection data={data} page={page} setPage={setPage} /> */}

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { Span, Text, Img, H1, FlexContainer, Button } from '@atoms';
 import { ScheduleTable, RelatedMovies } from '@molecules';
@@ -37,6 +38,7 @@ const TextWrap = styled.div`
 `;
 
 export function ArchiveModal() {
+  const navigate = useNavigate();
   const [movie, setMovie] = useRecoilState<UserMovieData>(movieModalDataState);
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
@@ -191,17 +193,20 @@ export function ArchiveModal() {
           ))}
         </div>
       </Wrap>
-      <FlexContainer justify="right">
-        <Button
-          bgcolor="var(--main-color)"
-          width={440}
-          padding="calc(18px * 0.8) calc(100px * 0.8)"
-          radius="10px"
-          color="white"
-        >
-          온라인 상영관 바로가기
-        </Button>
-      </FlexContainer>
+      {movie.screening.status === '상영' && (
+        <FlexContainer justify="right">
+          <Button
+            bgcolor="var(--main-color)"
+            width={440}
+            padding="calc(18px * 0.8) calc(100px * 0.8)"
+            radius="10px"
+            color="white"
+            onClick={() => navigate(`/movie/online/${movie.id}`)}
+          >
+            온라인 상영관 바로가기
+          </Button>
+        </FlexContainer>
+      )}
     </Container>
   );
 }
