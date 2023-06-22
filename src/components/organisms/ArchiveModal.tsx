@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { Span, Text, Img, H1, FlexContainer, Button } from '@atoms';
+import { Box, CircularProgress } from '@mui/material';
 import { ScheduleTable, RelatedMovies } from '@molecules';
 import { getMovieByIdApi } from '../../apis/movie/get-movie-by-id-api';
 import { getUserMoviedApi } from '../../apis/movie/get-user-movie-detail-api';
@@ -43,6 +44,7 @@ export function ArchiveModal() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
   const [movieSchedule, setMovieSchedule] = useState<any>();
+  const [isLoading, setIsLoading] = useState(true);
 
   const movieApi = useCallback(async () => {
     await getUserMoviedApi(movieModalId)
@@ -51,11 +53,13 @@ export function ArchiveModal() {
         setMovie(res.data);
         // setRelatedMovies((prev) => [...prev, res.data]);
         setMovieSchedule({ schedule: res.data.schedule, addInfo: res.data.tags });
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [movieModalId, setMovie]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (movieModalId !== Infinity) {
       movieApi();
     }
@@ -83,129 +87,137 @@ export function ArchiveModal() {
 
   return (
     <Container id="modal">
-      <FlexContainer justify="space-between" align="center" margin="0 calc(36px * 0.8) calc(32px * 0.8) 0">
-        <Span weight="bold" size={2.5}>
-          배급작품
-        </Span>
-        <Button border="none" width={48} height={48} onClick={onCloseClick}>
-          <Img src={close} alt="닫기아이콘" width={48} height={48} />
-        </Button>
-      </FlexContainer>
-      <ArchiveModalSlide data={movie} />
-      <Wrap>
-        <Text size={1.25} weight="bold" margin="calc(16px * 0.8) 0">
-          SCHEDULE
-        </Text>
-        <ScheduleTable data={movieSchedule} />
-      </Wrap>
-      <Wrap>
-        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          시놉시스
-        </Text>
-        <Span>{movie.synopsisKo}</Span>
-      </Wrap>
-      <Wrap>
-        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          프로그래머 노트
-        </Text>
-        <Span>{movie.programmerNoteKo}</Span>
-      </Wrap>
-      <Wrap>
-        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          카테고리
-        </Text>
-        <FlexContainer>
-          {movie.categoryImages.map((item) => (
-            <Img alt="카테고리이미지" src={item} width={122} height={122} margin="0 calc(20px * 0.8) 0 0" />
-          ))}
-        </FlexContainer>
-      </Wrap>
+      {isLoading ? (
+        <Box width="100%" height="50vh" display="flex" justifyContent="center" alignItems="center">
+          <CircularProgress color="success" />
+        </Box>
+      ) : (
+        <>
+          <FlexContainer justify="space-between" align="center" margin="0 calc(36px * 0.8) calc(32px * 0.8) 0">
+            <Span weight="bold" size={2.5}>
+              배급작품
+            </Span>
+            <Button border="none" width={48} height={48} onClick={onCloseClick}>
+              <Img src={close} alt="닫기아이콘" width={48} height={48} />
+            </Button>
+          </FlexContainer>
+          <ArchiveModalSlide data={movie} />
+          <Wrap>
+            <Text size={1.25} weight="bold" margin="calc(16px * 0.8) 0">
+              SCHEDULE
+            </Text>
+            <ScheduleTable data={movieSchedule} />
+          </Wrap>
+          <Wrap>
+            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+              시놉시스
+            </Text>
+            <Span>{movie.synopsisKo}</Span>
+          </Wrap>
+          <Wrap>
+            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+              프로그래머 노트
+            </Text>
+            <Span>{movie.programmerNoteKo}</Span>
+          </Wrap>
+          <Wrap>
+            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+              카테고리
+            </Text>
+            <FlexContainer>
+              {movie.categoryImages.map((item) => (
+                <Img alt="카테고리이미지" src={item} width={122} height={122} margin="0 calc(20px * 0.8) 0 0" />
+              ))}
+            </FlexContainer>
+          </Wrap>
 
-      <Wrap>
-        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          Credit
-        </Text>
-        <TextWrap>
-          <Span>섹션</Span>
-          <Span weight="bold">{movie.section.nameKo}</Span>
-          <Span>배우</Span>
-          <Span weight="bold">{movie.credit.castingKo}</Span>
-          <Span>제작</Span>
-          <Span weight="bold">
-            감독: {movie.credit.directorNameEn}, 각본: {movie.credit.directorNameEn}, 프로듀서:{' '}
-            {movie.credit.directorNameEn}
-          </Span>
-          <Span>자막</Span>
-          <Span weight="bold">{movie.subTitle}</Span>
-        </TextWrap>
-      </Wrap>
-
-      <Wrap>
-        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          Contact
-        </Text>
-        <Wrap className="contact">
-          {/* <Span>배급</Span> */}
-          <Span weight="bold">{movie.contact.distribution}</Span>
-          <Span weight="bold">{movie.contact.email}</Span>
-        </Wrap>
-      </Wrap>
-
-      <Wrap>
-        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          Director
-        </Text>
-        <FlexContainer>
-          <Img
-            src={movie.credit.profileImage === '' ? emptyImg : movie.credit.profileImage}
-            alt="감독사진"
-            width={300}
-            height={300}
-            radius="10px"
-            objectfit="cover"
-          />
-          <div style={{ width: 'calc(480px * 0.8)', marginLeft: 'calc(24px * 0.8)' }}>
-            <Text weight="bold" size={1.5} margin="0 0 calc(20px * 0.8) 0">
-              {movie.credit.directorNameKo}
-              <Span weight="bold" color="#767676" margin="0 0 0 calc(8px * 0.8)">
+          <Wrap>
+            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+              Credit
+            </Text>
+            <TextWrap>
+              <Span>섹션</Span>
+              <Span weight="bold">{movie.section.nameKo}</Span>
+              <Span>배우</Span>
+              <Span weight="bold">{movie.credit.castingKo}</Span>
+              <Span>제작</Span>
+              <Span weight="bold">
+                감독: {movie.credit.directorNameEn}, 각본: {movie.credit.directorNameEn}, 프로듀서:{' '}
                 {movie.credit.directorNameEn}
               </Span>
-            </Text>
-            <Span size={1.125}>{movie.credit.directorInfoKo}</Span>
-          </div>
-        </FlexContainer>
-      </Wrap>
+              <Span>자막</Span>
+              <Span weight="bold">{movie.subTitle}</Span>
+            </TextWrap>
+          </Wrap>
 
-      <Wrap>
-        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-          관련출품작
-        </Text>
-        <div style={{ display: 'flex' }}>
-          {movie.relatedMovies.map((e) => (
-            <RelatedMovies
-              key={e.id}
-              title={e.titleKo}
-              director={e.directorName}
-              year={e.eventYear}
-              time={e.runningTime}
-              src={e.stillImage}
-            />
-          ))}
-        </div>
-      </Wrap>
-      {movie.screening.status === '상영' && (
-        <FlexContainer justify="right">
-          <Button
-            bgcolor="var(--main-color)"
-            width={440}
-            padding="calc(18px * 0.8) calc(100px * 0.8)"
-            radius="10px"
-            color="white"
-            onClick={() => navigate(`/movie/online/${movie.id}`)}
-          >
-            온라인 상영관 바로가기
-          </Button>
-        </FlexContainer>
+          <Wrap>
+            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+              Contact
+            </Text>
+            <Wrap className="contact">
+              {/* <Span>배급</Span> */}
+              <Span weight="bold">{movie.contact.distribution}</Span>
+              <Span weight="bold">{movie.contact.email}</Span>
+            </Wrap>
+          </Wrap>
+
+          <Wrap>
+            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+              Director
+            </Text>
+            <FlexContainer>
+              <Img
+                src={movie.credit.profileImage === '' ? emptyImg : movie.credit.profileImage}
+                alt="감독사진"
+                width={300}
+                height={300}
+                radius="10px"
+                objectfit="cover"
+              />
+              <div style={{ width: 'calc(480px * 0.8)', marginLeft: 'calc(24px * 0.8)' }}>
+                <Text weight="bold" size={1.5} margin="0 0 calc(20px * 0.8) 0">
+                  {movie.credit.directorNameKo}
+                  <Span weight="bold" color="#767676" margin="0 0 0 calc(8px * 0.8)">
+                    {movie.credit.directorNameEn}
+                  </Span>
+                </Text>
+                <Span size={1.125}>{movie.credit.directorInfoKo}</Span>
+              </div>
+            </FlexContainer>
+          </Wrap>
+
+          <Wrap>
+            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+              관련출품작
+            </Text>
+            <div style={{ display: 'flex' }}>
+              {movie.relatedMovies.map((e) => (
+                <RelatedMovies
+                  key={e.id}
+                  title={e.titleKo}
+                  director={e.directorName}
+                  year={e.eventYear}
+                  time={e.runningTime}
+                  src={e.stillImage}
+                />
+              ))}
+            </div>
+          </Wrap>
+          {movie.screening.status === '상영' && (
+            <FlexContainer justify="right">
+              <Button
+                bgcolor="var(--main-color)"
+                width={440}
+                padding="calc(18px * 0.8) calc(100px * 0.8)"
+                radius="10px"
+                color="white"
+                onClick={() => navigate(`/movie/online/${movie.id}`)}
+              >
+                온라인 상영관 바로가기
+              </Button>
+            </FlexContainer>
+          )}
+        </>
       )}
     </Container>
   );

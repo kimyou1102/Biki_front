@@ -78,6 +78,7 @@ export function ScheduleInfoPage() {
       getMoviesByVenueAndDate(venueId, currentDate!)
         .then((res) => {
           setMovieSchedule(res.data.data);
+          setCurrentDate(res.data.data.runningDateStart);
 
           // runningDateStart 부터 runningDateEnd까지 날짜를 전부 저장하는 배열 만들기 위한 변수
           const tempDates = [];
@@ -148,6 +149,7 @@ export function ScheduleInfoPage() {
                   titleKo={currentMovie.titleKo}
                   titleEn={currentMovie.titleEn}
                   time={currentMovie.startTime.substring(0, 5)}
+                  label={currentMovie.label}
                   runningTime={currentMovie.runningTime}
                   rating={currentMovie.rating}
                   movies={currentMovie.movies}
