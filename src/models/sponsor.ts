@@ -1,5 +1,5 @@
 export type SponsorType = {
-    id: number;
-    image: string;
-    url: string;
-}
+  id: number;
+  image: string;
+  url: string;
+};

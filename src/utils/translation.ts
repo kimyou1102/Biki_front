@@ -4,7 +4,9 @@ export const translation = {
       // 번역본 쓸 공간
       nav: {
         login: '로그인',
+        logout: '로그아웃',
         signup: '회원가입',
+        mypage: '마이페이지',
       },
       header: [
         {
@@ -148,7 +150,9 @@ export const translation = {
     translation: {
       nav: {
         login: 'Log In',
+        logout: 'Logout',
         signup: 'Sign Up',
+        mypage: 'My page',
       },
       header: [
         {

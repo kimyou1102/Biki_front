@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { HeaderDefault } from '@atoms';
 import { HeaderButtons } from '@molecules/buttonList';
 import { ButtonsProps } from 'src/models/headerButton';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
 import i18next from '../../../local/i18n';
 import { languageState } from '../../../recoil/language/atom';
 
 export function Header() {
-  // const [language, setLanguage] = useState<string>('English');
+  const [isLogin, setLogin] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const [language, setLanguage] = useRecoilState<string>(languageState);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  // const setLanguageState = languageState
+
+  useEffect(() => {
+    if (cookies.access_token) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  }, [cookies.access_token]);
+
+  const onLogoutClick = () => {
+    if (cookies.access_token) {
+      removeCookie('access_token');
+    } else {
+      navigate('/login');
+    }
+  };
 
   const openLanguageMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -45,8 +61,8 @@ export function Header() {
   ];
 
   const rightData: ButtonsProps[] = [
-    { id: 1, name: t(`nav.login`), url: '/login' },
-    { id: 2, name: t(`nav.signup`), url: '/' },
+    { id: 1, name: isLogin ? t(`nav.logout`) : t(`nav.login`), url: '/login', onClick: onLogoutClick },
+    { id: 2, name: isLogin ? t(`nav.mypage`) : t(`nav.signup`), url: '/signup' },
     {
       id: 3,
       name: language,

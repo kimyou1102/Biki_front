@@ -10,3 +10,4 @@ export * from './education';
 export * from './event';
 export * from './forum';
 export * from './contact';
+export * from './SignupPage';

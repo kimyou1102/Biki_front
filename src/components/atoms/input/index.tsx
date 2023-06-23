@@ -15,6 +15,7 @@ interface InputProps {
   border?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   ref?: React.RefObject<HTMLInputElement>;
+  required?: boolean;
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -46,7 +47,17 @@ export function Input({
   value,
   onChange,
   ref,
+  required = false,
 }: InputProps) {
   const CommonProps = { width, height, padding, position, radius, size, value, border };
-  return <StyledInput ref={ref} type={type} {...CommonProps} placeholder={placeholder} onChange={onChange} />;
+  return (
+    <StyledInput
+      ref={ref}
+      type={type}
+      {...CommonProps}
+      placeholder={placeholder}
+      onChange={onChange}
+      required={required}
+    />
+  );
 }
