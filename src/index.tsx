@@ -4,6 +4,7 @@ import './index.css';
 import { RecoilRoot } from 'recoil';
 import ScrollToTop from '@molecules/ScrollToTop';
 import { BrowserRouter } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './styles/globalStyle';
@@ -12,11 +13,13 @@ import './local/i18n';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <RecoilRoot>
-    <BrowserRouter>
-      <GlobalStyle />
-      <ScrollToTop />
-      <App />
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <ScrollToTop />
+        <App />
+      </BrowserRouter>
+    </CookiesProvider>
   </RecoilRoot>,
 );
 

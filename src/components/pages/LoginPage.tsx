@@ -1,25 +1,56 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
 import { SignupBox, Button, Text, FlexContainer, Input, Span } from '@atoms';
-import { SingupTitleBox } from '@molecules';
+import { SingupTitleBox, SignupInput } from '@molecules';
 import { Footer } from '@layout/Footer';
 import { useNavigate } from 'react-router-dom';
+import { createLoginApi } from '../../apis/user/create-login-api';
 
 const Grid = styled.div`
   display: grid;
-  gap: calc(8px * 0.8);
+  gap: calc(16px * 0.8);
   margin-top: calc(21px * 0.8);
   margin-bottom: calc(64px * 0.8);
 `;
 
 export function LoginPage() {
+  const [cookies, setCookie] = useCookies(['access_token']);
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const navigate = useNavigate();
 
+  const loginApi = async () => {
+    await createLoginApi({ email, password })
+      .then((res) => {
+        const cookie = res.headers.authorization.replace('Bearer ', '');
+        setCookie('access_token', cookie);
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const validation = () => {
+    const regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (!regexEmail.test(email)) {
+      alert('이메일이 올바른 형식이 아닙니다.');
+      return false;
+    }
+
+    return true;
+  };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validation()) {
+      return;
+    }
+
+    loginApi();
   };
 
   return (
@@ -31,30 +62,17 @@ export function LoginPage() {
         <SingupTitleBox color="#74B743">로그인</SingupTitleBox>
         <form onSubmit={onSubmit}>
           <Grid>
-            <Span color="#191919" weight="bold">
-              이메일
-            </Span>
-            <Input
-              border="none"
-              radius="16px"
-              width="100%"
-              height={60}
+            <SignupInput
+              label="이메일"
               placeholder="이메일을 입력해주세요."
-              padding="0 0 0 calc(16px * 0.8)"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Span color="#191919" weight="bold">
-              비밀번호
-            </Span>
-            <Input
-              border="none"
-              radius="16px"
-              width="100%"
-              height={60}
-              placeholder="비밀번호를 입력해주세요."
-              padding="0 0 0 calc(16px * 0.8)"
+            <SignupInput
+              label="비밀번호"
+              placeholder="이메일을 입력해주세요."
               value={password}
+              inputType="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Grid>

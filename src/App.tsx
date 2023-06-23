@@ -58,9 +58,11 @@ import {
   VideoClipPage,
   PressReleasePage,
   TheaterInformationPage,
+  ScheduleInfoPage,
+  SignupPage,
 } from '@pages';
 import { HeaderLayout } from '@layout';
-import { ScheduleInfoPage } from '@pages/movieSchedule';
+// import { ScheduleInfoPage } from '@pages/movieSchedule';
 import { MoviePage } from '@pages/2023program/MoviePage';
 import { TicketInformationPage } from '@pages/2023program/TicketInformationPage';
 import { OnlineMoviePage } from '@pages/2023program/OnlineScreeningPage';
@@ -117,6 +119,7 @@ function App() {
           <Route path="/movie/ready-action18-movies" element={<ReadyActionMovies18Page />} />
           <Route path="/movie/ready-action-movies" element={<ReadyActionMoviesPage />} /> */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Route>
       </Routes>
     </div>

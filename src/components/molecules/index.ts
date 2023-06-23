@@ -27,3 +27,4 @@ export * from './SingupTitleBox';
 export * from './MainEventBox';
 export * from './ShortcutsButton';
 export * from './ShortcutButtonList';
+export * from './SignupInput';
