@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
+import { useRecoilValue } from 'recoil';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { Viewer } from '@toast-ui/react-editor';
 import { useNavigate } from 'react-router-dom';
 import { Button, FlexContainer, Text, Span } from '@atoms';
 import { PostType } from '../../../models/post';
+import { languageState } from '../../../recoil/language/atom';
 import attach_file_icon from '../../../assets/images/attach_file.png';
 
 // interface Props {
@@ -57,13 +61,10 @@ const Icon = styled.img`
 export function NewsSection({ url, data }: Props) {
   const navigate = useNavigate();
   const [element, setElement] = useState<any>('');
-  // let url = '';
-  // const count = 3;
-  // const createDate = new Date(data.createdDate!);
-  // const deleteDate = `${createDate.getFullYear()}_${createDate.getMonth() + 1}_${createDate.getDate()}`;
-
   const date = new Date(data.createdDate!);
   const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  const { t } = useTranslation();
+  const language = useRecoilValue(languageState);
 
   function getFileName(targetUrl: string) {
     const fileName = targetUrl.substring(targetUrl.lastIndexOf('/') + 1);
@@ -119,19 +120,23 @@ export function NewsSection({ url, data }: Props) {
         margin="22px 0 calc(33px * 0.8) auto"
         onClick={() => navigate(`/news/${url}`)}
       >
-        목록
+        {t(`news.list`)}
       </Button>
       <FlexContainer justify="space-between" align="center" margin="0 0 0.5rem 0">
-        <Text size={2}>{data.titleKo}</Text>
-        <Span>조회수 {data.view}</Span>
+        <Text size={2}>{language === 'English' ? data.titleKo : data.titleEn}</Text>
+        <Span>
+          {t(`view`)} {data.view}
+        </Span>
       </FlexContainer>
       <Span>{dateStr}</Span>
       {/* <div style={{ marginTop: 'calc(82px * 0.8)' }}>{element && <Viewer initialValue={element} />}</div> */}
       <div style={{ marginTop: 'calc(82px * 0.8)' }}>
         <div className="ck-content" dangerouslySetInnerHTML={{ __html: element }} />
         {data.files.length > 0
-          ? data.files.map((e) => (
+          ? data.files.map((e, i) => (
               <AttacBox
+                // eslint-disable-next-line react/no-array-index-key
+                key={i}
                 onClick={() =>
                   // downloadFile('https://biky-files.s3.ap-northeast-2.amazonaws.com/post/2023/06/15/8.jpg', '이름')
                   downloadFile(e.file, e.file.replace('https://biky-files.s3.ap-northeast-2.amazonaws.com/post/', ''))

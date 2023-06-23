@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { TextList } from '@molecules';
 import { A, BorderContainer, MainNewsUl } from '@atoms';
 import { useRecoilValue } from 'recoil';
+import { languageState } from '@src/recoil/language/atom';
 import { NoticeType, noticeState } from '../../../recoil/notice/notice';
 import { PostType } from '../../../models/post';
 
@@ -18,6 +19,8 @@ const StyledUl = styled.ul`
 `;
 
 export function NoticeBox({ data }: Props) {
+  const language = useRecoilValue(languageState);
+  console.log(data);
   return (
     <BorderContainer radius={10} bgcolor="#eeeeee">
       <MainNewsUl type="notice">
@@ -25,8 +28,13 @@ export function NoticeBox({ data }: Props) {
           const date = new Date(post.createdDate!);
           const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
           return (
-            <A url={`/news/notice/${post.id}`}>
-              <TextList key={post.id} date={dateStr} title={post.titleKo} isCheck={post.highlightStatus === 1} />
+            <A key={post.id} url={`/news/notice/${post.id}`}>
+              <TextList
+                key={post.id}
+                date={dateStr}
+                title={language === 'English' ? post.titleKo : post.titleEn}
+                isCheck={post.highlightStatus === 1}
+              />
             </A>
           );
         })}

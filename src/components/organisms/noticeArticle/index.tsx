@@ -4,6 +4,8 @@ import { NoticeBox } from '@organisms/noticeBox';
 import { NoticeHeader } from '@molecules';
 // import { getPostByIdApi } from '@src/apis/post/get-post-by-id-api';
 import { getPostApi } from '@src/apis/post/get-post-api';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { PostType } from '../../../models/post';
 
 const StyledArticel = styled.article`
@@ -13,6 +15,7 @@ const StyledArticel = styled.article`
 
 export function NoticeArticel() {
   const [posts, setPosts] = useState<PostType[]>([]);
+  const { t } = useTranslation();
 
   const postApi = useCallback(async () => {
     await getPostApi('공지사항', 0, 12)
@@ -36,10 +39,10 @@ export function NoticeArticel() {
   useEffect(() => {
     postApi();
   }, [postApi]);
-
+  // t(`nav.login`)
   return (
     <StyledArticel>
-      <NoticeHeader title="공지사항" url="news/notice" />
+      <NoticeHeader title={t(`main.notice`)} url="news/notice" />
       <NoticeBox data={posts} />
     </StyledArticel>
   );

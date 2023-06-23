@@ -89,7 +89,6 @@ function App() {
           <Route path="/articles/사무국사람들" element={<ContactOfficePage />} />
           <Route path="/articles/사무국위치" element={<ContactPositionPage />} />
           <Route path="/articles/contact/인더스트리-네트워크" element={<ContactIndustryPage />} />
-
           <Route path="/archive/distributions" element={<ArchiveMoviePage />} />
           <Route path="/archive/sketch" element={<ArchiveSketchPage />} />
           <Route path="/archive/videoclip" element={<VideoClipPage />} />
@@ -98,7 +97,7 @@ function App() {
           <Route path="/news/newsletter" element={<Newsletter />} />
           <Route path="/news/newsletter/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/news/pressrelease" element={<PressReleasePage />} />
-          <Route path="/news/pressrelease/:id" element={<NewsDetail type="newsletter" />} />
+          <Route path="/news/pressrelease/:id" element={<NewsDetail type="pressrelease" />} />
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />

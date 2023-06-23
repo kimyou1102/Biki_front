@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { Img, Button } from '@atoms';
 import { SearchBar } from '@molecules/searchBar';
 import { getMovieBySectionIdAndTitleApi } from '@src/apis/movie/get-movie-by-id-and-title-api';
@@ -24,6 +26,7 @@ export function SearchFilter({ type, id }: Props) {
   const [sketchs, setSketchs] = useRecoilState<SketchType[]>(sketchState);
   const [filmValue, setFilmValue] = useRecoilState<string>(filmInputState);
   const [sketchValue, setSketchValue] = useRecoilState<string>(sketchInputState);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (filmValue === '') {
@@ -73,7 +76,7 @@ export function SearchFilter({ type, id }: Props) {
         radius={10}
         width={349}
         height={48}
-        placeholder={type === 'film' ? '영화 제목 검색' : '제목 검색'}
+        placeholder={type === 'film' ? t(`archive.search`) : t(`news.search`)}
       />
       <Button
         type="button"

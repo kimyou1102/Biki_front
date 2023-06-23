@@ -1,4 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { NewsTemplates } from '@templates';
 import { NewsSection } from '@organisms';
 import { Footer } from '@layout/Footer';
@@ -23,15 +25,12 @@ export function NewsDetail({ type }: Props) {
     highlightStatus: 0,
     files: [],
   });
-  // const location = useLocation();
-  // console.log(location.state);
-  // const { id, title, count, date } = location.state;
-  // console.log(id, title, count, date);
+  const { t } = useTranslation();
 
   const postApi = useCallback(async () => {
     await getPostByIdApi(parseInt(id!, 10))
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
         // setNotices(res.data);
       })
@@ -48,11 +47,14 @@ export function NewsDetail({ type }: Props) {
   let titleName = '';
 
   if (type === 'notice') {
-    titleName = '공지사항';
+    // eslint-disable-next-line prefer-destructuring
+    titleName = t(`news.notice`);
   } else if (type === 'newsletter') {
-    titleName = '뉴스레터';
+    // eslint-disable-next-line prefer-destructuring
+    titleName = t(`news.newsletter`);
   } else {
-    titleName = '보도자료';
+    // eslint-disable-next-line prefer-destructuring
+    titleName = t(`news.press`);
   }
   return (
     <>

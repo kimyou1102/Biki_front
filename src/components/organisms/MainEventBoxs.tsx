@@ -1,4 +1,6 @@
 import React, { useRef, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 // import { ContentBox } from '@molecules/contentBox';
 import { MainEventBox } from '@molecules';
 import { SlideContainer } from '@atoms';
@@ -15,6 +17,7 @@ import main_event5 from '../../assets/images/main_event5.jpg';
 export function MainEventBoxs() {
   const setScroll = useSetRecoilState<HTMLDivElement | undefined>(mainEventScrollState);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
@@ -23,11 +26,11 @@ export function MainEventBoxs() {
   }, [setScroll]);
 
   const datas = [
-    { id: 1, url: main_event1, title: '영화 읽기' },
-    { id: 2, url: main_event2, title: '배리어프리' },
-    { id: 3, url: main_event3, title: '라이브더빙' },
-    { id: 4, url: main_event4, title: '관객과의 대화' },
-    { id: 5, url: main_event5, title: '공감토크: 문' },
+    { id: 1, url: main_event1, title: t(`event.readingMovie`) },
+    { id: 2, url: main_event2, title: t(`event.barrierFree`) },
+    { id: 3, url: main_event3, title: t(`event.live`) },
+    { id: 4, url: main_event4, title: t(`event.conversation`) },
+    { id: 5, url: main_event5, title: t(`event.talk`) },
   ];
 
   return (

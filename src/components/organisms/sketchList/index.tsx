@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { SketchProps, SketchType } from '../../../models/sketch';
 import { ClipType } from '../../../models/clip';
 import { modalDataState, modalState } from '../../../recoil/archive/atome';
+import { languageState } from '../../../recoil/language/atom';
 
 interface Props {
   page: number;
@@ -16,7 +17,8 @@ interface Props {
 }
 
 export function SketchList({ page, setPage, datas, type }: Props) {
-  const setModal = useSetRecoilState(modalState);
+  // const setModal = useSetRecoilState(modalState);
+  const language = useRecoilValue(languageState);
 
   const limit = 15;
   const offset = page * limit;
@@ -34,7 +36,7 @@ export function SketchList({ page, setPage, datas, type }: Props) {
               <ContentBox
                 key={data.id}
                 id={data.id}
-                title={data.titleKo}
+                title={language === 'English' ? data.titleKo : data.titleEn}
                 date={`${date.getFullYear()} / ${date.getMonth() + 1} / ${date.getDate()}`}
                 count={data.view}
                 type="archive"

@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RecoilRoot } from 'recoil';
 import ScrollToTop from '@molecules/ScrollToTop';
-import { HeaderLayout } from '@layout';
-import { ArchiveMoviePage, ArchiveSketchPage, NewsNotice, Newsletter, NewsDetail } from '@pages';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './styles/globalStyle';
+import './local/i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

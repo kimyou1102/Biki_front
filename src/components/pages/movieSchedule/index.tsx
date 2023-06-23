@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { Section } from '@atoms';
 import { LabelHint, MovieScheduleTitle, ScreeningItem } from '@molecules';
 import {
@@ -35,6 +37,8 @@ const MAIN_THEME = '#288CB4';
 
 export function ScheduleInfoPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const tableRoundStyle = {
     backgroundColor: 'white',
     color: 'black',
@@ -175,7 +179,7 @@ export function ScheduleInfoPage() {
 
           <Box display="flex" width="19rem" alignItems="center">
             <Typography fontFamily="PretendardBold" width="6rem" mr="10px">
-              상영관선택
+              {t(`screening.select`)}
             </Typography>
 
             <FormControl fullWidth>
@@ -218,7 +222,7 @@ export function ScheduleInfoPage() {
             <TableHead>
               <TableRow>
                 <TableCell align="left" sx={tableRoundStyle} size="small">
-                  상영관명
+                  {t(`screening.name`)}
                 </TableCell>
 
                 {rounds.map((item) => (
@@ -236,27 +240,27 @@ export function ScheduleInfoPage() {
         </TableContainer>
 
         <Typography fontFamily="PretendardBold" mb="1rem">
-          *라벨도움말
+          *{t(`screening.label`)}
         </Typography>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="BF" rightText="배리어프리 영화" bgcolor="#FF810D" />
-          <LabelHint leftText="GV" rightText="관객과의 대화" bgcolor="#8A2BE2" />
+          <LabelHint leftText="BF" rightText={t(`screening.bf`)} bgcolor="#FF810D" />
+          <LabelHint leftText="GV" rightText={t(`screening.gv`)} bgcolor="#8A2BE2" />
         </Box>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="Reads" rightText="영화읽기" bgcolor="#006400" />
-          <LabelHint leftText="Greeting" rightText="무대인사  " bgcolor="#FF1191" />
+          <LabelHint leftText="Reads" rightText={t(`screening.read`)} bgcolor="#006400" />
+          <LabelHint leftText="Greeting" rightText={t(`screening.greeting`)} bgcolor="#FF1191" />
         </Box>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="W.S" rightText="워크숍  " bgcolor="#B7CC37" />
-          <LabelHint leftText="Live" rightText="라이브더빙  " bgcolor="#283FBC" />
+          <LabelHint leftText="W.S" rightText={t(`screening.ws`)} bgcolor="#B7CC37" />
+          <LabelHint leftText="Live" rightText={t(`screening.live`)} bgcolor="#283FBC" />
         </Box>
 
         <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="Opening" rightText="개막작  " bgcolor="#191919" />
-          <LabelHint leftText="Talk" rightText="시네마 토크  " bgcolor="#E5C32B" />
+          <LabelHint leftText="Opening" rightText={t(`screening.opening`)} bgcolor="#191919" />
+          <LabelHint leftText="Talk" rightText={t(`screening.talk`)} bgcolor="#E5C32B" />
         </Box>
       </Section>
     </ThemeProvider>

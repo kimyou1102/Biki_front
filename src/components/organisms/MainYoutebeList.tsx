@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { SlideHeader } from '@molecules';
 import { useRecoilValue } from 'recoil';
 import { mainYoutubeScrollState } from '../../recoil/scroll/scroll';
@@ -8,8 +10,8 @@ import { ClipType } from '../../models/clip';
 
 export function MainYoutebeList() {
   const scroll = useRecoilValue<HTMLDivElement | undefined>(mainYoutubeScrollState);
-
   const [youtubes, setYoutubes] = useState<ClipType[]>([]);
+  const { t } = useTranslation();
 
   const clipApi = useCallback(async () => {
     await getClipApi()
@@ -36,7 +38,7 @@ export function MainYoutebeList() {
   };
   return (
     <>
-      <SlideHeader text="영상" onLeftClick={onLeftClick} onRightClick={onRightClick} />
+      <SlideHeader text={t(`main.movie`)} onLeftClick={onLeftClick} onRightClick={onRightClick} />
       <ContentBoxs data={youtubes} />
     </>
   );

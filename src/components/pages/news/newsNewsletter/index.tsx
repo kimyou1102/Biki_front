@@ -1,4 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
 import { Footer } from '@layout/Footer';
@@ -12,7 +14,7 @@ export function Newsletter() {
   const [total, setTotal] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
+  const { t } = useTranslation();
   // const initialLimit = 12;
   // const [limit, setLimit] = useState(12);
   const limit = 15;
@@ -58,7 +60,7 @@ export function Newsletter() {
   }, [postApi]);
 
   return (
-    <NewsTemplates title="뉴스레터">
+    <NewsTemplates title={t(`news.newsletter`)}>
       {isLoading ? (
         <Box width="100%" height="50vh" display="flex" justifyContent="center" alignItems="center">
           <CircularProgress color="success" />

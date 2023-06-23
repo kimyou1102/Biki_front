@@ -1,4 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
 import { Box, CircularProgress, LinearProgress } from '@mui/material';
@@ -14,6 +16,7 @@ export function NewsNotice() {
   // const [notices, setNotices] = useState<any>([]);
   const [notices, setNotices] = useRecoilState<PostType[]>(noticeListState);
   const [noticeListInitial, setNoticeListInitial] = useRecoilState<PostType[]>(noticeListInitialState); // api에서 받아오는 걸로
+  const { t } = useTranslation();
 
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
@@ -69,7 +72,7 @@ export function NewsNotice() {
 
   return (
     <>
-      <NewsTemplates title="공지사항">
+      <NewsTemplates title={t(`news.notice`)}>
         {isLoading ? (
           <Box width="100%" height="50vh" display="flex" justifyContent="center" alignItems="center">
             <CircularProgress color="success" />
