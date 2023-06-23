@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -45,6 +46,7 @@ export function ArchiveModal() {
   const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
   const [movieSchedule, setMovieSchedule] = useState<any>();
   const language = useRecoilValue(languageState);
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const movieApi = useCallback(async () => {
@@ -198,17 +200,20 @@ export function ArchiveModal() {
           ))}
         </div>
       </Wrap>
-      <FlexContainer justify="right">
-        <Button
-          bgcolor="var(--main-color)"
-          width={440}
-          padding="calc(18px * 0.8) calc(100px * 0.8)"
-          radius="10px"
-          color="white"
-        >
-          {t(`movie.goToOnline`)}
-        </Button>
-      </FlexContainer>
+      {movie.screening.status === '상영' && (
+        <FlexContainer justify="right">
+          <Button
+            bgcolor="var(--main-color)"
+            width={440}
+            padding="calc(18px * 0.8) calc(100px * 0.8)"
+            radius="10px"
+            color="white"
+            onClick={() => navigate(`/movie/online/${movie.id}`)}
+          >
+            {t(`movie.goToOnline`)}
+          </Button>
+        </FlexContainer>
+      )}
     </Container>
   );
 }

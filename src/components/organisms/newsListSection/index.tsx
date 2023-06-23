@@ -11,18 +11,21 @@ interface Props {
   data: PostType[];
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  inputValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  onSearch: () => void;
   limit: number;
   total: number;
 }
 
-export function NewsListSection({ data, page, setPage, limit, total }: Props) {
+export function NewsListSection({ data, page, setPage, inputValue, setInputValue, onSearch, limit, total }: Props) {
   const [value, setValue] = useState<string>('');
   const offset = (page - 1) * limit;
   const language = useRecoilValue(languageState);
   const { t } = useTranslation();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setInputValue(e.target.value);
   };
 
   // console.log('뉴스섹션 : ', data.length);
@@ -34,17 +37,17 @@ export function NewsListSection({ data, page, setPage, limit, total }: Props) {
   //   }
   // }, [data, noticeListInitial, setNotices, value]);
 
-  const onSearch = () => {
-    // const newData = notices.filter((e) => e.titleKo.includes(value));
-    // console.log(newData);
-    // setNotices(newData);
-  };
+  // const onSearch = () => {
+  //   // const newData = notices.filter((e) => e.titleKo.includes(value));
+  //   // console.log(newData);
+  //   // setNotices(newData);
+  // };
 
   return (
     <>
       <SearchBar
         type="news"
-        value={value}
+        value={inputValue}
         onChange={onChange}
         onSearch={onSearch}
         color="#767676"

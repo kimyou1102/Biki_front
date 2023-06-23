@@ -55,7 +55,7 @@ export function ScheduleTable({ data }: Props) {
                 <Th>{e.screeningDate}</Th>
                 <Th>{e.startTime}</Th>
                 <Th>{e.theater}</Th>
-                <Th>{data.addInfo.join(' ')}</Th>
+                <Th>{data.addInfo}</Th>
                 <Th>
                   <Button
                     size={1}

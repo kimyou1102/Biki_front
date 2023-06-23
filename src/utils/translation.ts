@@ -156,11 +156,11 @@ export const translation = {
       },
       header: [
         {
-          title: 'biky',
+          title: 'Biky',
           items: ['18th BIKY', 'Festival Symbol', 'Awards', 'People Behind BIKY', 'Sponsor Recruitment'],
         },
         {
-          title: 'education',
+          title: 'Education',
           items: [
             'Affiliated Research Institute',
             'Film Distribution Textbook, Activity Guide, Educational Videos',
@@ -169,11 +169,11 @@ export const translation = {
           ],
         },
         {
-          title: 'program',
+          title: 'Program',
           items: ['Screening Schedule', 'Theater Information', 'Ticket Information'],
         },
         {
-          title: 'event',
+          title: 'Event',
           items: [
             'Screening Events',
             'Poster Art Exhibition',
@@ -182,19 +182,19 @@ export const translation = {
           ],
         },
         {
-          title: 'archive',
+          title: 'Archive',
           items: ['The Path of BIKY', 'Distributed Films', 'On-Site Sketches', 'Video Clips', 'Search for Films'],
         },
         {
-          title: 'contact',
+          title: 'Contact',
           items: ['Office Members', 'Office Location'],
         },
         {
-          title: 'forum',
+          title: 'Forum',
           items: ['Biky Forum of All Time', 'Industry Network'],
         },
         {
-          title: 'news',
+          title: 'News',
           items: ['Notice', 'Newsletter', 'Press Release'],
         },
       ],

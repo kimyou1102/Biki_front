@@ -5,6 +5,7 @@ import { ArchiveTemplate } from '@templates';
 import { ArchiveMovieSection, ArchiveModal, ArchiveMovieList } from '@organisms';
 import { Footer } from '@layout/Footer';
 import { ModalWrap } from '@atoms';
+import { Box, CircularProgress } from '@mui/material';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   movieModalState,
@@ -20,6 +21,7 @@ export function ArchiveMoviePage() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
   const [top, setTop] = useRecoilState(movieModalPositionState);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [movies, setMovies] = useRecoilState<MovieData[]>(movieState);
   const setInitialMovieData = useSetRecoilState<MovieData[]>(movieInitialState); // api에서 받아오는 걸로
@@ -33,6 +35,7 @@ export function ArchiveMoviePage() {
         // console.log(res);
         setMovies(res);
         setInitialMovieData(res);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [setInitialMovieData, setMovies]);
@@ -53,8 +56,15 @@ export function ArchiveMoviePage() {
   return (
     <>
       <ArchiveTemplate title={t(`movie.distribution`)} type="film">
-        {movies.length === 0 ? (
-          <h1>{t(`archive.empty`)}</h1>
+        {isLoading ? (
+          <Box width="100%" height="50vh" display="flex" justifyContent="center" alignItems="center">
+            <CircularProgress color="success" />
+          </Box>
+
+//       <ArchiveTemplate title={t(`movie.distribution`)} type="film">
+//         {movies.length === 0 ? (
+//           <h1>{t(`archive.empty`)}</h1>
+
         ) : (
           <ArchiveMovieList page={page} setPage={setPage} movies={movies} />
         )}

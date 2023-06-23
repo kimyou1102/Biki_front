@@ -1,11 +1,12 @@
 import { Box, Button, ClickAwayListener, Tooltip, Typography, Zoom } from '@mui/material';
 import React, { useState } from 'react';
-import { ScheduleMovieType } from 'src/models/schedule';
+import { MovieLabelType, ScheduleMovieType } from 'src/models/schedule';
 
 interface ScreeningItemProps {
   titleKo: string;
   titleEn: string;
   time: string;
+  label: MovieLabelType;
   movies: ScheduleMovieType[];
   runningTime: number;
   rating: string;
@@ -14,7 +15,7 @@ interface ScreeningItemProps {
 // 메인색상
 const MAIN_THEME = '#288CB4';
 
-export function ScreeningItem({ titleKo, titleEn, time, runningTime, rating, movies }: ScreeningItemProps) {
+export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rating, movies }: ScreeningItemProps) {
   const [tooltip, setTooltip] = useState(false);
 
   const handleTooltipOpen = () => setTooltip(!tooltip);
@@ -44,8 +45,8 @@ export function ScreeningItem({ titleKo, titleEn, time, runningTime, rating, mov
           </Box>
         )}
 
-        <Box padding="2px 8px" bgcolor="#D9D9D9" borderRadius="5px" fontSize="0.7rem" mr="10px">
-          GV
+        <Box padding="2px 8px" bgcolor={label.bgColor} color="white" borderRadius="5px" fontSize="0.7rem" mr="10px">
+          {label.name}
         </Box>
       </Box>
       {movies.length > 0 && (

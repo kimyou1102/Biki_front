@@ -20,8 +20,18 @@ export function NoticeArticel() {
   const postApi = useCallback(async () => {
     await getPostApi('공지사항', 0, 12)
       .then((res) => {
-        console.log(res.data.content);
-        setPosts(res.data.content.reverse());
+        const sortedPosts = res.data.content.sort((a: any, b: any) => {
+          if (a.highlightStatus < b.highlightStatus) {
+            return 1;
+          }
+          if (a.highlightStatus > b.highlightStatus) {
+            return -1;
+          }
+
+          return 0;
+        });
+
+        setPosts(sortedPosts);
       })
       .catch((err) => console.log(err));
   }, []);

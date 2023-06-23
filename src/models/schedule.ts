@@ -22,7 +22,18 @@ export type ScheduleItemType = {
   startTime: string;
   rating: string;
   runningTime: number;
+  label: MovieLabelType;
   movies: ScheduleMovieType[];
+};
+export type MovieLabelType = {
+  id: number;
+  name: string;
+  titleKo: string;
+  titleEn: string;
+  descriptionKo: string;
+  descriptionEn: string;
+  bgColor: string;
+  status: number;
 };
 
 export type ScheduleMovieType = {
