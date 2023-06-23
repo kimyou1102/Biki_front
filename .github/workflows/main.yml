@@ -1,67 +1,67 @@
-name: Positive Tree S3 Deploy
+# name: Positive Tree S3 Deploy
 
-on:
-  push:
-    branches:
-      - master # main 브런치에서 push 이벤트가 일어났을 때 실행
-  pull_request:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master # main 브런치에서 push 이벤트가 일어났을 때 실행
+#   pull_request:
+#     branches:
+#       - master
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@master # workflow에서 액세스할 수 있도록 저장소를 체크아웃
+#     steps:
+#       - name: Checkout source code
+#         uses: actions/checkout@master # workflow에서 액세스할 수 있도록 저장소를 체크아웃
 
-      - name: Cache node modules # node modules 캐싱
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-master-build-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+#       - name: Cache node modules # node modules 캐싱
+#         uses: actions/cache@v1
+#         with:
+#           path: node_modules
+#           key: ${{ runner.OS }}-master-build-${{ hashFiles('**/yarn.lock') }}
+#           restore-keys: |
+#             ${{ runner.OS }}-build-
+#             ${{ runner.OS }}-
 
-      - name: Setting .env
-        run: |
-          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> .env
-          echo "REACT_APP_API=${{ secrets.REACT_APP_API}}" >> .env
-          echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env
-          cat .env
+#       - name: Setting .env
+#         run: |
+#           echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> .env
+#           echo "REACT_APP_API=${{ secrets.REACT_APP_API}}" >> .env
+#           echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env
+#           cat .env
 
-      - name: Install dependencies
-        run: yarn install
+#       - name: Install dependencies
+#         run: yarn install
 
-      - name: Build
-        run: CI='' yarn build
+#       - name: Build
+#         run: CI='' yarn build
 
-      - name: S3 Deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-northeast-2
-        run: |
-          aws s3 sync ./build s3://www.biky.or.kr
+#       - name: S3 Deploy
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: ap-northeast-2
+#         run: |
+#           aws s3 sync ./build s3://www.biky.or.kr
 
-      - name: Invalidate CloudFront Cache # 새로 리소스를 업데이트할 때 기존 캐시 무효화
-        uses: chetan/invalidate-cloudfront-action@master
-        env:
-          AWS_DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_ID }}
-          PATHS: '/index.html'
-        continue-on-error: true
+#       - name: Invalidate CloudFront Cache # 새로 리소스를 업데이트할 때 기존 캐시 무효화
+#         uses: chetan/invalidate-cloudfront-action@master
+#         env:
+#           AWS_DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_ID }}
+#           PATHS: '/index.html'
+#         continue-on-error: true
 
-      - name: Post to a Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.23.0
-        with:
-          # Slack channel id, channel name, or user id to post message.
-          # See also: https://api.slack.com/methods/chat.postMessage#channels
-          # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
-          channel-id: 'dev'
-          # For posting a simple plain text message
-          slack-message: "*:alert: [BIKY] Admin Front Deploy :alert:*\n :white_check_mark: ${{ job.status }}\n${{ github.event.head_commit.message }}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+#       - name: Post to a Slack channel
+#         id: slack
+#         uses: slackapi/slack-github-action@v1.23.0
+#         with:
+#           # Slack channel id, channel name, or user id to post message.
+#           # See also: https://api.slack.com/methods/chat.postMessage#channels
+#           # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
+#           channel-id: 'dev'
+#           # For posting a simple plain text message
+#           slack-message: "*:alert: [BIKY] Admin Front Deploy :alert:*\n :white_check_mark: ${{ job.status }}\n${{ github.event.head_commit.message }}"
+#         env:
+#           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
