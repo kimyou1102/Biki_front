@@ -98,6 +98,10 @@ export function ScheduleInfoPage() {
             startDate.setDate(startDate.getDate() + 1);
           }
 
+          if (!tempDates.includes(currentDate)) {
+            setCurrentDate(res.data.data.runningDateStart);
+          }
+
           // 만들어진 날짜 배열을 저장
           setDates(tempDates);
 
@@ -152,6 +156,7 @@ export function ScheduleInfoPage() {
                   titleKo={currentMovie.titleKo}
                   titleEn={currentMovie.titleEn}
                   time={currentMovie.startTime.substring(0, 5)}
+                  label={currentMovie.label}
                   runningTime={currentMovie.runningTime}
                   rating={currentMovie.rating}
                   movies={currentMovie.movies}

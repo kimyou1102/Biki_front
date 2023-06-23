@@ -39,7 +39,7 @@ export function Header() {
   };
 
   const lefttData: ButtonsProps[] = [
-    { id: 1, name: 'Guest', url: 'http://guest.biky.s3-website.ap-northeast-2.amazonaws.com' },
+    { id: 1, name: 'Guest', url: 'https://guest.biky.or.kr/' },
     { id: 2, name: 'Volunteer', url: 'http://volunteer.biky.s3-website.ap-northeast-2.amazonaws.com' },
     { id: 3, name: 'Badge', url: 'http://biky-badge-create.s3-website.ap-northeast-2.amazonaws.com/' },
   ];
@@ -56,7 +56,8 @@ export function Header() {
   ];
   return (
     <HeaderDefault>
-      <HeaderButtons data={lefttData} color="var(--main-color)" />
+      {/* <HeaderButtons data={lefttData} color="var(--main-color)" /> */}
+      <HeaderButtons data={[]} />
       <HeaderButtons data={rightData} />
     </HeaderDefault>
   );
