@@ -17,7 +17,8 @@ export function Header() {
   ];
   return (
     <HeaderDefault>
-      <HeaderButtons data={lefttData} color="var(--main-color)" />
+      {/* <HeaderButtons data={lefttData} color="var(--main-color)" /> */}
+      <HeaderButtons data={[]} />
       <HeaderButtons data={rightData} />
     </HeaderDefault>
   );
