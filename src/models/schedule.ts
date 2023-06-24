@@ -17,6 +17,7 @@ export type ScheduleItemType = {
   round: number;
   theater: string;
   screeningDate: string;
+  movieId: number;
   titleKo: string;
   titleEn: string;
   startTime: string;
