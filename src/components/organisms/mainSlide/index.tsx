@@ -1,4 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -11,38 +13,11 @@ interface PhotoProps extends MainProps {
   id: number;
 }
 
-// const test: PhotoProps[] = [
-//   {
-//     id: 1,
-//     sub: '제18회 부산국제어린이청소년영화제',
-//     title: '“달라도 좋아! We are all Unique!”',
-//     date: '2023년 7월 10일 (월) ~ 16일 (일)',
-//     src: 'http://www.biky.or.kr/uploads/editor/20220805144747_1-13copy.jpg',
-//   },
-//   {
-//     id: 2,
-//     sub: '제18회 부산국제어린이청소년영화제',
-//     title: '“달라도 좋아! We are all Unique!”',
-//     date: '2023년 7월 10일 (월) ~ 16일 (일)',
-//     src: 'http://www.biky.or.kr/uploads/editor/20220805144932_1-17copy.jpg',
-//   },
-//   {
-//     id: 3,
-//     sub: '제18회 부산국제어린이청소년영화제',
-//     title: '“달라도 좋아! We are all Unique!”',
-//     date: '2023년 7월 10일 (월) ~ 16일 (일)',
-//     src: 'http://www.biky.or.kr/uploads/editor/20220805144828_1-15copy.jpg',
-//   },
-//   {
-//     id: 4,
-//     sub: '제18회 부산국제어린이청소년영화제',
-//     title: '“달라도 좋아! We are all Unique!”',
-//     date: '2023년 7월 10일 (월) ~ 16일 (일)',
-//     src: 'http://www.biky.or.kr/uploads/editor/20220805145030_1-15-4copy.jpg',
-//   },
-// ];
-
 export function MainSlide() {
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
   const [banners, setBanners] = useState<BannerType[]>([
     {
       id: 0,
@@ -83,14 +58,38 @@ export function MainSlide() {
     ),
     dotsClass: 'dots_custom',
   };
-  return (
+
+  const settingsMobile = {
+    dots: false,
+    loop: true,
+    infinite: true,
+    speed: 500,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
+  return isMobile ? (
+    <Slider {...settingsMobile}>
+      {banners.map((main) => (
+        <MainPhoto key={main.id} src={main.image} sub="" title="" date="" url={main.url} type="mobile" />
+      ))}
+    </Slider>
+  ) : (
     <Slider {...settings}>
       {banners.map((main) => (
-        <MainPhoto key={main.id} src={main.image} sub="" title="" date="" url={main.url} />
+        <MainPhoto key={main.id} src={main.image} sub="" title="" date="" url={main.url} type="pc" />
       ))}
-      {/* {test.map((main) => (
-        <MainPhoto key={main.id} src={main.src} sub={main.sub} title={main.title} date={main.date} />
-      ))} */}
     </Slider>
   );
+  // return (
+  //   <Slider {...settings}>
+  //     {banners.map((main) => (
+  //       <MainPhoto key={main.id} src={main.image} sub="" title="" date="" url={main.url} />
+  //     ))}
+  //     {/* {test.map((main) => (
+  //       <MainPhoto key={main.id} src={main.src} sub={main.sub} title={main.title} date={main.date} />
+  //     ))} */}
+  //   </Slider>
+  // );
 }

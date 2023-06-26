@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Span, Text, Img, H1, FlexContainer, Button } from '@atoms';
 import { ScheduleTable, RelatedMovies } from '@molecules';
@@ -15,12 +17,12 @@ import close from '../../assets/images/close.png';
 import emptyImg from '../../assets/images/empty.png';
 import { languageState } from '../../recoil/language/atom';
 
-const Container = styled.div`
-  width: calc(1600px * 0.8);
+const Container = styled.div<{ isMobile: boolean }>`
+  width: ${(props) => (props.isMobile ? '100%' : 'calc(1600px * 0.8)')};
   background-color: white;
   overflow-y: auto;
   height: 100vh;
-  padding: calc(100px * 0.8) calc(120px * 0.8);
+  padding: ${(props) => (props.isMobile ? '0 16px' : 'calc(100px * 0.8) calc(120px * 0.8)')};
   box-sizing: border-box;
 `;
 
@@ -48,6 +50,10 @@ export function ArchiveModal() {
   const language = useRecoilValue(languageState);
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
 
   const movieApi = useCallback(async () => {
     await getUserMoviedApi(movieModalId)
@@ -87,11 +93,11 @@ export function ArchiveModal() {
   console.log(movie);
 
   return (
-    <Container id="modal">
-      <FlexContainer justify="space-between" align="center" margin="0 calc(36px * 0.8) calc(32px * 0.8) 0">
-        <Span weight="bold" size={2.5}>
+    <Container id="modal" isMobile={isMobile}>
+      <FlexContainer justify="right" align="center" margin="0 calc(36px * 0.8) calc(32px * 0.8) 0">
+        {/* <Span weight="bold" size={2.5}>
           {t(`movie.distribution`)}
-        </Span>
+        </Span> */}
         <Button border="none" width={48} height={48} onClick={onCloseClick}>
           <Img src={close} alt="닫기아이콘" width={48} height={48} />
         </Button>

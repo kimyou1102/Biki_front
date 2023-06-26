@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -84,6 +86,10 @@ export function ArchiveModalSlide({ data }: Props) {
   const language = useRecoilValue(languageState);
   const imgs = [];
 
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
   const obj = {
     id: '',
     first: '',
@@ -127,7 +133,27 @@ export function ArchiveModalSlide({ data }: Props) {
     ),
     dotsClass: 'dots_custom_archive',
   };
-  return (
+
+  const mobileSettings = {
+    dots: false,
+    loop: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    initialSlide: 1,
+  };
+  return isMobile ? (
+    <div id="archive">
+      <Slider {...mobileSettings} ref={(e: any) => setSlick(e)}>
+        {imgs.map((image, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Img key={i} src={image} alt="스틸컷" height={148 / 0.8} />
+        ))}
+      </Slider>
+    </div>
+  ) : (
     <div id="archive" style={{ position: 'relative' }}>
       <TextWrap>
         <Text color="white" weight="bold" size={2.5} margin="0 0 calc(10px * 0.8) 0">

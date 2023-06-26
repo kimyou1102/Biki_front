@@ -60,6 +60,7 @@ import {
   TheaterInformationPage,
   ScheduleInfoPage,
   SignupPage,
+  ArchiveDetail,
 } from '@pages';
 import { HeaderLayout } from '@layout';
 // import { ScheduleInfoPage } from '@pages/movieSchedule';
@@ -92,6 +93,7 @@ function App() {
           <Route path="/articles/사무국위치" element={<ContactPositionPage />} />
           <Route path="/articles/contact/인더스트리-네트워크" element={<ContactIndustryPage />} />
           <Route path="/archive/distributions" element={<ArchiveMoviePage />} />
+          <Route path="/archive/distributions/detail/:id" element={<ArchiveDetail />} />
           <Route path="/archive/sketch" element={<ArchiveSketchPage />} />
           <Route path="/archive/videoclip" element={<VideoClipPage />} />
           <Route path="/news/notice" element={<NewsNotice />} />

@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { Span, Img, FlexContainer } from '@atoms';
 
 interface Props {
@@ -31,7 +35,26 @@ const TextBox = styled.div`
 `;
 
 export function RelatedMovies({ title, director, year, time, src }: Props) {
-  return (
+  const { t } = useTranslation();
+
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
+  return isMobile ? (
+    <FlexContainer>
+      <Img src={src} width={160 / 0.8} height={120 / 0.8} alt="관련출품작" margin="0 8px 0 0" />
+      <FlexContainer direction="column">
+        <Span weight="bold" size={1 / 0.8}>
+          {title}
+        </Span>
+        <Span size={0.75 / 0.8} margin="8px 0 0 0">
+          {director} | {year} | {time}
+          {t(`movie.minute`)}
+        </Span>
+      </FlexContainer>
+    </FlexContainer>
+  ) : (
     <Container>
       <Img src={src} width={440} height={334} alt="관련출품작" />
       <TextBox>
@@ -39,7 +62,8 @@ export function RelatedMovies({ title, director, year, time, src }: Props) {
           {title}
         </Span>
         <Span color="white">
-          {director}|{year}|{time}분 분
+          {director}|{year}|{time}
+          {t(`movie.minute`)}
         </Span>
       </TextBox>
     </Container>

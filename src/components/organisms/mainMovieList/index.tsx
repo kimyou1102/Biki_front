@@ -40,9 +40,9 @@ export function MainMovieList() {
     }
   };
   return (
-    <div>
+    <>
       <SlideHeader text={t(`main.screening`)} onLeftClick={onLeftClick} onRightClick={onRightClick} />
       <MainMovieBoxs data={initialMovieData} />
-    </div>
+    </>
   );
 }
