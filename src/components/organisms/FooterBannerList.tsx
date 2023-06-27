@@ -119,7 +119,6 @@ export function FooterBannerList() {
               width={200}
               height={40}
               onClick={() => {
-                console.log(e.url);
                 window.open(e.url);
               }}
             >
