@@ -70,9 +70,6 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
           <Box width="100%" height="50vh" display="flex" justifyContent="center" alignItems="center">
             <CircularProgress color="success" />
           </Box>
-//       <ArchiveTemplate title={title} type="film" pageTitle={t(`screening.title`)} sub={t(`screening.introduce`)}>
-//         {movies.length === 0 ? (
-//           <h1>{t(`archive.empty`)}</h1>
         ) : (
           <ArchiveMovieList page={page} setPage={setPage} movies={movies} />
         )}

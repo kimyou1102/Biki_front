@@ -39,7 +39,7 @@ const RightLabelDiv = styled.div`
 
 export function LabelHint({ bgcolor, leftText, rightText }: LabelHintProps) {
   return (
-    <Div display="flex" margin="0 0 1rem 0" style={{ width: '100%' }}>
+    <Div display="flex" margin="0 0 1rem 0" style={{ width: '100%', flexBasis: '49%' }}>
       <LeftLabelDiv bgcolor={bgcolor}>{leftText}</LeftLabelDiv>
       <RightLabelDiv>{rightText}</RightLabelDiv>
     </Div>

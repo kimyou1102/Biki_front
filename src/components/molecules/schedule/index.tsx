@@ -1,5 +1,9 @@
+import { ModalWrap } from '@atoms';
 import { Box, Button, ClickAwayListener, Tooltip, Typography, Zoom } from '@mui/material';
+import { ArchiveModal } from '@organisms';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { MovieLabelType, ScheduleMovieType } from 'src/models/schedule';
 
 interface ScreeningItemProps {
@@ -10,19 +14,49 @@ interface ScreeningItemProps {
   movies: ScheduleMovieType[];
   runningTime: number;
   rating: string;
+  id?: number;
 }
 
 // 메인색상
 const MAIN_THEME = '#288CB4';
 
-export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rating, movies }: ScreeningItemProps) {
+export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rating, movies, id }: ScreeningItemProps) {
   const [tooltip, setTooltip] = useState(false);
+  const [top, setTop] = useRecoilState(movieModalPositionState);
+  const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
+  const [movieModal, setMovieModal] = useRecoilState(movieModalState);
 
   const handleTooltipOpen = () => setTooltip(!tooltip);
   const handleTooltipClose = () => setTooltip(false);
 
+  const handleSingleMovieClick = () => {
+    if (id) {
+      setMovieModal(true);
+      // setMovieModalData(data);
+      setTop(window.scrollY);
+      setmovieModalId(id);
+      document.querySelector('body')?.classList.add('none');
+    }
+  };
+
+  const handleGroupMovieClick = (movieId: number) => {
+    // handleTooltipClose();
+    setMovieModal(true);
+    // setMovieModalData(data);
+    setTop(window.scrollY);
+    setmovieModalId(movieId);
+    document.querySelector('body')?.classList.add('none');
+  };
+
   return (
-    <Box display="flex" flexDirection="column" width="13rem">
+    <Box
+      display="flex"
+      flexDirection="column"
+      maxWidth="12rem"
+      component="div"
+      onClick={handleSingleMovieClick}
+      sx={{ cursor: 'pointer' }}
+    >
       <Typography fontFamily="Pretendard" fontWeight="bold" fontSize="0.9rem">
         {titleKo}
       </Typography>
@@ -59,9 +93,14 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div>상영작 목록</div>
                 {movies.map((item, index) => (
-                  <div key={item.id}>
+                  <Button
+                    variant="contained"
+                    component="button"
+                    key={item.id}
+                    onClick={() => handleGroupMovieClick(item.id)}
+                  >
                     {index + 1}. {item.title}
-                  </div>
+                  </Button>
                 ))}
               </div>
             }
