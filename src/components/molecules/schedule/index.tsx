@@ -1,9 +1,12 @@
+import { ModalWrap } from '@atoms';
 import { Box, Button, ClickAwayListener, Tooltip, Typography, Zoom } from '@mui/material';
+import { ArchiveModal } from '@organisms';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
 import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { MovieLabelType, ScheduleMovieType } from 'src/models/schedule';
 import { languageState } from '../../../recoil/language/atom';
 
@@ -15,13 +18,17 @@ interface ScreeningItemProps {
   movies: ScheduleMovieType[];
   runningTime: number;
   rating: string;
+  id?: number;
 }
 
 // 메인색상
 const MAIN_THEME = '#288CB4';
 
-export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rating, movies }: ScreeningItemProps) {
+export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rating, movies, id }: ScreeningItemProps) {
   const [tooltip, setTooltip] = useState(false);
+  const [top, setTop] = useRecoilState(movieModalPositionState);
+  const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
+  const [movieModal, setMovieModal] = useRecoilState(movieModalState);
 
   const handleTooltipOpen = () => setTooltip(!tooltip);
   const handleTooltipClose = () => setTooltip(false);
@@ -108,6 +115,7 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
     </Box>
   ) : (
     <Box display="flex" flexDirection="column" width="13rem">
+
       <Typography fontFamily="Pretendard" fontWeight="bold" fontSize="0.9rem">
         {language === 'English' ? titleKo : titleEn}
       </Typography>
@@ -145,9 +153,14 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div>{t(`screening.list`)}</div>
                 {movies.map((item, index) => (
-                  <div key={item.id}>
+                  <Button
+                    variant="contained"
+                    component="button"
+                    key={item.id}
+                    onClick={() => handleGroupMovieClick(item.id)}
+                  >
                     {index + 1}. {item.title}
-                  </div>
+                  </Button>
                 ))}
               </div>
             }

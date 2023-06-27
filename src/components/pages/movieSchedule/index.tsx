@@ -1,8 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
 import { Section, H1, Span } from '@atoms';
+
 import { LabelHint, MovieScheduleTitle, ScreeningItem } from '@molecules';
 import {
   Box,
@@ -33,12 +35,19 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import { MovieScheduleTheaterItemType, ScheduleVenueType } from 'src/models/schedule';
+import { labelState } from '@src/recoil/label/atom';
+import { getLabelListApi } from '@src/apis/label/get-label-list-api';
+import { ArchiveModal } from '@organisms';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
 
 // 메인색상
 const MAIN_THEME = '#288CB4';
 
 export function ScheduleInfoPage() {
   const navigate = useNavigate();
+
+  const [movieLabel, setMovieLabel] = useRecoilState(labelState);
+
   const { t } = useTranslation();
 
   const isMobile = useMediaQuery({
@@ -67,10 +76,19 @@ export function ScheduleInfoPage() {
   const [venue, setVenue] = useState<ScheduleVenueType[]>([]);
   const [venueId, setVenueId] = useState<number>(0);
   const [currentDate, setCurrentDate] = useState('');
+  const [top, setTop] = useRecoilState(movieModalPositionState);
+  const [movieModal, setMovieModal] = useRecoilState(movieModalState);
 
   const [dates, setDates] = useState<string[]>([]);
   const [movieSchedule, setMovieSchedule] = useRecoilState(movieScheduleState);
   const [rounds, setRounds] = useState<number[]>([]);
+
+  useEffect(() => {
+    getLabelListApi().then((res) => {
+      console.log(res);
+      setMovieLabel(res);
+    });
+  }, [setMovieLabel]);
 
   useEffect(() => {
     /**
@@ -122,6 +140,14 @@ export function ScheduleInfoPage() {
     setVenueId(parseInt(event.target.value, 10));
   }
 
+  const onOutsideModalClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('#modal')) {
+      setMovieModal(false);
+      document.querySelector('body')?.classList.remove('none');
+    }
+  };
+
   // 날짜를 바꿨을 때, 해당하는 날짜의 상열일정 정보를 들고오게 만드는 핸들러
   function handleDateChange(event: React.SyntheticEvent, value: any) {
     setCurrentDate(value);
@@ -168,6 +194,7 @@ export function ScheduleInfoPage() {
                   runningTime={currentMovie.runningTime}
                   rating={currentMovie.rating}
                   movies={currentMovie.movies}
+                  id={currentMovie.movieId}
                 />
               </TableCell>
             );
@@ -266,7 +293,7 @@ export function ScheduleInfoPage() {
   ) : (
     <ThemeProvider theme={theme}>
       <Section>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box display="flex" justifyContent="space-between" alignItems="center" marginX="-3rem">
           <MovieScheduleTitle />
 
           <Box display="flex" width="19rem" alignItems="center">
@@ -310,7 +337,7 @@ export function ScheduleInfoPage() {
         </Box>
 
         <TableContainer component={Paper} sx={{ boxShadow: 'none', mb: '6rem' }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 850 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align="left" sx={tableRoundStyle} size="small">
@@ -335,26 +362,23 @@ export function ScheduleInfoPage() {
           *{t(`screening.label`)}
         </Typography>
 
-        <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="BF" rightText={t(`screening.bf`)} bgcolor="#FF810D" />
-          <LabelHint leftText="GV" rightText={t(`screening.gv`)} bgcolor="#8A2BE2" />
-        </Box>
-
-        <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="Reads" rightText={t(`screening.read`)} bgcolor="#006400" />
-          <LabelHint leftText="Greeting" rightText={t(`screening.greeting`)} bgcolor="#FF1191" />
-        </Box>
-
-        <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="W.S" rightText={t(`screening.ws`)} bgcolor="#B7CC37" />
-          <LabelHint leftText="Live" rightText={t(`screening.live`)} bgcolor="#283FBC" />
-        </Box>
-
-        <Box display="flex" width="100%" gap="0 10px;">
-          <LabelHint leftText="Opening" rightText={t(`screening.opening`)} bgcolor="#191919" />
-          <LabelHint leftText="Talk" rightText={t(`screening.talk`)} bgcolor="#E5C32B" />
+        <Box display="flex" width="100%" gap="0 10px;" flexWrap="wrap">
+          {movieLabel.map(
+            (item) =>
+              item.bgColor !== '#ffffff' && (
+                <LabelHint leftText={item.name} rightText={item.titleKo} bgcolor={item.bgColor} />
+              ),
+          )}
         </Box>
       </Section>
+
+      <ModalWrap
+        top={top}
+        className={movieModal ? '' : 'none'}
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onOutsideModalClick(e)}
+      >
+        <ArchiveModal />
+      </ModalWrap>
     </ThemeProvider>
   );
 }

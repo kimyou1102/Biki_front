@@ -171,8 +171,7 @@ export function ArchiveDetail() {
             </Span>
             <Span size={1 / 0.8}>{t(`archive.production`)}</Span>
             <Span size={1 / 0.8} weight="bold">
-              {t(`movie.director`)}: {movie.credit.directorNameEn}, {t(`archive.script`)}: {movie.credit.directorNameEn}
-              , {t(`archive.producer`)}: {movie.credit.directorNameEn}
+              {movie.contact.distribution}
             </Span>
           </TextWrap>
         </Wrap>

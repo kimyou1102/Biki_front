@@ -46,11 +46,13 @@ export function LabelHint({ bgcolor, leftText, rightText }: LabelHintProps) {
   });
 
   return (
+
     <Div display="flex" margin="0 0 1rem 0" style={{ width: '100%' }}>
       <LeftLabelDiv bgcolor={bgcolor} isMobile={isMobile}>
         {leftText}
       </LeftLabelDiv>
       <RightLabelDiv isMobile={isMobile}>{rightText}</RightLabelDiv>
+
     </Div>
   );
 }
