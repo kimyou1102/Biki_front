@@ -39,20 +39,17 @@ const RightLabelDiv = styled.div<{ isMobile: boolean }>`
   font-family: 'PretendardBold';
   font-size: 0.9rem;
 `;
-
 export function LabelHint({ bgcolor, leftText, rightText }: LabelHintProps) {
   const isMobile = useMediaQuery({
     query: '(max-width:768px)',
   });
 
   return (
-
     <Div display="flex" margin="0 0 1rem 0" style={{ width: '100%' }}>
       <LeftLabelDiv bgcolor={bgcolor} isMobile={isMobile}>
         {leftText}
       </LeftLabelDiv>
       <RightLabelDiv isMobile={isMobile}>{rightText}</RightLabelDiv>
-
     </Div>
   );
 }

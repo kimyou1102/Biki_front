@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
-import { Section, H1, Span } from '@atoms';
+import { Section, H1, Span, ModalWrap } from '@atoms';
 
 import { LabelHint, MovieScheduleTitle, ScreeningItem } from '@molecules';
 import {
