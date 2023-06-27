@@ -115,7 +115,14 @@ export function FooterBannerList() {
         ))} */}
         {sponsors.map((e) => (
           <SwiperSlide key={e.id}>
-            <Button width={200} height={40} onClick={() => window.open(e.url)}>
+            <Button
+              width={200}
+              height={40}
+              onClick={() => {
+                console.log(e.url);
+                window.open(e.url);
+              }}
+            >
               <Img alt="후원사" src={e.image} width={200} height={40} />
             </Button>
           </SwiperSlide>
