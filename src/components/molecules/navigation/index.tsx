@@ -32,23 +32,23 @@ export function Navigation({ left, menus }: Props) {
   // const { t } = useTranslation();
   // const language = useRecoilValue(languageState);
 
-  const sectionApi = useCallback(async () => {
-    await getSectionApi()
-      .then((res) => {
-        setKoUrl(res.map((x: any) => x.nameKo.trim()));
-        setEnUrl(res.map((x: any) => x.nameEn.trim()));
+  // const sectionApi = useCallback(async () => {
+  //   await getSectionApi()
+  //     .then((res) => {
+  //       setKoUrl(res.map((x: any) => x.nameKo.trim()));
+  //       setEnUrl(res.map((x: any) => x.nameEn.trim()));
 
-        if (language === 'English') {
-          setSection(res.map((x: any) => x.nameKo));
-          setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
-        } else {
-          setSection(res.map((x: any) => x.nameEn));
-          setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameEn}`));
-        }
-      })
-      .catch((err) => console.log(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [language]);
+  //       if (language === 'English') {
+  //         setSection(res.map((x: any) => x.nameKo));
+  //         setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
+  //       } else {
+  //         setSection(res.map((x: any) => x.nameEn));
+  //         setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameEn}`));
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [language]);
 
   // useEffect(() => {
   //   sectionApi();

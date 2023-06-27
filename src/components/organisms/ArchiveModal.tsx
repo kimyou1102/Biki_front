@@ -8,7 +8,6 @@ import { useMediaQuery } from 'react-responsive';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Span, Text, Img, H1, FlexContainer, Button } from '@atoms';
 import { ScheduleTable, RelatedMovies } from '@molecules';
-import { Box, CircularProgress } from '@mui/material';
 import { getMovieByIdApi } from '../../apis/movie/get-movie-by-id-api';
 import { getUserMoviedApi } from '../../apis/movie/get-user-movie-detail-api';
 import { ArchiveModalSlide } from './ArchiveModalSlide';
@@ -48,7 +47,6 @@ export function ArchiveModal() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
   const [movieSchedule, setMovieSchedule] = useState<any>();
-  const [isLoading, setIsLoading] = useState(true);
   const language = useRecoilValue(languageState);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -64,7 +62,6 @@ export function ArchiveModal() {
         setMovie(res.data);
         // setRelatedMovies((prev) => [...prev, res.data]);
         setMovieSchedule({ schedule: res.data.schedule, addInfo: res.data.tags });
-        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [movieModalId, setMovie]);
@@ -135,95 +132,93 @@ export function ArchiveModal() {
         </FlexContainer>
       </Wrap>
 
-          <Wrap>
-            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-              Credit
-            </Text>
-            <TextWrap>
-              <Span>{t(`archive.section`)}</Span>
-              <Span weight="bold">{language === 'English' ? movie.section.nameKo : movie.section.nameEn}</Span>
-              <Span>{t(`archive.actor`)}</Span>
-              <Span weight="bold">{language === 'English' ? movie.credit.castingKo : movie.credit.castingEn}</Span>
-              <Span>{t(`archive.production`)}</Span>
-              <Span weight="bold">
-                {t(`movie.director`)}: {movie.credit.directorNameEn}, {t(`archive.script`)}:{' '}
-                {movie.credit.directorNameEn}, {t(`archive.producer`)}: {movie.credit.directorNameEn}
+      <Wrap>
+        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+          Credit
+        </Text>
+        <TextWrap>
+          <Span>{t(`archive.section`)}</Span>
+          <Span weight="bold">{language === 'English' ? movie.section.nameKo : movie.section.nameEn}</Span>
+          <Span>{t(`archive.actor`)}</Span>
+          <Span weight="bold">{language === 'English' ? movie.credit.castingKo : movie.credit.castingEn}</Span>
+          <Span>{t(`archive.production`)}</Span>
+          <Span weight="bold">
+            {t(`movie.director`)}: {movie.credit.directorNameEn}, {t(`archive.script`)}: {movie.credit.directorNameEn},{' '}
+            {t(`archive.producer`)}: {movie.credit.directorNameEn}
+          </Span>
+          <Span>{t(`archive.subtitle`)}</Span>
+          <Span weight="bold">{movie.subTitle}</Span>
+        </TextWrap>
+      </Wrap>
+
+      <Wrap>
+        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+          Contact
+        </Text>
+        <Wrap className="contact">
+          {/* <Span>배급</Span> */}
+          <Span weight="bold">{movie.contact.distribution}</Span>
+          <Span weight="bold">{movie.contact.email}</Span>
+        </Wrap>
+      </Wrap>
+
+      <Wrap>
+        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+          Director
+        </Text>
+        <FlexContainer>
+          <Img
+            src={movie.credit.profileImage === '' ? emptyImg : movie.credit.profileImage}
+            alt="감독사진"
+            width={300}
+            height={300}
+            radius="10px"
+            objectfit="cover"
+          />
+          <div style={{ width: 'calc(480px * 0.8)', marginLeft: 'calc(24px * 0.8)' }}>
+            <Text weight="bold" size={1.5} margin="0 0 calc(20px * 0.8) 0">
+              {language === 'English' ? movie.credit.directorNameKo : movie.credit.directorNameEn}
+              <Span weight="bold" color="#767676" margin="0 0 0 calc(8px * 0.8)">
+                {language === 'English' ? movie.credit.directorNameEn : movie.credit.directorNameKo}
               </Span>
-              <Span>{t(`archive.subtitle`)}</Span>
-              <Span weight="bold">{movie.subTitle}</Span>
-            </TextWrap>
-          </Wrap>
-
-          <Wrap>
-            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-              Contact
             </Text>
-            <Wrap className="contact">
-              {/* <Span>배급</Span> */}
-              <Span weight="bold">{movie.contact.distribution}</Span>
-              <Span weight="bold">{movie.contact.email}</Span>
-            </Wrap>
-          </Wrap>
+            <Span size={1.125}>
+              {language === 'English' ? movie.credit.directorInfoKo : movie.credit.directorInfoEn}
+            </Span>
+          </div>
+        </FlexContainer>
+      </Wrap>
 
-          <Wrap>
-            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-              Director
-            </Text>
-            <FlexContainer>
-              <Img
-                src={movie.credit.profileImage === '' ? emptyImg : movie.credit.profileImage}
-                alt="감독사진"
-                width={300}
-                height={300}
-                radius="10px"
-                objectfit="cover"
-              />
-              <div style={{ width: 'calc(480px * 0.8)', marginLeft: 'calc(24px * 0.8)' }}>
-                <Text weight="bold" size={1.5} margin="0 0 calc(20px * 0.8) 0">
-                  {language === 'English' ? movie.credit.directorNameKo : movie.credit.directorNameEn}
-                  <Span weight="bold" color="#767676" margin="0 0 0 calc(8px * 0.8)">
-                    {language === 'English' ? movie.credit.directorNameEn : movie.credit.directorNameKo}
-                  </Span>
-                </Text>
-                <Span size={1.125}>
-                  {language === 'English' ? movie.credit.directorInfoKo : movie.credit.directorInfoEn}
-                </Span>
-              </div>
-            </FlexContainer>
-          </Wrap>
-
-          <Wrap>
-            <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
-              {t(`movie.relatedMovie`)}
-            </Text>
-            <div style={{ display: 'flex' }}>
-              {movie.relatedMovies.map((e) => (
-                <RelatedMovies
-                  key={e.id}
-                  title={language === 'English' ? e.titleKo : e.titleEn}
-                  director={e.directorName}
-                  year={e.eventYear}
-                  time={e.runningTime}
-                  src={e.stillImage}
-                />
-              ))}
-            </div>
-          </Wrap>
-          {movie.screening.status === '상영' && (
-            <FlexContainer justify="right">
-              <Button
-                bgcolor="var(--main-color)"
-                width={440}
-                padding="calc(18px * 0.8) calc(100px * 0.8)"
-                radius="10px"
-                color="white"
-                onClick={() => navigate(`/movie/online/${movie.id}`)}
-              >
-                {t(`movie.goToOnline`)}
-              </Button>
-            </FlexContainer>
-          )}
-        </>
+      <Wrap>
+        <Text weight="bold" size={2} margin="0 0 calc(16px * 0.8) 0">
+          {t(`movie.relatedMovie`)}
+        </Text>
+        <div style={{ display: 'flex' }}>
+          {movie.relatedMovies.map((e) => (
+            <RelatedMovies
+              key={e.id}
+              title={language === 'English' ? e.titleKo : e.titleEn}
+              director={e.directorName}
+              year={e.eventYear}
+              time={e.runningTime}
+              src={e.stillImage}
+            />
+          ))}
+        </div>
+      </Wrap>
+      {movie.screening.status === '상영' && (
+        <FlexContainer justify="right">
+          <Button
+            bgcolor="var(--main-color)"
+            width={440}
+            padding="calc(18px * 0.8) calc(100px * 0.8)"
+            radius="10px"
+            color="white"
+            onClick={() => navigate(`/movie/online/${movie.id}`)}
+          >
+            {t(`movie.goToOnline`)}
+          </Button>
+        </FlexContainer>
       )}
     </Container>
   );
