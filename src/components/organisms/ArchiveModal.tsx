@@ -142,10 +142,7 @@ export function ArchiveModal() {
           <Span>{t(`archive.actor`)}</Span>
           <Span weight="bold">{language === 'English' ? movie.credit.castingKo : movie.credit.castingEn}</Span>
           <Span>{t(`archive.production`)}</Span>
-          <Span weight="bold">
-            {t(`movie.director`)}: {movie.credit.directorNameEn}, {t(`archive.script`)}: {movie.credit.directorNameEn},{' '}
-            {t(`archive.producer`)}: {movie.credit.directorNameEn}
-          </Span>
+          <Span weight="bold">{movie.contact.distribution}</Span>
           <Span>{t(`archive.subtitle`)}</Span>
           <Span weight="bold">{movie.subTitle}</Span>
         </TextWrap>
@@ -157,7 +154,7 @@ export function ArchiveModal() {
         </Text>
         <Wrap className="contact">
           {/* <Span>배급</Span> */}
-          <Span weight="bold">{movie.contact.distribution}</Span>
+          {/* <Span weight="bold">{movie.contact.distribution}</Span> */}
           <Span weight="bold">{movie.contact.email}</Span>
         </Wrap>
       </Wrap>
