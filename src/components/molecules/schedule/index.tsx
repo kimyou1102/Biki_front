@@ -39,8 +39,27 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
     query: '(max-width:768px)',
   });
 
+  const handleSingleMovieClick = () => {
+    if (id) {
+      setMovieModal(true);
+      // setMovieModalData(data);
+      setTop(window.scrollY);
+      setmovieModalId(id);
+      document.querySelector('body')?.classList.add('none');
+    }
+  };
+
+  const handleGroupMovieClick = (movieId: number) => {
+    // handleTooltipClose();
+    setMovieModal(true);
+    // setMovieModalData(data);
+    setTop(window.scrollY);
+    setmovieModalId(movieId);
+    document.querySelector('body')?.classList.add('none');
+  };
+
   return isMobile ? (
-    <Box display="flex" flexDirection="column" width="35vw">
+    <Box display="flex" flexDirection="column" width="35vw" onClick={handleSingleMovieClick} sx={{ cursor: 'pointer' }}>
       <Typography fontFamily="PretendardBold" fontWeight="bold" fontSize="1rem">
         {language === 'English' ? titleKo : titleEn}
       </Typography>
@@ -78,9 +97,14 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div>{t(`screening.list`)}</div>
                 {movies.map((item, index) => (
-                  <div key={item.id}>
+                  <Button
+                    variant="contained"
+                    component="button"
+                    key={item.id}
+                    onClick={() => handleGroupMovieClick(item.id)}
+                  >
                     {index + 1}. {item.title}
-                  </div>
+                  </Button>
                 ))}
               </div>
             }
@@ -102,11 +126,7 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
               },
             }}
           >
-            <Button
-              variant="contained"
-              sx={{ mb: '6px', borderRadius: '8px', width: '80%' }}
-              onClick={handleTooltipOpen}
-            >
+            <Button variant="contained" sx={{ mb: '6px' }} onClick={handleTooltipOpen}>
               {t(`screening.list`)}
             </Button>
           </Tooltip>
@@ -114,8 +134,13 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
       )}
     </Box>
   ) : (
-    <Box display="flex" flexDirection="column" width="13rem">
-
+    <Box
+      display="flex"
+      flexDirection="column"
+      width="13rem"
+      onClick={handleSingleMovieClick}
+      sx={{ cursor: 'pointer' }}
+    >
       <Typography fontFamily="Pretendard" fontWeight="bold" fontSize="0.9rem">
         {language === 'English' ? titleKo : titleEn}
       </Typography>
