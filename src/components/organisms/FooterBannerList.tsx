@@ -1,11 +1,8 @@
 import React, { useEffect, useCallback, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Button, Img } from '@atoms';
-
-// import Slider from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
+import { Button, Img } from '@atoms';
 import 'swiper/swiper.min.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import SwiperCore, { Navigation, Scrollbar, Autoplay } from 'swiper';
@@ -20,8 +17,8 @@ interface ArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Container = styled.div`
-  width: calc(1520px * 0.8);
+const Container = styled.div<{ isMobile: boolean }>`
+  width: ${(props) => (props.isMobile ? '100%' : 'calc(1520px * 0.8)')};
   /* width: calc(700px * 0.8); */
   height: calc(60px * 0.8);
   margin: 0 auto;
@@ -57,6 +54,9 @@ export function FooterBannerList() {
   const originRef = useRef<any>(null);
   const cloneRef = useRef<any>(null);
 
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
   // useEffect(() => {
   //   console.log(originRef.current.getBoundingClientRect().left);
   // });
@@ -85,8 +85,36 @@ export function FooterBannerList() {
   const test = Array.from({ length: 8 }, (v, i) => i + 1);
   SwiperCore.use([Autoplay]);
 
-  return (
-    <Container id="banner">
+  return isMobile ? (
+    <Container id="banner" isMobile={isMobile}>
+      <Swiper
+        // slidesPerView="auto"
+        spaceBetween={16}
+        centeredSlides
+        loop
+        init={false}
+        freeMode
+        observer
+        observeParents
+        speed={8000}
+        allowTouchMove={false}
+        slidesPerView={2}
+        autoplay={{
+          delay: 0,
+          disableOnInteraction: false,
+        }}
+      >
+        {sponsors.map((e) => (
+          <SwiperSlide key={e.id}>
+            <Button width={200} height={40} onClick={() => window.open(e.url)}>
+              <Img alt="후원사" src={e.image} width={200} height={40} />
+            </Button>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Container>
+  ) : (
+    <Container id="banner" isMobile={isMobile}>
       <Swiper
         // slidesPerView="auto"
         spaceBetween={16}
@@ -103,16 +131,7 @@ export function FooterBannerList() {
           delay: 0,
           disableOnInteraction: false,
         }}
-        // modules={[Autoplay]}
       >
-        {/* {test.map((e, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <SwiperSlide key={i}>
-            <Button width={200} height={40} bgcolor="tomato">
-              후원사{e}
-            </Button>
-          </SwiperSlide>
-        ))} */}
         {sponsors.map((e) => (
           <SwiperSlide key={e.id}>
             <Button
@@ -127,57 +146,6 @@ export function FooterBannerList() {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* <BannerContainer>
-        <Wrap>
-          <Roller className="original" left={0}>
-            <BannerUl ref={originRef}>
-              {sponsors.map((e) => (
-                <li key={e.id}>
-                  <Button width={200} height={40} onClick={() => window.open(e.url)}>
-                    <Img alt="후원사" src={e.image} width={200} height={40} />
-                  </Button>
-                </li>
-              ))}
-            </BannerUl>
-          </Roller>
-          <Roller
-            className="clone"
-            ref={cloneRef}
-            left={originRef.current ? originRef.current.getBoundingClientRect().right : 0}
-          >
-            <BannerUl>
-              {sponsors.map((e) => (
-                <li key={e.id}>
-                  <Button width={200} height={40} onClick={() => window.open(e.url)}>
-                    <Img alt="후원사" src={e.image} width={200} height={40} />
-                  </Button>
-                </li>
-              ))}
-            </BannerUl>
-          </Roller>
-        </Wrap>
-      </BannerContainer> */}
-
-      {/* <Slider {...settings}>
-        {sponsors.map((e) => (
-          <ul key={e.id}>
-            <li>
-              <Button width={200} height={40} onClick={() => window.open(e.url)}>
-                <Img alt="후원사" src={e.image} width={200} height={40} />
-              </Button>
-            </li>
-          </ul>
-        ))} */}
-      {/* {test.map((e) => (
-          <ul key={e}>
-            <li>
-              <Button width={200} height={40} bgcolor="tomato">
-                후원사배너{e}
-              </Button>
-            </li>
-          </ul>
-        ))} */}
-      {/* </Slider> */}
     </Container>
   );
 }

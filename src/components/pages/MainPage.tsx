@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import { MainListSection, Img } from '@atoms';
 import { ShortcutButtonList } from '@molecules';
 import { MainSlide, NoticeArticel, MainMovieList, MainEventList, MainYoutebeList, MainNewsBoxList } from '@organisms';
@@ -11,6 +13,19 @@ import cloud from '../../assets/images/main_cloud.png';
 
 const Wrap = styled.div`
   position: relative;
+`;
+
+const MobileWrap = styled.div<{ left?: boolean }>`
+  margin-top: 41px;
+  padding-left: ${(props) => (props.left ? '12px' : '0px')};
+`;
+
+// const Section = styled.div`
+//   padding: 0px 12px;
+// `;
+
+const Section = styled.div`
+  padding: 0px 12px;
 `;
 
 const ImgWrap = styled.div`
@@ -39,7 +54,30 @@ const ImgWrap = styled.div`
 `;
 
 export function MainPage() {
-  return (
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
+  return isMobile ? (
+    <>
+      <MainSlide />
+      <Section>
+        <NoticeArticel />
+      </Section>
+      <MobileWrap left>
+        <MainMovieList />
+      </MobileWrap>
+      <MobileWrap left>
+        <MainEventList />
+      </MobileWrap>
+      <MobileWrap left>
+        <MainYoutebeList />
+      </MobileWrap>
+      <Section>
+        <MainNewsBoxList />
+      </Section>
+    </>
+  ) : (
     <>
       <MainSlide />
       <ShortcutButtonList />
@@ -73,7 +111,6 @@ export function MainPage() {
         <ImgWrap className="character3">
           <Img width={162} height={87} alt="배경캐릭터" src={character3} />
         </ImgWrap>
-        {/* <Footer /> */}
       </Wrap>
     </>
   );

@@ -71,6 +71,9 @@ export function ProgramMoviesTemplate({ title, id }: Props) {
             <CircularProgress color="success" />
           </Box>
         ) : (
+          //       <ArchiveTemplate title={title} type="film" pageTitle={t(`screening.title`)} sub={t(`screening.introduce`)}>
+          //         {movies.length === 0 ? (
+          //           <h1>{t(`archive.empty`)}</h1>
           <ArchiveMovieList page={page} setPage={setPage} movies={movies} />
         )}
       </ArchiveTemplate>

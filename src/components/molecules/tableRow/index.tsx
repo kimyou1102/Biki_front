@@ -18,7 +18,7 @@ export function TableRow({ id, num, title, count, date }: TableRowProps) {
       <Th
         className="title"
         onClick={() => {
-          navigate(`${id}`, { replace: true, state: { id, title, count, date } });
+          navigate(`${id}`, { replace: false, state: { id, title, count, date } });
         }}
       >
         {title}

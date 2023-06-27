@@ -43,7 +43,7 @@ export const translation = {
         },
         {
           title: '비키소식',
-          items: ['공지사항', '뉴스레터', '보도자료'],
+          items: ['공지사항', '뉴스레터', '언론보도', '보도자료'],
         },
       ],
 
@@ -195,7 +195,7 @@ export const translation = {
         },
         {
           title: 'News',
-          items: ['Notice', 'Newsletter', 'Press Release'],
+          items: ['Notice', 'Newsletter', 'Media Coverage', 'Press release'],
         },
       ],
       counter_one: 'Changed language just once',

@@ -8,6 +8,10 @@ interface SpanProps {
   weight?: string | number;
   margin?: string;
   font?: string;
+  className?: string;
+  display?: string;
+  textoverflow?: number;
+  lineheight?: number;
 }
 
 const StyledSpan = styled.span<SpanProps>`
@@ -16,15 +20,45 @@ const StyledSpan = styled.span<SpanProps>`
   margin: ${(props) => props.margin};
   font-size: ${(props) => (props.size ? `${props.size * 0.8}rem` : '1rem')};
   font-family: ${(props) => (props.font ? `${props.font}` : 'PretendardRegular')};
+  display: ${(props) => (props.display ? props.display : 'inline')};
+  &.text-overflow {
+    width: ${(props) => `calc(100% - ${props.textoverflow}px)`};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &.line-height {
+    line-height: ${(props) => `${props.lineheight}px`};
+  }
 `;
 
-export function Span({ children, size = 1, color = 'black', weight, margin = '0px', font }: SpanProps) {
+export function Span({
+  children,
+  size = 1,
+  color = 'black',
+  weight,
+  margin = '0px',
+  font,
+  className,
+  display,
+  textoverflow = 0,
+  lineheight,
+}: SpanProps) {
   const CommonPros = {
     size,
     color,
     weight,
     margin,
     font,
+    className,
+    display,
+    textoverflow,
+    lineheight,
   };
-  return <StyledSpan {...CommonPros}>{children}</StyledSpan>;
+  return (
+    <StyledSpan {...CommonPros} className={className}>
+      {children}
+    </StyledSpan>
+  );
 }

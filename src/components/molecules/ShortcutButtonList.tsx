@@ -24,6 +24,9 @@ export function ShortcutButtonList() {
     instagram: 'https://www.instagram.com/biky_filmfest/',
     facebook: 'https://www.facebook.com/biky.festival/',
     youtube: 'https://www.youtube.com/@bikipr',
+    blog: 'https://blog.naver.com/bikff',
+    newsletter: 'https://www.biky.or.kr/news/newsletter',
+    subscribe: 'https://www.biky.or.kr/news/notice/599',
   };
 
   function handleButtonClick(link: string) {
@@ -35,9 +38,9 @@ export function ShortcutButtonList() {
       <ShortcutsButton src={instagram} onClickEvent={() => handleButtonClick(snsLink.instagram)} />
       <ShortcutsButton src={facebook} onClickEvent={() => handleButtonClick(snsLink.facebook)} />
       <ShortcutsButton src={youtube} onClickEvent={() => handleButtonClick(snsLink.youtube)} />
-      <ShortcutsButton src={blog} />
-      <ShortcutsButton src={newsletter} />
-      <ShortcutsButton src={subscribe} />
+      <ShortcutsButton src={blog} onClickEvent={() => handleButtonClick(snsLink.blog)} />
+      <ShortcutsButton src={newsletter} onClickEvent={() => handleButtonClick(snsLink.newsletter)} />
+      <ShortcutsButton src={subscribe} onClickEvent={() => handleButtonClick(snsLink.subscribe)} />
     </Container>
   );
 }

@@ -28,21 +28,6 @@ export function NewsListSection({ data, page, setPage, inputValue, setInputValue
     setInputValue(e.target.value);
   };
 
-  // console.log('뉴스섹션 : ', data.length);
-
-  // useEffect(() => {
-  //   if (value === '') {
-  //     // setNewsData(data);
-  //     setNotices(noticeListInitial);
-  //   }
-  // }, [data, noticeListInitial, setNotices, value]);
-
-  // const onSearch = () => {
-  //   // const newData = notices.filter((e) => e.titleKo.includes(value));
-  //   // console.log(newData);
-  //   // setNotices(newData);
-  // };
-
   return (
     <>
       <SearchBar
@@ -61,7 +46,7 @@ export function NewsListSection({ data, page, setPage, inputValue, setInputValue
           <Tr>
             <Th className="left">{t(`news.number`)}</Th>
             <Th className="title">{t(`news.title`)}</Th>
-            <Th>{t(`views`)}</Th>
+            <Th>{t(`view`)}</Th>
             <Th className="right">{t(`registrationDate`)}</Th>
           </Tr>
         </THead>

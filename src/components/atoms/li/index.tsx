@@ -11,6 +11,8 @@ interface LiProps {
   margin?: string;
   onClick?: (e: any) => void;
   id?: string;
+  width?: string;
+  size?: number;
 }
 
 const StyledLi = styled.li<LiProps>`
@@ -19,9 +21,10 @@ const StyledLi = styled.li<LiProps>`
   cursor: pointer;
   font-weight: ${(props) => (props.weight ? props.weight : 'normal')};
   outline: none;
-  font-size: 1rem;
+  font-size: ${(props) => (props.size ? `${props.size}rem` : '1rem')};
   padding: ${(props) => (props.padding ? props.padding : '0px')};
   margin: ${(props) => (props.margin ? props.margin : '0px')};
+  width: ${(props) => (props.width ? props.width : 'auto')};
 `;
 
 export function Li({
@@ -34,6 +37,8 @@ export function Li({
   onClick,
   id,
   margin,
+  width,
+  size,
 }: LiProps) {
   const CommonProps = {
     color,
@@ -44,6 +49,8 @@ export function Li({
     padding,
     id,
     margin,
+    width,
+    size,
   };
   return (
     <StyledLi {...CommonProps} id={id}>

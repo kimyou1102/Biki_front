@@ -1,14 +1,13 @@
 import React, { useCallback, useState, useEffect } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
 import { Box, CircularProgress, LinearProgress } from '@mui/material';
 import { Footer } from '@layout/Footer';
 import { getPostByTitleApi } from '@src/apis/post/get-post-by-title';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { noticeListState, noticeListInitialState } from '../../../../recoil/notice/notice';
-
 import { getPostApi } from '../../../../apis/post/get-post-api';
 import { PostType } from '../../../../models/post';
 
@@ -26,8 +25,9 @@ export function NewsNotice() {
   const [searchKeyword, setSearchKeyword] = useState('');
 
   console.log(page, limit);
+
   const postApi = useCallback(async () => {
-    if (searchKeyword !== null) {
+    if (searchKeyword !== '') {
       await getPostByTitleApi('공지사항', searchKeyword, page, limit)
         .then((res) => {
           // console.log(res.data.content);
@@ -84,7 +84,7 @@ export function NewsNotice() {
             setPage={setPage}
             inputValue={searchKeyword}
             setInputValue={setSearchKeyword}
-            onSearch={handleSearchButtonClick}
+            onSearch={() => handleSearchButtonClick}
             limit={limit}
             total={total}
           />

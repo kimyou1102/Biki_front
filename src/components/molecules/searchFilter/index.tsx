@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import { Img, Button } from '@atoms';
 import { SearchBar } from '@molecules/searchBar';
 import { getMovieBySectionIdAndTitleApi } from '@src/apis/movie/get-movie-by-id-and-title-api';
 import { getMovieByTitleApi } from '@src/apis/movie/get-movie-by-title-api';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { filmInputState, sketchInputState } from '../../../recoil/archive/atome';
+import { filmInputState, sketchInputState, pageState } from '../../../recoil/archive/atome';
 import { movieState, testMovie, movieInitialState } from '../../../recoil/movies';
 import { testSketchs, sketchState } from '../../../recoil/sketch/atom';
 import { SketchProps, SketchType } from '../../../models/sketch';
@@ -26,7 +28,12 @@ export function SearchFilter({ type, id }: Props) {
   const [sketchs, setSketchs] = useRecoilState<SketchType[]>(sketchState);
   const [filmValue, setFilmValue] = useRecoilState<string>(filmInputState);
   const [sketchValue, setSketchValue] = useRecoilState<string>(sketchInputState);
+  const [page, setPage] = useRecoilState<number>(pageState);
   const { t } = useTranslation();
+
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
 
   useEffect(() => {
     if (filmValue === '') {
@@ -48,9 +55,12 @@ export function SearchFilter({ type, id }: Props) {
     } else {
       getMovieByTitleApi(filmValue).then((res) => {
         setMovies(res.list);
+        setPage(0);
       });
     }
   };
+
+  console.log(movies);
 
   const onSketchSearch = () => {};
 
@@ -66,7 +76,17 @@ export function SearchFilter({ type, id }: Props) {
     console.log('필터링');
   };
 
-  return (
+  return isMobile ? (
+    <SearchBar
+      value={type === 'film' ? filmValue : sketchValue}
+      onChange={onChange}
+      onSearch={type === 'film' ? onFilmSearch : onSketchSearch}
+      color="#555555"
+      radius={10}
+      height={48}
+      placeholder={type === 'film' ? t(`archive.search`) : t(`news.search`)}
+    />
+  ) : (
     <div style={{ display: 'flex' }}>
       <SearchBar
         value={type === 'film' ? filmValue : sketchValue}
