@@ -54,21 +54,14 @@ export function HeaderLayout() {
   const sectionApi = useCallback(async () => {
     await getSectionApi()
       .then((res) => {
-        // 'nameKo' 속성을 기준으로 배열 정렬
-        const resKo = res.sort((a: any, b: any) => {
-          if (a.nameKo < b.nameKo) return -1;
-          if (a.nameKo > b.nameKo) return 1;
-          return 0;
-        });
-
-        setKoUrl(resKo.map((x: any) => x.nameKo.trim()));
-        setEnUrl(resKo.map((x: any) => x.nameEn.trim()));
+        setKoUrl(res.map((x: any) => x.nameKo.trim()));
+        setEnUrl(res.map((x: any) => x.nameEn.trim()));
         if (language === 'English') {
-          setSection(resKo.map((x: any) => x.nameKo));
-          setSectionUrl(resKo.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
+          setSection(res.map((x: any) => x.nameKo));
+          setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameKo}`));
         } else {
           setSection(res.map((x: any) => x.nameEn));
-          setSectionUrl(resKo.map((x: any) => `/movie/${x.id}?title=${x.nameEn}`));
+          setSectionUrl(res.map((x: any) => `/movie/${x.id}?title=${x.nameEn}`));
         }
       })
       .catch((err) => console.log(err));
