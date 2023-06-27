@@ -24,6 +24,7 @@ const StyledH1 = styled.h1<H1Props>`
 
   &.mobile {
     font-size: 1.5rem;
+    font-family: 'PretendardBold';
   }
 `;
 

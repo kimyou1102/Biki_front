@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
 import { Box, CircularProgress, LinearProgress } from '@mui/material';
@@ -36,6 +35,7 @@ export function NewsNotice() {
           setNotices(res.data.content);
           setNoticeListInitial(res.data.content);
           setIsLoading(false);
+          setPage(0);
         })
         .catch((err) => console.log(err));
     } else {

@@ -4,15 +4,17 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { Img } from '@atoms';
 import { useTranslation } from 'react-i18next';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
+import { useCookies } from 'react-cookie';
 import { Nav } from '@organisms';
 import { Header, MobileHeader } from '@molecules';
 import { Footer } from '@layout/Footer';
+import i18next from '../../../local/i18n';
 import { getSectionApi } from '../../../apis/section/get-section-api';
 import { languageState } from '../../../recoil/language/atom';
 import { koUrlState, enUrlState } from '../../../recoil/archive/program/atom';
 import { NavigationType } from '../../../models/nav';
+import { ButtonsProps } from '../../../models/headerButton';
 import { navState } from '../../../recoil/mobile-nav/atome';
 
 const NavBack = styled.div`
@@ -49,7 +51,58 @@ export function HeaderLayout() {
   const [enUrl, setEnUrl] = useRecoilState(enUrlState);
   const [navOpen, setNavOpen] = useRecoilState(navState);
   const { t } = useTranslation();
-  const language = useRecoilValue(languageState);
+  const [language, setLanguage] = useRecoilState<string>(languageState);
+  const [isLogin, setLogin] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  useEffect(() => {
+    if (cookies.access_token) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  }, [cookies.access_token]);
+
+  const onLogoutClick = () => {
+    if (cookies.access_token) {
+      removeCookie('access_token');
+    } else {
+      navigate('/login');
+    }
+  };
+
+  const openLanguageMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const closeLanguageMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const changeLanguage = (lang: string) => {
+    i18next.changeLanguage(lang);
+    closeLanguageMenu();
+  };
+
+  const onClick = () => {
+    if (language === 'English') {
+      changeLanguage('en');
+    } else {
+      changeLanguage('ko');
+    }
+    setLanguage((prev) => (prev === 'English' ? '한국어' : 'English'));
+  };
+
+  const accountMenus: ButtonsProps[] = [
+    { id: 1, name: isLogin ? t(`nav.logout`) : t(`nav.login`), url: '/login', onClick: onLogoutClick },
+    { id: 2, name: isLogin ? t(`nav.mypage`) : t(`nav.signup`), url: '/signup' },
+    {
+      id: 3,
+      name: language,
+      url: '/',
+      onClick,
+    },
+  ];
 
   const sectionApi = useCallback(async () => {
     await getSectionApi()
@@ -166,7 +219,7 @@ export function HeaderLayout() {
 
   return isMobile ? (
     <div style={{ position: 'relative' }}>
-      <MobileHeader menus={menus} />
+      <MobileHeader menus={menus} accountMenus={accountMenus} />
       <Main isMobile>
         <Outlet />
       </Main>
@@ -176,7 +229,7 @@ export function HeaderLayout() {
   ) : (
     <>
       <>
-        <Header />
+        <Header accountMenus={accountMenus} />
         <Nav menus={menus} />
       </>
       <Main>
