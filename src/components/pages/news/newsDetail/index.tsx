@@ -3,8 +3,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NewsTemplates } from '@templates';
 import { NewsSection } from '@organisms';
-import { Footer } from '@layout/Footer';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { addPostViewApi } from '@src/apis/post/add-post-view-api';
 import { getPostByIdApi } from '../../../../apis/post/get-post-by-id-api';
 import { PostType } from '../../../../models/post';
@@ -56,6 +55,7 @@ export function NewsDetail({ type }: Props) {
     // eslint-disable-next-line prefer-destructuring
     titleName = t(`news.press`);
   }
+
   return (
     <>
       <NewsTemplates title={titleName}>

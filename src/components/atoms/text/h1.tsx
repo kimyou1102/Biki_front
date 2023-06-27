@@ -10,6 +10,7 @@ interface H1Props {
   font?: string;
   margin?: string;
   lineHeight?: number;
+  className?: string;
 }
 
 const StyledH1 = styled.h1<H1Props>`
@@ -20,9 +21,17 @@ const StyledH1 = styled.h1<H1Props>`
   font-family: ${(props) => (props.font ? `${props.font}` : 'PretendardRegular')};
   margin: ${(props) => (props.margin ? props.margin : '0px')};
   line-height: ${(props) => (props.lineHeight ? `${props.lineHeight}rem` : 'inherit')};
+
+  &.mobile {
+    font-size: 1.5rem;
+  }
 `;
 
-export function H1({ children, display, size, weight, color = 'black', font, margin, lineHeight }: H1Props) {
+export function H1({ children, display, size, weight, color = 'black', font, margin, lineHeight, className }: H1Props) {
   const CommonProps = { display, size, weight, color, font, margin, lineHeight };
-  return <StyledH1 {...CommonProps}>{children}</StyledH1>;
+  return (
+    <StyledH1 {...CommonProps} className={className}>
+      {children}
+    </StyledH1>
+  );
 }

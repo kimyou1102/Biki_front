@@ -7,4 +7,5 @@ export interface TextProps {
 export interface MainProps extends TextProps {
   src?: string;
   url: string;
+  type: string;
 }

@@ -162,6 +162,10 @@ const GlobalStyle = createGlobalStyle`
       color:white;
     }
 
+    #collapse {
+      border-collapse: separate !important;
+    }
+
     @font-face {
         font-family: 'PretendardBold';
         src: local('PretendardBold'), url(${PretendardBold}) format('woff2');

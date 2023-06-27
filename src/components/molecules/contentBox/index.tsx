@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import { ContentDescription } from '@molecules';
 import { FlexContainer, Iframe, Img } from '@atoms';
 import { ContentBoxInfo } from 'src/models/content';
@@ -19,6 +21,10 @@ export function ContentBox({ type, title, date, count, url, subType }: ContentBo
   const [top, setTop] = useRecoilState<number>(modalPositionState);
   const setModal = useSetRecoilState<boolean>(modalState);
 
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
   const onClick = () => {
     if (type === 'archive' && Array.isArray(url)) {
       document.querySelector('body')?.classList.add('none');
@@ -35,15 +41,17 @@ export function ContentBox({ type, title, date, count, url, subType }: ContentBo
     <FlexContainer
       onClick={onClick}
       className={[type, 'cursor'].join(' ')}
-      width={type === 'main' ? 630 : 413}
+      // eslint-disable-next-line no-nested-ternary
+      width={type === 'main' ? (isMobile ? 307 / 0.8 : 630) : 413}
       direction="column"
       margin={type === 'main' ? '0px 17px 0px 0px' : '0px'}
       radius="16px"
     >
       {type === 'main' ? (
-        <Wrap width={630} height={352.5}>
+        <Wrap width={isMobile ? 307 / 0.8 : 630} height={isMobile ? 173 / 0.8 : 352.5}>
           <Iframe
             type="main"
+            isMobile={isMobile}
             url={
               !Array.isArray(url)
                 ? url.replace('https://www.youtube.com/watch?v=', '')

@@ -21,7 +21,11 @@ interface Props {
 export const FlexContainer = styled.div<Props>`
   display: flex;
   margin: ${(props) => (props.margin ? props.margin : '0px')};
-  width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')};
+  /* width: ${(props) => (props.width ? `calc(${props.width}px * 0.8)` : 'auto')}; */
+  width: ${(props) =>
+    // eslint-disable-next-line no-nested-ternary
+    props.width ? (typeof props.width === 'string' ? props.width : `calc(${props.width}px * 0.8)`) : 'auto'};
+
   height: ${(props) => (props.height ? `calc(${props.height}px * 0.8)` : 'auto')};
   flex-direction: ${(props) => (props.direction ? props.direction : 'row')};
   flex-wrap: ${(props) => (props.wrap ? props.wrap : 'nowrap')};

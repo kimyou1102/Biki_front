@@ -38,3 +38,8 @@ export const modalPositionState = atom<number>({
   key: 'modalPositionState',
   default: 0,
 });
+
+export const pageState = atom<number>({
+  key: 'pageState',
+  default: 0,
+});

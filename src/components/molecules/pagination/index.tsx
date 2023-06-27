@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import { Button, Img, FlexContainer } from '@atoms';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import ReactPaginate from 'react-paginate';
@@ -35,6 +37,10 @@ export function Pagination({ total, limit, page, setPage }: Props) {
   // const arr = Array.from({ length: numPage }, (v, i) => i);
   const items = Array.from({ length: numPage }, (v, i) => i);
 
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
   const [currentItems, setCurrentItems] = useState<any>(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -51,7 +57,25 @@ export function Pagination({ total, limit, page, setPage }: Props) {
     // setPageCount(Math.ceil(items.length / itemsPerPage));
   };
 
-  return (
+  return isMobile ? (
+    <FlexContainer justify="center" margin="26px 0px 0px 0px">
+      <ReactPaginate
+        breakLabel={false}
+        nextLabel={<NextButton />}
+        onPageChange={(e) => handlePageClick(e)}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={0}
+        pageCount={numPage}
+        previousLabel={<PrevButton />}
+        // renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        pageLinkClassName="page-num"
+        previousLinkClassName="page-left"
+        nextLinkClassName="page-right"
+        activeLinkClassName="active"
+      />
+    </FlexContainer>
+  ) : (
     <FlexContainer justify="center" margin="26px 0px 0px 0px">
       <ReactPaginate
         breakLabel="..."

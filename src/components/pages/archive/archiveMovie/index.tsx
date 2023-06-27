@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 import { ArchiveTemplate } from '@templates';
 import { ArchiveMovieSection, ArchiveModal, ArchiveMovieList } from '@organisms';
 import { Footer } from '@layout/Footer';
@@ -16,6 +19,7 @@ import {
 } from '../../../../recoil/movies';
 import { MovieBoxInfo, MovieData } from '../../../../models/movie';
 import { getMovieApi } from '../../../../apis/movie/get-movie-api';
+import { pageState } from '../../../../recoil/archive/atome';
 
 export function ArchiveMoviePage() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
@@ -26,8 +30,13 @@ export function ArchiveMoviePage() {
   const [movies, setMovies] = useRecoilState<MovieData[]>(movieState);
   const setInitialMovieData = useSetRecoilState<MovieData[]>(movieInitialState); // api에서 받아오는 걸로
 
-  const [page, setPage] = useState(0);
+  // const [page, setPage] = useState(0);
+  const [page, setPage] = useRecoilState<number>(pageState);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
 
   const movieApi = useCallback(async () => {
     await getMovieApi()
@@ -61,6 +70,9 @@ export function ArchiveMoviePage() {
             <CircularProgress color="success" />
           </Box>
         ) : (
+          //       <ArchiveTemplate title={t(`movie.distribution`)} type="film">
+          //         {movies.length === 0 ? (
+          //           <h1>{t(`archive.empty`)}</h1>
           <ArchiveMovieList page={page} setPage={setPage} movies={movies} />
         )}
       </ArchiveTemplate>

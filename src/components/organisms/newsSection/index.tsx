@@ -100,11 +100,11 @@ export function NewsSection({ url, data }: Props) {
 
   // console.log(data);
   // console.log(data.body);
-  console.log(data.files);
+  // console.log(data.files);
 
   useEffect(() => {
     setElement(data.body);
-    console.log(data.body);
+    // console.log(data.body);
   }, [data.body]);
 
   return (
