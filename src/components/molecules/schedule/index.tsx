@@ -3,8 +3,12 @@ import { Box, Button, ClickAwayListener, Tooltip, Typography, Zoom } from '@mui/
 import { ArchiveModal } from '@organisms';
 import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
+import { useTranslation } from 'react-i18next';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { MovieLabelType, ScheduleMovieType } from 'src/models/schedule';
+import { languageState } from '../../../recoil/language/atom';
 
 interface ScreeningItemProps {
   titleKo: string;
@@ -28,40 +32,95 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
 
   const handleTooltipOpen = () => setTooltip(!tooltip);
   const handleTooltipClose = () => setTooltip(false);
+  const { t } = useTranslation();
+  const language = useRecoilValue(languageState);
 
-  const handleSingleMovieClick = () => {
-    if (id) {
-      setMovieModal(true);
-      // setMovieModalData(data);
-      setTop(window.scrollY);
-      setmovieModalId(id);
-      document.querySelector('body')?.classList.add('none');
-    }
-  };
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
 
-  const handleGroupMovieClick = (movieId: number) => {
-    // handleTooltipClose();
-    setMovieModal(true);
-    // setMovieModalData(data);
-    setTop(window.scrollY);
-    setmovieModalId(movieId);
-    document.querySelector('body')?.classList.add('none');
-  };
+  return isMobile ? (
+    <Box display="flex" flexDirection="column" width="35vw">
+      <Typography fontFamily="PretendardBold" fontWeight="bold" fontSize="1rem">
+        {language === 'English' ? titleKo : titleEn}
+      </Typography>
+      <Typography fontFamily="Pretendard" fontWeight="500" fontSize="0.75rem" color="#4D4E7B" mb="0.3rem">
+        {language === 'English' ? titleEn : titleKo}
+      </Typography>
 
-  return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      maxWidth="12rem"
-      component="div"
-      onClick={handleSingleMovieClick}
-      sx={{ cursor: 'pointer' }}
-    >
+      <Typography fontFamily="PretendardBold" fontWeight="bold" fontSize="1rem" mb="5px">
+        {time}
+      </Typography>
+
+      <Box display="flex" mb="10px" sx={{ flexWrap: 'wrap', gap: '6px 0px' }}>
+        <Box padding="2px 8px" bgcolor="#D9D9D9" borderRadius="5px" fontSize="0.7rem" mr="6px">
+          {runningTime}
+          {t(`movie.minute`)}
+        </Box>
+
+        {rating && (
+          <Box padding="3px 8px" bgcolor="#D9D9D9" borderRadius="5px" fontSize="0.7rem" mr="6px">
+            {rating}
+          </Box>
+        )}
+
+        <Box padding="3px 8px" bgcolor={label.bgColor} color="white" borderRadius="5px" fontSize="0.7rem" mr="10px">
+          {label.name}
+        </Box>
+      </Box>
+      {movies.length > 0 && (
+        <ClickAwayListener onClickAway={handleTooltipClose}>
+          <Tooltip
+            PopperProps={{
+              disablePortal: true,
+            }}
+            title={
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div>{t(`screening.list`)}</div>
+                {movies.map((item, index) => (
+                  <div key={item.id}>
+                    {index + 1}. {item.title}
+                  </div>
+                ))}
+              </div>
+            }
+            placement="top"
+            TransitionComponent={Zoom}
+            onClose={handleTooltipClose}
+            open={tooltip}
+            disableFocusListener
+            disableHoverListener
+            disableTouchListener
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  bgcolor: MAIN_THEME,
+                  '& .MuiTooltip-arrow': {
+                    color: 'white',
+                  },
+                },
+              },
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{ mb: '6px', borderRadius: '8px', width: '80%' }}
+              onClick={handleTooltipOpen}
+            >
+              {t(`screening.list`)}
+            </Button>
+          </Tooltip>
+        </ClickAwayListener>
+      )}
+    </Box>
+  ) : (
+    <Box display="flex" flexDirection="column" width="13rem">
+
       <Typography fontFamily="Pretendard" fontWeight="bold" fontSize="0.9rem">
-        {titleKo}
+        {language === 'English' ? titleKo : titleEn}
       </Typography>
       <Typography fontFamily="Pretendard" fontWeight="500" fontSize="0.8rem" color="#4D4E7B" mb="0.3rem">
-        {titleEn}
+        {language === 'English' ? titleEn : titleKo}
       </Typography>
 
       <Typography fontFamily="Pretendard" fontWeight="bold" fontSize="0.9rem" mb="5px">
@@ -70,7 +129,8 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
 
       <Box display="flex" mb="10px">
         <Box padding="2px 8px" bgcolor="#D9D9D9" borderRadius="5px" fontSize="0.7rem" mr="6px">
-          {runningTime}분
+          {runningTime}
+          {t(`movie.minute`)}
         </Box>
 
         {rating && (
@@ -91,7 +151,7 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
             }}
             title={
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div>상영작 목록</div>
+                <div>{t(`screening.list`)}</div>
                 {movies.map((item, index) => (
                   <Button
                     variant="contained"
@@ -123,7 +183,7 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
             }}
           >
             <Button variant="contained" sx={{ mb: '6px' }} onClick={handleTooltipOpen}>
-              상영작 목록
+              {t(`screening.list`)}
             </Button>
           </Tooltip>
         </ClickAwayListener>

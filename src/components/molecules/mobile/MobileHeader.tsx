@@ -7,10 +7,12 @@ import { MobileNav } from './MobileNav';
 import logo from '../../../assets/images/Biky_Logo_season.png';
 import menu from '../../../assets/images/BurgerMenu.png';
 import { NavigationType } from '../../../models/nav';
+import { ButtonsProps } from '../../../models/headerButton';
 import { navState } from '../../../recoil/mobile-nav/atome';
 
 interface Props {
   menus: NavigationType[];
+  accountMenus: ButtonsProps[];
 }
 
 const Contianer = styled.div`
@@ -20,7 +22,7 @@ const Contianer = styled.div`
   padding: 14px 16px;
 `;
 
-export function MobileHeader({ menus }: Props) {
+export function MobileHeader({ menus, accountMenus }: Props) {
   //   const [open, setOpen] = useState<boolean>(false);
   const [navOpen, setNavOpen] = useRecoilState(navState);
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ export function MobileHeader({ menus }: Props) {
         }}
         className="cursor"
       />
-      {navOpen ? <MobileNav menus={menus} setOpen={setNavOpen} /> : null}
+      {navOpen ? <MobileNav menus={menus} accountMenus={accountMenus} setOpen={setNavOpen} /> : null}
     </Contianer>
   );
 }

@@ -9,10 +9,12 @@ import { languageState } from '../../../recoil/language/atom';
 import { koUrlState, enUrlState } from '../../../recoil/archive/program/atom';
 import menuClose from '../../../assets/images/menuClose.png';
 import { NavigationType } from '../../../models/nav';
+import { ButtonsProps } from '../../../models/headerButton';
 
 interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   menus: NavigationType[];
+  accountMenus: ButtonsProps[];
 }
 
 const Container = styled.div`
@@ -72,7 +74,7 @@ const SubMenu = styled.li`
   }
 `;
 
-export function MobileNav({ setOpen, menus }: Props) {
+export function MobileNav({ setOpen, menus, accountMenus }: Props) {
   const navigate = useNavigate();
 
   return (
@@ -110,6 +112,7 @@ export function MobileNav({ setOpen, menus }: Props) {
                         onClick={() => {
                           setOpen(false);
                           navigate(menu.link[i]);
+                          document.querySelector('body')?.classList.remove('none');
                         }}
                       >
                         {text1}
@@ -120,6 +123,13 @@ export function MobileNav({ setOpen, menus }: Props) {
                   })}
                 </ButtonsWrap>
               </DropMenuWrap>
+            </Menu>
+          ))}
+          {accountMenus.map((menu) => (
+            <Menu key={menu.id} onClick={() => (menu.onClick ? menu.onClick() : navigate(menu.url ? menu.url : '/'))}>
+              <FlexContainer align="center" padding="12px 16px" id="name">
+                {menu.name}
+              </FlexContainer>
             </Menu>
           ))}
         </MenuWrap>

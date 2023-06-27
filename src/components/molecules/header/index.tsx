@@ -9,7 +9,11 @@ import { useCookies } from 'react-cookie';
 import i18next from '../../../local/i18n';
 import { languageState } from '../../../recoil/language/atom';
 
-export function Header() {
+interface Props {
+  accountMenus: ButtonsProps[];
+}
+
+export function Header({ accountMenus }: Props) {
   const [isLogin, setLogin] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const [language, setLanguage] = useRecoilState<string>(languageState);
@@ -74,7 +78,7 @@ export function Header() {
     <HeaderDefault>
       {/* <HeaderButtons data={lefttData} color="var(--main-color)" /> */}
       <HeaderButtons data={[]} />
-      <HeaderButtons data={rightData} />
+      <HeaderButtons data={accountMenus} />
     </HeaderDefault>
   );
 }

@@ -93,6 +93,7 @@ export const translation = {
         live: '라이브더빙  ',
         opening: '개막작  ',
         talk: '시네마 토크  ',
+        list: '상영작 목록',
       },
       movie: {
         distribution: '배급작품',
@@ -156,7 +157,7 @@ export const translation = {
       },
       header: [
         {
-          title: 'Biky',
+          title: 'BIKY',
           items: ['18th BIKY', 'Festival Symbol', 'Awards', 'People Behind BIKY', 'Sponsor Recruitment'],
         },
         {
@@ -244,6 +245,7 @@ export const translation = {
         live: 'Live Dubbing  ',
         opening: 'Opening Film  ',
         talk: 'Cinema Talk  ',
+        list: 'Screening List',
       },
       movie: {
         distribution: 'Distributed Films',
