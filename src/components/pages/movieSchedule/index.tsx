@@ -161,7 +161,7 @@ export function ScheduleInfoPage() {
     return (
       <TableBody sx={{ borderBottom: '1px solid #DBDBDB' }}>
         {/* 1. 제일먼저 행의 첫번째에 상영관 이름을 배치한다. */}
-        <TableCell key={theater.id} sx={{ minWidth: '15vw', padding: '16px 10px 16px 0px' }}>
+        <TableCell key={theater.id} sx={{ minWidth: isMobile ? '15vw' : '9vw', padding: '16px 10px 16px 0px' }}>
           {theater.name}
         </TableCell>
 

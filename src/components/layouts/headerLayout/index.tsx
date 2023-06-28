@@ -197,7 +197,7 @@ export function HeaderLayout() {
       idValue: 'archive',
       url: '/archive/distributions',
       arr: [headers[4].items[0], headers[4].items[1], headers[4].items[2], headers[4].items[3]],
-      link: ['/', '/archive/distributions', '/archive/sketch', '/archive/videoclip'],
+      link: ['/archive/history', '/archive/distributions', '/archive/sketch', '/archive/videoclip'],
     },
     {
       id: 8,

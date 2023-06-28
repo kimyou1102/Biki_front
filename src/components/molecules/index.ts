@@ -29,3 +29,5 @@ export * from './ShortcutsButton';
 export * from './ShortcutButtonList';
 export * from './SignupInput';
 export * from './mobile';
+export * from './AwardMovie';
+export * from './HistoryOutlineTable';
