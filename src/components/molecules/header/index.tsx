@@ -7,7 +7,7 @@ import { ButtonsProps } from 'src/models/headerButton';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import i18next from '../../../local/i18n';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 
 interface Props {
   accountMenus: ButtonsProps[];

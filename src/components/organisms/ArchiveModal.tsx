@@ -11,11 +11,11 @@ import { ScheduleTable, RelatedMovies } from '@molecules';
 import { getMovieByIdApi } from '../../apis/movie/get-movie-by-id-api';
 import { getUserMoviedApi } from '../../apis/movie/get-user-movie-detail-api';
 import { ArchiveModalSlide } from './ArchiveModalSlide';
-import { movieModalState, movieModalDataState, movieModalIdState } from '../../recoil/movies';
+import { movieModalState, movieModalDataState, movieModalIdState } from '../../store/movies';
 import { MovieBoxInfo, MovieData, UserMovieData } from '../../models/movie';
 import close from '../../assets/images/close.png';
 import emptyImg from '../../assets/images/empty.png';
-import { languageState } from '../../recoil/language/atom';
+import { languageState } from '../../store/language/atom';
 
 const Container = styled.div<{ isMobile: boolean }>`
   width: ${(props) => (props.isMobile ? '100%' : 'calc(1600px * 0.8)')};

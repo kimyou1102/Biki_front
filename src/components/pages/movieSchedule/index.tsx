@@ -28,17 +28,17 @@ import {
 } from '@mui/material';
 import { getMoviesByVenueAndDate } from '@src/apis/movieSchedule/get-movies-by-venue-and-date';
 import { getVenueListApi } from '@src/apis/movieSchedule/get-venue-list-type';
-import { movieScheduleState } from '@src/recoil/movieSchedule/movieSchedule';
+import { movieScheduleState } from '@src/store/movieSchedule/movieSchedule';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { useRecoilState } from 'recoil';
 
 import { MovieScheduleTheaterItemType, ScheduleVenueType } from 'src/models/schedule';
-import { labelState } from '@src/recoil/label/atom';
+import { labelState } from '@src/store/label/atom';
 import { getLabelListApi } from '@src/apis/label/get-label-list-api';
 import { ArchiveModal } from '@organisms';
-import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/store/movies';
 
 // 메인색상
 const MAIN_THEME = '#288CB4';

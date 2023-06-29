@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface TrProps {
+  highlightStatus?: boolean;
+}
 
 export const Th = styled.th`
   vertical-align: middle;
@@ -16,8 +20,14 @@ export const Th = styled.th`
   }
 `;
 
-export const Tr = styled.tr`
+export const Tr = styled.tr<TrProps>`
   height: 32px;
+
+  ${(props) =>
+    props.highlightStatus &&
+    css`
+      color: var(--main-color);
+    `}
 `;
 
 export const THead = styled.thead`

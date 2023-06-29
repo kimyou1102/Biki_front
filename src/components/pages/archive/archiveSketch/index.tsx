@@ -6,8 +6,8 @@ import { ModalWrap } from '@atoms';
 import { ArchiveTemplate } from '@templates';
 import { SketchModal, SketchList } from '@organisms';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { modalState, modalPositionState, modalDataState } from '../../../../recoil/archive/atome';
-import { sketchState } from '../../../../recoil/sketch/atom';
+import { modalState, modalPositionState, modalDataState } from '../../../../store/archive/atome';
+import { sketchState } from '../../../../store/sketch/atom';
 import { SketchProps, SketchType } from '../../../../models/sketch';
 import { getSketchApi } from '../../../../apis/sketch/get-sketch-api';
 

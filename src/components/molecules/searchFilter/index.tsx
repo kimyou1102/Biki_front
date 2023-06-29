@@ -8,9 +8,9 @@ import { SearchBar } from '@molecules/searchBar';
 import { getMovieBySectionIdAndTitleApi } from '@src/apis/movie/get-movie-by-id-and-title-api';
 import { getMovieByTitleApi } from '@src/apis/movie/get-movie-by-title-api';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { filmInputState, sketchInputState, pageState } from '../../../recoil/archive/atome';
-import { movieState, testMovie, movieInitialState } from '../../../recoil/movies';
-import { testSketchs, sketchState } from '../../../recoil/sketch/atom';
+import { filmInputState, sketchInputState, pageState } from '../../../store/archive/atome';
+import { movieState, testMovie, movieInitialState } from '../../../store/movies';
+import { testSketchs, sketchState } from '../../../store/sketch/atom';
 import { SketchProps, SketchType } from '../../../models/sketch';
 import { MovieInfo, MovieData } from '../../../models/movie';
 

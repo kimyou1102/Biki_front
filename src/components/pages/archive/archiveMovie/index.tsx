@@ -16,10 +16,10 @@ import {
   movieModalPositionState,
   movieState,
   movieInitialState,
-} from '../../../../recoil/movies';
+} from '../../../../store/movies';
 import { MovieBoxInfo, MovieData } from '../../../../models/movie';
 import { getMovieApi } from '../../../../apis/movie/get-movie-api';
-import { pageState } from '../../../../recoil/archive/atome';
+import { pageState } from '../../../../store/archive/atome';
 
 export function ArchiveMoviePage() {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);

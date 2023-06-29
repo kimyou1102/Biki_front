@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { ModalWrap } from '@atoms';
 import { Box, Button, ClickAwayListener, Tooltip, Typography, Zoom } from '@mui/material';
 import { ArchiveModal } from '@organisms';
-import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/store/movies';
 import { MovieLabelType, ScheduleMovieType } from 'src/models/schedule';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 
 interface ScreeningItemProps {
   titleKo: string;

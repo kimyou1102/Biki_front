@@ -3,7 +3,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SlideHeader, MainEventBox } from '@molecules';
 import { useRecoilValue } from 'recoil';
-import { mainEventScrollState } from '../../recoil/scroll/scroll';
+import { mainEventScrollState } from '../../store/scroll/scroll';
 import { MainEventBoxs } from './MainEventBoxs';
 // import { getBoardByParamApi } from '../../apis/board/get-board-by-param-api';
 

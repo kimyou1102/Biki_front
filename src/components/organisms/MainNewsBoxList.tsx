@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { MainNewsBox } from '@molecules';
 import { useRecoilValue } from 'recoil';
 import { Button, FlexContainer } from '@atoms';
-import { NoticeType, noticeState } from '../../recoil/notice/notice';
+import { NoticeType, noticeState } from '../../store/notice/notice';
 import { getPostApi } from '../../apis/post/get-post-api';
 import { PostType } from '../../models/post';
 

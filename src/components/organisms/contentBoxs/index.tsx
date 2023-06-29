@@ -3,9 +3,9 @@ import { ContentBox } from '@molecules/contentBox';
 import { SlideContainer } from '@atoms';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { ContentProps } from 'src/models/content';
-import { mainYoutubeScrollState } from '../../../recoil/scroll/scroll';
+import { mainYoutubeScrollState } from '../../../store/scroll/scroll';
 import { ClipType } from '../../../models/clip';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 
 interface Props {
   data: ClipType[];

@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Text, Img } from '@atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { modalState, modalPositionState, modalDataState } from '../../recoil/archive/atome';
+import { modalState, modalPositionState, modalDataState } from '../../store/archive/atome';
 import left from '../../assets/images/modalLeft.png';
 import right from '../../assets/images/modalRight.png';
 

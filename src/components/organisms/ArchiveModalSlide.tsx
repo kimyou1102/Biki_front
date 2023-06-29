@@ -12,7 +12,7 @@ import { Img, Button, Text, Span, FlexContainer } from '@atoms';
 import { MovieBoxInfo, MovieData, UserMovieData } from '../../models/movie';
 import left from '../../assets/images/modalLeft.png';
 import right from '../../assets/images/modalRight.png';
-import { languageState } from '../../recoil/language/atom';
+import { languageState } from '../../store/language/atom';
 
 interface Props {
   // data: MovieData;

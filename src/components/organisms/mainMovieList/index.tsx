@@ -5,8 +5,8 @@ import { SlideHeader } from '@molecules';
 import { MainMovieBoxs } from '@organisms/mainMovieBoxs';
 import { MovieInfo, MovieData } from 'src/models/movie';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { mainMovieScrollState } from '../../../recoil/notice/notice';
-import { movieState, movieInitialState } from '../../../recoil/movies';
+import { mainMovieScrollState } from '../../../store/notice/notice';
+import { movieState, movieInitialState } from '../../../store/movies';
 import { getMovieApi } from '../../../apis/movie/get-movie-api';
 
 export function MainMovieList() {

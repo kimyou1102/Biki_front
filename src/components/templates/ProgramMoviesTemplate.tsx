@@ -12,7 +12,7 @@ import {
   movieModalPositionState,
   movieState,
   movieInitialState,
-} from '../../recoil/movies';
+} from '../../store/movies';
 import { MovieData } from '../../models/movie';
 import { getSectionByIdApi } from '../../apis/section/get-section-by-id-api';
 

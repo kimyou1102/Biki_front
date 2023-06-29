@@ -27,18 +27,7 @@ export function NoticeArticel() {
   const postApi = useCallback(async () => {
     await getPostApi('공지사항', 0, 20)
       .then((res) => {
-        const sortedPosts = res.data.content.slice(0, 12).sort((a: any, b: any) => {
-          if (a.highlightStatus < b.highlightStatus) {
-            return 1;
-          }
-          if (a.highlightStatus > b.highlightStatus) {
-            return -1;
-          }
-
-          return 0;
-        });
-
-        setPosts(sortedPosts);
+        setPosts(res.data.content.slice(0, 12));
         const arr = res.data.content;
         const newArr: any[] = [];
         let count = 0;

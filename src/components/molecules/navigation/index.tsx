@@ -7,8 +7,8 @@ import { useFetcher, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import character from '../../../assets/images/nav_menu_character.png';
 import { getSectionApi } from '../../../apis/section/get-section-api';
-import { languageState } from '../../../recoil/language/atom';
-import { koUrlState, enUrlState } from '../../../recoil/archive/program/atom';
+import { languageState } from '../../../store/language/atom';
+import { koUrlState, enUrlState } from '../../../store/archive/program/atom';
 import { NavigationType } from '../../../models/nav';
 
 interface Props {

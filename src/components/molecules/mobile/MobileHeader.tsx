@@ -8,7 +8,7 @@ import logo from '../../../assets/images/Biky_Logo_season.png';
 import menu from '../../../assets/images/BurgerMenu.png';
 import { NavigationType } from '../../../models/nav';
 import { ButtonsProps } from '../../../models/headerButton';
-import { navState } from '../../../recoil/mobile-nav/atome';
+import { navState } from '../../../store/mobile-nav/atome';
 
 interface Props {
   menus: NavigationType[];

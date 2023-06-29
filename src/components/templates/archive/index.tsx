@@ -8,7 +8,7 @@ import { Nav, ArchiveMovieSection } from '@organisms';
 import { Footer } from '@layout/Footer';
 import { MovieData } from '../../../models/movie';
 import { SketchProps } from '../../../models/sketch';
-import { pageState } from '../../../recoil/archive/atome';
+import { pageState } from '../../../store/archive/atome';
 
 interface Props {
   children: React.ReactNode;

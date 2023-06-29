@@ -8,12 +8,13 @@ interface TableRowProps {
   title: string;
   count: number;
   date: string;
+  hilightStatus?: boolean;
 }
 
-export function TableRow({ id, num, title, count, date }: TableRowProps) {
+export function TableRow({ id, num, title, count, date, hilightStatus }: TableRowProps) {
   const navigate = useNavigate();
   return (
-    <Tr>
+    <Tr highlightStatus={hilightStatus}>
       <Th>{num}</Th>
       <Th
         className="title"

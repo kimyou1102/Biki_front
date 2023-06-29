@@ -6,7 +6,7 @@ import { MovieBox } from '@organisms/movieBox';
 import { Pagination } from '@molecules';
 import { MovieInfo, MovieData } from 'src/models/movie';
 import { useRecoilValue } from 'recoil';
-import { movieState } from '../../../recoil/movies';
+import { movieState } from '../../../store/movies';
 
 interface Props {
   page: number;

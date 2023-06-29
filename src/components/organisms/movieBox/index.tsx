@@ -12,11 +12,11 @@ import {
   movieModalDataState,
   movieModalPositionState,
   movieModalIdState,
-} from '../../../recoil/movies';
+} from '../../../store/movies';
 import { MovieBoxInfo, MovieData } from '../../../models/movie';
 // import emptyImg from '../../../assets/images/empty.png';
 import emptyImg from '../../../assets/images/empty_medium.png';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 
 interface Props {
   type: 'main' | 'archive';

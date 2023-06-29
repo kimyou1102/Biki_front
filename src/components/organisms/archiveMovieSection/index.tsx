@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArchiveMovieList } from '@organisms/archiveMovieList';
 import { MovieInfo, MovieData } from 'src/models/movie';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { movieState, movieInitialState } from '../../../recoil/movies';
+import { movieState, movieInitialState } from '../../../store/movies';
 import { getMovieApi } from '../../../apis/movie/get-movie-api';
 
 interface Props {

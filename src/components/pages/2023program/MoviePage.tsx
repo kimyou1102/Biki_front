@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { ProgramMoviesTemplate } from '@templates';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { koUrlState, enUrlState } from '../../../recoil/archive/program/atom';
-import { languageState } from '../../../recoil/language/atom';
+import { koUrlState, enUrlState } from '../../../store/archive/program/atom';
+import { languageState } from '../../../store/language/atom';
 
 export function MoviePage() {
   // 상영작 아이디 추출

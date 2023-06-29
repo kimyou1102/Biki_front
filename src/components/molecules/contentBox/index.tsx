@@ -6,7 +6,7 @@ import { ContentDescription } from '@molecules';
 import { FlexContainer, Iframe, Img } from '@atoms';
 import { ContentBoxInfo } from 'src/models/content';
 import { useSetRecoilState, useRecoilState } from 'recoil';
-import { modalDataState, modalState, modalPositionState } from '../../../recoil/archive/atome';
+import { modalDataState, modalState, modalPositionState } from '../../../store/archive/atome';
 
 const Wrap = styled.div<{ width: number; height: number }>`
   width: ${(props) => `calc(${props.width}px * 0.8)`};

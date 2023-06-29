@@ -5,8 +5,8 @@ import { useMediaQuery } from 'react-responsive';
 import { TextList } from '@molecules';
 import { A, BorderContainer, MainNewsUl } from '@atoms';
 import { useRecoilValue } from 'recoil';
-import { languageState } from '@src/recoil/language/atom';
-import { NoticeType, noticeState } from '../../../recoil/notice/notice';
+import { languageState } from '@src/store/language/atom';
+import { NoticeType, noticeState } from '../../../store/notice/notice';
 import { PostType } from '../../../models/post';
 
 interface Props {

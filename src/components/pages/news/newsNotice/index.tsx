@@ -6,7 +6,7 @@ import { Box, CircularProgress, LinearProgress } from '@mui/material';
 import { Footer } from '@layout/Footer';
 import { getPostByTitleApi } from '@src/apis/post/get-post-by-title';
 import { useRecoilState } from 'recoil';
-import { noticeListState, noticeListInitialState } from '../../../../recoil/notice/notice';
+import { noticeListState, noticeListInitialState } from '../../../../store/notice/notice';
 import { getPostApi } from '../../../../apis/post/get-post-api';
 import { PostType } from '../../../../models/post';
 
@@ -29,8 +29,6 @@ export function NewsNotice() {
     if (searchKeyword !== '') {
       await getPostByTitleApi('공지사항', searchKeyword, page, limit)
         .then((res) => {
-          // console.log(res.data.content);
-          // console.log(res.data);
           setTotal(res.data.totalElements);
           setNotices(res.data.content);
           setNoticeListInitial(res.data.content);
@@ -84,7 +82,7 @@ export function NewsNotice() {
             setPage={setPage}
             inputValue={searchKeyword}
             setInputValue={setSearchKeyword}
-            onSearch={() => handleSearchButtonClick}
+            onSearch={() => handleSearchButtonClick()}
             limit={limit}
             total={total}
           />

@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { Span, Img, FlexContainer } from '@atoms';
 import { AwardWinnersMovieType } from '../../models/history';
-import { movieModalIdState, movieModalPositionState, movieModalState } from '../../recoil/movies';
-import { languageState } from '../../recoil/language/atom';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '../../store/movies';
+import { languageState } from '../../store/language/atom';
 
 interface Props {
   data: AwardWinnersMovieType;

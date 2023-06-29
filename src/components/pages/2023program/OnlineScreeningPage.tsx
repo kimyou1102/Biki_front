@@ -3,7 +3,7 @@ import { ArchiveTemplate, ProgramMoviesTemplate } from '@templates';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserMovieData } from '@src/models/movie';
-import { movieModalDataState } from '@src/recoil/movies';
+import { movieModalDataState } from '@src/store/movies';
 import { getUserMoviedApi } from '@src/apis/movie/get-user-movie-detail-api';
 
 export function OnlineMoviePage() {

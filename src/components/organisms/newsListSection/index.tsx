@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { TableRow, SearchBar, Pagination } from '@molecules';
 import { Th, Tr, THead } from '@atoms';
 import { PostType } from '@src/models/post';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 
 interface Props {
   data: PostType[];
@@ -67,6 +67,7 @@ export function NewsListSection({ data, page, setPage, inputValue, setInputValue
                   title={language === 'English' ? newsInfo.titleKo : newsInfo.titleEn}
                   count={newsInfo.view!}
                   date={dateStr}
+                  hilightStatus={newsInfo.highlightStatus === 1}
                 />
               );
             })}

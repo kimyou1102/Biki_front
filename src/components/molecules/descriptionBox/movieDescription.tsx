@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive';
 import { Span, StyledStrong, ContentDescriptionWrap, MobileContentDescriptionWrap } from '@atoms';
 import { MovieDescriptionInfo } from '../../../models/movie';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 
 export function MovieDescription({ type, title, director, country, year, runningTime }: MovieDescriptionInfo) {
   const { t } = useTranslation();

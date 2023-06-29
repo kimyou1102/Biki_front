@@ -9,7 +9,7 @@ import { Viewer } from '@toast-ui/react-editor';
 import { useNavigate } from 'react-router-dom';
 import { Button, FlexContainer, Text, Span } from '@atoms';
 import { PostType } from '../../../models/post';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 import attach_file_icon from '../../../assets/images/attach_file.png';
 
 // interface Props {

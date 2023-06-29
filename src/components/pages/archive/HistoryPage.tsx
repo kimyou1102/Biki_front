@@ -9,8 +9,8 @@ import { ArchiveTitle, AwardMovie, HistoryOutlineTable } from '@molecules';
 import { ArchiveModal } from '@organisms';
 import { getHistoryByYearApi } from '../../../apis/history/get-history-by-year-api';
 import { HistoryType } from '../../../models/history';
-import { movieModalIdState, movieModalPositionState, movieModalState } from '../../../recoil/movies';
-import { languageState } from '../../../recoil/language/atom';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '../../../store/movies';
+import { languageState } from '../../../store/language/atom';
 
 // 메인색상
 const MAIN_THEME = '#288CB4';

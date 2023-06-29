@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { MovieBox } from '@organisms/movieBox';
 import { SlideContainer } from '@atoms';
 import { useSetRecoilState } from 'recoil';
-import { mainMovieScrollState } from '../../../recoil/notice/notice';
+import { mainMovieScrollState } from '../../../store/notice/notice';
 import { MovieInfo, MovieData } from '../../../models/movie';
 
 interface Props {

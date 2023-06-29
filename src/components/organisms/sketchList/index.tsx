@@ -5,8 +5,8 @@ import { ContentBox } from '@molecules/contentBox';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { SketchProps, SketchType } from '../../../models/sketch';
 import { ClipType } from '../../../models/clip';
-import { modalDataState, modalState } from '../../../recoil/archive/atome';
-import { languageState } from '../../../recoil/language/atom';
+import { modalDataState, modalState } from '../../../store/archive/atome';
+import { languageState } from '../../../store/language/atom';
 
 interface Props {
   page: number;

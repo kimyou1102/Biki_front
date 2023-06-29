@@ -7,10 +7,10 @@ import { useMediaQuery } from 'react-responsive';
 import { BorderContainer, FlexContainer, MainNewsUl, Text, More, A } from '@atoms';
 import { TextList, MainNewsBoxText } from '@molecules';
 import { useRecoilValue } from 'recoil';
-import { NoticeType, noticeState } from '../../recoil/notice/notice';
+import { NoticeType, noticeState } from '../../store/notice/notice';
 import { PostType } from '../../models/post';
 import { getPostApi } from '../../apis/post/get-post-api';
-import { languageState } from '../../recoil/language/atom';
+import { languageState } from '../../store/language/atom';
 
 interface Props {
   data: PostType[];

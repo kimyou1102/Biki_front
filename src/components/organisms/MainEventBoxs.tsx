@@ -6,7 +6,7 @@ import { MainEventBox } from '@molecules';
 import { SlideContainer } from '@atoms';
 import { useSetRecoilState } from 'recoil';
 // import { ContentProps } from 'src/models/content';
-import { mainEventScrollState } from '../../recoil/scroll/scroll';
+import { mainEventScrollState } from '../../store/scroll/scroll';
 import main_event1 from '../../assets/images/main_event1.jpg';
 import main_event2 from '../../assets/images/main_event2.jpg';
 import main_event3 from '../../assets/images/main_event3.jpg';

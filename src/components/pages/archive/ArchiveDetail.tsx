@@ -12,10 +12,10 @@ import { ArchiveModalSlide } from '@organisms';
 import { ArchiveTemplate } from '@templates';
 import { getMovieByIdApi } from '../../../apis/movie/get-movie-by-id-api';
 import { getUserMoviedApi } from '../../../apis/movie/get-user-movie-detail-api';
-import { movieModalState, movieModalDataState, movieModalIdState } from '../../../recoil/movies';
+import { movieModalState, movieModalDataState, movieModalIdState } from '../../../store/movies';
 import { MovieBoxInfo, MovieData, UserMovieData } from '../../../models/movie';
 import emptyImg from '../../../assets/images/empty.png';
-import { languageState } from '../../../recoil/language/atom';
+import { languageState } from '../../../store/language/atom';
 
 const Container = styled.div`
   width: 100%;

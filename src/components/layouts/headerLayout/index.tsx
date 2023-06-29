@@ -11,11 +11,11 @@ import { Header, MobileHeader } from '@molecules';
 import { Footer } from '@layout/Footer';
 import i18next from '../../../local/i18n';
 import { getSectionApi } from '../../../apis/section/get-section-api';
-import { languageState } from '../../../recoil/language/atom';
-import { koUrlState, enUrlState } from '../../../recoil/archive/program/atom';
+import { languageState } from '../../../store/language/atom';
+import { koUrlState, enUrlState } from '../../../store/archive/program/atom';
 import { NavigationType } from '../../../models/nav';
 import { ButtonsProps } from '../../../models/headerButton';
-import { navState } from '../../../recoil/mobile-nav/atome';
+import { navState } from '../../../store/mobile-nav/atome';
 
 const NavBack = styled.div`
   width: 100%;

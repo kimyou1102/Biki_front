@@ -14,7 +14,7 @@ const Styled = styled.div<{ src: string; type: string }>`
 export function MainPhoto({ src, sub, title, date, url, type }: MainProps) {
   const navigate = useNavigate();
   return (
-    <Styled src={src!} onClick={() => navigate(url)} type={type}>
+    <Styled src={src!} onClick={() => window.open(url)} type={type}>
       <Img
         position="absolute"
         width="100%"

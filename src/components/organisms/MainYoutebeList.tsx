@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SlideHeader } from '@molecules';
 import { useRecoilValue } from 'recoil';
-import { mainYoutubeScrollState } from '../../recoil/scroll/scroll';
+import { mainYoutubeScrollState } from '../../store/scroll/scroll';
 import { ContentBoxs } from './contentBoxs';
 import { getClipApi } from '../../apis/videoClip/get-clip-api';
 import { ClipType } from '../../models/clip';
