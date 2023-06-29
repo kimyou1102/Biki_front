@@ -1,12 +1,13 @@
-import { ModalWrap } from '@atoms';
-import { Box, Button, ClickAwayListener, Tooltip, Typography, Zoom } from '@mui/material';
-import { ArchiveModal } from '@organisms';
-import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
 import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import { useRecoilValue, useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import { ModalWrap } from '@atoms';
+import { Box, Button, ClickAwayListener, Tooltip, Typography, Zoom } from '@mui/material';
+import { ArchiveModal } from '@organisms';
+import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/recoil/movies';
 import { MovieLabelType, ScheduleMovieType } from 'src/models/schedule';
 import { languageState } from '../../../recoil/language/atom';
 
@@ -32,6 +33,7 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
 
   const handleTooltipOpen = () => setTooltip(!tooltip);
   const handleTooltipClose = () => setTooltip(false);
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const language = useRecoilValue(languageState);
 
@@ -41,11 +43,15 @@ export function ScreeningItem({ titleKo, titleEn, time, label, runningTime, rati
 
   const handleSingleMovieClick = () => {
     if (id) {
-      setMovieModal(true);
-      // setMovieModalData(data);
-      setTop(window.scrollY);
-      setmovieModalId(id);
-      document.querySelector('body')?.classList.add('none');
+      if (isMobile) {
+        navigate(`/archive/distributions/detail/${id}`);
+      } else {
+        setMovieModal(true);
+        // setMovieModalData(data);
+        setTop(window.scrollY);
+        setmovieModalId(id);
+        document.querySelector('body')?.classList.add('none');
+      }
     }
   };
 
