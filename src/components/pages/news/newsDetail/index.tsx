@@ -3,7 +3,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NewsTemplates } from '@templates';
 import { NewsSection } from '@organisms';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addPostViewApi } from '@src/apis/post/add-post-view-api';
 import { getPostByIdApi } from '../../../../apis/post/get-post-by-id-api';
 import { PostType } from '../../../../models/post';
@@ -12,6 +12,7 @@ interface Props {
   type: string;
 }
 export function NewsDetail({ type }: Props) {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState<PostType>({
     id: 0,
@@ -29,15 +30,22 @@ export function NewsDetail({ type }: Props) {
   const postApi = useCallback(async () => {
     await getPostByIdApi(parseInt(id!, 10))
       .then((res) => {
-        // console.log(res.data);
-        setData(res.data);
-        // setNotices(res.data);
+        const linkCommandPattern = /gomylinkcommand\[(.*?)\]/i;
+        const linkCommandMatch = res.data.body.match(linkCommandPattern);
+
+        if (linkCommandMatch) {
+          const url = linkCommandMatch[1];
+          window.open(url, '_blank');
+          navigate(-1);
+        } else {
+          setData(res.data);
+        }
       })
       .catch((err) => console.log(err));
 
     // 조회수 추가
     await addPostViewApi(parseInt(id!, 10));
-  }, [id]);
+  }, [id, navigate]);
 
   useEffect(() => {
     postApi();
