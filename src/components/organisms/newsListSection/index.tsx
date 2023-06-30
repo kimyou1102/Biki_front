@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from 'react-responsive';
 import { useRecoilValue } from 'recoil';
 import { TableRow, SearchBar, Pagination } from '@molecules';
 import { Th, Tr, THead } from '@atoms';
@@ -28,6 +29,10 @@ export function NewsListSection({ data, page, setPage, inputValue, setInputValue
     setInputValue(e.target.value);
   };
 
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
   return (
     <>
       <SearchBar
@@ -44,9 +49,9 @@ export function NewsListSection({ data, page, setPage, inputValue, setInputValue
       <table style={{ width: '100%', borderSpacing: 0 }}>
         <THead>
           <Tr>
-            <Th className="left">{t(`news.number`)}</Th>
-            <Th className="title">{t(`news.title`)}</Th>
-            <Th>{t(`view`)}</Th>
+            {!isMobile ? <Th className="left">{t(`news.number`)}</Th> : null}
+            <Th className={isMobile ? 'left' : 'title'}>{t(`news.title`)}</Th>
+            {!isMobile ? <Th>{t(`view`)}</Th> : null}
             <Th className="right">{t(`registrationDate`)}</Th>
           </Tr>
         </THead>

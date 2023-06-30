@@ -146,7 +146,7 @@ export function HeaderLayout() {
       name: headers[1].title,
       idValue: 'education',
       url: '/#',
-      arr: [headers[1].items[0], headers[0].items[1], headers[0].items[2], headers[0].items[3]],
+      arr: [headers[1].items[0], headers[1].items[1], headers[1].items[2], headers[1].items[3]],
       link: [
         '/articles/부설연구소',
         '/articles/배급영화-교재-활동지-교육영상',

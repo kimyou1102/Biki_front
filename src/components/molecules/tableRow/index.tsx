@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import { Th, Tr } from '@atoms';
 
 interface TableRowProps {
@@ -13,18 +14,22 @@ interface TableRowProps {
 
 export function TableRow({ id, num, title, count, date, hilightStatus }: TableRowProps) {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
+
   return (
     <Tr highlightStatus={hilightStatus}>
-      <Th>{num}</Th>
+      {!isMobile ? <Th>{num}</Th> : null}
       <Th
-        className="title"
+        className="title mobile"
         onClick={() => {
           navigate(`${id}`, { replace: false, state: { id, title, count, date } });
         }}
       >
         {title}
       </Th>
-      <Th>{count}</Th>
+      {!isMobile ? <Th>{count}</Th> : null}
       <Th>{date}</Th>
     </Tr>
   );

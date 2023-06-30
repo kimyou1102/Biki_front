@@ -20,6 +20,10 @@ const StyledP = styled.p<TextProps>`
   font-family: ${(props) => (props.font ? `${props.font}` : 'PretendardRegular')};
   position: ${(props) => (props.position ? props.position : 'relative')};
 
+  &.left {
+    text-align: left;
+  }
+
   &.right {
     text-align: right;
   }

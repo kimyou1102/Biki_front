@@ -16,6 +16,7 @@ interface Props {
   wrap?: string;
   radius?: string;
   onClick?: () => void;
+  gap?: string;
 }
 
 export const FlexContainer = styled.div<Props>`
@@ -39,6 +40,7 @@ export const FlexContainer = styled.div<Props>`
   left: ${(props) => (props.left ? `calc(${props.left}px * 0.8)` : '0px')};
   overflow-x: ${(props) => (props.overflowx ? props.overflowx : 'visible')};
   border-radius: ${(props) => (props.radius ? props.radius : '0px')};
+  gap: ${(props) => (props.gap ? props.gap : '0px')};
 
   &.slide {
     -ms-overflow-style: none;

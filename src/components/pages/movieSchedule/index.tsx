@@ -1,10 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
 import { Section, H1, Span, ModalWrap } from '@atoms';
-
 import { LabelHint, MovieScheduleTitle, ScreeningItem } from '@molecules';
 import {
   Box,
@@ -31,9 +28,7 @@ import { getVenueListApi } from '@src/apis/movieSchedule/get-venue-list-type';
 import { movieScheduleState } from '@src/store/movieSchedule/movieSchedule';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-
 import { useRecoilState } from 'recoil';
-
 import { MovieScheduleTheaterItemType, ScheduleVenueType } from 'src/models/schedule';
 import { labelState } from '@src/store/label/atom';
 import { getLabelListApi } from '@src/apis/label/get-label-list-api';

@@ -2,8 +2,21 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { Box, FormControl, MenuItem, Select, SelectChangeEvent, Tab, Tabs } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Tab,
+  Tabs,
+  ThemeProvider,
+  Shadows,
+  createTheme,
+} from '@mui/material';
 import { Section, Span, H3, Img, ModalWrap } from '@atoms';
 import { ArchiveTitle, AwardMovie, HistoryOutlineTable } from '@molecules';
 import { ArchiveModal } from '@organisms';
@@ -14,6 +27,18 @@ import { languageState } from '../../../store/language/atom';
 
 // 메인색상
 const MAIN_THEME = '#288CB4';
+
+const theme = createTheme({
+  shadows: Array(25).fill('none') as Shadows,
+  typography: {
+    fontFamily: ['PretendardMedium'].join(','),
+  },
+  palette: {
+    primary: {
+      main: MAIN_THEME,
+    },
+  },
+});
 
 export function HistoryPage() {
   const [currentTitle, setCurrentTitle] = useState('개요/규모');
@@ -28,7 +53,9 @@ export function HistoryPage() {
   const [top, setTop] = useRecoilState(movieModalPositionState);
   const [movieModalId, setmovieModalId] = useRecoilState(movieModalIdState);
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
-
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
   const { t } = useTranslation();
   const language = useRecoilValue(languageState);
 
@@ -63,7 +90,6 @@ export function HistoryPage() {
     }
   };
 
-  // 2020 - 2006
   const Style = {
     width: '25%',
     display: 'flex',
@@ -80,16 +106,28 @@ export function HistoryPage() {
   };
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Section>
         <Box display="flex" alignItems="flex-start" flexDirection="column">
-          {/* <MovieScheduleTitle /> */}
-          <ArchiveTitle />
-
-          <Box display="flex" width="100%" alignItems="center" justifyContent="space-between" marginBottom="2rem">
-            <H3 size={2} weight="bold">
+          {!isMobile ? <ArchiveTitle /> : null}
+          {isMobile ? (
+            <H3 size={1.5 / 0.8} weight="bold" font="PretendardBold" margin="0 0 10px 0px;">
               {t(`history.title`)}
             </H3>
+          ) : null}
+          <Box
+            display="flex"
+            width="100%"
+            alignItems="center"
+            justifyContent={isMobile ? 'right' : 'space-between'}
+            marginBottom="2rem"
+          >
+            {!isMobile ? (
+              <H3 size={2} weight="bold">
+                {t(`history.title`)}
+              </H3>
+            ) : null}
+
             <FormControl>
               <Select
                 labelId="demo-simple-select-label"
@@ -236,6 +274,6 @@ export function HistoryPage() {
       >
         <ArchiveModal />
       </ModalWrap>
-    </div>
+    </ThemeProvider>
   );
 }

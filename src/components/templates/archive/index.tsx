@@ -12,7 +12,7 @@ import { pageState } from '../../../store/archive/atome';
 
 interface Props {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   type: string;
   pageTitle?: string;
   sub?: string;
@@ -31,16 +31,23 @@ export function ArchiveTemplate({ children, title, type, id, pageTitle, sub }: P
       <ArchiveTitle pageTitle={pageTitle} sub={sub} />
       {isMobile ? (
         <FlexContainer className="full" margin="0px 0px 26px 0px" direction="column">
-          <H3 size={1 / 0.8} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'} margin="0 0 8px 0">
-            {title}
-          </H3>
+          {title ? (
+            <H3 size={1 / 0.8} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'} margin="0 0 8px 0">
+              {title}
+            </H3>
+          ) : null}
           {type !== 'online' && <SearchFilter type={type} id={id} />}
         </FlexContainer>
       ) : (
         <FlexContainer className="full" margin="0px 0px 26px 0px" justify="space-between" align="center">
-          <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
+          {title ? (
+            <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
+              {title}
+            </H3>
+          ) : null}
+          {/* <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
             {title}
-          </H3>
+          </H3> */}
           {type !== 'online' && <SearchFilter type={type} id={id} />}
         </FlexContainer>
       )}
