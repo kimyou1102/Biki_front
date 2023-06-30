@@ -72,7 +72,7 @@ export function ArchiveDetail() {
   }, [movieApi, id]);
 
   return (
-    <ArchiveTemplate title={t(`movie.distribution`)} type="online">
+    <ArchiveTemplate type="online">
       <Container id="modal">
         <ArchiveModalSlide data={movie} />
         <FlexContainer direction="column" margin="16px 0 26px 0">

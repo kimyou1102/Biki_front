@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { Span, Img, FlexContainer } from '@atoms';
 import { AwardWinnersMovieType } from '../../models/history';
@@ -26,14 +28,21 @@ export function AwardMovie({ data }: Props) {
 
   const { t } = useTranslation();
   const language = useRecoilValue(languageState);
+  const navigate = useNavigate();
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
   //   console.log(data);
   const handleMovieClick = () => {
     if (data.id) {
-      setMovieModal(true);
-      // setMovieModalData(data);
-      setTop(window.scrollY);
-      setmovieModalId(data.id);
-      document.querySelector('body')?.classList.add('none');
+      if (isMobile) {
+        navigate(`/archive/distributions/detail/${data.id}`);
+      } else {
+        setMovieModal(true);
+        setTop(window.scrollY);
+        setmovieModalId(data.id);
+        document.querySelector('body')?.classList.add('none');
+      }
     }
   };
 

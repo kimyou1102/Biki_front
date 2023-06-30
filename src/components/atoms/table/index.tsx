@@ -18,6 +18,11 @@ export const Th = styled.th`
   &.title {
     text-align: left;
   }
+
+  &.mobile {
+    padding: 10px 10px 10px 0px;
+    line-height: 1.5rem;
+  }
 `;
 
 export const Tr = styled.tr<TrProps>`

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useMediaQuery } from 'react-responsive';
+import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import { SignupBox, Button, Text, FlexContainer, Input, Span } from '@atoms';
 import { SingupTitleBox, SignupInput } from '@molecules';
@@ -21,6 +24,11 @@ export function LoginPage() {
   const [password, setPassword] = useState<string>('');
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const isMobile = useMediaQuery({
+    query: '(max-width:768px)',
+  });
 
   const loginApi = async () => {
     await createLoginApi({ email, password })
@@ -55,10 +63,15 @@ export function LoginPage() {
 
   return (
     <div>
-      <Text size={2.5} weight="bold" className="center" margin="calc(119px * 0.8) 0 calc(59px * 0.8) 0">
+      <Text
+        size={isMobile ? 1.5 / 0.8 : 2.5}
+        weight="bold"
+        className="center"
+        margin="calc(119px * 0.8) 0 calc(59px * 0.8) 0"
+      >
         BIKY 로그인
       </Text>
-      <SignupBox>
+      <SignupBox isMobile={isMobile}>
         <SingupTitleBox color="#74B743">로그인</SingupTitleBox>
         <form onSubmit={onSubmit}>
           <Grid>
