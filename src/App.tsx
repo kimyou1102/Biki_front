@@ -62,6 +62,7 @@ import {
   SignupPage,
   ArchiveDetail,
   HistoryPage,
+  NewsRelease,
 } from '@pages';
 import { HeaderLayout } from '@layout';
 // import { ScheduleInfoPage } from '@pages/movieSchedule';
@@ -104,6 +105,8 @@ function App() {
           <Route path="/news/newsletter/:id" element={<NewsDetail type="newsletter" />} />
           <Route path="/news/pressrelease" element={<PressReleasePage />} />
           <Route path="/news/pressrelease/:id" element={<NewsDetail type="pressrelease" />} />
+          <Route path="/news/newsrelease" element={<NewsRelease />} />
+          <Route path="/news/newsrelease/:id" element={<NewsDetail type="newsrelease" />} />
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/movie/schedule" element={<ScheduleInfoPage />} />

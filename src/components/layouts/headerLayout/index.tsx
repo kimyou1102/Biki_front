@@ -188,8 +188,8 @@ export function HeaderLayout() {
       name: headers[7].title,
       idValue: 'news',
       url: '/#',
-      arr: [headers[7].items[0], headers[7].items[1], headers[7].items[2]],
-      link: ['/news/notice', '/news/newsletter', '/news/pressrelease'],
+      arr: [headers[7].items[0], headers[7].items[1], headers[7].items[2], headers[7].items[3]],
+      link: ['/news/notice', '/news/newsletter', '/news/pressrelease', '/news/newsrelease'],
     },
     {
       id: 7,

@@ -59,9 +59,12 @@ export function NewsDetail({ type }: Props) {
   } else if (type === 'newsletter') {
     // eslint-disable-next-line prefer-destructuring
     titleName = t(`news.newsletter`);
-  } else {
+  } else if (type === 'pressrelease]') {
     // eslint-disable-next-line prefer-destructuring
     titleName = t(`news.press`);
+  } else {
+    // eslint-disable-next-line prefer-destructuring
+    titleName = t(`news.newsrelease`);
   }
 
   return (

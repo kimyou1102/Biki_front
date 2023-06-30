@@ -142,6 +142,7 @@ export const translation = {
         search: '제목 검색',
         list: '목록',
         empty: '등록된 글이 없습니다.',
+        newsrelease: '보도자료',
       },
       history: {
         title: '비키가 걸어온 길',
@@ -217,7 +218,7 @@ export const translation = {
         },
         {
           title: 'News',
-          items: ['Notice', 'Newsletter', 'Media Coverage', 'Press release'],
+          items: ['Notice', 'Newsletter', 'Press release', 'News Coverage'],
         },
       ],
       counter_one: 'Changed language just once',
@@ -315,6 +316,7 @@ export const translation = {
         search: 'Search Title',
         list: 'List',
         empty: 'There are no registered articles.',
+        newsrelease: 'News Release',
       },
       history: {
         title: 'The Path of BIKY',
