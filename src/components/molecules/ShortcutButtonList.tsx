@@ -9,7 +9,6 @@ import newsletter from '../../assets/images/newsletter.png';
 import subscribe from '../../assets/images/subscribe.png';
 
 const Container = styled.ul`
-  width: 80px;
   position: fixed;
   top: 50%;
   right: 20px;
@@ -17,6 +16,34 @@ const Container = styled.ul`
   display: grid;
   gap: calc(16px * 0.8);
   z-index: 100;
+
+  #instagram:hover,
+  #facebook:hover,
+  #youtube:hover,
+  #blog:hover,
+  #newsletter:hover,
+  #subscribe:hover {
+    width: auto;
+  }
+
+  #instagram:hover .text_wrap,
+  #facebook:hover .text_wrap,
+  #youtube:hover .text_wrap,
+  #blog:hover .text_wrap,
+  #newsletter:hover .text_wrap,
+  #subscribe:hover .text_wrap {
+    display: flex;
+  }
+
+  #instagram:hover .shortcuts-button,
+  #facebook:hover .shortcuts-button,
+  #youtube:hover .shortcuts-button,
+  #blog:hover .shortcuts-button,
+  #newsletter:hover .shortcuts-button,
+  #subscribe:hover .shortcuts-button {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
 `;
 
 export function ShortcutButtonList() {
@@ -35,12 +62,12 @@ export function ShortcutButtonList() {
 
   return (
     <Container>
-      <ShortcutsButton src={instagram} onClickEvent={() => handleButtonClick(snsLink.instagram)} />
-      <ShortcutsButton src={facebook} onClickEvent={() => handleButtonClick(snsLink.facebook)} />
-      <ShortcutsButton src={youtube} onClickEvent={() => handleButtonClick(snsLink.youtube)} />
-      <ShortcutsButton src={blog} onClickEvent={() => handleButtonClick(snsLink.blog)} />
-      <ShortcutsButton src={newsletter} onClickEvent={() => handleButtonClick(snsLink.newsletter)} />
-      <ShortcutsButton src={subscribe} onClickEvent={() => handleButtonClick(snsLink.subscribe)} />
+      <ShortcutsButton src={instagram} onClickEvent={() => handleButtonClick(snsLink.instagram)} name="인스타그램" />
+      <ShortcutsButton src={facebook} onClickEvent={() => handleButtonClick(snsLink.facebook)} name="페이스북" />
+      <ShortcutsButton src={youtube} onClickEvent={() => handleButtonClick(snsLink.youtube)} name="유튜브" />
+      <ShortcutsButton src={blog} onClickEvent={() => handleButtonClick(snsLink.blog)} name="블로그" />
+      <ShortcutsButton src={newsletter} onClickEvent={() => handleButtonClick(snsLink.newsletter)} name="뉴스레터" />
+      <ShortcutsButton src={subscribe} onClickEvent={() => handleButtonClick(snsLink.subscribe)} name="구독" />
     </Container>
   );
 }

@@ -58,6 +58,10 @@ export function MainPage() {
     query: '(max-width:768px)',
   });
 
+  const isPaint = useMediaQuery({
+    query: '(max-width:1500px)',
+  });
+
   return isMobile ? (
     <>
       <MainSlide />
@@ -83,12 +87,16 @@ export function MainPage() {
       <ShortcutButtonList />
       <Wrap>
         <NoticeArticel />
-        <ImgWrap className="character1">
-          <Img width={186} height={198} alt="배경캐릭터" src={character1} />
-        </ImgWrap>
-        <ImgWrap className="cloud">
-          <Img width={286} height={327} alt="배경구름" src={cloud} />
-        </ImgWrap>
+        {!isPaint ? (
+          <>
+            <ImgWrap className="character1">
+              <Img width={186} height={198} alt="배경캐릭터" src={character1} />
+            </ImgWrap>
+            <ImgWrap className="cloud">
+              <Img width={286} height={327} alt="배경구름" src={cloud} />
+            </ImgWrap>
+          </>
+        ) : null}
       </Wrap>
       <MainListSection>
         <MainMovieList />
