@@ -29,6 +29,7 @@ const Th = styled.th<{ size?: number; isMobile?: boolean }>`
   height: calc(56px * 0.8);
   vertical-align: middle;
   border: ${(props) => (props.isMobile ? 'none' : '2px solid var(--main-color)')};
+  padding: ${(props) => (props.isMobile ? '10px' : '0px')};
 
   &.header {
     font-weight: bold;
@@ -39,11 +40,17 @@ const Th = styled.th<{ size?: number; isMobile?: boolean }>`
   &.mobile-header {
     font-weight: bold;
     border-bottom: 1px solid var(--main-color);
+    padding: 0px;
   }
 `;
 
 export function ScheduleTable({ data }: Props) {
   const { t } = useTranslation();
+  const now = new Date();
+  const today = `${now.getFullYear()}${now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1}${
+    now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()
+  }`;
+  const openDate = '20230708';
   const isMobile = useMediaQuery({
     query: '(max-width:768px)',
   });
@@ -63,7 +70,7 @@ export function ScheduleTable({ data }: Props) {
               {t(`movie.schedule.theater`)}
             </Th>
             <Th size={0.75} className="mobile-header" isMobile>
-              {t(`movie.schedule.ticket`)}
+              {today === openDate ? t(`movie.schedule.ticket`) : t(`movie.schedule.ticketOpen`)}
             </Th>
           </Tr>
         </thead>
@@ -76,17 +83,22 @@ export function ScheduleTable({ data }: Props) {
                 <Th isMobile>{e.startTime.slice(0, 5)}</Th>
                 <Th isMobile>{e.theater}</Th>
                 <Th isMobile>
-                  <Button
-                    size={1}
-                    width={120}
-                    bgcolor="var(--main-color)"
-                    color="white"
-                    weight="bold"
-                    padding="calc(6px * 0.8) calc(36px * 0.8)"
-                    radius="8px"
-                  >
-                    {t(`movie.schedule.reservation`)}
-                  </Button>
+                  {today === openDate ? (
+                    <Button
+                      size={1}
+                      width={120}
+                      bgcolor="var(--main-color)"
+                      color="white"
+                      weight="bold"
+                      padding="calc(6px * 0.8) calc(36px * 0.8)"
+                      radius="8px"
+                      onClick={() => window.open('https://mobile.dureraum.org:44500/bccm/main/main.do?rbsIdx=1')}
+                    >
+                      {t(`movie.schedule.reservation`)}
+                    </Button>
+                  ) : (
+                    <h1>{t(`movie.schedule.expected`)}</h1>
+                  )}
                 </Th>
               </Tr>
             ))
@@ -131,7 +143,7 @@ export function ScheduleTable({ data }: Props) {
               {t(`movie.schedule.addtional`)}
             </Th>
             <Th isMobile={false} className="header">
-              {t(`movie.schedule.ticket`)}
+              {today === openDate ? t(`movie.schedule.ticket`) : t(`movie.schedule.ticketOpen`)}
             </Th>
           </Tr>
         </thead>
@@ -145,17 +157,22 @@ export function ScheduleTable({ data }: Props) {
                 <Th isMobile={false}>{e.theater}</Th>
                 <Th isMobile={false}>{data.addInfo}</Th>
                 <Th isMobile={false}>
-                  <Button
-                    size={1}
-                    width={120}
-                    bgcolor="var(--main-color)"
-                    color="white"
-                    weight="bold"
-                    padding="calc(6px * 0.8) calc(36px * 0.8)"
-                    radius="8px"
-                  >
-                    {t(`movie.schedule.reservation`)}
-                  </Button>
+                  {today === openDate ? (
+                    <Button
+                      size={1}
+                      width={120}
+                      bgcolor="var(--main-color)"
+                      color="white"
+                      weight="bold"
+                      padding="calc(6px * 0.8) calc(36px * 0.8)"
+                      radius="8px"
+                      onClick={() => window.open('https://mobile.dureraum.org:44500/bccm/main/main.do?rbsIdx=1')}
+                    >
+                      {t(`movie.schedule.reservation`)}
+                    </Button>
+                  ) : (
+                    <h1>{t(`movie.schedule.expected`)}</h1>
+                  )}
                 </Th>
               </Tr>
             ))
