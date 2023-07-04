@@ -18,7 +18,7 @@ const FooterWrap = styled.div<{ isMobile?: boolean }>`
   backdrop-filter: blur(2px);
   background-image: url(${footer});
   background-blend-mode: overlay;
-  padding: ${(props) => (props.isMobile ? '32px 16px' : 'calc(68.8px) calc(94.4px)')};
+  padding: ${(props) => (props.isMobile ? '32px 16px' : 'calc(50px) calc(94.4px)')};
 
   ul {
     display: grid;
@@ -72,7 +72,7 @@ export function Footer() {
       <FooterBannerList />
       <FooterWrap>
         <FlexContainer align="center">
-          <Img alt="하단로고" src={bikiLogo} width={350} height={110} />
+          <Img alt="하단로고" src={bikiLogo} width={350 * 0.7} height={110 * 0.7} />
           <ul>
             <Li color="white">{t(`footer.address`)}</Li>
             <Li color="white">{t(`footer.phone`)} : 051. 743. 7652</Li>
