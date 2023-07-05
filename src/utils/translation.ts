@@ -31,7 +31,7 @@ export const translation = {
 
         {
           title: '아카이브',
-          items: ['비키가 걸어온 길', '배급작품', '현장스케치', '영상클립', '상영작검색'],
+          items: ['비키가 걸어온 길', '아카이브', '현장스케치', '영상클립', '상영작검색'],
         },
         {
           title: 'Contact',
@@ -96,7 +96,7 @@ export const translation = {
         list: '상영작 목록',
       },
       movie: {
-        distribution: '배급작품',
+        distribution: '아카이브',
         schedule: {
           date: '상영날짜',
           time: '상영시간',
@@ -208,7 +208,7 @@ export const translation = {
         },
         {
           title: 'Archive',
-          items: ['The Path of BIKY', 'Distributed Films', 'On-Site Sketches', 'Video Clips', 'Search for Films'],
+          items: ['The Path of BIKY', 'Archive', 'On-Site Sketches', 'Video Clips', 'Search for Films'],
         },
         {
           title: 'Contact',
@@ -272,7 +272,7 @@ export const translation = {
         list: 'Screening List',
       },
       movie: {
-        distribution: 'Distributed Films',
+        distribution: 'Archive',
         schedule: {
           date: 'Date',
           time: 'Time',
