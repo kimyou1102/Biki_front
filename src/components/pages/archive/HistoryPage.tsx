@@ -20,6 +20,7 @@ import {
 import { Section, Span, H3, Img, ModalWrap } from '@atoms';
 import { ArchiveTitle, AwardMovie, HistoryOutlineTable } from '@molecules';
 import { ArchiveModal } from '@organisms';
+import { Helmet } from 'react-helmet-async';
 import { getHistoryByYearApi } from '../../../apis/history/get-history-by-year-api';
 import { HistoryType } from '../../../models/history';
 import { movieModalIdState, movieModalPositionState, movieModalState } from '../../../store/movies';
@@ -106,174 +107,179 @@ export function HistoryPage() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Section>
-        <Box display="flex" alignItems="flex-start" flexDirection="column">
-          {!isMobile ? <ArchiveTitle /> : null}
-          {isMobile ? (
-            <H3 size={1.5 / 0.8} weight="bold" font="PretendardBold" margin="0 0 10px 0px;">
-              {t(`history.title`)}
-            </H3>
-          ) : null}
-          <Box
-            display="flex"
-            width="100%"
-            alignItems="center"
-            justifyContent={isMobile ? 'right' : 'space-between'}
-            marginBottom="2rem"
-          >
-            {!isMobile ? (
-              <H3 size={2} weight="bold">
+    <>
+      <Helmet>
+        <title>비키가 걸어온 길</title>
+      </Helmet>
+      <ThemeProvider theme={theme}>
+        <Section>
+          <Box display="flex" alignItems="flex-start" flexDirection="column">
+            {!isMobile ? <ArchiveTitle /> : null}
+            {isMobile ? (
+              <H3 size={1.5 / 0.8} weight="bold" font="PretendardBold" margin="0 0 10px 0px;">
                 {t(`history.title`)}
               </H3>
             ) : null}
+            <Box
+              display="flex"
+              width="100%"
+              alignItems="center"
+              justifyContent={isMobile ? 'right' : 'space-between'}
+              marginBottom="2rem"
+            >
+              {!isMobile ? (
+                <H3 size={2} weight="bold">
+                  {t(`history.title`)}
+                </H3>
+              ) : null}
 
-            <FormControl>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={selectCount.toString()}
-                onChange={handleCountChange} // eslint-disable-line react/jsx-no-bind
-                sx={{ width: '12rem', height: '2.3rem' }}
-              >
-                {venue.map((item, index) =>
-                  item === 0 ? (
-                    <MenuItem value={item.toString()}>Pre BIKY</MenuItem>
-                  ) : (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <MenuItem value={item.toString()} key={index}>
-                      {language === 'English' ? `제${item}회 BIKY` : `${item}${ordinal[item]} BIKY`}
-                    </MenuItem>
-                  ),
-                )}
-              </Select>
-            </FormControl>
+              <FormControl>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectCount.toString()}
+                  onChange={handleCountChange} // eslint-disable-line react/jsx-no-bind
+                  sx={{ width: '12rem', height: '2.3rem' }}
+                >
+                  {venue.map((item, index) =>
+                    item === 0 ? (
+                      <MenuItem value={item.toString()}>Pre BIKY</MenuItem>
+                    ) : (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <MenuItem value={item.toString()} key={index}>
+                        {language === 'English' ? `제${item}회 BIKY` : `${item}${ordinal[item]} BIKY`}
+                      </MenuItem>
+                    ),
+                  )}
+                </Select>
+              </FormControl>
+            </Box>
           </Box>
-        </Box>
-        <Box sx={{ border: 'none' }}>
-          <Tabs
-            value={currentTitle}
-            onChange={handleTitleChange} // eslint-disable-line react/jsx-no-bind
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="scrollable auto tabs example"
-            sx={{
-              fontFamily: 'PretendardRegular',
-            }}
-          >
-            <Tab value="개요/규모" label={t(`history.outline`)} sx={Style} />
-            <Tab value="상영작" label={t(`history.screening`)} sx={Style} />
-            <Tab value="수상작" label={t(`history.winner`)} sx={Style} />
-            <Tab value="포스터" label={t(`history.poster`)} sx={Style} />
-          </Tabs>
-        </Box>
-        {currentTitle === '개요/규모' ? (
-          <>
-            <Box sx={WrapStyle}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
+          <Box sx={{ border: 'none' }}>
+            <Tabs
+              value={currentTitle}
+              onChange={handleTitleChange} // eslint-disable-line react/jsx-no-bind
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="scrollable auto tabs example"
+              sx={{
+                fontFamily: 'PretendardRegular',
+              }}
+            >
+              <Tab value="개요/규모" label={t(`history.outline`)} sx={Style} />
+              <Tab value="상영작" label={t(`history.screening`)} sx={Style} />
+              <Tab value="수상작" label={t(`history.winner`)} sx={Style} />
+              <Tab value="포스터" label={t(`history.poster`)} sx={Style} />
+            </Tabs>
+          </Box>
+          {currentTitle === '개요/규모' ? (
+            <>
+              <Box sx={WrapStyle}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <Span size={2} weight="bold">
+                    {t(`history.outline`)}
+                  </Span>
+                  <Span size={1.5} weight="bold">
+                    {language === 'English' ? history?.nameKo : history?.nameEn}
+                  </Span>
+                  <HistoryOutlineTable
+                    year={`${history?.eventStart} ~ ${history?.eventEnd}`}
+                    // eslint-disable-next-line no-nested-ternary
+                    location={history ? (language === 'English' ? history.theaterKo : history.theaterEn) : ''}
+                    // eslint-disable-next-line no-nested-ternary
+                    host={history ? (language === 'English' ? history.hostKo : history.hostEn) : ''}
+                  />
+                </Box>
+              </Box>
+              <Box sx={WrapStyle}>
                 <Span size={2} weight="bold">
-                  {t(`history.outline`)}
+                  {t(`history.style`)}
                 </Span>
-                <Span size={1.5} weight="bold">
-                  {language === 'English' ? history?.nameKo : history?.nameEn}
-                </Span>
-                <HistoryOutlineTable
-                  year={`${history?.eventStart} ~ ${history?.eventEnd}`}
-                  // eslint-disable-next-line no-nested-ternary
-                  location={history ? (language === 'English' ? history.theaterKo : history.theaterEn) : ''}
-                  // eslint-disable-next-line no-nested-ternary
-                  host={history ? (language === 'English' ? history.hostKo : history.hostEn) : ''}
-                />
+                <Box sx={{ display: ' grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
+                  <Span size={1.5} weight="bold">
+                    {t(`history.motto`)}
+                  </Span>
+                  <Span size={1.5} weight="bold">
+                    {t(`history.slogan`)}
+                  </Span>
+                  <Span size={1.5}>
+                    {language === 'English' ? history?.eventNature.mottoKo : history?.eventNature.mottoEn}
+                  </Span>
+                  <Span size={1.5}>
+                    {language === 'English' ? history?.eventNature.sloganKo : history?.eventNature.sloganEn}
+                  </Span>
+                </Box>
               </Box>
-            </Box>
-            <Box sx={WrapStyle}>
-              <Span size={2} weight="bold">
-                {t(`history.style`)}
-              </Span>
-              <Box sx={{ display: ' grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-                <Span size={1.5} weight="bold">
-                  {t(`history.motto`)}
+              <Box sx={{ padding: 'calc(48px * 0.8) 0px' }}>
+                <Span size={2} weight="bold">
+                  {t(`history.scale`)}
                 </Span>
-                <Span size={1.5} weight="bold">
-                  {t(`history.slogan`)}
-                </Span>
-                <Span size={1.5}>
-                  {language === 'English' ? history?.eventNature.mottoKo : history?.eventNature.mottoEn}
-                </Span>
-                <Span size={1.5}>
-                  {language === 'English' ? history?.eventNature.sloganKo : history?.eventNature.sloganEn}
-                </Span>
+                <Box sx={{ display: ' grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
+                  <Span size={1.5} weight="bold">
+                    {t(`history.movieCount`)}
+                  </Span>
+                  <Span size={1.5} weight="bold">
+                    {t(`history.guestCount`)}
+                  </Span>
+                  <Span size={1.5} weight="bold">
+                    {t(`history.screenCount`)}
+                  </Span>
+                  <Span size={1.5}>
+                    {history?.eventScale.movieCountryCount}
+                    {t(`history.country`)} {history?.eventScale.movieCount}
+                    {t(`history.film`)}
+                  </Span>
+                  <Span size={1.5}>
+                    {history?.eventScale.guestCountryCount}
+                    {t(`history.country`)} {history?.eventScale.guestCount}
+                    {t(`history.people`)}
+                  </Span>
+                  <Span size={1.5}>
+                    {history?.eventScale.screeningCount}
+                    {t(`history.count`)}
+                  </Span>
+                </Box>
               </Box>
-            </Box>
+            </>
+          ) : null}
+          {currentTitle === '상영작' ? <h1>상영작</h1> : null}
+          {currentTitle === '수상작'
+            ? history?.awardWinners.map((item) => (
+                <Box sx={{ padding: 'calc(48px * 0.8) 0px' }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '16px' }}>
+                    <Span size={1.5} weight="bold">
+                      {language === 'English' ? item.nameKo : item.nameEn}
+                    </Span>
+                    <Span size={1}>{language === 'English' ? item.descriptionKo : item.descriptionEn}</Span>
+                  </Box>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {item.movies.map((e, i) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <AwardMovie key={i} data={e} />
+                    ))}
+                  </Box>
+                </Box>
+              ))
+            : null}
+          {currentTitle === '포스터' ? (
             <Box sx={{ padding: 'calc(48px * 0.8) 0px' }}>
               <Span size={2} weight="bold">
-                {t(`history.scale`)}
+                {language === 'English' ? history?.nameKo : history?.nameEn}
               </Span>
-              <Box sx={{ display: ' grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-                <Span size={1.5} weight="bold">
-                  {t(`history.movieCount`)}
-                </Span>
-                <Span size={1.5} weight="bold">
-                  {t(`history.guestCount`)}
-                </Span>
-                <Span size={1.5} weight="bold">
-                  {t(`history.screenCount`)}
-                </Span>
-                <Span size={1.5}>
-                  {history?.eventScale.movieCountryCount}
-                  {t(`history.country`)} {history?.eventScale.movieCount}
-                  {t(`history.film`)}
-                </Span>
-                <Span size={1.5}>
-                  {history?.eventScale.guestCountryCount}
-                  {t(`history.country`)} {history?.eventScale.guestCount}
-                  {t(`history.people`)}
-                </Span>
-                <Span size={1.5}>
-                  {history?.eventScale.screeningCount}
-                  {t(`history.count`)}
-                </Span>
+              <Box margin="0 auto" marginTop="2rem">
+                <Img src={history?.posterImage} alt="포스터" />
               </Box>
             </Box>
-          </>
-        ) : null}
-        {currentTitle === '상영작' ? <h1>상영작</h1> : null}
-        {currentTitle === '수상작'
-          ? history?.awardWinners.map((item) => (
-              <Box sx={{ padding: 'calc(48px * 0.8) 0px' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '16px' }}>
-                  <Span size={1.5} weight="bold">
-                    {language === 'English' ? item.nameKo : item.nameEn}
-                  </Span>
-                  <Span size={1}>{language === 'English' ? item.descriptionKo : item.descriptionEn}</Span>
-                </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {item.movies.map((e, i) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <AwardMovie key={i} data={e} />
-                  ))}
-                </Box>
-              </Box>
-            ))
-          : null}
-        {currentTitle === '포스터' ? (
-          <Box sx={{ padding: 'calc(48px * 0.8) 0px' }}>
-            <Span size={2} weight="bold">
-              {language === 'English' ? history?.nameKo : history?.nameEn}
-            </Span>
-            <Box margin="0 auto" marginTop="2rem">
-              <Img src={history?.posterImage} alt="포스터" />
-            </Box>
-          </Box>
-        ) : null}
-      </Section>
-      <ModalWrap
-        top={top}
-        className={movieModal ? '' : 'none'}
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onOutsideModalClick(e)}
-      >
-        <ArchiveModal />
-      </ModalWrap>
-    </ThemeProvider>
+          ) : null}
+        </Section>
+        <ModalWrap
+          top={top}
+          className={movieModal ? '' : 'none'}
+          onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onOutsideModalClick(e)}
+        >
+          <ArchiveModal />
+        </ModalWrap>
+      </ThemeProvider>
+    </>
   );
 }

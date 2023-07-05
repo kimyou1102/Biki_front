@@ -6,6 +6,7 @@ import { Section, H3, FlexContainer } from '@atoms';
 import { Header, ArchiveTitle, SearchFilter } from '@molecules';
 import { Nav, ArchiveMovieSection } from '@organisms';
 import { Footer } from '@layout/Footer';
+import { Helmet } from 'react-helmet-async';
 import { MovieData } from '../../../models/movie';
 import { SketchProps } from '../../../models/sketch';
 import { pageState } from '../../../store/archive/atome';
@@ -27,33 +28,38 @@ export function ArchiveTemplate({ children, title, type, id, pageTitle, sub }: P
   });
 
   return (
-    <Section>
-      <ArchiveTitle pageTitle={pageTitle} sub={sub} />
-      {isMobile ? (
-        <FlexContainer className="full" margin="0px 0px 26px 0px" direction="column">
-          {title ? (
-            <H3 size={1 / 0.8} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'} margin="0 0 8px 0">
-              {title}
-            </H3>
-          ) : null}
-          {type !== 'online' && <SearchFilter type={type} id={id} />}
-        </FlexContainer>
-      ) : (
-        <FlexContainer className="full" margin="0px 0px 26px 0px" justify="space-between" align="center">
-          {title ? (
-            <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
-              {title}
-            </H3>
-          ) : null}
-          {/* <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
+    <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <Section>
+        <ArchiveTitle pageTitle={pageTitle} sub={sub} />
+        {isMobile ? (
+          <FlexContainer className="full" margin="0px 0px 26px 0px" direction="column">
+            {title ? (
+              <H3 size={1 / 0.8} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'} margin="0 0 8px 0">
+                {title}
+              </H3>
+            ) : null}
+            {type !== 'online' && <SearchFilter type={type} id={id} />}
+          </FlexContainer>
+        ) : (
+          <FlexContainer className="full" margin="0px 0px 26px 0px" justify="space-between" align="center">
+            {title ? (
+              <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
+                {title}
+              </H3>
+            ) : null}
+            {/* <H3 size={2} weight="bold" color={pageTitle ? 'var(--main-color)' : 'black'}>
             {title}
           </H3> */}
-          {type !== 'online' && <SearchFilter type={type} id={id} />}
-        </FlexContainer>
-      )}
+            {type !== 'online' && <SearchFilter type={type} id={id} />}
+          </FlexContainer>
+        )}
 
-      {children}
-      {/* <ArchiveMovieSection data={data} page={page} setPage={setPage} /> */}
-    </Section>
+        {children}
+        {/* <ArchiveMovieSection data={data} page={page} setPage={setPage} /> */}
+      </Section>
+    </>
   );
 }

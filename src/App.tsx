@@ -12,7 +12,7 @@ import {
   ArchiveMovieSection,
   NewsSection,
 } from '@organisms';
-import { Header } from '@molecules';
+import { SEOMetaTag } from '@molecules';
 import { Section, Div, Input, H3, Th, Tr, THead, A } from '@atoms';
 import { useSetRecoilState } from 'recoil';
 import { NewsTemplates } from '@templates';
@@ -72,7 +72,8 @@ import { OnlineMoviePage } from '@pages/2023program/OnlineScreeningPage';
 
 function App() {
   return (
-    <div className="App">
+    <>
+      <SEOMetaTag />
       <Routes>
         <Route path="/" element={<HeaderLayout />}>
           <Route path="/" element={<MainPage />} />
@@ -129,7 +130,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
         </Route>
       </Routes>
-    </div>
+    </>
   );
 }
 

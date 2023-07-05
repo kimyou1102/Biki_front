@@ -34,6 +34,7 @@ import { labelState } from '@src/store/label/atom';
 import { getLabelListApi } from '@src/apis/label/get-label-list-api';
 import { ArchiveModal } from '@organisms';
 import { movieModalIdState, movieModalPositionState, movieModalState } from '@src/store/movies';
+import { Helmet } from 'react-helmet-async';
 
 // 메인색상
 const MAIN_THEME = '#288CB4';
@@ -201,179 +202,186 @@ export function ScheduleInfoPage() {
     );
   }
 
-  return isMobile ? (
-    <ThemeProvider theme={theme}>
-      <Section>
-        <Box display="flex" flexDirection="column">
-          <H1 display="inline-block" className="mobile" weight="bold" margin="0px 13px 0px 0px">
-            {t(`screening.title`)}
-          </H1>
-          <Box display="flex" width="100%" alignItems="center" justifyContent="space-between" marginTop="1rem">
-            <Span size={1.25} weight="bold">
-              {t(`screening.schedule`)}
-            </Span>
-            <FormControl>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={venueId.toString()}
-                onChange={handleVenueIdChange} // eslint-disable-line react/jsx-no-bind
-                sx={{ width: '12rem', height: '2.3rem', borderRadius: '16px' }}
+  return (
+    <>
+      <Helmet>
+        <title>상영시간표</title>
+      </Helmet>
+      {isMobile ? (
+        <ThemeProvider theme={theme}>
+          <Section>
+            <Box display="flex" flexDirection="column">
+              <H1 display="inline-block" className="mobile" weight="bold" margin="0px 13px 0px 0px">
+                {t(`screening.title`)}
+              </H1>
+              <Box display="flex" width="100%" alignItems="center" justifyContent="space-between" marginTop="1rem">
+                <Span size={1.25} weight="bold">
+                  {t(`screening.schedule`)}
+                </Span>
+                <FormControl>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={venueId.toString()}
+                    onChange={handleVenueIdChange} // eslint-disable-line react/jsx-no-bind
+                    sx={{ width: '12rem', height: '2.3rem', borderRadius: '16px' }}
+                  >
+                    {venue.map((item, index) => (
+                      <MenuItem value={item.id.toString()} key={item.id}>
+                        {item.nameKo}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
+
+            <Box sx={{ border: 'none', mb: '1rem' }}>
+              <Tabs
+                value={currentDate}
+                onChange={handleDateChange} // eslint-disable-line react/jsx-no-bind
+                variant="scrollable"
+                scrollButtons="auto"
+                aria-label="scrollable auto tabs example"
+                sx={{
+                  fontFamily: 'PretendardRegular',
+                }}
               >
-                {venue.map((item, index) => (
-                  <MenuItem value={item.id.toString()} key={item.id}>
-                    {item.nameKo}
-                  </MenuItem>
+                {dates.map((item, index) => (
+                  <Tab value={item} label={item} key={item} />
                 ))}
-              </Select>
-            </FormControl>
-          </Box>
-        </Box>
+              </Tabs>
+            </Box>
 
-        <Box sx={{ border: 'none', mb: '1rem' }}>
-          <Tabs
-            value={currentDate}
-            onChange={handleDateChange} // eslint-disable-line react/jsx-no-bind
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="scrollable auto tabs example"
-            sx={{
-              fontFamily: 'PretendardRegular',
-            }}
-          >
-            {dates.map((item, index) => (
-              <Tab value={item} label={item} key={item} />
-            ))}
-          </Tabs>
-        </Box>
+            <TableContainer component={Paper} sx={{ boxShadow: 'none', mb: '2.5rem' }}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left" sx={{ ...tableRoundStyle, padding: '16px 10px 16px 0px' }} size="small">
+                      {t(`screening.name`)}
+                    </TableCell>
 
-        <TableContainer component={Paper} sx={{ boxShadow: 'none', mb: '2.5rem' }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="left" sx={{ ...tableRoundStyle, padding: '16px 10px 16px 0px' }} size="small">
-                  {t(`screening.name`)}
-                </TableCell>
+                    {rounds.map((item) => (
+                      <TableCell align="left" sx={tableRoundStyle} key={item}>
+                        {item}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
 
-                {rounds.map((item) => (
-                  <TableCell align="left" sx={tableRoundStyle} key={item}>
-                    {item}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+                {movieSchedule.theaters.map((theater, theaterIdx) => {
+                  return renderMovieSchedule(theater, theaterIdx);
+                })}
+              </Table>
+            </TableContainer>
 
-            {movieSchedule.theaters.map((theater, theaterIdx) => {
-              return renderMovieSchedule(theater, theaterIdx);
-            })}
-          </Table>
-        </TableContainer>
-
-        <Typography fontFamily="PretendardBold" mb="0.5rem">
-          *{t(`screening.label`)}
-        </Typography>
-
-        <Box display="flex" width="100%" gap="0 10px;" flexDirection="column">
-          <LabelHint leftText="BF" rightText={t(`screening.bf`)} bgcolor="#FF810D" />
-          <LabelHint leftText="GV" rightText={t(`screening.gv`)} bgcolor="#8A2BE2" />
-          <LabelHint leftText="Reads" rightText={t(`screening.read`)} bgcolor="#006400" />
-          <LabelHint leftText="Greeting" rightText={t(`screening.greeting`)} bgcolor="#FF1191" />
-          <LabelHint leftText="W.S" rightText={t(`screening.ws`)} bgcolor="#B7CC37" />
-          <LabelHint leftText="Live" rightText={t(`screening.live`)} bgcolor="#283FBC" />
-          <LabelHint leftText="Opening" rightText={t(`screening.opening`)} bgcolor="#191919" />
-          <LabelHint leftText="Talk" rightText={t(`screening.talk`)} bgcolor="#E5C32B" />
-        </Box>
-      </Section>
-    </ThemeProvider>
-  ) : (
-    <ThemeProvider theme={theme}>
-      <Section>
-        <Box display="flex" justifyContent="space-between" alignItems="center" marginX="-3rem">
-          <MovieScheduleTitle />
-
-          <Box display="flex" width="19rem" alignItems="center">
-            <Typography fontFamily="PretendardBold" width="6rem" mr="10px">
-              {t(`screening.select`)}
+            <Typography fontFamily="PretendardBold" mb="0.5rem">
+              *{t(`screening.label`)}
             </Typography>
 
-            <FormControl fullWidth>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={venueId.toString()}
-                onChange={handleVenueIdChange} // eslint-disable-line react/jsx-no-bind
-                sx={{ width: '12rem', height: '2.3rem' }}
+            <Box display="flex" width="100%" gap="0 10px;" flexDirection="column">
+              <LabelHint leftText="BF" rightText={t(`screening.bf`)} bgcolor="#FF810D" />
+              <LabelHint leftText="GV" rightText={t(`screening.gv`)} bgcolor="#8A2BE2" />
+              <LabelHint leftText="Reads" rightText={t(`screening.read`)} bgcolor="#006400" />
+              <LabelHint leftText="Greeting" rightText={t(`screening.greeting`)} bgcolor="#FF1191" />
+              <LabelHint leftText="W.S" rightText={t(`screening.ws`)} bgcolor="#B7CC37" />
+              <LabelHint leftText="Live" rightText={t(`screening.live`)} bgcolor="#283FBC" />
+              <LabelHint leftText="Opening" rightText={t(`screening.opening`)} bgcolor="#191919" />
+              <LabelHint leftText="Talk" rightText={t(`screening.talk`)} bgcolor="#E5C32B" />
+            </Box>
+          </Section>
+        </ThemeProvider>
+      ) : (
+        <ThemeProvider theme={theme}>
+          <Section>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <MovieScheduleTitle />
+
+              <Box display="flex" width="19rem" alignItems="center">
+                <Typography fontFamily="PretendardBold" width="6rem" mr="10px">
+                  {t(`screening.select`)}
+                </Typography>
+
+                <FormControl fullWidth>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={venueId.toString()}
+                    onChange={handleVenueIdChange} // eslint-disable-line react/jsx-no-bind
+                    sx={{ width: '12rem', height: '2.3rem' }}
+                  >
+                    {venue.map((item, index) => (
+                      <MenuItem value={item.id.toString()} key={item.id}>
+                        {item.nameKo}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
+
+            <Box sx={{ border: 'none', mb: '1rem' }}>
+              <Tabs
+                value={currentDate}
+                onChange={handleDateChange} // eslint-disable-line react/jsx-no-bind
+                variant="scrollable"
+                scrollButtons="auto"
+                aria-label="scrollable auto tabs example"
+                sx={{
+                  fontFamily: 'PretendardRegular',
+                }}
               >
-                {venue.map((item, index) => (
-                  <MenuItem value={item.id.toString()} key={item.id}>
-                    {item.nameKo}
-                  </MenuItem>
+                {dates.map((item, index) => (
+                  <Tab value={item} label={item} key={item} />
                 ))}
-              </Select>
-            </FormControl>
-          </Box>
-        </Box>
+              </Tabs>
+            </Box>
 
-        <Box sx={{ border: 'none', mb: '1rem' }}>
-          <Tabs
-            value={currentDate}
-            onChange={handleDateChange} // eslint-disable-line react/jsx-no-bind
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="scrollable auto tabs example"
-            sx={{
-              fontFamily: 'PretendardRegular',
-            }}
+            <TableContainer component={Paper} sx={{ boxShadow: 'none', mb: '6rem' }}>
+              <Table sx={{ minWidth: 850 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left" sx={tableRoundStyle} size="small">
+                      {t(`screening.name`)}
+                    </TableCell>
+
+                    {rounds.map((item) => (
+                      <TableCell align="left" sx={tableRoundStyle} key={item}>
+                        {item}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+
+                {movieSchedule.theaters.map((theater, theaterIdx) => {
+                  return renderMovieSchedule(theater, theaterIdx);
+                })}
+              </Table>
+            </TableContainer>
+
+            <Typography fontFamily="PretendardBold" mb="1rem">
+              *{t(`screening.label`)}
+            </Typography>
+
+            <Box display="flex" width="100%" gap="0 10px;" flexWrap="wrap">
+              {movieLabel.map(
+                (item) =>
+                  item.bgColor !== '#ffffff' && (
+                    <LabelHint leftText={item.name} rightText={item.titleKo} bgcolor={item.bgColor} />
+                  ),
+              )}
+            </Box>
+          </Section>
+
+          <ModalWrap
+            top={top}
+            className={movieModal ? '' : 'none'}
+            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onOutsideModalClick(e)}
           >
-            {dates.map((item, index) => (
-              <Tab value={item} label={item} key={item} />
-            ))}
-          </Tabs>
-        </Box>
-
-        <TableContainer component={Paper} sx={{ boxShadow: 'none', mb: '6rem' }}>
-          <Table sx={{ minWidth: 850 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="left" sx={tableRoundStyle} size="small">
-                  {t(`screening.name`)}
-                </TableCell>
-
-                {rounds.map((item) => (
-                  <TableCell align="left" sx={tableRoundStyle} key={item}>
-                    {item}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-
-            {movieSchedule.theaters.map((theater, theaterIdx) => {
-              return renderMovieSchedule(theater, theaterIdx);
-            })}
-          </Table>
-        </TableContainer>
-
-        <Typography fontFamily="PretendardBold" mb="1rem">
-          *{t(`screening.label`)}
-        </Typography>
-
-        <Box display="flex" width="100%" gap="0 10px;" flexWrap="wrap">
-          {movieLabel.map(
-            (item) =>
-              item.bgColor !== '#ffffff' && (
-                <LabelHint leftText={item.name} rightText={item.titleKo} bgcolor={item.bgColor} />
-              ),
-          )}
-        </Box>
-      </Section>
-
-      <ModalWrap
-        top={top}
-        className={movieModal ? '' : 'none'}
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onOutsideModalClick(e)}
-      >
-        <ArchiveModal />
-      </ModalWrap>
-    </ThemeProvider>
+            <ArchiveModal />
+          </ModalWrap>
+        </ThemeProvider>
+      )}
+    </>
   );
 }

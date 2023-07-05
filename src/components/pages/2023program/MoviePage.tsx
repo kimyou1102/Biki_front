@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { ProgramMoviesTemplate } from '@templates';
+import { Helmet } from 'react-helmet-async';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { koUrlState, enUrlState } from '../../../store/archive/program/atom';
 import { languageState } from '../../../store/language/atom';
@@ -42,5 +43,12 @@ export function MoviePage() {
     }
   }, [enUrl, getTitle, koUrl, language, title]);
 
-  return <ProgramMoviesTemplate title={title!} id={parseInt(id!, 10)} />;
+  return (
+    <>
+      <Helmet>
+        <title>{title!}</title>
+      </Helmet>
+      <ProgramMoviesTemplate title={title!} id={parseInt(id!, 10)} />
+    </>
+  );
 }
