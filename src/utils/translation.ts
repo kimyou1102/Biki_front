@@ -138,7 +138,7 @@ export const translation = {
       news: {
         notice: '공지사항',
         newsletter: '뉴스레터',
-        press: '보도자료',
+        press: '언론보도',
         number: '번호',
         title: '제목',
         search: '제목 검색',

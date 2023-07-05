@@ -4,8 +4,8 @@ import { RecoilRoot } from 'recoil';
 import ScrollToTop from '@molecules/ScrollToTop';
 import { BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
-
 import GlobalStyle from './styles/globalStyle';
 import './local/i18n';
 
@@ -16,7 +16,9 @@ root.render(
       <BrowserRouter>
         <GlobalStyle />
         <ScrollToTop />
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </BrowserRouter>
     </CookiesProvider>
   </RecoilRoot>,

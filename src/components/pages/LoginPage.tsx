@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import { SignupBox, Button, Text, FlexContainer, Input, Span } from '@atoms';
 import { SingupTitleBox, SignupInput } from '@molecules';
 import { Footer } from '@layout/Footer';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { createLoginApi } from '../../apis/user/create-login-api';
 
@@ -62,62 +63,67 @@ export function LoginPage() {
   };
 
   return (
-    <div>
-      <Text
-        size={isMobile ? 1.5 / 0.8 : 2.5}
-        weight="bold"
-        className="center"
-        margin="calc(119px * 0.8) 0 calc(59px * 0.8) 0"
-      >
-        BIKY 로그인
-      </Text>
-      <SignupBox isMobile={isMobile}>
-        <SingupTitleBox color="#74B743">로그인</SingupTitleBox>
-        <form onSubmit={onSubmit}>
-          <Grid>
-            <SignupInput
-              label="이메일"
-              placeholder="이메일을 입력해주세요."
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <SignupInput
-              label="비밀번호"
-              placeholder="이메일을 입력해주세요."
-              value={password}
-              inputType="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Grid>
-          <Button
-            radius="16px"
-            bgcolor="var(--main-color)"
-            height={70}
-            color="white"
-            weight="bold"
-            className="full"
-            type="submit"
-            margin="0 0 calc(16px * 0.8) 0"
-          >
-            로그인 하기
-          </Button>
-        </form>
-        <FlexContainer justify="space-between">
-          <Button
-            radius="16px"
-            width="49%"
-            bgcolor="#D9D9D9"
-            height={70}
-            weight="bold"
-            onClick={() => navigate('/signup')}
-          >
-            회원가입
-          </Button>
-          <Button radius="16px" width="49%" bgcolor="#D9D9D9" height={70} weight="bold">
-            비밀번호 찾기
-          </Button>
-        </FlexContainer>
-      </SignupBox>
-    </div>
+    <>
+      <Helmet>
+        <title>BIKY 로그인</title>
+      </Helmet>
+      <div>
+        <Text
+          size={isMobile ? 1.5 / 0.8 : 2.5}
+          weight="bold"
+          className="center"
+          margin="calc(119px * 0.8) 0 calc(59px * 0.8) 0"
+        >
+          BIKY 로그인
+        </Text>
+        <SignupBox isMobile={isMobile}>
+          <SingupTitleBox color="#74B743">로그인</SingupTitleBox>
+          <form onSubmit={onSubmit}>
+            <Grid>
+              <SignupInput
+                label="이메일"
+                placeholder="이메일을 입력해주세요."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <SignupInput
+                label="비밀번호"
+                placeholder="이메일을 입력해주세요."
+                value={password}
+                inputType="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Grid>
+            <Button
+              radius="16px"
+              bgcolor="var(--main-color)"
+              height={70}
+              color="white"
+              weight="bold"
+              className="full"
+              type="submit"
+              margin="0 0 calc(16px * 0.8) 0"
+            >
+              로그인 하기
+            </Button>
+          </form>
+          <FlexContainer justify="space-between">
+            <Button
+              radius="16px"
+              width="49%"
+              bgcolor="#D9D9D9"
+              height={70}
+              weight="bold"
+              onClick={() => navigate('/signup')}
+            >
+              회원가입
+            </Button>
+            <Button radius="16px" width="49%" bgcolor="#D9D9D9" height={70} weight="bold">
+              비밀번호 찾기
+            </Button>
+          </FlexContainer>
+        </SignupBox>
+      </div>
+    </>
   );
 }

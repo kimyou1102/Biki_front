@@ -6,6 +6,7 @@ import { MainListSection, Img } from '@atoms';
 import { ShortcutButtonList } from '@molecules';
 import { MainSlide, NoticeArticel, MainMovieList, MainEventList, MainYoutebeList, MainNewsBoxList } from '@organisms';
 import { Footer } from '@layout/Footer';
+import { Helmet } from 'react-helmet-async';
 import character1 from '../../assets/images/main_character1.png';
 import character2 from '../../assets/images/main_character2.png';
 import character3 from '../../assets/images/main_character3.png';
@@ -62,64 +63,73 @@ export function MainPage() {
     query: '(max-width:1500px)',
   });
 
-  return isMobile ? (
+  return (
     <>
-      <MainSlide />
-      <Section>
-        <NoticeArticel />
-      </Section>
-      <MobileWrap left>
-        <MainMovieList />
-      </MobileWrap>
-      <MobileWrap left>
-        <MainEventList />
-      </MobileWrap>
-      <MobileWrap left>
-        <MainYoutebeList />
-      </MobileWrap>
-      <Section>
-        <MainNewsBoxList />
-      </Section>
-    </>
-  ) : (
-    <>
-      <MainSlide />
-      <ShortcutButtonList />
-      <Wrap>
-        <NoticeArticel />
-        {!isPaint ? (
-          <>
-            <ImgWrap className="character1">
-              <Img width={186} height={198} alt="배경캐릭터" src={character1} />
+      <Helmet>
+        <title>제18회 부산국제어린이청소년영화제</title>
+      </Helmet>
+      {isMobile ? (
+        <>
+          <MainSlide />
+          <Section>
+            <NoticeArticel />
+          </Section>
+          <MobileWrap left>
+            <MainMovieList />
+          </MobileWrap>
+          <MobileWrap left>
+            <MainEventList />
+          </MobileWrap>
+          <MobileWrap left>
+            <MainYoutebeList />
+          </MobileWrap>
+          <Section>
+            <MainNewsBoxList />
+          </Section>
+        </>
+      ) : (
+        <>
+          <MainSlide />
+          <ShortcutButtonList />
+          <Wrap>
+            <NoticeArticel />
+            {!isPaint ? (
+              <>
+                <ImgWrap className="character1">
+                  <Img width={186} height={198} alt="배경캐릭터" src={character1} />
+                </ImgWrap>
+                <ImgWrap className="cloud">
+                  <Img width={286} height={327} alt="배경구름" src={cloud} />
+                </ImgWrap>
+              </>
+            ) : null}
+          </Wrap>
+          <MainListSection>
+            <MainMovieList />
+          </MainListSection>
+          <div
+            style={{ background: '#F8F8F8', padding: '40px 0 0 0', display: 'flex', marginBottom: 'calc(117px * 0.8)' }}
+          >
+            <MainListSection bottom={60}>
+              <MainEventList />
+            </MainListSection>
+          </div>
+          <Wrap>
+            <MainListSection>
+              <ImgWrap className="character2">
+                <Img width={108} height={113} alt="배경캐릭터2" src={character2} />
+              </ImgWrap>
+              <MainYoutebeList />
+            </MainListSection>
+          </Wrap>
+          <MainNewsBoxList />
+          <Wrap>
+            <ImgWrap className="character3">
+              <Img width={162} height={87} alt="배경캐릭터" src={character3} />
             </ImgWrap>
-            <ImgWrap className="cloud">
-              <Img width={286} height={327} alt="배경구름" src={cloud} />
-            </ImgWrap>
-          </>
-        ) : null}
-      </Wrap>
-      <MainListSection>
-        <MainMovieList />
-      </MainListSection>
-      <div style={{ background: '#F8F8F8', padding: '40px 0 0 0', display: 'flex', marginBottom: 'calc(117px * 0.8)' }}>
-        <MainListSection bottom={60}>
-          <MainEventList />
-        </MainListSection>
-      </div>
-      <Wrap>
-        <MainListSection>
-          <ImgWrap className="character2">
-            <Img width={108} height={113} alt="배경캐릭터2" src={character2} />
-          </ImgWrap>
-          <MainYoutebeList />
-        </MainListSection>
-      </Wrap>
-      <MainNewsBoxList />
-      <Wrap>
-        <ImgWrap className="character3">
-          <Img width={162} height={87} alt="배경캐릭터" src={character3} />
-        </ImgWrap>
-      </Wrap>
+          </Wrap>
+        </>
+      )}
     </>
   );
 }
