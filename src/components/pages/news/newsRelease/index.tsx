@@ -3,7 +3,6 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NewsListSection } from '@organisms';
 import { NewsTemplates } from '@templates';
-import { Footer } from '@layout/Footer';
 import { Box, CircularProgress } from '@mui/material';
 import { getPostByTitleApi } from '@src/apis/post/get-post-by-title';
 import { getPostApi } from '../../../../apis/post/get-post-api';

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { ContentBox } from '@molecules/contentBox';
+import { ContentBox } from '@molecules';
 import { SlideContainer } from '@atoms';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { ContentProps } from 'src/models/content';

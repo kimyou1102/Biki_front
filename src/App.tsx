@@ -1,17 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  Nav,
-  NoticeArticel,
-  MainMovieList,
-  MainSlide,
-  ContentBoxs,
-  MovieBox,
-  ArchiveMovieList,
-  ArchiveMovieSection,
-  NewsSection,
-} from '@organisms';
 import { SEOMetaTag } from '@molecules';
 import { Section, Div, Input, H3, Th, Tr, THead, A } from '@atoms';
 import { useSetRecoilState } from 'recoil';
