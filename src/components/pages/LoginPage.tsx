@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import { SignupBox, Button, Text, FlexContainer, Input, Span } from '@atoms';
 import { SingupTitleBox, SignupInput } from '@molecules';
-import { Footer } from '@layout/Footer';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { createLoginApi } from '../../apis/user/create-login-api';

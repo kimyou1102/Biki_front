@@ -5,7 +5,6 @@ import { useRecoilState } from 'recoil';
 import { Section, H3, FlexContainer } from '@atoms';
 import { Header, ArchiveTitle, SearchFilter } from '@molecules';
 import { Nav, ArchiveMovieSection } from '@organisms';
-import { Footer } from '@layout/Footer';
 import { Helmet } from 'react-helmet-async';
 import { MovieData } from '../../../models/movie';
 import { SketchProps } from '../../../models/sketch';

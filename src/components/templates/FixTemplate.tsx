@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { Section } from '@atoms';
-import { Footer } from '@layout/Footer';
 import { Helmet } from 'react-helmet-async';
 import { getBoardByParamApi } from '../../apis/board/get-board-by-param-api';
 import '../../styles/content-styles.css';

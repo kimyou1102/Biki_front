@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 import { MainListSection, Img } from '@atoms';
 import { ShortcutButtonList } from '@molecules';
-import { MainSlide, NoticeArticel, MainMovieList, MainEventList, MainYoutebeList, MainNewsBoxList } from '@organisms';
-import { Footer } from '@layout/Footer';
+import { MainSlide, NoticeArticle, MainMovieList, MainEventList, MainYoutebeList, MainNewsBoxList } from '@organisms';
 import { Helmet } from 'react-helmet-async';
 import character1 from '../../assets/images/main_character1.png';
 import character2 from '../../assets/images/main_character2.png';
@@ -72,7 +71,7 @@ export function MainPage() {
         <>
           <MainSlide />
           <Section>
-            <NoticeArticel />
+            <NoticeArticle />
           </Section>
           <MobileWrap left>
             <MainMovieList />
@@ -92,7 +91,7 @@ export function MainPage() {
           <MainSlide />
           <ShortcutButtonList />
           <Wrap>
-            <NoticeArticel />
+            <NoticeArticle />
             {!isPaint ? (
               <>
                 <ImgWrap className="character1">

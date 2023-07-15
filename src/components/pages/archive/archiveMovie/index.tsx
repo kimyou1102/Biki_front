@@ -6,7 +6,6 @@ import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
 import { ArchiveTemplate } from '@templates';
 import { ArchiveMovieSection, ArchiveModal, ArchiveMovieList } from '@organisms';
-import { Footer } from '@layout/Footer';
 import { ModalWrap } from '@atoms';
 import { Box, CircularProgress } from '@mui/material';
 import { useRecoilState, useSetRecoilState } from 'recoil';

@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
 import { MovieDescription } from '@molecules';
 import { FlexContainer, Img, ContentBoxImgWrap } from '@atoms';
@@ -42,7 +41,6 @@ const Wrap = styled.div`
   border-radius: 16px;
 `;
 
-// export function MovieBox({ type, title, director, country, year, runningTime, url }: MovieBoxInfo) {
 export function MovieBox({ type, data }: Props) {
   const [movieModal, setMovieModal] = useRecoilState(movieModalState);
   const [movieModalData, setMovieModalData] = useRecoilState(movieModalDataState);
